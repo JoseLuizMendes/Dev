@@ -11,10 +11,14 @@
             "id": "4e3969729f1a2c0d",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Visualização em gráfico"
+              "type": "markdown",
+              "state": {
+                "file": "Dev/Plannner Mode - Phase One.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Plannner Mode - Phase One"
             }
           }
         ]
@@ -191,10 +195,17 @@
       "obsidian-kanban:Criar um novo quadro": false
     }
   },
-  "active": "aa80e9957e322106",
+  "active": "4e3969729f1a2c0d",
   "lastOpenFiles": [
+    "Dev/Sem título 2.md",
+    "Dev/Plannner Mode - Phase One.md",
+    "Dev/Sem título 1.md",
+    "Dev/Sem título.md",
+    "Dev/s.md",
+    "crie um link.md",
+    "Sem título",
+    "Dev",
     "Bem-vindo.md",
-    "LICENSE",
-    "crie um link.md"
+    "LICENSE"
   ]
 }
