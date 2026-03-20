@@ -11,14 +11,10 @@
             "id": "4e3969729f1a2c0d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Dev/Plannner Mode - Phase One.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Plannner Mode - Phase One"
+              "title": "Nova aba"
             }
           }
         ]
@@ -74,7 +70,8 @@
               "title": "Marcadores"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -94,6 +91,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Sem título.base",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +101,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos"
+              "title": "Links inversos para Sem título"
             }
           },
           {
@@ -112,11 +110,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Sem título.base",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída"
+              "title": "Links de saída para Sem título"
             }
           },
           {
@@ -154,16 +153,17 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Sem título.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário"
+              "title": "Sumário de Sem título"
             }
           },
           {
-            "id": "5d9d0a2fcaaa871f",
+            "id": "cf5a2630bc186b19",
             "type": "leaf",
             "state": {
               "type": "calendar",
@@ -192,20 +192,36 @@
       "obsidian-excalidraw-plugin:New drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Criar um novo quadro": false
+      "obsidian-kanban:Create new board": false,
+      "remotely-save:Remotely Save": false,
+      "obsidian-importer:Open Importer": false
     }
   },
   "active": "4e3969729f1a2c0d",
   "lastOpenFiles": [
-    "Dev/Sem título 2.md",
+    "Sem título.base",
     "Dev/Plannner Mode - Phase One.md",
-    "Dev/Sem título 1.md",
-    "Dev/Sem título.md",
-    "Dev/s.md",
     "crie um link.md",
-    "Sem título",
-    "Dev",
     "Bem-vindo.md",
+    "Sem título.canvas",
+    "copilot/copilot-custom-prompts/Clip Web Page.md",
+    "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
+    "copilot/copilot-custom-prompts/Remove URLs.md",
+    "copilot/copilot-custom-prompts/Generate glossary.md",
+    "copilot/copilot-custom-prompts/Generate table of contents.md",
+    "copilot/copilot-custom-prompts/Make longer.md",
+    "copilot/copilot-custom-prompts/Make shorter.md",
+    "copilot/copilot-custom-prompts/Emojify.md",
+    "copilot/copilot-custom-prompts/Explain like I am 5.md",
+    "copilot/copilot-custom-prompts/Simplify.md",
+    "copilot/copilot-custom-prompts/Summarize.md",
+    "copilot/copilot-custom-prompts/Translate to Chinese.md",
+    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
+    "copilot/copilot-custom-prompts",
+    "copilot",
+    "Dev",
     "LICENSE"
   ]
 }

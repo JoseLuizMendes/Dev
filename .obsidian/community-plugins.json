@@ -1,12 +1,25 @@
 [
   "obsidian-excalidraw-plugin",
+<<<<<<< Updated upstream
+=======
+  "obsidian-tasks-plugin",
+>>>>>>> Stashed changes
   "table-editor-obsidian",
   "calendar",
   "obsidian-git",
   "obsidian-kanban",
+<<<<<<< Updated upstream
   "obsidian-icon-folder",
   "advanced-canvas",
   "obsidian-pandoc",
   "google-drive-sync",
   "mcp-tools"
+=======
+  "remotely-save",
+  "obsidian-importer",
+  "google-drive-sync",
+  "mcp-tools",
+  "open-in-terminal",
+  "obsidian-icon-folder"
+>>>>>>> Stashed changes
 ]
