@@ -10,7 +10,7 @@ tags:
 
 # Develop Preferences
 
-> Este arquivo é a referência rápida da stack e preferências de desenvolvimento. Para detalhamento completo, consulte [[M5 - Dev Preferences & Quality Standards]].
+> Este arquivo é a referência rápida da stack e preferências de desenvolvimento. Para detalhamento completo, consulte [[Dev Preferences & Quality Standards]].
 
 ---
 
@@ -54,4 +54,4 @@ tags:
 ## Referência Completa
 
 Para detalhamento exaustivo de cada tecnologia, regras e padrões de qualidade, consulte:
-→ [[M5 - Dev Preferences & Quality Standards]]
+→ [[Dev Preferences & Quality Standards]]

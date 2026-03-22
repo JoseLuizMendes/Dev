@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "3ae547deceb7bd50",
+        "id": "99bce4f89ae127ff",
         "type": "tabs",
         "children": [
           {
-            "id": "de796f9d79bfb63a",
+            "id": "81e3f8ce2868c3e1",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Visualização em gráfico"
+              "type": "markdown",
+              "state": {
+                "file": "Dev/4 - Error's Memory/INDEX.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "INDEX"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Dev/4 - Error's Memory/INDEX.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos"
+              "title": "Links inversos para INDEX"
             }
           },
           {
@@ -172,7 +177,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,19 +196,19 @@
       "obsidian-kanban:Criar um novo quadro": false
     }
   },
-  "active": "aa80e9957e322106",
+  "active": "81e3f8ce2868c3e1",
   "lastOpenFiles": [
-    "Auth & Security.md",
+    "Dev/0 - Planner Project/Develop Preferences.md",
     "M5 - Dev Preferences & Quality Standards.md",
+    "Dev/0 - Planner Project/Cognitive Vault Architecture.md",
+    "Auth & Security.md",
     "Dev/0 - Planner Project/Immunological Error Memory.md",
     "Dev/0 - Planner Project/Dev Preferences & Quality Standards.md",
     "Dev/0 - Planner Project/Dynamic Contract Engine.md",
     "Dev/0 - Planner Project/Project Lifecycle Pipeline.md",
     "Dev/0 - Planner Project/Session Protocol.md",
-    "Dev/0 - Planner Project/Cognitive Vault Architecture.md",
     "Dev/rename.py",
     "Dev/0 - Planner Project/Preferencias Dev.md",
-    "Dev/0 - Planner Project/Develop Preferences.md",
     "Dev/4 - Error's Memory/by-stack/gsap-lenis.md",
     "Dev/4 - Error's Memory/by-stack/tailwind-shadcn.md",
     "Dev/4 - Error's Memory/by-stack/nestjs.md",
