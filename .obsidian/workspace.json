@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "5482efc1e47e0248",
+        "id": "3ae547deceb7bd50",
         "type": "tabs",
         "children": [
           {
-            "id": "4e3969729f1a2c0d",
+            "id": "de796f9d79bfb63a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Dev/Plannner Mode - Phase One.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Plannner Mode - Phase One"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
             }
           }
         ]
@@ -176,8 +172,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -195,17 +190,44 @@
       "obsidian-kanban:Criar um novo quadro": false
     }
   },
-  "active": "4e3969729f1a2c0d",
+  "active": "aa80e9957e322106",
   "lastOpenFiles": [
-    "Dev/Sem título 2.md",
-    "Dev/Plannner Mode - Phase One.md",
-    "Dev/Sem título 1.md",
-    "Dev/Sem título.md",
-    "Dev/s.md",
-    "crie um link.md",
-    "Sem título",
-    "Dev",
-    "Bem-vindo.md",
-    "LICENSE"
+    "Auth & Security.md",
+    "M5 - Dev Preferences & Quality Standards.md",
+    "Dev/0 - Planner Project/Immunological Error Memory.md",
+    "Dev/0 - Planner Project/Dev Preferences & Quality Standards.md",
+    "Dev/0 - Planner Project/Dynamic Contract Engine.md",
+    "Dev/0 - Planner Project/Project Lifecycle Pipeline.md",
+    "Dev/0 - Planner Project/Session Protocol.md",
+    "Dev/0 - Planner Project/Cognitive Vault Architecture.md",
+    "Dev/rename.py",
+    "Dev/0 - Planner Project/Preferencias Dev.md",
+    "Dev/0 - Planner Project/Develop Preferences.md",
+    "Dev/4 - Error's Memory/by-stack/gsap-lenis.md",
+    "Dev/4 - Error's Memory/by-stack/tailwind-shadcn.md",
+    "Dev/4 - Error's Memory/by-stack/nestjs.md",
+    "Dev/4 - Error's Memory/by-stack/react.md",
+    "Dev/4 - Error's Memory/by-stack",
+    "Dev/4 - Error's Memory/by-category/deployment.md",
+    "Dev/4 - Error's Memory/by-category/state-management.md",
+    "Dev/4 - Error's Memory/by-category/performance.md",
+    "Dev/4 - Error's Memory/by-category/auth-security.md",
+    "Dev/4 - Error's Memory/by-category/api-integration.md",
+    "Dev/4 - Error's Memory/by-category/dependency-breaks.md",
+    "Dev/4 - Error's Memory/by-category",
+    "Dev/4 - Error's Memory/INDEX.md",
+    "Dev/3 - Session Logs/MEMORY.md",
+    "Dev/3 - Session Logs",
+    "Dev/1 - Templates/Session Log Template.md",
+    "Dev/1 - Templates/Planning Template.md",
+    "Dev/0 - Planner Project/M6 - Immunological Error Memory.md",
+    "Dev/0 - Planner Project/M5 - Dev Preferences & Quality Standards.md",
+    "Pasted image 20260321152023.png",
+    "Dev/2 - Projects/[Nicho]",
+    "Dev/2 - Projects/[Nicho]/Client Planning Example",
+    "Dev/2 - Audit/Sem título",
+    "Dev/0.1 - Metodology",
+    "Dev/0.2 - Audit",
+    "Dev/4 - Error's Memory"
   ]
 }
