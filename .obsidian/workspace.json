@@ -11,14 +11,10 @@
             "id": "81e3f8ce2868c3e1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Dev/0 - Planner Project/Develop Preferences.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Develop Preferences"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Dev/0 - Planner Project/Develop Preferences.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para Develop Preferences"
+              "title": "Links inversos"
             }
           },
           {
@@ -198,6 +193,7 @@
   },
   "active": "81e3f8ce2868c3e1",
   "lastOpenFiles": [
+    "Dev/0 - Planner Project/Develop Preferences.md",
     "Dev/0.3 - Claude Skills Export/cognitive-vault-manager/SKILL.md",
     "Dev/0.3 - Claude Skills Export/cognitive-vault-manager",
     "Dev/0.3 - Claude Skills Export/portfolio-copy-architect/SKILL.md",
@@ -209,7 +205,6 @@
     "Dev/0.3 - Claude Skills Export",
     "Dev/1 - Templates/Planning Template.md",
     "Dev/4 - Error's Memory/INDEX.md",
-    "Dev/0 - Planner Project/Develop Preferences.md",
     "M5 - Dev Preferences & Quality Standards.md",
     "Dev/0 - Planner Project/Cognitive Vault Architecture.md",
     "Auth & Security.md",
