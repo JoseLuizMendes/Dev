@@ -1,0 +1,35 @@
+# Client Onboarding & Project Initialization Protocol
+
+> **Propósito:** Este protocolo define como o Agente de IA (Claude) deve agir quando receber do usuário o PDF (ou documento exportado) preenchido do *Master Project Planning Template*. Ele atua como a ponte entre o planejamento comercial e a inicialização da engenharia via Spec-Kit.
+
+## Gatilho de Ativação
+Sempre que o usuário enviar um arquivo (PDF, Word, Markdown) que contenha a estrutura do `Master Project Planning Template`, a IA deve automaticamente executar as ações descritas abaixo, a menos que o usuário instrua o contrário.
+
+---
+
+## Passo a Passo para o Agente de IA (Claude)
+
+### 1. Extração de Metadados Padrão
+A IA deve analisar o documento fornecido e mapear (mentalmente ou em resposta explícita) as variáveis-chave para as próximas etapas:
+- `{{CLIENT_NAME}}`
+- `{{MARKET_NICHE}}`
+- Todas as User Stories (Seção 2)
+- Requisitos Arquiteturais (Seção 3)
+
+### 2. Automação de Contrato (Dynamic Contract)
+A IA deverá ler o arquivo `1 - Templates/Contract Template.md` e preenchê-lo utilizando os metadados extraídos do planejamento:
+- Preencher *Nome*, *Nicho* e escopo acordado baseado no Master Plan.
+- Retornar o contrato preenchido ao usuário (ou formatar para que ele exporte o PDF finalizado do contrato para o cliente).
+
+### 3. Setup de Diretório Alvo
+A IA deve instruir o sistema (ou confirmar a criação manual com o usuário caso não possua acesso ao filesystem local via MCP) para inicializar o repositório/pasta oficial do cliente no caminho correto:
+`2 - Projects/[Nicho extraído]/[Nome do Cliente extraído]/`
+
+### 4. Spec-Kit e Drive-Dev Init
+Dentro do novo diretório criado:
+1. A IA deve iniciar a metodologia **Spec-Kit**.
+2. Transformar a "Seção 2: Requisitos Funcionais e User Stories" extraída do Master Plan no arquivo primário de backlog técnico (ex: `.spec/backlog.md` ou equivalente).
+3. Gerar a arquitetura técnica basilar cruzando a Seção 3 do Master Plan e o arquivo global `Preferencias Dev.md`.
+
+### 5. Início do Ciclo de Desenvolvimento (Code Time)
+Somente após a execução com sucesso dos Passos de 1 a 4, a IA anunciará que "O Setup Spec-Kit foi concluído com sucesso" e o desenvolvimento do código real poderá ser iniciado seguindo as *Issues/Tickets* previamente mapeadas.

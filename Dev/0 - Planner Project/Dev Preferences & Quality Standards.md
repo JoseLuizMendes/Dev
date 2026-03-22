@@ -13,7 +13,20 @@ tags:
 
 # M5 — Dev Preferences & Quality Standards
 
-Este módulo funciona como a **constituição técnica** do agente de IA. Ele estabelece regras inegociáveis para seleção de dependências, arquitetura de sistemas e padrões de qualidade. O agente **DEVE** ler este documento no boot de toda sessão. A versão exaustiva contendo as diretrizes definitivas encontra-se também sumariada em `[[Preferencias Dev]]`.
+Este módulo funciona como a **constituição técnica** do agente de IA. Ele estabelece regras inegociáveis para seleção de dependências, arquitetura de sistemas e padrões de qualidade. O agente **DEVE** ler este documento no boot de toda sessão.
+
+---
+
+## ⚡ Regras Inegociáveis (Quick Reference)
+
+| ❌ Proibido | ✅ Obrigatório |
+|---|---|
+| Tipo `any` em TypeScript | `strict: true` no `tsconfig.json` |
+| CSS global (exceto Edge Cases) | `useGSAP` para animações no React |
+| HEX Colors hardcoded no código | Fastify como adaptador HTTP no backend |
+| `useEffect` para data fetching banal | Prisma ORM para manipulação de BD |
+| Gerenciadores `npm`, `yarn` ou `bun` | Apenas `pnpm` permitido e Builds Docker |
+| Lógica de negócios em Controladores | Uso de Services/Providers com injeção |
 
 ---
 
