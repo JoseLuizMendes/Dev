@@ -10,7 +10,7 @@ tags:
 
 # Template de Planejamento de Projeto
 
-> Este template é gerado pela IA a partir do `[[Requirements & Scope Project Template|01-Escopo.md]]` via `/speckit.plan`. Preencha as seções conforme as instruções.
+> Este template é gerado pela IA a partir do [[Requirements & Scope Project Template|01-Escopo.md]] via `/speckit.plan`. Preencha as seções conforme as instruções.
 
 ---
 
