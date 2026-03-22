@@ -16,7 +16,7 @@ Pelo presente Contrato de Prestação de Serviços de Desenvolvimento de Site (*
 
 **b.** os serviços prestados pelo(a) **CONTRATADO(A)** visam a expansão do(a) **CONTRATANTE** no que tange sua rede de relacionamento online com seus clientes e parceiros, bem como sua divulgação no ambiente virtual.
 
-**c.** para a constituição do Website o(a) **CONTRATADO(A)**, por meio deste Contrato, compromete-se a executar: [Exs: layout para as telas que compõe o site/identidade visual, modelagem de banco de dados que compõe o site, programação do site...], vez que este declara-se devidamente habilitado(a) para realização de todas as atividades relacionadas a essa atribuição.
+**c.** para a constituição da plataforma digital do(a) **CONTRATANTE**, o(a) **CONTRATADO(A)**, por meio deste Contrato, compromete-se a executar o escopo técnico definido no documento de Requisitos e Escopo aprovado, incluindo arquitetura, implementação, integrações e entrega funcional do serviço contratado, vez que este declara-se devidamente habilitado(a) para realização de todas as atividades relacionadas a essa atribuição.
 
 ## Forma de Execução dos Serviços e Pagamento
 

@@ -41,6 +41,12 @@
 
 ---
 
+## Aprendizados Globais
+
+- [[GLOBAL-ERRORS]]
+
+---
+
 ## Registro de Erros
 
 _Os erros são listados abaixo em ordem cronológica reversa (mais recente primeiro)._

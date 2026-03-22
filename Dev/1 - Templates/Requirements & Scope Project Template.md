@@ -20,6 +20,8 @@ valor: "{{PROJECT_VALUE}}"
 
 > **Nota de Uso:** Este é o documento primário de intake do projeto. A IA extrairá o frontmatter para gerar automaticamente o Contrato Dinâmico e o Planejamento. Preencha todos os campos entre `{{ }}` ou `[ ]`.
 
+> **Para que serve no fluxo:** após o cliente responder o **Master Project Planning Template**, este template é usado para consolidar as respostas em formato técnico estruturado (fonte oficial para contrato, planejamento e `speckit.specify`).
+
 ---
 
 ## 1. Metadados do Projeto

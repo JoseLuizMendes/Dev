@@ -7,6 +7,30 @@ Sempre que o usuário enviar um arquivo (PDF, Word, Markdown) que contenha a est
 
 ---
 
+## Fluxo Resumido Oficial (Saída Mínima)
+
+Quando não houver instrução contrária, o onboarding deve gerar apenas:
+
+1. Contrato do cliente usando `1 - Templates/Contract Template.md` como fonte base.
+2. Resultado do documento de Requisitos e Escopo (fonte para `speckit.specify`).
+3. Planejamento de resolução e tarefas em formato Kanban.
+4. Erros e aprendizados somente em repositório global (nunca isolado apenas no projeto).
+
+Regras adicionais obrigatórias:
+
+- Não duplicar o template de contrato inteiro no projeto do cliente.
+- Personalizar apenas a seção de tipo de serviço (cláusula referente ao escopo executado).
+- Manter a pasta do cliente com o mínimo de artefatos necessário para iniciar o Spec-Kit.
+
+Regras operacionais consolidadas (prompts recentes):
+
+- A pasta `MeusProjetos/Freelas` deve conter literalmente o projeto web (código), não documentação de onboarding.
+- Documentos de onboarding devem ficar em `Dev/2 - Projects/[Nicho]/[Projeto-do-Cliente]`.
+- O `Master Project Planning Template` é o formulário respondido pelo cliente e deve ser a fonte primária da documentação consolidada.
+- O `Requirements & Scope Project Template` serve como formato de consolidação técnica estruturada a partir das respostas do Master.
+
+---
+
 ## Passo a Passo para o Agente de IA (Claude)
 
 ### 1. Extração de Metadados Padrão
