@@ -160,7 +160,7 @@ Se os requisitos mudam durante o desenvolvimento:
 
 - [[Cognitive Vault Architecture]] — Onde cada artefato vive
 - [[Dynamic Contract Engine]] — Geração dinâmica do contrato
-- [[Dev Preferences & Quality Standards]] — Stack e regras completas
+- [[Preferencias Dev]] — Stack e regras completas
 - [[Immunological Error Memory]] — Consulta pré-planejamento
 - [[Requirements & Scope Project Template]] — Template do escopo
 - [[Planning Template]] — Template do planejamento

@@ -24,7 +24,6 @@ Dev/
 │   ├── Session Protocol.md
 │   ├── Project Lifecycle Pipeline.md
 │   ├── Dynamic Contract Engine.md
-│   ├── Dev Preferences & Quality Standards.md
 │   ├── Immunological Error Memory.md
 │   └── Preferencias Dev.md
 │
@@ -147,5 +146,5 @@ Metodologia aplicada: [[ai-web-designer-agent]]
 - [[Session Protocol]] — Protocolos de início/fim de sessão e gestão de memória
 - [[Project Lifecycle Pipeline]] — Fluxo completo de um projeto
 - [[Dynamic Contract Engine]] — Geração de contratos dinâmicos
-- [[Dev Preferences & Quality Standards]] — Stack e regras de qualidade
+- [[Preferencias Dev]] — Stack e regras de qualidade
 - [[Immunological Error Memory]] — Sistema global de erros

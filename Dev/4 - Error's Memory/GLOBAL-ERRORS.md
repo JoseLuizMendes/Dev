@@ -5,7 +5,7 @@
 ## Regras
 1. Todo erro relevante de projeto deve ser promovido para este arquivo.
 2. Cada entrada deve conter causa raiz e prevencao reutilizavel.
-3. Se recorrencia >= 2, promover regra para Dev Preferences & Quality Standards.
+3. Se recorrencia >= 2, promover regra para Preferencias Dev.
 
 ## Entradas
 ### GLB-2026-0001

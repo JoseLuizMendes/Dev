@@ -145,7 +145,7 @@ Para determinar se um erro é "o mesmo":
 
 Quando um erro atinge 2 recorrências:
 
-1. O agente **DEVE** inserir uma nova regra na seção "Regras Promovidas da Memória Imunológica" do `[[Dev Preferences & Quality Standards]]` e `[[Preferencias Dev]]`
+1. O agente **DEVE** inserir uma nova regra na seção "Regras Promovidas da Memória Imunológica" do `[[Preferencias Dev]]`
 2. A regra incluirá:
    - O anti-padrão a ser evitado
    - A solução correta
@@ -201,4 +201,4 @@ Cada arquivo agrupa erros por **tecnologia específica**:
 - [[Cognitive Vault Architecture]] — Onde a pasta `4 - Error's Memory/` vive
 - [[Session Protocol]] — Boot sequence inclui leitura do INDEX.md
 - [[Project Lifecycle Pipeline]] — Consulta pré-planejamento obrigatória
-- [[Dev Preferences & Quality Standards]] — Destino das regras promovidas
+- [[Preferencias Dev]] — Destino das regras promovidas

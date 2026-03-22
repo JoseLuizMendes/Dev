@@ -70,7 +70,7 @@ _A fundação estratégica do projeto._
 
 ## ⚙️ 3. Arquitetura Premium e Tech Stack
 
-> **Para IA:** Esta seção deve ser cruzada obrigatoriamente com [[Develop Preferences]] e [[Dev Preferences & Quality Standards]]. Nenhuma dependência externa pode ser adicionada sem aprovação.
+> **Para IA:** Esta seção deve ser cruzada obrigatoriamente com [[Preferencias Dev]]. Nenhuma dependência externa pode ser adicionada sem aprovação.
 
 - **Tipo de Plataforma:** {{APP_TYPE}} *(Ex: SaaS Full-Stack, Landing Page Imersiva)*
 - **Front-End & UI/UX:** {{FRONTEND_STACK}} *(Ex: Next.js 14, React, Tailwind, GSAP)*

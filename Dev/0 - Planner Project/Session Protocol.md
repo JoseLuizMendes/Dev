@@ -29,7 +29,7 @@ boot_sequence:
 
   - passo: 2
     ação: "Ler Dev Preferences"
-    arquivo: "Dev/0 - Planner Project/Dev Preferences & Quality Standards.md"
+    arquivo: "Dev/0 - Planner Project/Preferencias Dev.md"
     propósito: "Carregar regras inegociáveis da stack e padrões de qualidade"
 
   - passo: 3
