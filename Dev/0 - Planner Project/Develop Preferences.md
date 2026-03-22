@@ -16,20 +16,20 @@ tags:
 
 ## Stack Aprovada
 
-| Camada                      | Tecnologia                                     | Regra Principal                            |
-| --------------------------- | ---------------------------------------------- | ------------------------------------------ |
-| **Linguagem**               | TypeScript 5.x                                 | `any` proibido. `strict: true` obrigatório |
-| **Backend / API**           | NestJS 10.x + Fastify                          | Modular + DI. Lógica nos Services          |
-| **Banco de Dados**          | PostgreSQL + Prisma ORM                        | Schema declarativo puramente               |
-| **Frontend** | [React 19+](https://github.com/facebook/react), [Angular 17+](https://github.com/angular/angular) | Functional components + hooks |
-| **Framework** | [Next.js 14+](https://github.com/vercel/next.js) | App Router padrão. SEO e Performance |
-| **State & UI Libs** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Padrões modernos, type-safe e zero boilerplate |
-| **Styling**                 | Tailwind 3.4+ + Shadcn/ui                      | Zero CSS global. Tokens do config          |
-| **Animações**               | GSAP 3.12+ + Lenis                             | `useGSAP` obrigatório                      |
-| **Testes**                  | Jest (Unit/Int) + Playwright (E2E)             | Cobertura total obrigatória                |
-| **Infra/Deploy**            | Docker                                         | Containers isolados                        |
-| **Pipeline (Orquestração)** | Spec-Kit (Spacify)                             | SDD obrigatório                            |
-| **Integração IA (MCP)** | [Context7](https://github.com/upstash/context7) + [Skill Obsidian](https://github.com/kepano/obsidian-skills) + [MarketingCopywrite](https://github.com/deeppath-ai/mcp-marketing-site) | Injeção de dependências reais, gestão de cofre e copywriting |
+| Camada                      | Tecnologia                                                                                                                                                                              | Regra Principal                                              |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Linguagem**               | TypeScript 5.x                                                                                                                                                                          | `any` proibido. `strict: true` obrigatório                   |
+| **Backend / API**           | NestJS 10.x + Fastify                                                                                                                                                                   | Modular + DI. Lógica nos Services                            |
+| **Banco de Dados**          | PostgreSQL + Prisma ORM                                                                                                                                                                 | Schema declarativo puramente                                 |
+| **Frontend**                | [React 19+](https://github.com/facebook/react), [Angular 17+](https://github.com/angular/angular)                                                                                       | Functional components + hooks                                |
+| **Framework**               | [Next.js 16+](https://github.com/vercel/next.js)                                                                                                                                        | App Router padrão. SEO e Performance                         |
+| **State & UI Libs**         | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide                                                                                                                                    | Padrões modernos, type-safe e zero boilerplate               |
+| **Styling**                 | Tailwind 3.4+ + Shadcn/ui                                                                                                                                                               | Zero CSS global. Tokens do config                            |
+| **Animações**               | GSAP 3.12+ + Lenis                                                                                                                                                                      | `useGSAP` obrigatório                                        |
+| **Testes**                  | Jest (Unit/Int) + Playwright (E2E)                                                                                                                                                      | Cobertura total obrigatória                                  |
+| **Infra/Deploy**            | Docker                                                                                                                                                                                  | Containers isolados                                          |
+| **Pipeline (Orquestração)** | Spec-Kit (Spacify)                                                                                                                                                                      | SDD obrigatório                                              |
+| **Integração IA (MCP)**     | [Context7](https://github.com/upstash/context7) + [Skill Obsidian](https://github.com/kepano/obsidian-skills) + [MarketingCopywrite](https://github.com/deeppath-ai/mcp-marketing-site) | Injeção de dependências reais, gestão de cofre e copywriting |
 
 ---
 
