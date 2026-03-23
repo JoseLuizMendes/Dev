@@ -18,9 +18,12 @@ Quando não houver instrução contrária, o onboarding deve gerar apenas:
 
 Regras adicionais obrigatórias:
 
-- Não duplicar o template de contrato inteiro no projeto do cliente.
-- Personalizar apenas a seção de tipo de serviço (cláusula referente ao escopo executado).
+- Manter a estrutura contratual completa baseada no template oficial, personalizando variáveis e cláusulas dinâmicas conforme o escopo.
+- Personalizar a seção de tipo de serviço (cláusula referente ao escopo executado) e demais campos variáveis do contrato.
 - Manter a pasta do cliente com o mínimo de artefatos necessário para iniciar o Spec-Kit.
+- Saida minima significa quantidade minima de arquivos locais, nao conteudo resumido.
+- `01-Escopo.md` deve manter a estrutura do `Requirements & Scope Project Template.md` preenchida.
+- `02-Contrato.md` deve manter estrutura contratual completa baseada no `Contract Template.md`, com clausulas dinamicas da classificacao aplicadas.
 
 Regras operacionais consolidadas (prompts recentes):
 
@@ -28,6 +31,29 @@ Regras operacionais consolidadas (prompts recentes):
 - Documentos de onboarding devem ficar em `Dev/2 - Projects/[Nicho]/[Projeto-do-Cliente]`.
 - O `Master Project Planning Template` é o formulário respondido pelo cliente e deve ser a fonte primária da documentação consolidada.
 - O `Requirements & Scope Project Template` serve como formato de consolidação técnica estruturada a partir das respostas do Master.
+
+### Quality Gate Obrigatório (antes de concluir a saída)
+
+Antes de encerrar o onboarding, a IA deve validar obrigatoriamente:
+
+1. `01-Escopo.md`:
+	- Estrutura completa baseada no `1 - Templates/Requirements & Scope Project Template.md`.
+	- Conteúdo preenchido, sem resumo superficial.
+	- Quantidade de linhas **igual ou maior** que o `Master Project Planning Template.md` vigente.
+
+2. `02-Contrato.md`:
+	- Estrutura contratual completa baseada no `1 - Templates/Contract Template.md`.
+	- Sem versão resumida.
+	- Cláusulas dinâmicas aplicadas conforme `[[Dynamic Contract Engine]]` e classificação do escopo.
+
+3. `03-Planejamento.md`:
+	- Plano técnico detalhado (EAP/WBS, cronograma, riscos, critérios de aceite, kanban e governança de execução).
+	- Proibição de planejamento raso de poucas seções.
+
+4. Checklist final de consistência:
+	- Nicho base reaproveitável mantido (ex: Advocacia).
+	- Possibilidade explícita de ramificação por especialidade sem reconstrução total.
+	- Referência ao fluxo `[[Project Lifecycle Pipeline]]` respeitada.
 
 ---
 
