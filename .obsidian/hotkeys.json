@@ -1,0 +1,11 @@
+{
+  "open-in-terminal:open-gemini": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "G"
+    }
+  ]
+}

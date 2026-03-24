@@ -4,25 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5482efc1e47e0248",
+        "id": "f5569e7d95b92a8c",
         "type": "tabs",
         "children": [
           {
-            "id": "4e3969729f1a2c0d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Dev/Plannner Mode - Phase One.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Plannner Mode - Phase One"
-            }
-          },
-          {
-            "id": "8d9b88a5f4c9a4e3",
+            "id": "01ca910ea1047b2f",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -31,8 +17,7 @@
               "title": "Visualização em gráfico"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -105,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sem título.base",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para Sem título"
+              "title": "Links inversos"
             }
           },
           {
@@ -124,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sem título.base",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para Sem título"
+              "title": "Links de saída"
             }
           },
           {
@@ -167,23 +150,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sem título.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Sem título"
+              "title": "Sumário"
             }
           },
           {
-            "id": "cf5a2630bc186b19",
+            "id": "5d9d0a2fcaaa871f",
             "type": "leaf",
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "calendar"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ]
@@ -202,35 +184,51 @@
       "templates:Inserir modelo": false,
       "command-palette:Abrir paleta de comandos": false,
       "bases:Criar nova base": false,
-      "markdown-importer:Abrir importador Markdown": false
+      "markdown-importer:Abrir importador Markdown": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "obsidian-kanban:Criar um novo quadro": false
     }
   },
-  "active": "aa80e9957e322106",
+  "active": "01ca910ea1047b2f",
   "lastOpenFiles": [
-    "f.md",
-    "Dev/Plannner Mode - Phase One.md",
-    "Sem título.base",
-    "crie um link.md",
-    "Bem-vindo.md",
-    "Sem título.canvas",
-    "copilot/copilot-custom-prompts/Clip Web Page.md",
-    "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
-    "copilot/copilot-custom-prompts/Remove URLs.md",
-    "copilot/copilot-custom-prompts/Generate glossary.md",
-    "copilot/copilot-custom-prompts/Generate table of contents.md",
-    "copilot/copilot-custom-prompts/Make longer.md",
-    "copilot/copilot-custom-prompts/Make shorter.md",
-    "copilot/copilot-custom-prompts/Emojify.md",
-    "copilot/copilot-custom-prompts/Explain like I am 5.md",
-    "copilot/copilot-custom-prompts/Simplify.md",
-    "copilot/copilot-custom-prompts/Summarize.md",
-    "copilot/copilot-custom-prompts/Translate to Chinese.md",
-    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
-    "copilot/copilot-custom-prompts",
-    "copilot",
-    "Dev",
-    "LICENSE"
+    "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/03-Planejamento.md",
+    "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/02-Contrato.md",
+    "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/01-Escopo.md",
+    "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/03-Planejamento.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/02-Contrato.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/01-Escopo.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/06-Erros.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/05-Dev-Log.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/04-Tarefas.md",
+    "Dev/2 - Projects/Advocacia/Mock-02-Landing-Advocacia-Reutilizavel/03-Kanban.md",
+    "Dev/2 - Projects/Advocacia",
+    "Dev/4 - Error's Memory/by-category/deployment.md",
+    "Dev/0.3 - Claude Skills Export/cognitive-vault-manager/SKILL.md",
+    "Dev/0.3 - Claude Skills Export/portfolio-copy-architect/SKILL.md",
+    "Dev/0.3 - Claude Skills Export/portfolio-product-strategist/SKILL.md",
+    "Dev/0 - Planner Project/Preferencias Dev.md",
+    "Dev/0 - Planner Project/Dev Preferences & Quality Standards.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/03-Planejamento-Kanban.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/02-Resultado-Requisitos-Escopo.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/01-Contrato.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS",
+    "Dev/2 - Projects/EdTech",
+    "Dev/4 - Error's Memory/GLOBAL-ERRORS.md",
+    "Dev/1 - Templates/Mercedes Project Planning Template.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/08-SpecKit-Setup-Status.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/07-Erros.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/06-Dev-Log.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/05-Tarefas.md",
+    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/04-Planejamento-Tecnico.md",
+    "Dev/1 - Templates/Mercedes Project Planning Template.md.tmp.15744.1774200626459",
+    "Dev/0 - Planner Project/Preferencias Dev.md.tmp.15744.1774199670944",
+    "Dev/9 - Archive",
+    "Dev/0.2 - Audit/Audit Template.md.tmp.15744.1774199628620",
+    "Dev/1 - Templates/Requirements & Scope Project Template.md.tmp.15744.1774199615480",
+    "Pasted image 20260321152023.png"
   ]
 }
