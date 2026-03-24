@@ -20,8 +20,19 @@
               "icon": "lucide-file",
               "title": "Plannner Mode - Phase One"
             }
+          },
+          {
+            "id": "8d9b88a5f4c9a4e3",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -171,8 +182,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-ghost",
+              "title": "calendar"
             }
           }
         ]
@@ -191,19 +202,14 @@
       "templates:Inserir modelo": false,
       "command-palette:Abrir paleta de comandos": false,
       "bases:Criar nova base": false,
-      "markdown-importer:Abrir importador Markdown": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false,
-      "remotely-save:Remotely Save": false,
-      "obsidian-importer:Open Importer": false
+      "markdown-importer:Abrir importador Markdown": false
     }
   },
-  "active": "4e3969729f1a2c0d",
+  "active": "aa80e9957e322106",
   "lastOpenFiles": [
-    "Sem título.base",
+    "f.md",
     "Dev/Plannner Mode - Phase One.md",
+    "Sem título.base",
     "crie um link.md",
     "Bem-vindo.md",
     "Sem título.canvas",
