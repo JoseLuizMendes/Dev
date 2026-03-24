@@ -117,11 +117,11 @@ O desenvolvimento segue o pipeline rigoroso do Spec-Kit em 4 fases. **Nenhum có
 
 Após a implementação (ou durante, iterativamente), o código é auditado contra os 3 documentos norteadores:
 
-| Documento | Função na Auditoria |
-|---|---|
-| `[[ai-portfolio-product-strategist]]` | Valida posicionamento estratégico e narrativa |
-| `[[ai-web-designer-agent]]` | Valida design, UX, animações e responsividade |
-| `[[ai-portfolio-copy-architect]]` | Valida copy, microtextos e comunicação |
+| Documento                           | Função na Auditoria                           |
+| ----------------------------------- | --------------------------------------------- |
+| [[ai-portfolio-product-strategist]] | Valida posicionamento estratégico e narrativa |
+| [[ai-web-designer-agent]]           | Valida design, UX, animações e responsividade |
+| [[ai-portfolio-copy-architect]]     | Valida copy, microtextos e comunicação        |
 
 ### Fluxo de Auditoria
 
