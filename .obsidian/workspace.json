@@ -11,13 +11,30 @@
             "id": "01ca910ea1047b2f",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Visualização em gráfico"
+              "type": "markdown",
+              "state": {
+                "file": "Dev/1 - Templates/Contract Template.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Contract Template"
+            }
+          },
+          {
+            "id": "d645fb42585a58bb",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Notas de Lançamento 1.12.7"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -191,8 +208,9 @@
       "obsidian-kanban:Criar um novo quadro": false
     }
   },
-  "active": "01ca910ea1047b2f",
+  "active": "d645fb42585a58bb",
   "lastOpenFiles": [
+    "Dev/1 - Templates/Requirements & Scope Project Template.md",
     "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/03-Planejamento.md",
     "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/02-Contrato.md",
     "Dev/2 - Projects/Advocacia/Teste Mockado 01 - Landing Page Advocacia/01-Escopo.md",
@@ -223,7 +241,6 @@
     "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/07-Erros.md",
     "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/06-Dev-Log.md",
     "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/05-Tarefas.md",
-    "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/04-Planejamento-Tecnico.md",
     "Dev/1 - Templates/Mercedes Project Planning Template.md.tmp.15744.1774200626459",
     "Dev/0 - Planner Project/Preferencias Dev.md.tmp.15744.1774199670944",
     "Dev/9 - Archive",

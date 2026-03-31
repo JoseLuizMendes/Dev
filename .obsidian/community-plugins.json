@@ -9,5 +9,6 @@
   "obsidian-pandoc",
   "google-drive-sync",
   "mcp-tools",
-  "open-in-terminal"
+  "open-in-terminal",
+  "obsidian-local-rest-api"
 ]
