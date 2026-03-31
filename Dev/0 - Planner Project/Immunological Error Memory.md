@@ -145,7 +145,7 @@ Para determinar se um erro é "o mesmo":
 
 Quando um erro atinge 2 recorrências:
 
-1. O agente **DEVE** inserir uma nova regra na seção "Regras Promovidas da Memória Imunológica" do `[[Preferencias Dev]]`
+1. O agente **DEVE** inserir uma nova regra na seção "Regras Promovidas da Memória Imunológica" do [[Preferencias Dev]]
 2. A regra incluirá:
    - O anti-padrão a ser evitado
    - A solução correta

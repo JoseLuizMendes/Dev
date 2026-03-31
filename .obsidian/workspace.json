@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f5569e7d95b92a8c",
+        "id": "5482efc1e47e0248",
         "type": "tabs",
         "children": [
           {
-            "id": "01ca910ea1047b2f",
+            "id": "4e3969729f1a2c0d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -107,6 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Sem título.base",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +117,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos"
+              "title": "Links inversos para Sem título"
             }
           },
           {
@@ -125,11 +126,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Sem título.base",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída"
+              "title": "Links de saída para Sem título"
             }
           },
           {
@@ -167,22 +169,23 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Sem título.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário"
+              "title": "Sumário de Sem título"
             }
           },
           {
-            "id": "5d9d0a2fcaaa871f",
+            "id": "cf5a2630bc186b19",
             "type": "leaf",
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-ghost",
+              "title": "calendar"
             }
           }
         ]
@@ -201,13 +204,10 @@
       "templates:Inserir modelo": false,
       "command-palette:Abrir paleta de comandos": false,
       "bases:Criar nova base": false,
-      "markdown-importer:Abrir importador Markdown": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Criar um novo quadro": false
+      "markdown-importer:Abrir importador Markdown": false
     }
   },
+<<<<<<< HEAD
   "active": "d645fb42585a58bb",
   "lastOpenFiles": [
     "Dev/1 - Templates/Requirements & Scope Project Template.md",
@@ -243,9 +243,46 @@
     "Dev/2 - Projects/EdTech/NovaMente-AcademyOS/05-Tarefas.md",
     "Dev/1 - Templates/Mercedes Project Planning Template.md.tmp.15744.1774200626459",
     "Dev/0 - Planner Project/Preferencias Dev.md.tmp.15744.1774199670944",
+=======
+  "active": "4e3969729f1a2c0d",
+  "lastOpenFiles": [
+    "Dev/0 - Planner Project/Client Onboarding Protocol.md",
+    "Dev/0 - Planner Project/Cognitive Vault Architecture.md",
+    "Dev/0 - Planner Project/Dynamic Contract Engine.md",
+    "Dev/0 - Planner Project/Immunological Error Memory.md",
+    "Dev/0 - Planner Project/Preferencias Dev.md",
+    "Dev/0 - Planner Project/Project Lifecycle Pipeline.md",
+    "Dev/0 - Planner Project/Session Protocol.md",
+    "Dev/1 - Templates/Master Project Planning Template.md",
+    "Dev/9 - Archive/Plannner Mode - Phase One.md",
+    "Dev/9 - Archive/planner_mode_analysis.md",
+>>>>>>> 3140e4ae677d3e3ad2753e31c5e45d55d55c6d97
     "Dev/9 - Archive",
-    "Dev/0.2 - Audit/Audit Template.md.tmp.15744.1774199628620",
-    "Dev/1 - Templates/Requirements & Scope Project Template.md.tmp.15744.1774199615480",
-    "Pasted image 20260321152023.png"
+    "Dev/4 - Error's Memory/by-stack/tailwind-shadcn.md",
+    "Dev/4 - Error's Memory/by-stack/react.md",
+    "Dev/4 - Error's Memory/by-stack/nestjs.md",
+    "Dev/4 - Error's Memory/by-stack/gsap-lenis.md",
+    "Dev/4 - Error's Memory/by-category/state-management.md",
+    "Dev/4 - Error's Memory/by-category/performance.md",
+    "Dev/4 - Error's Memory/by-category/deployment.md",
+    "Dev/4 - Error's Memory/by-category/dependency-breaks.md",
+    "Dev/4 - Error's Memory/by-category/auth-security.md",
+    "Dev/4 - Error's Memory/by-category/api-integration.md",
+    "Dev/4 - Error's Memory/INDEX.md",
+    "Dev/4 - Error's Memory/GLOBAL-ERRORS.md",
+    "Dev/4 - Error's Memory/by-stack",
+    "Dev/4 - Error's Memory/by-category",
+    "Dev/4 - Error's Memory",
+    "Dev/3 - Session Logs/MEMORY.md",
+    "Dev/3 - Session Logs",
+    "Dev/1 - Templates/Session Log Template.md",
+    "Dev/1 - Templates/Requirements & Scope Project Template.md",
+    "Dev/1 - Templates/Contract Template.md",
+    "Dev/1 - Templates",
+    "Dev/0.3 - Claude Skills Export/ui-web-designer-architect",
+    "Dev/0.3 - Claude Skills Export/portfolio-product-strategist",
+    "Dev/0.3 - Claude Skills Export/portfolio-copy-architect",
+    "Dev/0.3 - Claude Skills Export/cognitive-vault-manager",
+    "Sem título.canvas"
   ]
 }

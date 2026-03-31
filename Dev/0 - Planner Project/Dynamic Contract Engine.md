@@ -19,7 +19,7 @@ Este módulo define a **lógica de geração de contratos dinâmicos** baseada n
 
 ## Princípio Fundamental
 
-O agente de IA atua como um **técnico paralegal**: lê a variável `classificação` do `[[Requirements & Scope Project Template|01-Escopo.md]]` e injeta ou remove cláusulas condicionais no `[[Contract Template]]`.
+O agente de IA atua como um **técnico paralegal**: lê a variável `classificação` do [[Requirements & Scope Project Template | 01-Escopo.md]] e injeta ou remove cláusulas condicionais no [[Contract Template]].
 
 ```
 Input: classificação_servico (do 01-Escopo.md)
