@@ -9,13 +9,19 @@
 ## Estado Atual
 
 - **Projeto em andamento:** Nenhum
-- **Fase:** Configuração inicial do vault cognitivo
-- **Último progresso:** Criação da estrutura modular completa (M1-M6, templates, Error Memory)
+- **Fase:** Manutenção do vault cognitivo
+- **Último progresso:** Auditoria e correção de inconsistências do vault (2026-03-31)
 
 ---
 
 ## Decisões Recentes
 
+- [2026-03-31] Vault auditado e inconsistências corrigidas via MCP do Obsidian
+- [2026-03-31] `Preferencias Dev.md` confirmado preenchido (v3.0) — item removido dos problemas em aberto
+- [2026-03-31] `INDEX.md` sincronizado com entradas do `GLOBAL-ERRORS.md`
+- [2026-03-31] `Planning Template.md` criado em `1 - Templates/`
+- [2026-03-31] Referência incorreta `[[5 - Error's Memory]]` corrigida para `[[4 - Error's Memory]]` em `Diretrizes.md`
+- [2026-03-31] `0.3 - Claude Skills Export/` registrado oficialmente na arquitetura do vault
 - [2026-03-21] Estrutura do vault decomposta em 6 módulos independentes conforme [[Cognitive Vault Architecture]]
 - [2026-03-21] Sistema de Memória Imunológica implementado com indexação dupla (by-category + by-stack) conforme [[Immunological Error Memory]]
 
@@ -23,12 +29,12 @@
 
 ## Problemas em Aberto
 
-- [ ] `Preferencias Dev.md` precisa ser preenchido com conteúdo do M5
-- [ ] Definir templates de auditoria em `0.2 - Audit/`
 - [ ] Validar o pipeline SDD com um projeto-piloto real
+- [ ] Boot sequence diverge entre [[Session Protocol]] (6 passos) e [[cognitive-vault-manager/SKILL]] (4 passos) — alinhar
 
 ---
 
 ## Lições Aprendidas
 
-_Seção será preenchida conforme as sessões de trabalho acumularem insights._
+- MCP do Obsidian configurado com sucesso via `uvx mcp-obsidian` + Local REST API (porta 27124)
+- Config do Claude Desktop deve usar `uvx` e não `npx` para o servidor `mcp-obsidian`

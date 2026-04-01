@@ -1,6 +1,6 @@
 ---
 template: "Master Project Planning & Scope"
-version: 4.0
+version: 5.1
 status: "Template"
 tags:
   - template
@@ -11,6 +11,7 @@ tags:
   - client-presentation
   - lifecycle-pipeline
   - sdd-ready
+  - tdd
 cliente: "{{CLIENT_NAME}}"
 nicho: "{{MARKET_NICHE}}"
 classificacao: "{{SERVICE_TYPE}}"
@@ -22,172 +23,107 @@ stack_confirmada: "{{FRONTEND_STACK}} | {{BACKEND_STACK}} | {{CLOUD_STACK}}"
 
 # 🚀 Master Project Plan: {{PROJECT_NAME}}
 
-> **Nota de Uso:** Este documento foi desenhado para ser apresentado ao cliente (via PDF) e simultaneamente processado por Agentes de IA (Claude/Spec-Kit). Preencha os campos entre chaves `{{ }}` ou colchetes `[ ]`. A IA usará essas tags estruturadas para gerar o código e os contratos de forma autônoma.
+> **Nota de Uso:** Documento para apresentação ao cliente (PDF) e processamento por Agentes de IA. Preencha os campos entre `{{ }}` ou `[ ]`.
 >
-> **Fluxo de Ativação:** Ao receber este documento preenchido, a IA deve executar automaticamente o **Client Onboarding Protocol**: (1) extrair metadados, (2) gerar Contrato Dinâmico, (3) inicializar diretório do projeto, (4) iniciar Spec-Kit.
+> **Fluxo de Ativação:** Ao receber este documento, a IA executa automaticamente o [[Client Onboarding Protocol]]: extração de metadados → Contrato Dinâmico → diretório do projeto → bootstrap de dependências → Spec-Kit SDD+TDD.
 
 ---
 
 ## 🏢 1. Contexto de Negócios e Metadados
-_A fundação estratégica do projeto._
 
 - **Empresa / Cliente:** {{CLIENT_NAME}}
 - **Ponto de Contato (PO):** {{CLIENT_CONTACT}}
 - **Nicho de Mercado:** {{MARKET_NICHE}}
-- **Data de Início:** {{START_DATE}}
-- **Previsão de Entrega Final:** {{END_DATE}}
-- **Tier de Investimento:** {{BUDGET_TIER}} *(Ex: High-Ticket Tier 1)*
+- **Data de Início:** {{START_DATE}} | **Entrega Final:** {{END_DATE}}
+- **Tier de Investimento:** {{BUDGET_TIER}}
 
 ### 🎯 1.1 O Problema e a Visão
-- **A Dor Central:** [Descreva o problema que o cliente enfrenta hoje]
-- **A Visão da Solução:** [Descreva como este software premium resolverá o problema]
+- **A Dor Central:** [Problema que o cliente enfrenta hoje]
+- **A Visão da Solução:** [Como este software resolverá o problema]
 - **Público-Alvo:** [Quem vai usar a plataforma]
-- **Métricas de Sucesso (KPIs):**
-  - **Performance:** LCP < 2.5s, FID < 100ms, CLS < 0.1
-  - **Negócio:** [Ex: +40% de conversão na Landing Page]
-  - **Qualidade:** WCAG 2.1 AA, 100% cobertura de testes E2E
+- **KPIs:** LCP < 2.5s | FID < 100ms | CLS < 0.1 | WCAG 2.1 AA | 100% E2E | [KPIs de negócio]
 
 ---
 
 ## 🎨 2. Experiência do Usuário e Requisitos Funcionais (Scope)
 
-> **Para IA:** Esta seção será transformada em `.spec/backlog.md` para Spec-Driven Development. Cada User Story deve ter critério BDD executável.
+> **Para IA:** seção transformada em `.spec/backlog.md`. Cada critério BDD vira um teste TDD antes da implementação.
 
 ### 📦 Módulo 1: {{MODULE_1_NAME}}
-| ID | Funcionalidade (User Story) | Critério de Sucesso (BDD) | Prioridade | Agente Auditor |
+| ID | User Story | Critério BDD | Prioridade | Agente Auditor |
 | :--- | :--- | :--- | :---: | :---: |
-| **US-1.1** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [contexto] **WHEN** [ação] **THEN** [resultado] | 🔥 Alta | Product Strategist |
-| **US-1.2** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [contexto] **WHEN** [ação] **THEN** [resultado] | 🟡 Média | Web Designer |
+| **US-1.1** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [ctx] **WHEN** [ação] **THEN** [resultado] | 🔥 Alta | Product Strategist |
+| **US-1.2** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [ctx] **WHEN** [ação] **THEN** [resultado] | 🟡 Média | Web Designer |
 
 ### 📦 Módulo 2: {{MODULE_2_NAME}}
-| ID | Funcionalidade (User Story) | Critério de Sucesso (BDD) | Prioridade | Agente Auditor |
+| ID | User Story | Critério BDD | Prioridade | Agente Auditor |
 | :--- | :--- | :--- | :---: | :---: |
-| **US-2.1** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [contexto] **WHEN** [ação] **THEN** [resultado] | 🔥 Alta | Copy Architect |
-
-> **Regra:** Cada US será implementada via `/speckit.implement` uma tarefa por vez, com atualização de status em `04-Tarefas.md`.
+| **US-2.1** | *Como [persona], quero [ação] para [valor]* | **GIVEN** [ctx] **WHEN** [ação] **THEN** [resultado] | 🔥 Alta | Copy Architect |
 
 ---
 
-## ⚙️ 3. Arquitetura Premium e Tech Stack
+## ⚙️ 3. Arquitetura, Stack e Dependências
 
-> **Para IA:** Esta seção deve ser cruzada obrigatoriamente com [[Preferencias Dev]]. Nenhuma dependência externa pode ser adicionada sem aprovação.
+> **Para IA:** cruzar com [[Preferencias Dev]]. O campo `{{DEPENDENCIES}}` é o gatilho do bootstrap automático.
 
-- **Tipo de Plataforma:** {{APP_TYPE}} *(Ex: SaaS Full-Stack, Landing Page Imersiva)*
-- **Front-End & UI/UX:** {{FRONTEND_STACK}} *(Ex: Next.js 14, React, Tailwind, GSAP)*
-- **Back-End & Banco de Dados:** {{BACKEND_STACK}} *(Ex: NestJS, PostgreSQL, Prisma)*
-- **Infraestrutura Cloud:** {{CLOUD_STACK}} *(Ex: Vercel, AWS)*
-- **QoS (Qualidade de Serviço):**
-  - Animações fluidas a 60fps com `useGSAP`
-  - SEO Dinâmico (Next.js App Router)
-  - Acessibilidade WCAG 2.1 AA
-  - Segurança JWT avançada
-  - `strict: true` no TypeScript (any proibido)
-  - CSS zero global (exceto edge cases)
-  - Hex hardcoded proibido — usar tokens Tailwind
+- **Tipo de Plataforma:** {{APP_TYPE}}
+- **Front-End:** {{FRONTEND_STACK}} | **Back-End & BD:** {{BACKEND_STACK}} | **Infra:** {{CLOUD_STACK}}
 
-### 🔌 3.1 Integrações Essenciais (APIs)
-- **Pagamentos:** {{PAYMENT_GATEWAY}} *(Ex: Stripe)*
-- **Comunicação/E-mail:** {{EMAIL_SERVICE}} *(Ex: Resend)*
-- **Armazenamento / Outros:** {{STORAGE_SERVICE}} *(Ex: AWS S3)*
+### 🔌 3.1 Integrações (APIs)
+- **Pagamentos:** {{PAYMENT_GATEWAY}} | **E-mail:** {{EMAIL_SERVICE}} | **Storage:** {{STORAGE_SERVICE}}
 
-### 🔌 3.2 MCPs e Ferramentas de IA
-- **Context7:** Injeção de dependências e documentação em tempo real
-- **Skill Obsidian:** Gestão de memória e skills no Cofre Cognitivo
-- **MarketingCopywrite:** Support para copy e conteúdo estratégico
+### 📦 3.2 Dependências Extras do Projeto
+> **Para IA:** instalar via `pnpm add` no bootstrap. Dependências base da stack são instaladas automaticamente — não listar aqui.
+
+```
+{{DEPENDENCIES}}
+```
+
+*Ex: `stripe @stripe/stripe-js resend @aws-sdk/client-s3 date-fns`*
 
 ---
 
-## 🛡️ 4. Gestão de Escopo e Exclusões (Anti-Scope Creep)
+## 🛡️ 4. Gestão de Escopo e Exclusões
 
-> **Para IA:** Qualquer solicitação fora deste escopo deve acionar **Change Request** e atualizar `01-Escopo.md` antes de alterar código.
+> **Para IA:** solicitações fora deste escopo acionam **Change Request** e atualização do `01-Escopo.md` antes de alterar código.
 
-1. **🚫 Exclusão 1:** {{EXCLUSION_1}} *(Ex: Criação de conteúdo em texto/imagens)*
-2. **🚫 Exclusão 2:** {{EXCLUSION_2}} *(Ex: Integração com sistemas legados ou ERPs)*
-3. **Contrato:** Todas as funcionalidades respeitam exclusivamente a Seção 2 deste documento.
+1. **🚫 {{EXCLUSION_1}}**
+2. **🚫 {{EXCLUSION_2}}**
 
 ---
 
-## ⚠️ 5. Consulta à Memória Imunológica (Obrigatório)
+## ⚠️ 5. Consulta à Memória Imunológica
 
-> **Regra do Pipeline:** Antes de finalizar o planejamento, a IA **DEVE** consultar `[[INDEX]]` em `4 - Error's Memory/` e cruzar a stack do projeto com erros conhecidos.
+> **Para IA:** consultar [[4 - Error's Memory/INDEX]] antes de finalizar o planejamento. Cruzar stack com erros conhecidos.
 
-### Erros Conhecidos da Stack
-| Stack | Erro Conhecido | Mitigação |
+| Stack | Consultar |
+| :--- | :--- |
+| {{FRONTEND_STACK}} | `4 - Error's Memory/by-stack/` |
+| {{BACKEND_STACK}} | `4 - Error's Memory/by-stack/` |
+| {{CLOUD_STACK}} | `4 - Error's Memory/by-category/deployment.md` |
+
+---
+
+## 🗓️ 6. Cronograma de Entregas e Marcos
+
+| Fase | Entregável | Prazo |
 | :--- | :--- | :--- |
-| {{FRONTEND_STACK}} | [Consultar `4 - Error's Memory/by-stack/`] | [Prevent measure] |
-| {{BACKEND_STACK}} | [Consultar `4 - Error's Memory/by-stack/`] | [Prevent measure] |
-| {{CLOUD_STACK}} | [Consultar `4 - Error's Memory/by-category/deployment.md`] | [Prevent measure] |
-
-> **Fonte:** [[Immunological Error Memory]] — Se houver erros relevantes, criar seção "⚠️ Erros Conhecidos" no plano de tarefas.
-
----
-
-## 🗓️ 6. Cronograma de Entregas e Marcos (Milestones)
-
-| Fase de Execução | Descrição do Entregável | Prazo Estimado |
-| :--- | :--- | :--- |
-| **1. Discovery & Design UI/UX** | Wireframes e Layout em Alta Fidelidade (Figma). | {{PHASE_1_WEEKS}} Semanas |
-| **2. Fundação Técnica (Front/Back)** | Tabelas no BD, Roteamento e Telas Codificadas. | {{PHASE_2_WEEKS}} Semanas |
-| **3. Integrações & Lógica Core** | Conexão de APIs, Checkouts e Fluxos Reais. | {{PHASE_3_WEEKS}} Semanas |
-| **4. Polish & High-End UX** | Animações GSAP, responsividade fina e polimento visual. | {{PHASE_4_WEEKS}} Semanas |
-| **5. QA, Testes e Go-Live** | Bateria de testes e entrega em ambiente de produção. | {{PHASE_5_WEEKS}} Semanas |
+| **1. Discovery & Design** | Wireframes + Layout Figma | {{PHASE_1_WEEKS}} sem |
+| **2. Fundação Técnica** | DB, roteamento, telas base | {{PHASE_2_WEEKS}} sem |
+| **3. Integrações & Core** | APIs, checkouts, fluxos reais | {{PHASE_3_WEEKS}} sem |
+| **4. Polish & UX** | GSAP, responsividade, polimento | {{PHASE_4_WEEKS}} sem |
+| **5. QA & Go-Live** | Testes, auditoria, deploy | {{PHASE_5_WEEKS}} sem |
 
 ---
 
-## 🔧 7. Spec-Driven Development Pipeline
+## ✅ 7. Definição de Pronto (DoD)
 
-> **Para IA:** Este projeto seguirá o pipeline SDD em 4 fases. **Nenhum código é gerado antes da aprovação do planejamento.**
+- [ ] Todas as User Stories implementadas com testes passando (TDD)
+- [ ] 100% E2E (Playwright) + unitários críticos (Vitest)
+- [ ] Performance: LCP < 2.5s | FID < 100ms | CLS < 0.1
+- [ ] WCAG 2.1 AA validado
+- [ ] Auditado pelos 3 agentes norteadores sem violações
+- [ ] Bootstrap de dependências registrado no `05-Dev-Log.md`
+- [ ] Documentação completa entregue
 
-### Pipeline SDD
-| # | Fase | Comando | Input | Output |
-|---|---|---|---|---|
-| 1 | **Especificar** | `/speckit.specify` | Descrição alto nível | Jornadas de usuário + critérios de sucesso |
-| 2 | **Planejar** | `/speckit.plan` | Especificação + Dev Preferences | Arquitetura + endpoints + schemas + file tree |
-| 3 | **Gerar Tarefas** | `/speckit.tasks` | Plano técnico monolítico | Lista granular → `04-Tarefas.md` |
-| 4 | **Implementar** | `/speckit.implement` | Tarefa individual | Código + testes unitários |
-
-### Estrutura de Tarefas
-- Cada tarefa terá: ID, título, descrição, arquivos afetados, critérios de aceite
-- Status atualizado em `04-Tarefas.md`: `pending` → `in_progress` → `completed`
-- Erros registrados em `06-Erros.md` e propagados para `4 - Error's Memory/`
-
----
-
-## 🎯 8. Auditoria dos 3 Agentes Norteadores
-
-> **Para IA:** Após implementação (ou iterativamente), o código deve ser auditado contra os 3 documentos norteadores via `/speckit.analyze`.
-
-| Agente | Documento | Função na Auditoria |
-|---|---|---|
-| **Product Strategist** | [[ai-portfolio-product-strategist]] | Valida posicionamento estratégico e narrativa |
-| **Web Designer** | [[ai-web-designer-agent]] | Valida design, UX, animações e responsividade |
-| **Copy Architect** | [[ai-portfolio-copy-architect]] | Valida copy, microtextos e comunicação |
-
-### Critérios de Auditoria por Agente
-| Agente | Critérios de Validação |
-|---|---|
-| Product Strategist | Posicionamento claro, hierarquia de informação, conversão otimizada |
-| Web Designer | `useGSAP` obrigatório, `prefers-reduced-motion`, WCAG AA, tokens de design |
-| Copy Architect | Clareza, especificidade, autoridade, escaneabilidade, CTAs eficazes |
-
----
-
-## ✅ 9. Entrega e Handoff (UAT + Go-Live)
-
-| Etapa | Ação | Responsável |
-|---|---|---|
-| **Deploy de Homologação** | Link temporário para revisão | Dev |
-| **UAT (User Acceptance Testing)** | Cliente testa contra critérios BDD | Cliente + Dev |
-| **Feedback Loop** | Ajustes documentados em `05-Dev-Log.md` | Dev |
-| **Handoff** | Transferência de credenciais, código e documentação | Dev |
-| **Encerramento** | Atualização final do MEMORY.md | Dev + IA |
-
-### Definição de Pronto (DoD)
-- ✅ Todas as User Stories implementadas e testadas
-- ✅ Cobertura de testes: 100% E2E (Playwright) + Unit (Jest)
-- ✅ Performance: LCP < 2.5s, FID < 100ms, CLS < 0.1
-- ✅ Acessibilidade: WCAG 2.1 AA validado
-- ✅ Código auditado pelos 3 agentes sem violações
-- ✅ Documentação completa entregue
-
-
+> Pipeline completo de execução: [[Project Lifecycle Pipeline]] | Metodologia: [[Preferencias Dev]]

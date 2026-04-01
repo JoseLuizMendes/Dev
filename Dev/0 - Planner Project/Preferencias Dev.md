@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 3.0
+versão: 4.1
 status: "Ativo"
 tags:
   - preferences
@@ -8,104 +8,153 @@ tags:
   - regras
   - qualidade
   - sdd
+  - tdd
+  - akita
 ---
 
 # Preferências Dev
 
-> **Propósito:** Este e o arquivo canonico e unico de preferências de desenvolvimento. Ele consolida stack, regras inegociaveis, qualidade e operação SDD.
+> **Propósito:** Arquivo canônico de preferências de desenvolvimento. Consolida stack, metodologia, regras inegociáveis e bootstrap de projetos. Consultado obrigatoriamente no boot de sessão e antes de qualquer implementação.
 
 ---
 
-## Stack Tecnologica Aprovada
+## Stack Tecnológica Aprovada
 
-| Camada | Tecnologia                                           | Regra Principal |
+| Camada | Tecnologia | Regra Principal |
 |---|---|---|
-| **Linguagem** | TypeScript 5.x                                       | `any` proibido. `strict: true` obrigatório |
-| **Backend** | NestJS 10.x + Fastify                                | Modular + DI. Lógica nos Services |
-| **Banco de Dados** | PostgreSQL + Prisma ORM                              | Schema declarativo no `schema.prisma` |
-| **Frontend** | React 19+ / Angular 17+                              | Functional components + hooks |
-| **Framework** | Next.js 16+                                          | App Router padrão |
+| **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` obrigatório |
+| **Backend** | NestJS 10.x + Fastify | Modular + DI. Lógica nos Services, nunca nos Controllers |
+| **Banco de Dados** | PostgreSQL + Prisma ORM | Schema declarativo no `schema.prisma` |
+| **Frontend** | React 19+ / Angular 17+ | Functional components + hooks. Server Components quando aplicável |
+| **Framework** | Next.js 16+ | App Router padrão |
 | **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
-| **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI                | Zero CSS global. Tokens do config |
-| **Animações** | GSAP 3.12+ + Lenis                                   | `useGSAP` obrigatório |
-| **Testes** | Jest + Playwright (E2E)                              | Cobertura total obrigatória |
-| **Infra** | Docker                                               | Containers isolados |
-| **Pipeline** | Spec-Kit (Spacify)                                   | SDD obrigatório |
-| **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite       | Injeção de dependências reais, gestão de cofre e copywriting |
+| **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
+| **Animações** | GSAP 3.12+ + Lenis | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado |
+| **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
+| **Fetching** | React Query / SWR | `useEffect` para data fetching proibido |
+| **Infra** | Docker multi-stage + Compose | Containers isolados. Ambiente local via Compose |
+| **Package Manager** | pnpm | npm, yarn e bun banidos |
+| **Pipeline** | Spec-Kit (Spacify) | SDD+TDD obrigatório |
+| **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite | Docs em tempo real, gestão de cofre, copywriting |
 
 ---
 
-## Regras Inegociáveis (Quick List)
+## Metodologia de Desenvolvimento: Akita + SDD + TDD
 
-| ❌ Proibido | ✅ Obrigatório |
-|---|---|
-| Tipo `any` | `strict: true` no tsconfig |
-| CSS global (exceto bootstrap) | `useGSAP` para animações React |
-| Hex hardcoded — usar tokens | Fastify como adaptador HTTP |
-| `useEffect` para data fetching | Prisma ORM para banco de dados |
-| npm/yarn/bun (usar pnpm) | Docker multi-stage builds |
-| Redux (usar Zustand) | React Query/SWR para fetching |
+> Filosofia central inegociável. Aplica-se a todos os projetos sem exceção.
+
+### Princípios Akita
+
+1. **Spec-first:** nenhuma linha de código sem especificação aprovada.
+2. **Test-first (TDD):** teste escrito antes da implementação. O código existe para fazer o teste passar.
+3. **Incrementalismo rigoroso:** uma tarefa por vez, completamente finalizada antes de avançar.
+4. **Zero débito técnico intencional:** código de produção desde o dia 1.
+5. **Rastreabilidade total:** cada commit referencia uma tarefa do `04-Tarefas.md`, que referencia uma User Story do `01-Escopo.md`.
+
+### Fluxo TDD por Tarefa
+
+```
+1. Ler spec da tarefa (User Story + critério BDD do 01-Escopo.md)
+2. Escrever TESTE que valida o critério de aceite → RED
+3. Implementar mínimo de código para o teste passar → GREEN
+4. Refatorar mantendo o teste verde → REFACTOR
+5. Atualizar status em 04-Tarefas.md
+6. Registrar erros em 06-Erros.md se aplicável
+```
+
+### Cobertura Obrigatória
+
+| Tipo | Ferramenta | Escopo |
+|---|---|---|
+| **Unitário** | Vitest | Funções, services, utils críticos |
+| **Integração** | Vitest | Módulos, endpoints |
+| **E2E** | Playwright | Todos os critérios BDD |
 
 ---
 
-## Regras Avancadas de Qualidade
+## Setup Automático de Projeto (Bootstrap)
 
-- Respeitar `prefers-reduced-motion`
-- WCAG 2.1 AA compliance
-- LCP < 2.5s, FID < 100ms, CLS < 0.1
+> Gatilho: campo `{{DEPENDENCIES}}` do `Master Project Planning Template` ou `Requirements & Scope Project Template`. Executado uma única vez após criar a estrutura de pastas do projeto.
+
+### Sequência de Bootstrap
+
+```bash
+# 1. Inicializar projeto
+pnpm create next-app@latest . --typescript --tailwind --eslint --app --src-dir
+
+# 2. Dependências base da stack
+pnpm add @prisma/client prisma
+pnpm add zustand nuqs react-hook-form @hookform/resolvers zod
+pnpm add sonner lucide-react
+pnpm add gsap @gsap/react lenis
+
+# 3. UI
+pnpm dlx shadcn@latest init
+
+# 4. Testes
+pnpm add -D vitest @vitest/ui @testing-library/react @testing-library/jest-dom
+pnpm add -D playwright @playwright/test
+
+# 5. Dependências extras declaradas em {{DEPENDENCIES}}
+pnpm add [dependências do briefing]
+
+# 6. Infra
+# Gerar Dockerfile multi-stage + docker-compose.yml
+
+# 7. Config
+# tsconfig.json com strict: true
+```
+
+### Regras do Bootstrap
+
+- Nunca instalar dependências fora da stack aprovada sem aprovação explícita.
+- Conflitos com a stack: sinalizar e aguardar decisão antes de instalar.
+- Após bootstrap: registrar dependências instaladas com versões em `05-Dev-Log.md`.
 
 ---
 
-## Regras Inegociaveis por Tecnologia
-
-### Orquestracao e Integracao de IA
-- **Spec-Kit (Spacify):** todo desenvolvimento segue Spec-Driven Development (SDD) com `/speckit.specify`, `/speckit.plan`, `/speckit.tasks` e `/speckit.implement`.
-- **Context7 (MCP):** ao usar ou atualizar bibliotecas da stack, consultar documentacao atual via ferramenta de docs.
+## Regras Inegociáveis por Tecnologia
 
 ### TypeScript
-- `any` e proibido sem excecao arquitetural aprovada.
-- Interfaces e DTOs explicitos sao obrigatorios.
-- `strict: true` e obrigatorio no `tsconfig.json`.
+- `any` proibido sem exceção arquitetural aprovada.
+- Interfaces e DTOs explícitos obrigatórios. `strict: true` no `tsconfig.json`.
 
 ### NestJS + Fastify
-- Fastify e o adaptador HTTP padrao.
-- Arquitetura modular com injecao de dependencias.
-- Controllers nao carregam regra de negocio; regra fica em Services/Providers.
-- Acesso a dados via repositorios e modelagem declarativa no `schema.prisma`.
+- Fastify é o adaptador HTTP padrão (Express bloqueado).
+- Controllers não carregam regra de negócio — regra fica nos Services.
+- Acesso a dados via modelagem declarativa no `schema.prisma`.
 
 ### Frontend (React/Angular)
-- Componentes funcionais e hooks bem estruturados.
-- Em React, usar Server Components quando aplicavel.
-- Componentes de UI nao devem misturar renderizacao com chamadas de rede sem camada de dados.
+- Componentes funcionais e hooks. Server Components quando aplicável (React).
+- UI não mistura renderização com chamadas de rede sem camada de dados.
 
 ### Tailwind + Shadcn
-- CSS global e proibido, salvo excecoes controladas.
-- Design via classes utilitarias e componentes acessiveis.
-- Conformidade WCAG obrigatoria.
+- CSS global proibido, salvo exceções controladas. Design via classes utilitárias.
+- Hex hardcoded proibido — usar tokens do `tailwind.config.ts`.
 
 ### GSAP + Lenis
-- `useGSAP` e obrigatorio para encapsular animacoes no React.
-- Respeitar `prefers-reduced-motion`.
+- `useGSAP` obrigatório no React para auto-cleanup. Respeitar `prefers-reduced-motion`.
+- Animações não bloqueiam main thread. ScrollTrigger integrado ao Lenis via `requestAnimationFrame`.
 
-### Infra, Testes e Deploy
-- Apenas `pnpm` permitido. `npm`, `yarn` e `bun` banidos.
-- Docker com build multi-stage e `docker-compose.yml` para ambiente local.
-- Jest para testes unitarios/integracao e Playwright para E2E.
-- Codigo de producao desde o dia 1: sem prototipo fragil.
+### Vitest + Playwright
+- Testes escritos antes ou junto com a implementação.
+- Nenhuma tarefa marcada como `completed` sem todos os testes passando.
+- Mocks apenas para dependências externas — nunca para lógica interna.
+
+### Context7 (MCP)
+- Consultar documentação atual via Context7 ao usar ou atualizar bibliotecas da stack. Nunca adivinhar APIs.
 
 ---
 
-## Regras Promovidas da Memoria Imunologica
+## Regras Promovidas da Memória Imunológica
 
-> Esta secao recebe regras quando um erro atinge `recorrencias >= 2` no `4 - Error's Memory/INDEX.md`.
+> Seção populada automaticamente quando um erro atinge `recorrencias >= 2` no [[4 - Error's Memory/INDEX]].
 
 _Nenhuma regra promovida ainda._
 
 ---
 
-## Documentos Norteadores (3 Arquivos)
-
-Para auditoria de código, consultar obrigatoriamente:
+## Documentos Norteadores (Auditoria de Código)
 
 | Agente | Arquivo | Função |
 |---|---|---|
@@ -115,8 +164,9 @@ Para auditoria de código, consultar obrigatoriamente:
 
 ---
 
-## Referencias Internas
+## Referências Internas
 
-- [[Project Lifecycle Pipeline]]
-- [[Session Protocol]]
-- [[Immunological Error Memory]]
+- [[Project Lifecycle Pipeline]] — Fluxo completo de desenvolvimento
+- [[Session Protocol]] — Boot/shutdown de sessão
+- [[Immunological Error Memory]] — Sistema global de erros
+- [[Client Onboarding Protocol]] — Bootstrap e inicialização de projetos

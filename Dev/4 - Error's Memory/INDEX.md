@@ -10,10 +10,10 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 0 |
+| **Total de erros registrados** | 2 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
-| **Última atualização** | 2026-03-21 |
+| **Última atualização** | 2026-03-31 |
 
 ---
 
@@ -49,26 +49,34 @@
 
 ## Registro de Erros
 
-_Os erros são listados abaixo em ordem cronológica reversa (mais recente primeiro)._
-
 ```yaml
-# Nenhum erro registrado ainda.
-# Formato de registro:
-#
-# - id: ERR-YYYY-NNNN
-#   título: "Descrição curta"
-#   categoria: category-name
-#   stack: [tech1, tech2]
-#   severidade: baixa | média | alta | crítica
-#   projeto_origem: "Nicho/Cliente-Projeto"
-#   data_descoberta: YYYY-MM-DD
-#   sintoma: "O que aparece"
-#   causa_raiz: "Por que acontece"
-#   solução: "O que resolve"
-#   prevenção: "Como evitar"
-#   recorrências: 0
-#   links:
-#     - "[[Projeto/06-Erros]]"
-#     - "[[by-stack/tech]]"
-#     - "[[by-category/cat]]"
+- id: ERR-2026-0001
+  título: "Excesso de artefatos no onboarding inicial"
+  categoria: Deployment
+  stack: []
+  severidade: baixa
+  projeto_origem: "Mock/Onboarding-Teste"
+  data_descoberta: 2026-03-22
+  sintoma: "Fluxo mockado gerou documentos além do necessário para o cliente"
+  causa_raiz: "Falta de regra explícita de saída mínima por projeto"
+  solução: "Limitar saída do projeto a 3 arquivos locais + erros globais"
+  prevenção: "Seguir checklist de entrega mínima antes de finalizar onboarding"
+  recorrências: 0
+  links:
+    - "[[GLOBAL-ERRORS]]"
+
+- id: ERR-2026-0002
+  título: "Interpretação incorreta de saída mínima como conteúdo resumido"
+  categoria: Deployment
+  stack: []
+  severidade: baixa
+  projeto_origem: "Mock/Onboarding-Teste"
+  data_descoberta: 2026-03-22
+  sintoma: "Escopo e contrato entregues com estrutura reduzida, sem aderência aos templates base"
+  causa_raiz: "Ambiguidade entre 'mínimo de artefatos' e 'profundidade de preenchimento'"
+  solução: "Manter 3 arquivos locais no onboarding, porém com estrutura completa dos templates oficiais"
+  prevenção: "Validar 2 critérios antes de finalizar: (1) quantidade de arquivos, (2) aderência estrutural ao template"
+  recorrências: 0
+  links:
+    - "[[GLOBAL-ERRORS]]"
 ```
