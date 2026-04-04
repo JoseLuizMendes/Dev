@@ -82,11 +82,13 @@ tags:
 
 | Camada | Pacotes |
 |---|---|
-| **Framework** | `create-next-app@latest --typescript --tailwind --eslint --app --src-dir` |
-| **UI/UX** | `gsap @gsap/react lenis zustand nuqs sonner lucide-react` |
-| **Forms/Validação** | `react-hook-form @hookform/resolvers zod` |
-| **Testes** | `vitest @vitest/ui @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom` (dev) |
-| **Extras** | declarados em `{{DEPENDENCIES}}` do escopo — instalados via `npm install` |
+| **Framework** | `pnpm create next-app@latest --typescript --tailwind --eslint --app --src-dir --no-git` |
+| **UI/UX** | `pnpm add gsap @gsap/react lenis zustand nuqs sonner lucide-react` |
+| **Forms/Validação** | `pnpm add react-hook-form @hookform/resolvers zod` |
+| **Testes** | `pnpm add -D vitest @vitest/ui @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom` |
+| **Extras** | declarados em `{{DEPENDENCIES}}` — `pnpm add [deps]` |
+
+> Fonte dos comandos: [pnpm docs](https://pnpm.io/cli/add) | [Next.js installation](https://nextjs.org/docs/app/getting-started/installation)
 
 ### Regras do Bootstrap
 
@@ -94,6 +96,7 @@ tags:
 - Conflitos com a stack: sinalizar e aguardar decisão antes de instalar.
 - Após bootstrap: registrar dependências instaladas com versões em `05-Dev-Log.md`.
 - `setup.js` lê `01-Escopo.md` em runtime via `path.join(__dirname, ...)` — sem dados hardcoded.
+- `setup.js` usa o campo `package_manager` do frontmatter para gerar os comandos corretos — nunca hardcoda `npm` ou `pnpm` diretamente.
 
 ---
 

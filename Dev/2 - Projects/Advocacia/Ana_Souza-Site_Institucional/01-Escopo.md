@@ -16,6 +16,7 @@ data_inicio: "2026-04-07"
 data_entrega: "2026-05-19"
 valor: "R$ 4.800,00"
 tier: "Mid-Ticket"
+package_manager: "pnpm"
 ---
 
 # 📋 Formulário de Escopo e Requisitos: Ana Souza — Site Institucional

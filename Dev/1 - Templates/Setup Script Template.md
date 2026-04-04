@@ -57,7 +57,7 @@ Salvo em: `Dev/2 - Projects/[Nicho]/[Projeto]/setup.js`
 ## Seção 2 — Padrão obrigatório de leitura
 
 ```javascript
-const fs = require("fs");
+const fs   = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
@@ -68,39 +68,74 @@ if (!fs.existsSync(escopoPath)) {
 }
 
 const escopo = fs.readFileSync(escopoPath, "utf8");
-const frontmatterMatch = escopo.match(/^---\n([\s\S]*?)\n---/);
-if (!frontmatterMatch) {
+const fmMatch = escopo.match(/^---\n([\s\S]*?)\n---/);
+if (!fmMatch) {
   console.error("❌ Frontmatter não encontrado em 01-Escopo.md");
   process.exit(1);
 }
-const frontmatter = frontmatterMatch[1];
+const fm = fmMatch[1];
 
 const get = (key) => {
-  const match = frontmatter.match(new RegExp(`${key}:\\s*"?([^"\\n]+)"?`));
-  return match ? match[1].trim() : "";
+  const m = fm.match(new RegExp(`^${key}:\\s*"?([^"\\n]+)"?`, "m"));
+  return m ? m[1].trim() : "";
 };
 
-const PROJECT = (get("cliente") + "-" + get("projeto"))
-  .toLowerCase()
-  .replace(/\s+/g, "-")
-  .replace(/[^a-z0-9-]/g, "");
-const FRONTEND_STACK = get("frontend_stack");
-const DEPENDENCIES   = get("dependencies");
+const PROJECT    = (get("cliente") + "-" + get("projeto"))
+  .toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+const PKG_MGR    = get("package_manager") || "npm"; // pnpm | npm | yarn | bun
+const DEPENDENCIES = get("dependencies");
+```
+
+## Package Manager Abstraction — padrão obrigatório
+
+Sempre usar este objeto `pm` para gerar comandos. **Nunca hardcodar `npm install` ou `pnpm add` diretamente.**
+
+```javascript
+// Fonte: https://pnpm.io/cli/add | https://nextjs.org/docs/app/getting-started/installation
+const pm = {
+  create: (name) => {
+    const flags = "--typescript --tailwind --eslint --app --src-dir --no-git";
+    switch (PKG_MGR) {
+      case "pnpm": return `pnpm create next-app@latest ${name} ${flags}`;
+      case "yarn": return `yarn create next-app ${name} ${flags}`;
+      case "bun":  return `bun create next-app ${name} ${flags}`;
+      default:     return `npx create-next-app@latest ${name} ${flags}`;
+    }
+  },
+  add: (pkgs) => {
+    switch (PKG_MGR) {
+      case "pnpm": return `pnpm add ${pkgs}`;
+      case "yarn": return `yarn add ${pkgs}`;
+      case "bun":  return `bun add ${pkgs}`;
+      default:     return `npm install ${pkgs}`;
+    }
+  },
+  addDev: (pkgs) => {
+    switch (PKG_MGR) {
+      case "pnpm": return `pnpm add -D ${pkgs}`;
+      case "yarn": return `yarn add -D ${pkgs}`;
+      case "bun":  return `bun add -d ${pkgs}`;
+      default:     return `npm install --save-dev ${pkgs}`;
+    }
+  },
+};
 ```
 
 ---
 
 ## Seção 5 — Config files obrigatórios
 
-O script escreve exatamente estes arquivos de configuração — nada mais:
+O script aplica exatamente estes arquivos de configuração — nada mais:
 
-| Arquivo | Conteúdo |
-|---|---|
-| `tsconfig.json` | `strict: true` obrigatório + flags de segurança de tipo |
-| `next.config.ts` | Headers de segurança (X-Frame-Options, etc.) |
-| `vitest.config.ts` | Environment jsdom, globals, aliases `@/*` |
-| `src/test/setup.ts` | `import "@testing-library/jest-dom"` |
-| `.env.example` | Variáveis necessárias sem valores reais |
+| Arquivo | Estratégia | Conteúdo |
+|---|---|---|
+| `tsconfig.json` | **MERGE** — não overwrite | Adicionar `strict`, `noImplicitOverride`, `types: ["vitest/jsdom"]` ao gerado pelo scaffold |
+| `next.config.ts` | **Overwrite** intencional | Security headers (X-Frame-Options, nosniff, Referrer-Policy) |
+| `vitest.config.ts` | Criar | Environment jsdom, globals, aliases `@/*`, `jsdom.url` |
+| `src/test/setup.ts` | Criar | `import "@testing-library/jest-dom"` |
+| `.env.example` | Criar | Variáveis do escopo, sem valores reais |
+
+> ⚠️ `noUncheckedIndexedAccess` **excluído intencionalmente** do tsconfig — incompatível com tipos gerados pelo Next.js (fonte: Context7 / Next.js docs).
 
 > Componentes, tipos, schemas e dados são responsabilidade do [[Protocol-SpecKit]], **não** do setup.js.
 
@@ -108,13 +143,16 @@ O script escreve exatamente estes arquivos de configuração — nada mais:
 
 ## Variáveis extraídas do frontmatter de 01-Escopo.md
 
-| Variável | Campo no frontmatter | Uso |
+| Variável | Campo no frontmatter | Valores aceitos |
 |---|---|---|
-| `PROJECT` | `cliente` + `projeto` → kebab-case | Nome da pasta do projeto |
-| `FRONTEND_STACK` | `frontend_stack` | Comando de scaffold |
-| `DEPENDENCIES` | `dependencies` | `npm install [deps]` |
-| `EMAIL_SERVICE` | `email_service` | Linha no .env.example |
-| `CLOUD_STACK` | `cloud_stack` | Comentário no .env.example |
+| `PROJECT` | `cliente` + `projeto` → kebab-case | string kebab-case |
+| `PACKAGE_MANAGER` | `package_manager` | `pnpm` \| `npm` \| `yarn` \| `bun` |
+| `FRONTEND_STACK` | `frontend_stack` | ex: `Next.js 16 + React 19 + Tailwind` |
+| `DEPENDENCIES` | `dependencies` | pacotes separados por espaço, ou `N/A` |
+| `EMAIL_SERVICE` | `email_service` | ex: `Resend`, ou `N/A` |
+| `CLOUD_STACK` | `cloud_stack` | ex: `Vercel`, ou `N/A` |
+
+> `package_manager` é obrigatório — define todos os comandos `add`, `addDev` e `create`. Padrão: `npm` se ausente.
 
 ---
 
