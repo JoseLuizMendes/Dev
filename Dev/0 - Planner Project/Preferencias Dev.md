@@ -75,41 +75,25 @@ tags:
 ## Setup Automático de Projeto (Bootstrap)
 
 > Gatilho: campo `{{DEPENDENCIES}}` do `Master Project Planning Template` ou `Requirements & Scope Project Template`. Executado uma única vez após criar a estrutura de pastas do projeto.
+>
+> **Execução:** seguir [[Protocol-Bootstrap]] — responsável por criar `05-Dev-Log.md`, `06-Erros.md` e o `setup.js` dinâmico que lê o escopo em runtime.
 
-### Sequência de Bootstrap
+### Stack base instalada no bootstrap
 
-```bash
-# 1. Inicializar projeto
-pnpm create next-app@latest . --typescript --tailwind --eslint --app --src-dir
-
-# 2. Dependências base da stack
-pnpm add @prisma/client prisma
-pnpm add zustand nuqs react-hook-form @hookform/resolvers zod
-pnpm add sonner lucide-react
-pnpm add gsap @gsap/react lenis
-
-# 3. UI
-pnpm dlx shadcn@latest init
-
-# 4. Testes
-pnpm add -D vitest @vitest/ui @testing-library/react @testing-library/jest-dom
-pnpm add -D playwright @playwright/test
-
-# 5. Dependências extras declaradas em {{DEPENDENCIES}}
-pnpm add [dependências do briefing]
-
-# 6. Infra
-# Gerar Dockerfile multi-stage + docker-compose.yml
-
-# 7. Config
-# tsconfig.json com strict: true
-```
+| Camada | Pacotes |
+|---|---|
+| **Framework** | `create-next-app@latest --typescript --tailwind --eslint --app --src-dir` |
+| **UI/UX** | `gsap @gsap/react lenis zustand nuqs sonner lucide-react` |
+| **Forms/Validação** | `react-hook-form @hookform/resolvers zod` |
+| **Testes** | `vitest @vitest/ui @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom` (dev) |
+| **Extras** | declarados em `{{DEPENDENCIES}}` do escopo — instalados via `npm install` |
 
 ### Regras do Bootstrap
 
 - Nunca instalar dependências fora da stack aprovada sem aprovação explícita.
 - Conflitos com a stack: sinalizar e aguardar decisão antes de instalar.
 - Após bootstrap: registrar dependências instaladas com versões em `05-Dev-Log.md`.
+- `setup.js` lê `01-Escopo.md` em runtime via `path.join(__dirname, ...)` — sem dados hardcoded.
 
 ---
 
@@ -170,3 +154,4 @@ _Nenhuma regra promovida ainda._
 - [[Session Protocol]] — Boot/shutdown de sessão
 - [[Immunological Error Memory]] — Sistema global de erros
 - [[Client Onboarding Protocol]] — Bootstrap e inicialização de projetos
+
