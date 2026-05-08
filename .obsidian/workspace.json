@@ -184,7 +184,6 @@
       "obsidian-excalidraw-plugin:New drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false,
       "switcher:Abrir a troca rápida": false,
       "graph:Abrir visualização em gráfico": false,
       "canvas:Criar novo canvas": false,
@@ -193,14 +192,19 @@
       "command-palette:Abrir paleta de comandos": false,
       "bases:Criar nova base": false,
       "markdown-importer:Abrir importador Markdown": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false,
       "obsidian-kanban:Criar um novo quadro": false
     }
   },
   "active": "ae690a6eb40bbda5",
   "lastOpenFiles": [
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/06-Erros.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/05-Dev-Log.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/04-Tarefas.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/03-Planejamento.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/01-Escopo.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/INIT.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow",
+    "Dev/2 - Projects/Automacao",
     "Dev/2 - Projects/Casamento/Wedding-New/Requirements & Scope.md",
     "Dev/COWORK-INSTRUCTIONS.md",
     "Dev/2 - Projects/Casamento",
@@ -226,17 +230,9 @@
     "Sem título.md",
     "01-Escopo.md",
     "Dev/1 - Templates/Contract Template.md",
-    "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/setup.js",
     "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/05-Dev-Log.md",
     "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/06-Erros.md",
     "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/04-Tarefas.md",
-    "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/03-Planejamento.md",
-    "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/02-Contrato.md",
-    "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/01-Escopo.md",
-    "Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional",
-    "1 - Templates/Setup Script Template.md",
-    "0 - Planner Project/Client Onboarding Protocol.md",
-    "Dev/0 - Planner Project/Protocol-SpecKit.md",
     "Pasted image 20260321152023.png"
   ]
 }
