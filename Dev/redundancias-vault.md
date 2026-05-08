@@ -1,6 +1,7 @@
 # Mapa de Redundâncias — Vault Dev
 
-> Gerado em: 2026-05-08 | Análise de sobreposição de conteúdo entre todos os arquivos do vault.
+> Gerado em: 2026-05-08 | **Atualizado em: 2026-05-08** | Análise de sobreposição de conteúdo entre todos os arquivos do vault.
+> **Status:** Redundâncias críticas corrigidas — ver Resumo de Ações.
 
 ---
 
@@ -67,7 +68,12 @@ A sequência de inicialização do agente está definida em **3 lugares diferent
 > [!WARNING]
 > São 3 sequências de boot diferentes. O agente pode se comportar de forma inconsistente dependendo de qual arquivo leu primeiro. O `MEMORY.md` já documenta este conflito como problema em aberto.
 
-**Recomendação:** Consolidar em uma única sequência canônica no `Session Protocol.md`. `INIT.md` e `TOON-PROMPT.md` referenciam `[[Session Protocol]]` sem redefinir o fluxo.
+**Resolução aplicada (2026-05-08):**
+- `INIT.md` **removido** da raiz do vault — ele só existe dentro de cada projeto
+- `TOON-PROMPT.md` agora referencia `[[Session Protocol]]` como fonte canônica do boot
+- `CLAUDE.md` atualizado para indicar que `INIT.md` é gerado por projeto
+
+**Fonte canônica:** [[Session Protocol]] — é o único lugar onde a sequência de boot é definida.
 
 ---
 
@@ -94,7 +100,11 @@ Os 3 agentes de auditoria (`product-strategist`, `web-designer`, `copy-architect
 | `Protocol-SpecKit.md` | Passos do Spec-Kit (mesma lógica) |
 | `TOON-PROMPT.md` → Spec-Kit + Fluxo Macro | Mesmo pipeline, terceira vez |
 
-**Recomendação:** `Project Lifecycle Pipeline.md` é a fonte da verdade. `Protocol-SpecKit.md` detalha a execução (tudo bem). `TOON-PROMPT.md` pode referenciar `[[Project Lifecycle Pipeline]]`.
+**Resolução aplicada (2026-05-08):**
+- `TOON-PROMPT.md` — "Fluxo Macro" simplificado para delegar a `[[Project Lifecycle Pipeline]]`
+- Spec-Kit e Auditoria removidos do TOON-PROMPT (só existem nos arquivos canônicos)
+
+**Fonte canônica:** [[Project Lifecycle Pipeline]] + [[Protocol-SpecKit]] + [[0.2 - Audit/Diretrizes]]
 
 ---
 
@@ -120,7 +130,10 @@ Os 3 agentes de auditoria (`product-strategist`, `web-designer`, `copy-architect
 | `Cognitive Vault Architecture.md` → "Camadas de Memória" | Tabela resumida + `ver [[Session Protocol]]` |
 | `TOON-PROMPT.md` → "Arquitetura de Memória" | Descrição narrativa duplicada |
 
-**Avaliação:** `Cognitive Vault Architecture.md` é resumo intencional ✅. `TOON-PROMPT.md` duplica sem necessidade 🟡.
+**Resolução aplicada (2026-05-08):**
+- `TOON-PROMPT.md` — "Arquitetura de Memória" substituída por tabela resumida + `[[Session Protocol]]`
+
+**Fonte canônica:** [[Session Protocol]] + [[Cognitive Vault Architecture]] (resumo)
 
 ---
 
@@ -137,13 +150,15 @@ Estes casos são repetições **intencionais e corretas** — não precisam ser 
 
 ## Resumo das Ações Recomendadas
 
-| Prioridade | Ação | Arquivos Afetados |
-|---|---|---|
-| 🔴 Alta | Unificar boot sequence em `Session Protocol.md` | `INIT.md`, `TOON-PROMPT.md` |
-| 🔴 Alta | Remover árvore de pastas duplicada | `INDEX.md`, `CLAUDE.md`, `TOON-PROMPT.md` |
-| 🟡 Média | Reduzir duplicação da lista de agentes de auditoria | `Preferencias Dev.md`, `TOON-PROMPT.md` |
-| 🟡 Média | Consolidar descrição do pipeline SDD | `TOON-PROMPT.md` |
-| 🟢 Baixa | Seção de memória em `TOON-PROMPT.md` | Referenciar `[[Session Protocol]]` |
+| Prioridade | Ação | Arquivos Afetados | Status |
+|---|---|---|---|
+| 🔴 Alta | Unificar boot sequence em `Session Protocol.md` | `INIT.md` (removido), `TOON-PROMPT.md` | ✅ Concluído |
+| 🔴 Alta | Remover `INIT.md` da raiz do vault | `Dev/INIT.md` | ✅ Concluído |
+| 🔴 Alta | Simplificar Fluxo Macro e Auditoria | `TOON-PROMPT.md` | ✅ Concluído |
+| 🔴 Alta | Simplificar Arquitetura de Memória | `TOON-PROMPT.md` | ✅ Concluído |
+| 🔴 Alta | Remover árvore de pastas duplicada | `CLAUDE.md` | ✅ Concluído |
+| 🟡 Média | Reduzir duplicação da lista de agentes de auditoria | `Preferencias Dev.md`, `TOON-PROMPT.md` | ⏳ Pendente |
+| 🟢 Baixa | Árvore de pastas em `INDEX.md` | `INDEX.md` | ⏳ Pendente (aceitável — é de navegação) |
 
 ---
 
