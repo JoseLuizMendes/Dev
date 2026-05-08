@@ -76,6 +76,8 @@ Dev/
 
 **Projetos ativos:**
 - [[Dev/2 - Projects/Advocacia/Ana_Souza-Site_Institucional/01-Escopo|Advocacia / Ana Souza — Site Institucional]]
+- [[Dev/2 - Projects/Portifolio/Pessoal/MendeShift/Requirements & Scope|Portfólio / MendeShift]] ✅ Concluído
+- [[Dev/2 - Projects/Casamento/Wedding-New/Requirements & Scope|Portfólio / Wedding-New]] ✅ Concluído
 
 ---
 
