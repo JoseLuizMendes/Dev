@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 4.1
+versão: 4.2
 status: "Ativo"
 tags:
   - preferences
@@ -18,15 +18,18 @@ tags:
 
 ---
 
-## Stack Tecnológica Aprovada
+## Stack Tecnológica
+
+> **Regra fundamental:** A stack varia por projeto. A stack específica de cada projeto é sempre definida no `INIT.md` do projeto. Este arquivo documenta todas as stacks aprovadas e suas regras.
+
+### Stack Principal (Mais Usada)
 
 | Camada | Tecnologia | Regra Principal |
 |---|---|---|
 | **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` obrigatório |
 | **Backend** | NestJS 10.x + Fastify | Modular + DI. Lógica nos Services, nunca nos Controllers |
 | **Banco de Dados** | PostgreSQL + Prisma ORM | Schema declarativo no `schema.prisma` |
-| **Frontend** | React 19+ / Angular 17+ | Functional components + hooks. Server Components quando aplicável |
-| **Framework** | Next.js 16+ | App Router padrão |
+| **Frontend** | React 19+ / Next.js 16+ | Functional components + hooks. Server Components quando aplicável |
 | **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
 | **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
 | **Animações** | GSAP 3.12+ + Lenis | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado |
@@ -36,6 +39,15 @@ tags:
 | **Package Manager** | pnpm | npm, yarn e bun banidos |
 | **Pipeline** | Spec-Kit (Spacify) | SDD+TDD obrigatório |
 | **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite | Docs em tempo real, gestão de cofre, copywriting |
+
+### Stacks Adicionais (Variáveis por Projeto)
+
+| Linguagem/Framework | Quando Usar | Observação |
+|---|---|---|
+| **C# (.NET)** | Projetos enterprise, APIs robustas, microservices | Stack definida no `INIT.md` do projeto |
+| **Java (Spring Boot)** | Projetos enterprise, Android, sistemas legados | Stack definida no `INIT.md` do projeto |
+| **Vue.js 3+** | Projetos lightweight, prototipagem rápida | Composition API obrigatório. Options API proibida |
+| **Angular** | Projetos enterprise em larga escala | Em adoção futura. Stack definida no `INIT.md` |
 
 ---
 
@@ -111,9 +123,36 @@ tags:
 - Controllers não carregam regra de negócio — regra fica nos Services.
 - Acesso a dados via modelagem declarativa no `schema.prisma`.
 
-### Frontend (React/Angular)
-- Componentes funcionais e hooks. Server Components quando aplicável (React).
+### Frontend (React / Next.js)
+- Componentes funcionais e hooks. Server Components quando aplicável.
 - UI não mistura renderização com chamadas de rede sem camada de dados.
+
+### Vue.js 3+
+- Composition API obrigatório. Options API proibida.
+- `<script setup>` como padrão. Props e emits tipados com `defineProps` / `defineEmits`.
+- Pinia para state management (Vuex banido).
+- Vite como bundler padrão.
+
+### C# (.NET)
+- Clean Architecture ou Vertical Slice Architecture — definida no `INIT.md` do projeto.
+- Async/await obrigatório em toda camada de I/O.
+- DTOs e Records para transferência de dados — nunca expor entidades diretamente.
+- xUnit para testes unitários. Fluent Assertions para legibilidade.
+- Entity Framework Core como ORM padrão.
+
+### Java (Spring Boot)
+- Arquitetura em camadas: Controller → Service → Repository.
+- Lombok permitido para reduzir boilerplate.
+- Testes com JUnit 5 + Mockito.
+- Maven ou Gradle — definido no `INIT.md` do projeto.
+- Records para DTOs quando Java 16+.
+
+### Angular
+- Standalone Components obrigatório (NgModules legado banido em projetos novos).
+- Signals para state local. NgRx apenas quando estado global complexo justificar.
+- Lazy loading de rotas obrigatório.
+- `inject()` preferível a constructor injection.
+- Regras a evoluir conforme adoção do projeto.
 
 ### Tailwind + Shadcn
 - CSS global proibido, salvo exceções controladas. Design via classes utilitárias.
