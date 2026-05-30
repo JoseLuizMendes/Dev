@@ -49,6 +49,29 @@ tags:
 | **Vue.js 3+** | Projetos lightweight, prototipagem rápida | Composition API obrigatório. Options API proibida |
 | **Angular** | Projetos enterprise em larga escala | Em adoção futura. Stack definida no `INIT.md` |
 
+### Stack Estendida — Ecommerce
+
+> Aprovada como extensão da Stack Principal para projetos de ecommerce que demandem auth completo, pagamento, mídia e email transacional. Quando uma destas libs é usada, o `01-Escopo.md` do projeto deve listar no `dependencies` do frontmatter.
+
+| Lib | Categoria | Quando usar | Justificativa |
+|---|---|---|---|
+| `next-auth` 5 (Auth.js v5) | Autenticação | Auth de usuário no Next.js | Adapter Prisma nativo, suporte OAuth + credenciais + JWT |
+| `@auth/prisma-adapter` | Autenticação | Sempre com Auth.js + Prisma | Cria tabelas Account/Session/VerificationToken/User esperadas |
+| `arctic` | OAuth | OAuth providers customizados (Google Admin allowlist) | Lib leve, opcional ao Auth.js providers built-in |
+| `bcryptjs` | Crypto | Hash de senha (credentials provider) | Padrão de mercado, Node-only |
+| `jose` | Crypto | JWT signing/verify Edge-safe (middleware) | Funciona em Edge runtime; bcrypt e jsonwebtoken não |
+| `otplib` | Crypto | TOTP (2FA admin) | Geração + validação de OTP |
+| `mercadopago` | Pagamento | Gateway de pagamento BR | Padrão BR, suporta PIX + cartão + boleto |
+| `cloudinary` + `next-cloudinary` | Mídia | Storage + delivery de imagens otimizadas | Transformações on-the-fly, CDN |
+| `resend` + `@react-email/components` + `@react-email/render` | Email | Email transacional + templates React | API simples, templates em React |
+| `recharts` | Visualização | Charts em painel admin | Lib React-native, mais leve que Chart.js em Next |
+| `@prisma/adapter-pg` + `pg` | DB | Postgres via Prisma 7+ driver adapter | Required pra Prisma 7 com Postgres em Edge |
+| `@radix-ui/react-*` ou `radix-ui` bundled | UI | Primitivos acessíveis (usado pelo shadcn) | Base do shadcn/ui — já implícito na stack principal |
+
+**Regra de adoção:**
+- Antes de adicionar lib fora desta lista E fora da Stack Principal: R7 dispara — registrar exceção justificada em `[[05-Dev-Log]]`.
+- Updates de versão MAJOR: consultar Context7 + adicionar entrada em `[[06-Erros]]` se houver breaking change relevante.
+
 ---
 
 ## Metodologia de Desenvolvimento: Akita + SDD + TDD
@@ -144,6 +167,27 @@ Presentation → Application → Domain ← Infrastructure
 
 **Promoção tardia permitida:** projeto que começou Layered e atingiu complexidade que justifica Hexagonal → refatorar agora é mais barato do que depois. Registrar decisão em `[[05-Dev-Log]]`.
 
+### 4. CLAUDE.md Universal (regra global de organização)
+
+> ⚠️ **Inegociável.** Toda pasta e sub-pasta do repositório de código DEVE conter um `CLAUDE.md` próprio.
+
+**Propósito:** cada `CLAUDE.md` documenta localmente o que aquela pasta faz, qual sua responsabilidade, quais regras específicas valem ali, e o que NÃO fazer. Garante que qualquer IA (ou humano) entrando numa pasta sabe imediatamente o contexto sem precisar reconstruir do código.
+
+**Como aplicar:**
+
+- Usar `[[Niche CLAUDE Template]]` como base canon — nunca escrever do zero.
+- Frontmatter obrigatório: `nicho` (nome da pasta) + `escopo` (descrição curta).
+- Sections obrigatórias: Escopo, Diretrizes Específicas, Stack Local, Testes, Dependências Permitidas.
+- Em pastas geradas por ferramenta (`node_modules`, `.next`, `dist`, `coverage`, `src/generated`, etc): **dispensadas** — listar no `.gitignore` e referenciar como exceção no CLAUDE.md do pai.
+
+**Granularidade:**
+
+- 1 `CLAUDE.md` por bounded context (`src/lib/cart/CLAUDE.md`)
+- 1 `CLAUDE.md` por camada hexagonal (`src/lib/cart/domain/CLAUDE.md`, `application/`, `infrastructure/`, `presentation/`)
+- 1 `CLAUDE.md` por sub-pasta de UI (`src/components/admin/CLAUDE.md`, `src/components/auth/CLAUDE.md`)
+
+**Quality gate:** o validator `tools/validate-project.js --code-path` checa que toda pasta visível (não gitignored) tem `CLAUDE.md`. Falha hard se faltar.
+
 ---
 
 ## Estrutura de Pastas por Stack
@@ -191,6 +235,68 @@ back/src/modules/<bounded-context>/
 │   └── http/                      # clientes de APIs externas
 ├── presentation/                  # NestJS controllers + DTOs (Zod)
 └── <bounded-context>.module.ts
+```
+
+### Next.js Standalone Fullstack — Layered (default)
+
+> Variante para projetos onde back e front vivem no MESMO Next.js (Route Handlers + Server Components + Prisma direto, sem NestJS). Aprovada quando o dev escolhe trabalhar back+front juntos em um único deploy.
+
+```
+projeto/                         # raiz do repo de código
+├── src/
+│   ├── app/                     # App Router (rotas + Server Components + Route Handlers em api/)
+│   │   ├── api/                 # Route Handlers (HTTP endpoints — NÃO confundir com src/api/)
+│   │   ├── (rotas pt-BR)/       # páginas públicas + admin
+│   │   ├── layout.tsx
+│   │   └── globals.css          # Tailwind v4 lê tokens daqui
+│   ├── lib/                     # data layer + server actions + stores + design tokens
+│   │   └── <bounded-context>/   # ver Hexagonal abaixo
+│   ├── components/              # UI (Server + Client Components)
+│   │   ├── ui/                  # shadcn/ui primitivos
+│   │   └── <feature>/
+│   ├── shadcn-utils/            # helpers exclusivos do shadcn (cn, formatPrice) — alias @/shadcn-utils
+│   ├── types/                   # *.d.ts (augmentations de Next-Auth, etc)
+│   ├── test/                    # setup de testes (jsdom, mocks GSAP/Lenis)
+│   └── middleware.ts            # proteção de rotas
+├── prisma/
+│   ├── schema.prisma
+│   ├── seed.ts
+│   ├── sql/                     # migrações manuais (se aplicável)
+│   └── CLAUDE.md
+├── e2e/                         # Playwright specs
+├── public/
+├── scripts/                     # scripts pontuais (admin setup, seeds extras)
+├── docs/                        # ARQUITETURA.md + decisões longas
+├── INIT.md                      # boot per-projeto (gerado via [[Project INIT Template]])
+├── CLAUDE.md                    # raiz do projeto (regra global universal)
+├── next.config.ts
+├── tsconfig.json
+├── components.json              # shadcn config
+├── eslint.config.mjs
+├── playwright.config.ts
+├── vitest.config.ts
+├── package.json
+└── pnpm-lock.yaml
+```
+
+**Regra de dependência (mesmo monolito Next.js):**
+- Server Components chamam `src/lib/*` diretamente (NÃO fetcham própria API).
+- Route Handlers em `src/app/api/*` são para clientes externos / Client Components.
+- `src/lib/` é a camada de domínio + dados; `src/components/` é só UI.
+
+### Next.js Standalone Fullstack — Hexagonal (recomendado quando 4+ sinais favoráveis)
+
+```
+src/lib/<bounded-context>/
+├── domain/                       # entities + value objects + regras puras (ZERO Prisma/Auth/MP/framework)
+├── application/
+│   ├── use-cases/                # AddItemToCart, ConfirmPayment, etc
+│   └── ports/                    # ICartRepository, IPaymentGateway, IEmailSender
+├── infrastructure/
+│   ├── persistence/              # PrismaCartRepository (implementa ICartRepository)
+│   └── external/                 # MercadoPagoGateway, ResendEmailSender, CloudinaryStorage
+├── presentation/                 # Server Actions (consumidas por src/components/ ou src/app/)
+└── CLAUDE.md
 ```
 
 ### C# (.NET) — Clean Architecture (Hexagonal-friendly)

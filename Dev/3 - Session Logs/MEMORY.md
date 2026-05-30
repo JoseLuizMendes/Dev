@@ -8,14 +8,28 @@
 
 ## Estado Atual
 
-- **Projeto em andamento:** Sentinel-Flow (Automação) — em desenvolvimento
-- **Fase:** Manutenção do vault cognitivo + rodada Preferencias Dev
-- **Último progresso:** Preferencias Dev expandido com Filosofia de Construção (SOLID + Clean Code + Hexagonal) + Estrutura de Pastas por Stack + R7 constitucional + validator com `--code-path` (2026-05-30)
+- **Projeto em andamento:** **Belessence (Mari Beauty)** — Refatoração Full-stack em curso (Rodadas 1 e 2 completas, Rodadas 3-4 pendentes)
+- **Fase:** Rodadas 3 (rename `src/api/`) e 4 (Hexagonal em `src/lib/`) pendentes
+- **Último progresso:** Rodada 2 completa (2026-05-30): mixed package managers limpos (só pnpm), `.gitignore` atualizado, `noImplicitOverride` no tsconfig, package name = `mari-beauty`, órfãos do parent dir movidos pra `trash/`, `.agents`/`_agents` consolidados, **75 `CLAUDE.md` criados via script** (`tools/generate-claude-md.js`) atendendo R8 em 89 pastas do repo. Validation: `pnpm install` OK, `tsc --noEmit` OK.
 
 ---
 
 ## Decisões Recentes
 
+- [2026-05-30] **Belessence — Rodada 2 (Limpeza + CLAUDE.md universal):**
+  - **Limpeza de package managers:** `package-lock.json` + `pnpm-lock.yaml.110687101` deletados. `.gitignore` ganhou `package-lock.json`, `yarn.lock`, `bun.lockb`, `pnpm-lock.yaml.*` (preventivo), e `/src/generated` (cobrindo todo o Prisma client). `pnpm install` validou: name = `mari-beauty`, Prisma generate OK.
+  - **TypeScript hardening:** `noImplicitOverride: true` adicionado ao `tsconfig.json`; `tsc --noEmit` passou sem erros (nenhuma classe do projeto tinha override implícito).
+  - **Trash dir:** órfãos do parent dir Belessence movidos pra `Belessence/trash/`: `m.png`, `m_figma.png`, `m_traced.svg`, `m_path.txt`, `code.html`, `screen.png`, `trace_m.py`, `trace_m2.py`, 6× `stitch_mari_beauty_home_desktop`.
+  - **Consolidação `.agents`/`_agents`:** havia uma cópia no parent dir Belessence e outra dentro do repo Next.js. Em ambas: `_agents/output/*` (auditorias UI) movidos pra `.agents/output/`, `_agents/docs/inspiration/*` movidos pra `.agents/inspiration/` (apenas no repo Next.js), `_agents/TODO's/` e `_agents/docs/` (que duplicava Dev/0.1 - Metodology/) movidos pra `trash/agents-legacy/` e `trash/agents-legacy-project/`. `_agents/` deletados em ambos os níveis.
+  - **`tools/generate-claude-md.js` criado:** gerador Node sem deps que walks o repo (excluindo gitignored), detecta a categoria de cada pasta (route-handler, app-public-route, app-admin-route, vendor, github, etc) e cria um `CLAUDE.md` apropriado usando `[[Niche CLAUDE Template]]` como base. Não sobrescreve existentes. Resultado: 89 pastas no repo, 14 já tinham CLAUDE.md, 75 criados — R8 100% satisfeita.
+- [2026-05-30] **Belessence — Rodada 1 (Vault Refresh):**
+  - Auditoria do repo Belessence vs vault identificou 14 desvios. Plan em `C:\Users\ADM\.claude\plans\f-1-zeca-1-repositorio-documentos-meusp-foamy-barto.md` sequencia em 4 rodadas (vault → limpeza → rename src/api/ → Hexagonal).
+  - `[[Preferencias Dev]]` ganhou: variante "Next.js Standalone Fullstack — Layered" + variante "— Hexagonal" + §Stack Estendida — Ecommerce (Auth.js v5, Arctic, adapter-pg, bcryptjs, jose, otplib, mercadopago, cloudinary, next-cloudinary, resend, react-email, recharts) + §Filosofia §4 "CLAUDE.md Universal".
+  - `[[CLAUDE]]` raiz ganhou **R8** — toda pasta visível DEVE ter CLAUDE.md; primeiro arquivo numa pasta nova é o CLAUDE.md.
+  - Projeto Belessence em `[[Dev/2 - Projects/Ecommerce/Belessence]]` refatorado: `Requirements & Scope.md` renomeado pra `01-Escopo.md` v3.0 com classificação mudada de "Refatoração de Frontend" → **"Refatoração Full-stack"**. Frontmatter expandido com `projeto`, `package_manager`, `frontend_stack`, `backend_stack`, `cloud_stack`, `dependencies`, `email_service`, `storage_service`, `payment_gateway`. 5+ novos módulos retroativos (auth, cart/wishlist privados, MP, admin, email, mídia).
+  - Gerados: `02-Contrato.md` (cláusulas dinâmicas Full-stack — auditoria prévia + isenção downtime), `03-Planejamento.md` (EAP Rodadas 2-4 + matriz Hexagonal 5/6 favorável), `04-Tarefas.md` (backlog granular T-1.X até T-4.10.X com TDD), `05-Dev-Log.md` (decisões retroativas + dependências instaladas), `06-Erros.md` (4 erros novos propagados).
+  - `[[Dev/4 - Error's Memory/INDEX]]` atualizado: 6 erros totais (ERR-2026-0003 a 0006 novos), 3 categorias afetadas (Auth & Security 3, Deployment 3), 4 novas stacks indexadas (Next-Auth, Prisma, PostgreSQL, Zustand).
+  - `INIT.md` criado em `Belessence/frontend/belessence/INIT.md` apontando pros 6 artefatos canon do vault.
 - [2026-05-30] **Pente fino completo do vault** executado conforme `[[docs/superpowers/specs/2026-05-30-vault-pente-fino-design]]`
 - [2026-05-30] Criado `[[Master Pipeline & Enforcement]]` como fonte da verdade da matriz Gatilho → Template → Output
 - [2026-05-30] 5 novos templates criados: `[[Tasks Template]]`, `[[Dev Log Template]]`, `[[Errors Template]]`, `[[Project INIT Template]]`, `[[Niche CLAUDE Template]]`

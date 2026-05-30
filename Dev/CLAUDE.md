@@ -31,6 +31,9 @@ Antes de sugerir QUALQUER solução (biblioteca, padrão arquitetural, ferrament
 
 Aplica-se inclusive a sugestões em conversa casual — não só a artefatos. Vale para arquitetura (Hexagonal vs Layered), bibliotecas (Express é proibido, Fastify obrigatório), estrutura de pastas, e qualquer recomendação técnica.
 
+**R8 — CLAUDE.md universal em toda pasta.**
+Toda pasta e sub-pasta visível do repositório de código (não gitignored) DEVE ter um `CLAUDE.md` próprio gerado a partir do `[[Niche CLAUDE Template]]`. Você **NÃO** pode declarar um trabalho de scaffold/refactor "concluído" se alguma pasta ficou sem `CLAUDE.md`. Quando criar uma pasta nova durante refactor, o primeiro arquivo a criar dentro dela é o `CLAUDE.md`. Exceções automáticas (sem precisar de override): pastas geradas por ferramenta listadas no `.gitignore` (`node_modules`, `.next`, `dist`, `coverage`, `src/generated`, `playwright-report`, `test-results`). Detalhamento completo em `[[Preferencias Dev#4. CLAUDE.md Universal]]`.
+
 ---
 
 ## Escopo
