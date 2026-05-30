@@ -25,13 +25,19 @@ O agente **NUNCA DEVE** iniciar código ou propor soluções sem antes seguir a 
 
 ## 🛑 Boot Sequence (Ação Inicial Obrigatória)
 
-Toda vez que uma nova sessão iniciar ou um projeto for reativado, o agente **DEVE**:
-1. Restaurar o estado lendo `Dev/3 - Session Logs/MEMORY.md`
-2. Carregar as regras inegociáveis lendo `Dev/0 - Planner Project/Preferencias Dev.md`
-3. Consultar a memória global de erros lendo `Dev/4 - Error's Memory/INDEX.md`
-4. Ler o contexto local em `[Pasta do Projeto]/05-Dev-Log.md`
+> ⚠️ **Esta skill NÃO redefine boot.** O canon de boot/shutdown do vault está em `Dev/0 - Planner Project/Session Protocol.md`. Esta skill apenas referencia.
+
+Toda vez que uma nova sessão iniciar ou um projeto for reativado, o agente **DEVE** seguir o boot canônico definido em **`Dev/0 - Planner Project/Session Protocol.md`** (6 passos):
+
+1. Ler `Dev/3 - Session Logs/MEMORY.md` — restaurar estado episódico
+2. Ler `Dev/0 - Planner Project/Preferencias Dev.md` — carregar stack e regras inegociáveis
+3. Ler `Dev/4 - Error's Memory/INDEX.md` — carregar memória imunológica global
+4. Ler `[Projeto atual]/05-Dev-Log.md` — restaurar contexto local
 5. Resumir estado em 3 bullets: o que foi feito, estado atual, próximos passos
 6. Aguardar instrução — nunca agir autonomamente antes de receber direção
+
+**Adicional obrigatório:**
+- Ler `Dev/0 - Planner Project/Master Pipeline & Enforcement.md` — matriz canon de Gatilho → Template (toda ação que produza artefato declarado na matriz DEVE usar o template canon listado)
 
 Sem realizar esses passos, nenhuma linha de código deve ser escrita.
 

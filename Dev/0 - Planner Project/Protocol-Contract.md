@@ -10,7 +10,38 @@ tags:
 
 # Protocol — Geração de Contrato
 
-> Sub-protocolo do [[Client Onboarding Protocol]]. Responsabilidade única: gerar o `02-Contrato.md` a partir do `01-Escopo.md` aprovado.
+> ⚠️ **GATILHO:** `01-Escopo.md` preenchido e salvo em `Dev/2 - Projects/[Nicho]/[Projeto]/`.
+> ⚠️ **TEMPLATE OBRIGATÓRIO:** `[[Contract Template]]` + `[[Dynamic Contract Engine]]`.
+> ⚠️ **OUTPUT:** `02-Contrato.md` no mesmo diretório.
+> ⚠️ **PRÓXIMO PASSO:** `[[Protocol-SpecKit]]`.
+>
+> O artefato DEVE ser produzido copiando o `[[Contract Template]]` e substituindo variáveis pelo Dynamic Contract Engine. Nunca escrever do zero. Nunca usar versão resumida.
+
+> Sub-protocolo do `[[Client Onboarding Protocol]]`. Responsabilidade única: gerar o `02-Contrato.md` a partir do `01-Escopo.md` aprovado.
+
+---
+
+## Sub-fluxograma
+
+```mermaid
+flowchart TD
+    A([01-Escopo.md salvo]) --> B[Ler Contract Template]
+    B --> C[Ler Dynamic Contract Engine]
+    C --> D[Extrair frontmatter do 01-Escopo]
+    D --> E{Classificacao do servico?}
+    E -->|Frontend do Zero| F1[Injetar limitacao_backend + dependencia_apis]
+    E -->|Full-stack do Zero| F2[Injetar transicao_infra + garantia_seguranca]
+    E -->|Refatoracao Frontend| F3[Injetar tech_debt + recalibragem]
+    E -->|Refatoracao Full-stack| F4[Injetar auditoria_previa + isencao_downtime]
+    F1 --> G[Aplicar clausulas imutaveis IP/Escopo/NDA/Disputas]
+    F2 --> G
+    F3 --> G
+    F4 --> G
+    G --> H[Preencher variaveis do template]
+    H --> I[Quality Gate]
+    I --> J([Salvar como 02-Contrato.md])
+    J --> K[Proximo: Protocol-SpecKit]
+```
 
 ---
 
@@ -52,6 +83,7 @@ Consultar [[Dynamic Contract Engine]] e injetar cláusulas conforme `classificac
 
 ## Quality Gate
 
+- [ ] **Artefato foi gerado a partir de `[[Contract Template]]` como base** (não escrito do zero, não versão resumida)
 - [ ] Todas as variáveis `{{}}` substituídas
 - [ ] Cláusulas dinâmicas da classificação aplicadas
 - [ ] Cláusulas imutáveis presentes: IP, Controle de Escopo, NDA, Resolução de Disputas

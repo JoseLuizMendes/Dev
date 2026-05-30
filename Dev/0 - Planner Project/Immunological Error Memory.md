@@ -14,6 +14,11 @@ tags:
 
 # M6 — Immunological Error Memory System 🛡️
 
+> ⚠️ **GATILHO:** erro encontrado em qualquer projeto OU recorrência detectada em projeto novo.
+> ⚠️ **TEMPLATE OBRIGATÓRIO (local):** `[[Errors Template]]` — base do `06-Erros.md` do projeto.
+> ⚠️ **SCHEMA OBRIGATÓRIO (global):** YAML definido neste arquivo (campos: id, título, categoria, stack, severidade, sintoma, causa_raiz, solução, prevenção, recorrências).
+> ⚠️ **OUTPUT:** `06-Erros.md` local + entrada em `[[4 - Error's Memory/INDEX]]` + `by-category/` + `by-stack/`. Se recorrências ≥ 2: regra promovida em `[[Preferencias Dev]]`.
+
 Este módulo define o sistema **global de registro, deduplicação e consulta de erros** que opera de forma independente do nicho ou projeto. Seu objetivo é garantir que **nenhum erro se repita no ecossistema**.
 
 ---
@@ -95,25 +100,26 @@ Cada erro no `INDEX.md` deve seguir este formato padronizado:
 
 ## Fluxo de Propagação Cross-Niche
 
-```
-🐛 Erro encontrado no Projeto X (qualquer nicho)
-    ↓
-1. Registrado LOCALMENTE em [Projeto]/06-Erros.md
-    ↓
-2. Agente busca no INDEX.md global: erro já existe?
-    ↓
-   ├── NÃO → Criar nova entrada no INDEX.md + by-category/ + by-stack/
-   │
-   └── SIM → Incrementar recorrências + adicionar link do novo projeto
-              + atualizar solução se a nova for melhor
-    ↓
-3. INDEX.md atualizado globalmente
-    ↓
-4. Próximo projeto (QUALQUER nicho) consulta INDEX.md no Boot
-    ↓
-5. IA cruza erros conhecidos com stack/arquitetura do novo projeto
-    ↓
-6. Gera alertas preventivos no Planejamento
+```mermaid
+flowchart TD
+    A([Erro encontrado no Projeto X]) -->|Errors Template| B[Registrar em 06-Erros.md local]
+    B --> C{Existe no INDEX global?}
+    C -->|Nao| D[Criar entrada nova no INDEX]
+    C -->|Sim| E[Incrementar recorrencias]
+    D --> F[Indexar em by-category + by-stack]
+    E --> G[Adicionar wikilink do novo projeto]
+    G --> H{Solucao nova e melhor?}
+    H -->|Sim| I[Atualizar solucao no global]
+    H -->|Nao| F
+    I --> F
+    F --> J([INDEX global atualizado])
+    J --> K[Proximos projetos consultam no boot]
+    K --> L[Cruza erros conhecidos com stack do novo projeto]
+    L --> M[Gera alertas preventivos no planejamento]
+    J --> N{recorrencias >= 2?}
+    N -->|Sim| O[Promover a regra em Preferencias Dev]
+    N -->|Nao| P([Fim])
+    O --> P
 ```
 
 ---
@@ -198,7 +204,9 @@ Cada arquivo agrupa erros por **tecnologia específica**:
 
 ## Referências Internas
 
-- [[Cognitive Vault Architecture]] — Onde a pasta `4 - Error's Memory/` vive
-- [[Session Protocol]] — Boot sequence inclui leitura do INDEX.md
-- [[Project Lifecycle Pipeline]] — Consulta pré-planejamento obrigatória
-- [[Preferencias Dev]] — Destino das regras promovidas
+- `[[Errors Template]]` — template canon do `06-Erros.md` local
+- `[[Master Pipeline & Enforcement]]` — matriz canon do vault
+- `[[Cognitive Vault Architecture]]` — Onde a pasta `4 - Error's Memory/` vive
+- `[[Session Protocol]]` — Boot sequence inclui leitura do INDEX.md
+- `[[Project Lifecycle Pipeline]]` — Consulta pré-planejamento obrigatória
+- `[[Preferencias Dev]]` — Destino das regras promovidas

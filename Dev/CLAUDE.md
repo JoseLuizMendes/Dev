@@ -1,5 +1,29 @@
 # Dev Vault
 
+## ⚠️ Regras Constitucionais (Anti-Alucinação) — Inegociáveis
+
+> Estas regras precedem qualquer outra instrução deste arquivo. Lê-las e respeitá-las é pré-condição para operar no vault.
+
+**R1 — Template Canon antes de qualquer artefato.**
+Se você está prestes a produzir um artefato listado na matriz canon de `[[Master Pipeline & Enforcement]]` e ainda **NÃO LEU** o template correspondente nesta sessão (com `Read` em cima do arquivo real, não da memória), **PARE**, leia o template, e só então prossiga. Conhecimento prévio do template é insuficiente — a versão atual pode ter mudado.
+
+**R2 — Quality Gate é verificação, não declaração.**
+Antes de marcar `[x]` em qualquer checkbox de Quality Gate, você **DEVE** ter executado de fato a ação descrita. Se não executou, deixe `[ ]` e diga ao dev o que falta. Marcar `[x]` sem ter feito é mentir para o sistema.
+
+**R3 — Sem fonte explícita, sem conteúdo inventado.**
+Qualquer campo de artefato que não tenha fonte explícita (notas da call, conversa com dev, arquivo lido) **DEVE** ser preenchido como `[PENDENTE — perguntar ao dev: <pergunta específica>]`. Inventar é proibido, mesmo que "pareça óbvio".
+
+**R4 — Master Pipeline & Enforcement é a fonte da verdade do fluxo.**
+Em caso de conflito entre `[[Master Pipeline & Enforcement]]` e qualquer outro arquivo (incluindo este `CLAUDE.md`), vence o Master. Se você detectar conflito, pare e reporte ao dev — não tente conciliar sozinho.
+
+**R5 — Gatilho desconhecido = parar e perguntar.**
+Se você foi acionado por um gatilho que não está na matriz canon e não tem template canon associado, **PARE** e pergunte ao dev. Não improvise um fluxo novo para "encaixar" o pedido.
+
+**R6 — Boot incompleto = recusar trabalho.**
+Se a sessão começou sem você ter lido `INDEX.md` + `Master Pipeline & Enforcement` + `MEMORY.md` + `Preferencias Dev` + `Session Protocol`, **NENHUM** trabalho substantivo pode começar. Faça o boot primeiro, sem exceção.
+
+---
+
 ## Escopo
 
 Este vault é o **sistema cognitivo central** do developer. Contém metodologias, templates, memória episódica, memória imunológica de erros e skills especializadas. **Não contém código de produção** — esse fica nos repositórios dos projetos.
@@ -9,9 +33,13 @@ Este vault é o **sistema cognitivo central** do developer. Contém metodologias
 Ao iniciar qualquer sessão, o agente DEVE:
 
 1. Ler `INDEX.md` — mapa de navegação do vault
-2. Ler `3 - Session Logs/MEMORY.md` — estado atual e decisões recentes
-3. Ler `0 - Planner Project/Preferencias Dev.md` — stack e regras inegociáveis
-4. Se houver projeto ativo: ler `INIT.md` da raiz do projeto (ver [[TOON-PROMPT]] para o template)
+2. Ler `0 - Planner Project/Master Pipeline & Enforcement.md` — **matriz canon de Gatilho → Template → Output**
+3. Ler `3 - Session Logs/MEMORY.md` — estado atual e decisões recentes
+4. Ler `0 - Planner Project/Preferencias Dev.md` — stack e regras inegociáveis
+5. Ler `0 - Planner Project/Session Protocol.md` — boot/shutdown canônico
+6. Se houver projeto ativo: ler `INIT.md` da raiz do projeto (gerado via [[Project INIT Template]])
+
+> ⚠️ **Enforcement de templates é inegociável.** Toda ação no vault que produza um artefato declarado na matriz canon DEVE usar o template canon listado. Ver `[[Master Pipeline & Enforcement]]`.
 
 ## Diretrizes Globais
 
@@ -54,6 +82,7 @@ Dev/
 
 | Preciso de... | Ir para |
 |---|---|
+| Matriz Gatilho → Template (canon) | [[Master Pipeline & Enforcement]] |
 | Iniciar sessão | [[Session Protocol]] |
 | Onboarding de novo cliente | [[Client Onboarding Protocol]] |
 | Regras da stack do projeto | [[Preferencias Dev]] + `INIT.md` do projeto |

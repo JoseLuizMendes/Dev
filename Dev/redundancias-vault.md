@@ -1,7 +1,7 @@
 # Mapa de Redundâncias — Vault Dev
 
-> Gerado em: 2026-05-08 | **Atualizado em: 2026-05-08** | Análise de sobreposição de conteúdo entre todos os arquivos do vault.
-> **Status:** Redundâncias críticas corrigidas — ver Resumo de Ações.
+> Gerado em: 2026-05-08 | **Atualizado em: 2026-05-30** | Análise de sobreposição de conteúdo entre todos os arquivos do vault.
+> **Status:** Todas as redundâncias resolvidas via `[[Master Pipeline & Enforcement]]` (criado em 2026-05-30) — ver Resumo de Ações.
 
 ---
 
@@ -157,8 +157,20 @@ Estes casos são repetições **intencionais e corretas** — não precisam ser 
 | 🔴 Alta | Simplificar Fluxo Macro e Auditoria | `TOON-PROMPT.md` | ✅ Concluído |
 | 🔴 Alta | Simplificar Arquitetura de Memória | `TOON-PROMPT.md` | ✅ Concluído |
 | 🔴 Alta | Remover árvore de pastas duplicada | `CLAUDE.md` | ✅ Concluído |
-| 🟡 Média | Reduzir duplicação da lista de agentes de auditoria | `Preferencias Dev.md`, `TOON-PROMPT.md` | ⏳ Pendente |
-| 🟢 Baixa | Árvore de pastas em `INDEX.md` | `INDEX.md` | ⏳ Pendente (aceitável — é de navegação) |
+| 🟡 Média | Reduzir duplicação da lista de agentes de auditoria | `Preferencias Dev.md`, `TOON-PROMPT.md` | ✅ Concluído (2026-05-30 — `TOON-PROMPT.md` delega a `[[0.2 - Audit/Diretrizes]]` e `[[Master Pipeline & Enforcement]]`) |
+| 🟢 Baixa | Árvore de pastas em `INDEX.md` | `INDEX.md` | ✅ Mantida intencionalmente (é arquivo de navegação) |
+| 🔴 Alta | Criar fonte da verdade do fluxo macro + matriz Gatilho → Template | `Master Pipeline & Enforcement.md` (novo) | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Criar templates faltantes para `04`, `05`, `06`, `INIT`, `CLAUDE` por nicho | `Tasks/Dev Log/Errors/Project INIT/Niche CLAUDE Templates` | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Blindar protocolos com banner ⚠️ + Mermaid + checkbox de template | Todos os protocols + Audit Diretrizes | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Sincronizar frontmatter do Requirements & Scope com setup.js | `Requirements & Scope Project Template.md` | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Cobrir fase pré-onboarding (call → Master preenchido) | `Pre-Sale Protocol.md` (novo) | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Documentar comandos `/speckit.*` + fallback manual | `Spec-Kit Reference.md` (novo) | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Alinhar `cognitive-vault-manager/SKILL.md` ao Session Protocol canon | `0.3 - Claude Skills Export/cognitive-vault-manager/SKILL.md` | ✅ Concluído (2026-05-30) |
+| 🟡 Média | Esclarecer no Master Project Planning Template quem preenche | `Master Project Planning Template.md` | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Adicionar refuse-rules constitucionais anti-alucinação | `CLAUDE.md` raiz (6 regras R1-R6) | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Criar fixture de aceitação para dry-run do pipeline | `Mock Pipeline Test.md` (novo) | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Validator mecânico de projetos | `tools/validate-project.js` (novo) | ✅ Concluído (2026-05-30) |
+| 🟡 Média | Reduzir prosa livre em templates críticos | Master + Requirements & Scope | ✅ Concluído (2026-05-30) |
 
 ---
 
