@@ -132,9 +132,11 @@ Dev/
 | Tarefa | Por onde começar |
 |---|---|
 | **Conferir matriz canon de templates** | **[[Master Pipeline & Enforcement]]** |
+| **Conferir filosofia + estrutura de pastas** | **[[Preferencias Dev]]** §Filosofia de Construção + §Estrutura de Pastas |
 | Cheguei da call com cliente, tenho notas | [[Pre-Sale Protocol]] |
 | Comandos `/speckit.*` (referência ou fallback) | [[Spec-Kit Reference]] |
-| Validar que um projeto está no canon | `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]"` |
+| Validar projeto (vault) | `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]"` |
+| Validar projeto + estrutura de código | `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]" --code-path "<repo>"` |
 | Testar pipeline ponta-a-ponta (dry-run) | [[Mock Pipeline Test]] |
 | Novo cliente / onboarding (cliente devolveu Master) | [[Client Onboarding Protocol]] |
 | Implementar tarefa do backlog | `04-Tarefas.md` do projeto → [[Preferencias Dev]] |

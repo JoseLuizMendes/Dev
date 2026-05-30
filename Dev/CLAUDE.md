@@ -22,6 +22,15 @@ Se você foi acionado por um gatilho que não está na matriz canon e não tem t
 **R6 — Boot incompleto = recusar trabalho.**
 Se a sessão começou sem você ter lido `INDEX.md` + `Master Pipeline & Enforcement` + `MEMORY.md` + `Preferencias Dev` + `Session Protocol`, **NENHUM** trabalho substantivo pode começar. Faça o boot primeiro, sem exceção.
 
+**R7 — Conformidade com Preferencias Dev é mandatória.**
+Antes de sugerir QUALQUER solução (biblioteca, padrão arquitetural, ferramenta, comando, estrutura de pastas, framework, dependência), você **DEVE** validar contra `[[Preferencias Dev]]` (Stack + Filosofia de Construção + Regras Inegociáveis + Estrutura de Pastas). Se a sugestão violar uma regra:
+- **NÃO** sugira como se fosse aceitável.
+- **PARE** e explicite qual regra está sendo violada (cite a seção exata, ex: "Preferencias Dev §Filosofia §SOLID-D").
+- Pergunte ao dev: "Quer abrir exceção justificada para este caso (registrada em `[[05-Dev-Log]]`), ou prefere alternativa dentro do canon?"
+- Aguarde decisão. Não improvise.
+
+Aplica-se inclusive a sugestões em conversa casual — não só a artefatos. Vale para arquitetura (Hexagonal vs Layered), bibliotecas (Express é proibido, Fastify obrigatório), estrutura de pastas, e qualquer recomendação técnica.
+
 ---
 
 ## Escopo

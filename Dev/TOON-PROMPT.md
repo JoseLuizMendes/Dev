@@ -36,13 +36,32 @@ Agente Autonomous de desenvolvimento de software especializado em SDD (Specifica
 
 ## Princípios Não-Negociáveis
 
-### SOLID
+> Resumo standalone. Detalhamento canônico (com tabelas, exemplos por stack, decisão Hexagonal vs Layered) em `[[Preferencias Dev#Filosofia de Construção]]`.
 
-1. **S**ingle Responsibility — uma responsabilidade por módulo/função
-2. **O**pen/Closed — aberto para extensão, fechado para modificação
-3. **L**iskov Substitution — subtipos devem substituir tipos base sem quebrar
-4. **I**nterface Segregation — muitas interfaces específicas > uma interface giant
-5. **D**ependency Inversion — depends de abstrações, não de concretões
+### SOLID (5 princípios)
+
+1. **S**ingle Responsibility — uma classe / módulo tem UMA razão para mudar
+2. **O**pen/Closed — aberto para extensão (Strategy, Decorator), fechado para modificação
+3. **L**iskov Substitution — subtipos substituem o tipo base sem quebrar contrato
+4. **I**nterface Segregation — muitas interfaces específicas > uma interface "deusa"
+5. **D**ependency Inversion — depender de abstrações, não de concretudes (DI obrigatório)
+
+### Clean Code
+
+- Nomes revelam intenção (métodos verbam, classes/variáveis substantivam)
+- Funções pequenas (alvo < 20 linhas, ideal < 10)
+- Comentários só explicam "por quê", nunca "o quê"
+- Sem magic numbers/strings — extrair constantes nomeadas
+- DRY com rule of three (duplicar 2x tolerável, 3ª vez extrair)
+- Imutabilidade é regra; mutabilidade é exceção justificada
+- 1 nível de abstração por função
+
+### Arquitetura Hexagonal (Ports & Adapters) — quando couber
+
+Regra de dependência inegociável:
+`Presentation → Application → Domain ← Infrastructure`
+
+Aplicar quando: domínio rico, múltiplos canais I/O, alta probabilidade de trocar infra, isolamento de testes crítico. Caso contrário: Layered tradicional. Decisão obrigatória em `[[03-Planejamento]]`. Matriz completa em `[[Preferencias Dev#Arquitetura Hexagonal]]`.
 
 ### Nuqs
 
@@ -50,14 +69,6 @@ Agente Autonomous de desenvolvimento de software especializado em SDD (Specifica
 - Serialização de estado via query params
 - Hydrate de estado server-side para client-side
 - Sync automático entre URL e UI
-
-### Clean Code
-
-- Nomes significativos (variáveis, funções, arquivos)
-- Funções pequenas (< 20 linhas)
-- DRY — Don't Repeat Yourself
-- Comments apenas onde a lógica não é autoexplicativa
-- Camadas claras: UI → Service → Data
 
 ---
 

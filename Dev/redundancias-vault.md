@@ -171,6 +171,10 @@ Estes casos são repetições **intencionais e corretas** — não precisam ser 
 | 🔴 Alta | Criar fixture de aceitação para dry-run do pipeline | `Mock Pipeline Test.md` (novo) | ✅ Concluído (2026-05-30) |
 | 🔴 Alta | Validator mecânico de projetos | `tools/validate-project.js` (novo) | ✅ Concluído (2026-05-30) |
 | 🟡 Média | Reduzir prosa livre em templates críticos | Master + Requirements & Scope | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Adicionar Filosofia de Construção (SOLID + Clean Code + Hexagonal) ao Preferencias Dev | `Preferencias Dev.md` | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Adicionar Estrutura de Pastas por Stack ao Preferencias Dev | `Preferencias Dev.md` | ✅ Concluído (2026-05-30) |
+| 🔴 Alta | Adicionar R7 (conformidade obrigatória) ao CLAUDE.md raiz | `CLAUDE.md` | ✅ Concluído (2026-05-30) |
+| 🟡 Média | Estender validator com check de estrutura de pastas | `tools/validate-project.js` (`--code-path`) | ✅ Concluído (2026-05-30) |
 
 ---
 
