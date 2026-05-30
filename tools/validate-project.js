@@ -4,9 +4,13 @@ const fs = require("fs");
 const path = require("path");
 
 const projectPath = process.argv[2];
+const codePathFlagIdx = process.argv.indexOf("--code-path");
+const codePath = codePathFlagIdx >= 0 ? process.argv[codePathFlagIdx + 1] : null;
 
 if (!projectPath) {
-  console.error("Uso: node tools/validate-project.js \"Dev/2 - Projects/[Nicho]/[Projeto]\"");
+  console.error("Uso: node tools/validate-project.js \"Dev/2 - Projects/[Nicho]/[Projeto]\" [--code-path <repo-do-codigo>]");
+  console.error("Sem --code-path: valida apenas artefatos do vault.");
+  console.error("Com --code-path: valida tambem estrutura de pastas do repo de codigo contra a stack do frontmatter.");
   process.exit(1);
 }
 
@@ -157,11 +161,79 @@ function checkArtifact(filename, spec) {
   }
 }
 
-console.log(`\nValidando projeto: ${projectPath}\n`);
+function checkCodeStructure(codePath, fm) {
+  if (!fs.existsSync(codePath)) {
+    errors.push(`[CODE STRUCTURE] caminho do repo de codigo nao existe: ${codePath}`);
+    return;
+  }
+
+  const fe = (fm.frontend_stack || "").toLowerCase();
+  const be = (fm.backend_stack || "").toLowerCase();
+  const stack = `${fe} / ${be}`;
+
+  const isNext = fe.includes("next") || fe.includes("react");
+  const isNest = be.includes("nest");
+  const isCSharp = be.includes(".net") || be.includes("asp.net") || be.includes("c#") || be.includes("dotnet");
+  const isSpring = be.includes("spring") || be.includes("java");
+  const isVue = fe.includes("vue");
+  const isAngular = fe.includes("angular");
+
+  const expected = [];
+
+  if (isNext && isNest) {
+    expected.push("back", "front", "shared", "infra", "pnpm-workspace.yaml");
+  } else if (isNext && !isNest) {
+    expected.push("src/app", "package.json");
+  } else if (isCSharp) {
+    expected.push("src", "tests");
+    const srcEntries = fs.readdirSync(path.join(codePath, "src")).filter((e) =>
+      fs.statSync(path.join(codePath, "src", e)).isDirectory()
+    );
+    const hasWeb = srcEntries.some((e) => e.endsWith(".Web"));
+    const hasApp = srcEntries.some((e) => e.endsWith(".Application"));
+    const hasDom = srcEntries.some((e) => e.endsWith(".Domain"));
+    const hasInfra = srcEntries.some((e) => e.endsWith(".Infrastructure"));
+    if (!hasWeb) errors.push(`[CODE STRUCTURE] C#: esperado projeto *.Web em src/ (Presentation)`);
+    if (!hasApp) errors.push(`[CODE STRUCTURE] C#: esperado projeto *.Application em src/`);
+    if (!hasDom) errors.push(`[CODE STRUCTURE] C#: esperado projeto *.Domain em src/`);
+    if (!hasInfra) errors.push(`[CODE STRUCTURE] C#: esperado projeto *.Infrastructure em src/`);
+    return;
+  } else if (isSpring) {
+    expected.push("src/main/java", "src/test/java");
+  } else if (isVue) {
+    expected.push("src/views", "src/components", "src/stores");
+  } else if (isAngular) {
+    expected.push("src/app/core", "src/app/shared", "src/app/features");
+  } else {
+    warnings.push(`[CODE STRUCTURE] nao foi possivel detectar a stack para validacao estrutural (frontend: ${fe || "vazio"}, backend: ${be || "vazio"})`);
+    return;
+  }
+
+  expected.forEach((rel) => {
+    const full = path.join(codePath, rel);
+    if (!fs.existsSync(full)) {
+      errors.push(`[CODE STRUCTURE] esperado "${rel}" em "${codePath}" (stack ${stack}) — nao encontrado`);
+    }
+  });
+}
+
+console.log(`\nValidando projeto: ${projectPath}${codePath ? `\nValidando codigo:   ${codePath}` : ""}\n`);
 
 Object.entries(REQUIRED_ARTIFACTS).forEach(([filename, spec]) => {
   checkArtifact(filename, spec);
 });
+
+if (codePath) {
+  const escopoPath = path.join(projectPath, "01-Escopo.md");
+  if (fs.existsSync(escopoPath)) {
+    const fm = parseFrontmatter(fs.readFileSync(escopoPath, "utf8"));
+    if (fm) {
+      checkCodeStructure(codePath, fm);
+    } else {
+      warnings.push(`[CODE STRUCTURE] nao foi possivel ler frontmatter de 01-Escopo.md para detectar stack`);
+    }
+  }
+}
 
 console.log("=".repeat(60));
 console.log(`Resultados`);

@@ -117,9 +117,10 @@ flowchart TD
 4. **Versão resumida do template é proibida.** Se uma seção não se aplica ao projeto, ela aparece com a marcação `N/A — [motivo]`, não é omitida.
 5. **Banners `⚠️` nos protocols** declaram GATILHO + TEMPLATE OBRIGATÓRIO + OUTPUT + PRÓXIMO PASSO antes do conteúdo. A IA lê o banner antes de qualquer ação.
 6. **Mudanças no template canon** exigem incremento da `version` no frontmatter + entrada em `[[MEMORY]]` documentando o motivo.
-7. **Regras constitucionais R1–R6** do `[[CLAUDE]]` raiz precedem qualquer instrução deste arquivo. Em caso de conflito, vencem as constitucionais.
-8. **Validação mecânica** via `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]"` é o gatekeeper final antes de declarar o onboarding completo.
+7. **Regras constitucionais R1–R7** do `[[CLAUDE]]` raiz precedem qualquer instrução deste arquivo. Em caso de conflito, vencem as constitucionais.
+8. **Validação mecânica** via `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]" [--code-path <repo>]` é o gatekeeper final antes de declarar o onboarding completo.
 9. **Teste de aceitação** via `[[Mock Pipeline Test]]` deve ser executado mentalmente sempre que um template ou protocol for editado.
+10. **Filosofia de Construção** (`[[Preferencias Dev#Filosofia de Construção]]`) — SOLID + Clean Code + Hexagonal — rege todo código produzido. R7 obriga validação prévia.
 
 ---
 

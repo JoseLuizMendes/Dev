@@ -9,10 +9,14 @@ Valida que um projeto em `Dev/2 - Projects/[Nicho]/[Projeto]/` segue 100% a matr
 **Uso:**
 
 ```bash
+# Validação só do vault (artefatos)
 node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow"
+
+# Validação completa: vault + estrutura de pastas do repo de código
+node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow" --code-path "C:\Freelas\Sentinel-Flow"
 ```
 
-**O que valida:**
+**O que valida (sem `--code-path`):**
 
 - Cada artefato obrigatório existe (`01-Escopo.md` até `06-Erros.md` + `setup.js`)
 - Frontmatter YAML está completo (campos obrigatórios preenchidos, sem `{{}}` órfãos)
@@ -21,6 +25,16 @@ node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow"
 - `04-Tarefas.md` tem padrão `T-X.Y` + tarefas `[TEST]`
 - `02-Contrato.md` contém as 4 cláusulas imutáveis (IP, Escopo, NDA, Disputas)
 - Nenhum placeholder `{{VARIAVEL}}` ficou sem substituir
+
+**O que valida adicionalmente com `--code-path`:**
+
+Lê `frontend_stack` e `backend_stack` do frontmatter de `01-Escopo.md` e verifica que o repo de código tem a estrutura de pastas correspondente conforme `[[Preferencias Dev#Estrutura de Pastas por Stack]]`:
+
+- **TS + Next + NestJS:** espera `back/`, `front/`, `shared/`, `infra/`, `pnpm-workspace.yaml`
+- **C# (.NET):** espera `src/<Name>.Web/`, `src/<Name>.Application/`, `src/<Name>.Domain/`, `src/<Name>.Infrastructure/`, `tests/`
+- **Java Spring:** espera `src/main/java/`, `src/test/java/`
+- **Vue:** espera `src/views/`, `src/components/`, `src/stores/`
+- **Angular:** espera `src/app/core/`, `src/app/shared/`, `src/app/features/`
 
 **Exit codes:**
 

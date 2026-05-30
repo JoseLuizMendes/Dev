@@ -9,8 +9,8 @@
 ## Estado Atual
 
 - **Projeto em andamento:** Sentinel-Flow (Automação) — em desenvolvimento
-- **Fase:** Manutenção do vault cognitivo + pente fino de enforcement
-- **Último progresso:** Pente fino completo do vault — Master Pipeline & Enforcement criado, 5 templates novos, protocolos blindados (2026-05-30)
+- **Fase:** Manutenção do vault cognitivo + rodada Preferencias Dev
+- **Último progresso:** Preferencias Dev expandido com Filosofia de Construção (SOLID + Clean Code + Hexagonal) + Estrutura de Pastas por Stack + R7 constitucional + validator com `--code-path` (2026-05-30)
 
 ---
 
@@ -27,6 +27,14 @@
 - [2026-05-30] Criado `[[Spec-Kit Reference]]` com documentação de `/speckit.specify`, `.plan`, `.tasks`, `.implement`, `.analyze` + fallback manual para cada um
 - [2026-05-30] `cognitive-vault-manager/SKILL.md` alinhado: boot section agora REFERENCIA `[[Session Protocol]]` ao invés de redefinir 4 passos divergentes
 - [2026-05-30] `[[Master Project Planning Template]]` — nota de uso esclarece que o DEV preenche (via Pre-Sale Protocol) a partir das notas da call; cliente recebe para revisão/aprovação
+- [2026-05-30] **Rodada Preferencias Dev — Filosofia + Estrutura + R7:**
+  - `[[Preferencias Dev]]` ganhou seção "Filosofia de Construção": SOLID (5 princípios com exemplos por stack) + Clean Code (7 regras) + Arquitetura Hexagonal (Ports & Adapters) com matriz de decisão de 6 sinais
+  - `[[Preferencias Dev]]` ganhou seção "Estrutura de Pastas por Stack": TS+Next+NestJS (default + hexagonal), C# Clean Architecture, Java Spring (hexagonal + layered), Vue, Angular
+  - R7 adicionado ao `[[CLAUDE]]` raiz: conformidade com `[[Preferencias Dev]]` é mandatória — IA deve avisar antes de qualquer sugestão que viole regras
+  - `[[TOON-PROMPT]]` mantido standalone (não foi gutted) — SOLID inline ampliado + Clean Code + Hexagonal resumo + link a `[[Preferencias Dev]]` para detalhes
+  - `tools/validate-project.js` ganhou flag `--code-path` para validar estrutura de pastas do repo de código contra stack do frontmatter (`back/`+`front/` p/ TS, `src/<Name>.Web/` p/ C#, etc)
+  - `[[Mock Pipeline Test]]` atualizado: critério de aceitação inclui decisão Hexagonal vs Layered + estrutura de pastas conforme stack + R7 respeitado
+  - `[[Master Pipeline & Enforcement]]` — Regras de Enforcement passaram a 10 itens (incluindo R7 e referência à Filosofia)
 - [2026-05-30] **Camada 3 de blindagem aplicada — anti-alucinação mecânica:**
   - 6 regras constitucionais (R1-R6) adicionadas ao topo do `[[CLAUDE]]` raiz
   - `[[Mock Pipeline Test]]` criado em `0 - Planner Project/` — fixture com cliente fake (TestCorp Advocacia) + outputs esperados por estágio para dry-run de aceitação

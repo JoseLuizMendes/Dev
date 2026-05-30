@@ -172,6 +172,28 @@ A IA deve invocar `[[Protocol-Bootstrap]]`.
 - `06-Erros.md` — gerado de `[[Errors Template]]`, schema YAML vazio
 - `INIT.md` (para raiz do projeto de código) — gerado de `[[Project INIT Template]]`
 
+**Estrutura de pastas esperada após `setup.js` rodar:**
+
+Como TestCorp é "Frontend do Zero" com Next.js (sem NestJS backend), espera-se estrutura Next.js single-app conforme `[[Preferencias Dev#Estrutura de Pastas por Stack]]`:
+
+```
+testcorp-advocacia-site/
+├── src/
+│   ├── app/                  # App Router
+│   ├── components/
+│   ├── lib/
+│   └── stores/
+├── public/
+├── package.json
+├── tsconfig.json
+├── tailwind.config.ts
+└── vitest.config.ts
+```
+
+> Para projetos full-stack com NestJS, esperar-se-ia `back/` + `front/` + `shared/` + `infra/` no root.
+
+**Decisão Hexagonal:** TestCorp é frontend simples — **NÃO** se aplica hexagonal (sinais: domínio simples, I/O único, MVP curto). Layered é o padrão correto. Decisão deve estar registrada em `03-Planejamento.md` §4.
+
 ---
 
 ## 6. Critérios de aceitação do teste
@@ -186,6 +208,9 @@ Marque como passou apenas se TODOS forem verdadeiros:
 - [ ] Contrato classificou corretamente como "Frontend do Zero" e injetou as 2 cláusulas dinâmicas
 - [ ] Memória Imunológica foi consultada antes de finalizar o planejamento
 - [ ] Sequência foi Pre-Sale → Onboarding → Contract → SpecKit → Bootstrap (na ordem)
+- [ ] Decisão Hexagonal vs Layered registrada em `03-Planejamento.md` §4 (esperado: Layered)
+- [ ] Estrutura de pastas esperada documentada conforme `[[Preferencias Dev#Estrutura de Pastas por Stack]]`
+- [ ] Nenhuma sugestão violou `[[Preferencias Dev]]` sem aviso explícito (R7)
 
 ---
 
