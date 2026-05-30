@@ -1,6 +1,6 @@
 ---
 template: "Requirements & Scope"
-version: 2.0
+version: 2.1
 status: "Template"
 tags:
   - template
@@ -10,11 +10,20 @@ tags:
   - spec-driven
   - tdd
 cliente: "{{CLIENT_NAME}}"
+projeto: "{{PROJECT_NAME}}"
 nicho: "{{MARKET_NICHE}}"
 classificacao: "{{SERVICE_TYPE}}"
 data_inicio: "{{START_DATE}}"
 data_entrega: "{{END_DATE}}"
 valor: "{{PROJECT_VALUE}}"
+package_manager: "{{PACKAGE_MANAGER}}"
+frontend_stack: "{{FRONTEND_STACK}}"
+backend_stack: "{{BACKEND_STACK}}"
+cloud_stack: "{{CLOUD_STACK}}"
+dependencies: "{{DEPENDENCIES}}"
+email_service: "{{EMAIL_SERVICE}}"
+storage_service: "{{STORAGE_SERVICE}}"
+payment_gateway: "{{PAYMENT_GATEWAY}}"
 ---
 
 # 📋 Formulário de Escopo e Requisitos: {{PROJECT_NAME}}
@@ -40,14 +49,28 @@ valor: "{{PROJECT_VALUE}}"
 
 ## 2. Declaração do Problema e Visão
 
+> ⚠️ Preencher TODAS as subdimensões abaixo. Se faltar dado nas notas da call, marcar `[PENDENTE — perguntar ao dev: <pergunta específica>]`. **Nunca inventar.**
+
 ### 2.1 A Dor Central
-[Descreva o problema que o cliente enfrenta hoje. Seja específico sobre limitações, gargalos e impactos no negócio.]
+
+- **Quem sente a dor** (persona específica + cargo + contexto operacional): 
+- **Sintoma observável** (o que acontece de errado no dia-a-dia, mensurável): 
+- **Causa raiz no negócio** (por que acontece — processo / ferramenta / gente): 
+- **Impacto quantificado** (R$ perdidos, horas desperdiçadas, leads não convertidos, etc): 
 
 ### 2.2 A Visão da Solução
-[Descreva como este software resolverá o problema. Inclua objetivos mensuráveis e resultados esperados.]
+
+- **Resultado-chave esperado** (o que estará funcionando na entrega): 
+- **Métrica de sucesso** (como vamos saber que resolveu — número concreto): 
+- **Horizonte de impacto** (em quanto tempo o impacto é esperado após go-live): 
+- **Diferencial competitivo** (por que ESTA solução e não comprar pronto / contratar terceiro): 
 
 ### 2.3 Público-Alvo
-[Quem vai usar a plataforma? Descreva personas, cargos, contexto de uso.]
+
+- **Persona primária** (cargo + perfil técnico + frequência de uso): 
+- **Persona secundária** (se houver — admin, gestor, suporte): 
+- **Contexto de uso** (mobile / desktop / ambos, ambiente — escritório / casa / rua): 
+- **Volume estimado** (usuários simultâneos, requests/dia se backend): 
 
 ### 2.4 Métricas de Sucesso (KPIs)
 | Tipo | Métrica | Meta |

@@ -12,7 +12,50 @@ tags:
 
 # M2 — Session Protocol & Memory Management
 
+> ⚠️ **ESTE É O CANON DE BOOT/SHUTDOWN DO VAULT.** Qualquer outro arquivo (`cognitive-vault-manager/SKILL.md`, `INIT.md`, `TOON-PROMPT.md`) DEVE referenciar este protocolo — nunca redefinir uma sequência alternativa.
+> ⚠️ **GATILHO BOOT:** início de qualquer sessão de trabalho no vault.
+> ⚠️ **GATILHO SHUTDOWN:** fim de qualquer sessão.
+> ⚠️ **TEMPLATE OBRIGATÓRIO (shutdown):** `[[Session Log Template]]` para o log da Camada 1.
+> ⚠️ **OUTPUT BOOT:** estado restaurado + 3 bullets de resumo.
+> ⚠️ **OUTPUT SHUTDOWN:** log em `Dev/3 - Session Logs/YYYY-MM-DD_HH-MM.md` + `[[MEMORY]]` atualizado + `[[05-Dev-Log]]` do projeto atualizado.
+
 Este módulo define **como o agente inicia, opera e encerra** cada sessão de trabalho, e como as 3 camadas de memória são gerenciadas para garantir continuidade cognitiva entre sessões.
+
+---
+
+## Sub-fluxograma — Boot
+
+```mermaid
+flowchart TD
+    A([Inicio de sessao]) --> B[Ler MEMORY.md]
+    B --> C[Ler Preferencias Dev]
+    C --> D[Ler Error Memory INDEX]
+    D --> E{Projeto ativo?}
+    E -->|Sim| F[Ler 05-Dev-Log do projeto]
+    E -->|Nao| G[Pular]
+    F --> H[Resumir em 3 bullets]
+    G --> H
+    H --> I([Aguardar instrucao])
+```
+
+## Sub-fluxograma — Shutdown
+
+```mermaid
+flowchart TD
+    A([Fim de sessao]) --> B[Copiar Session Log Template]
+    B --> C[Gerar log em 3 - Session Logs/YYYY-MM-DD_HH-MM.md]
+    C --> D[Destilar para MEMORY.md]
+    D --> E{Projeto ativo?}
+    E -->|Sim| F[Atualizar 05-Dev-Log do projeto]
+    E -->|Nao| G[Pular]
+    F --> H{Erros encontrados?}
+    G --> H
+    H -->|Sim| I[Propagar para 4 - Errors Memory via Errors Template]
+    H -->|Nao| J[Listar pendentes]
+    I --> J
+    J --> K[Commit git]
+    K --> L([Sessao encerrada])
+```
 
 ---
 
@@ -58,8 +101,9 @@ boot_sequence:
 ```yaml
 shutdown_sequence:
   - passo: 1
-    ação: "Gerar log de sessão"
+    ação: "Gerar log de sessão a partir do [[Session Log Template]]"
     destino: "Dev/3 - Session Logs/YYYY-MM-DD_HH-MM.md"
+    template: "[[Session Log Template]] — copiar e substituir variáveis"
     conteúdo: [resumo, decisões, erros encontrados, itens pendentes]
 
   - passo: 2
@@ -137,8 +181,20 @@ O agente prioriza navegação por wikilinks `[[]]` antes de buscas brutas. Isso 
 
 ---
 
+## Quality Gate (shutdown)
+
+- [ ] **Log de sessão foi gerado a partir de `[[Session Log Template]]` como base**
+- [ ] `[[MEMORY]]` destilado e atualizado
+- [ ] `[[05-Dev-Log]]` do projeto atualizado (se aplicável)
+- [ ] Erros propagados via `[[Errors Template]]` + `[[Immunological Error Memory]]` (se aplicável)
+- [ ] Pendentes listados para próxima sessão
+- [ ] Commit git executado (se versionamento configurado)
+
+---
+
 ## Referências Internas
 
-- [[Cognitive Vault Architecture]] — Estrutura de pastas e taxonomia
-- [[Immunological Error Memory]] — Propagação de erros
-- [[Session Log Template]] — Template para logs da Camada 1
+- `[[Master Pipeline & Enforcement]]` — matriz canon do vault (este protocolo é referenciado lá)
+- `[[Cognitive Vault Architecture]]` — Estrutura de pastas e taxonomia
+- `[[Immunological Error Memory]]` — Propagação de erros
+- `[[Session Log Template]]` — Template para logs da Camada 1

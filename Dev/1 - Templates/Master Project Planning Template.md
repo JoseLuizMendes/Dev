@@ -23,9 +23,15 @@ stack_confirmada: "{{FRONTEND_STACK}} | {{BACKEND_STACK}} | {{CLOUD_STACK}}"
 
 # 🚀 Master Project Plan: {{PROJECT_NAME}}
 
-> **Nota de Uso:** Documento para apresentação ao cliente (PDF) e processamento por Agentes de IA. Preencha os campos entre `{{ }}` ou `[ ]`.
+> **Quem preenche:** **o dev** preenche este documento a partir das notas da call de briefing com o cliente, via `[[Pre-Sale Protocol]]`. O cliente recebe o documento para **revisão e aprovação** — não para preencher do zero.
 >
-> **Fluxo de Ativação:** Ao receber este documento, a IA executa automaticamente o [[Client Onboarding Protocol]]: extração de metadados → Contrato Dinâmico → diretório do projeto → bootstrap de dependências → Spec-Kit SDD+TDD.
+> **Fluxo completo:**
+> 1. Dev faz call de briefing com cliente, registra notas.
+> 2. `[[Pre-Sale Protocol]]` → IA transforma notas neste documento (marca `[PENDENTE — confirmar com cliente]` o que faltar).
+> 3. Dev revisa, complementa, envia ao cliente.
+> 4. Cliente devolve aprovado → `[[Client Onboarding Protocol]]` dispara: extração de metadados → Contrato Dinâmico → diretório do projeto → bootstrap de dependências → Spec-Kit SDD+TDD.
+>
+> ⚠️ Documento gerado deve seguir 100% deste template — não escrever do zero. Campos `{{ }}` substituídos ou marcados como pendentes.
 
 ---
 
@@ -38,10 +44,27 @@ stack_confirmada: "{{FRONTEND_STACK}} | {{BACKEND_STACK}} | {{CLOUD_STACK}}"
 - **Tier de Investimento:** {{BUDGET_TIER}}
 
 ### 🎯 1.1 O Problema e a Visão
-- **A Dor Central:** [Problema que o cliente enfrenta hoje]
-- **A Visão da Solução:** [Como este software resolverá o problema]
-- **Público-Alvo:** [Quem vai usar a plataforma]
-- **KPIs:** LCP < 2.5s | FID < 100ms | CLS < 0.1 | WCAG 2.1 AA | 100% E2E | [KPIs de negócio]
+
+> ⚠️ Preencher TODAS as subdimensões. Se faltar dado nas notas da call, marcar `[PENDENTE — perguntar ao cliente: <pergunta>]`. **Não inventar.**
+
+**A Dor Central:**
+- Quem sente (persona + contexto): 
+- Sintoma observável: 
+- Causa raiz no negócio: 
+- Impacto quantificado: 
+
+**A Visão da Solução:**
+- Resultado-chave na entrega: 
+- Métrica de sucesso (número concreto): 
+- Horizonte de impacto: 
+
+**Público-Alvo:**
+- Persona primária (cargo + técnico/leigo): 
+- Persona secundária (se houver): 
+- Contexto de uso (mobile/desktop/ambos): 
+- Volume estimado: 
+
+**KPIs:** LCP < 2.5s | FID < 100ms | CLS < 0.1 | WCAG 2.1 AA | 100% E2E | [KPI de negócio específico do cliente — não deixar genérico]
 
 ---
 

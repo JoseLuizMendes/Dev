@@ -97,19 +97,9 @@ Agente Autonomous de desenvolvimento de software especializado em SDD (Specifica
 
 ### Arquivo de Contexto: `INIT.md`
 
-Na raiz de **cada projeto** (não do vault), deve existir `INIT.md` gerado via [[TOON-PROMPT]] quando o projeto é iniciado:
+Na raiz de **cada projeto** (não do vault), deve existir `INIT.md` gerado a partir do `[[Project INIT Template]]` quando o projeto é iniciado.
 
-```yaml
-init_sequence:
-  - ler: "INIT.md"           # Contexto do projeto
-  - ler: "CLAUDE.md"         # Diretrizes do diretório atual
-  - ler: "01-Escopo.md"      # Requisitos + User Stories + BDD
-  - ler: "05-Dev-Log.md"     # Estado atual do desenvolvimento
-  - resumir: "3 bullets: contexto, estado, próximos passos"
-  - aguardar: "instrução do developer"
-```
-
-> O template canônico do `INIT.md` está em `Dev/1 - Templates/`. A sequência completa de boot está em [[Session Protocol]].
+> O template canônico do `INIT.md` está em `[[Project INIT Template]]`. A sequência completa de boot do vault está em `[[Session Protocol]]`. A matriz canon de Gatilho → Template está em `[[Master Pipeline & Enforcement]]`.
 
 ### Estrutura de Arquivos de Contexto
 
@@ -170,19 +160,7 @@ Dev/0.3 - Claude Skills Export/    # Skills especializadas por domínio
 Dev/0.1 - Metodology/             # Metodologias de agente
 ```
 
-Skills disponíveis:
-
-| Skill | Caminho |
-|---|---|
-| UI Web Designer | `Dev/0.3 - Claude Skills Export/ui-web-designer-architect/` |
-| Product Strategist | `Dev/0.3 - Claude Skills Export/portfolio-product-strategist/` |
-| Copy Architect | `Dev/0.3 - Claude Skills Export/portfolio-copy-architect/` |
-| Cognitive Vault | `Dev/0.3 - Claude Skills Export/cognitive-vault-manager/` |
-| Senior Web Designer | `Dev/0.3 - Claude Skills Export/ai-senior-web-designer-agent/` |
-| Backend Interview | `Dev/0.3 - Claude Skills Export/backend-interview-agent/` |
-| Web Designer Agent | `Dev/0.1 - Metodology/ai-web-designer-agent.md` |
-| Product Strategist | `Dev/0.1 - Metodology/ai-portfolio-product-strategist.md` |
-| Copy Architect | `Dev/0.1 - Metodology/ai-portfolio-copy-architect.md` |
+> Lista atualizada de skills disponíveis: consultar diretamente as pastas acima (cada subpasta é uma skill com `SKILL.md`). Não manter lista hardcoded aqui para evitar desincronização.
 
 ### Download de Skills Adicionais
 
@@ -200,7 +178,7 @@ Se uma skill específica for necessária para o projeto:
 
 ### Regra
 
-Em cada niche do projeto, criar `claude.md` com diretrizes específicas:
+Em cada niche do projeto, criar `CLAUDE.md` com diretrizes específicas:
 
 ```
 projeto/
@@ -217,62 +195,9 @@ projeto/
     └── CLAUDE.md        # diretrizes infraestrutura
 ```
 
-### Template de claude.md por Nicho
+### Template canônico
 
-```markdown
-# {{NOME_DO_DIRETORIO}}
-
-## Escopo
-- [descrição do que este diretório contém]
-
-## Diretrizes Específicas
-- [regras particulares deste nicho]
-- [padrões esperados]
-
-## Stack Local
-- [tecnologias específicas deste nicho]
-- [bibliotecas許可idas]
-
-## Testes
-- [tipos de teste aplicáveis]
-- [cobertura mínima]
-
-## Dependências Externas
-- [quais dependências este nicho pode usar]
-```
-
----
-
-## Comandos CLI
-
-### Iniciar projeto
-
-```bash
-npx dev init --project <nome> --template <tipo>
-```
-
-### Executar bootstrap
-
-```bash
-npx dev bootstrap --project <caminho>
-```
-
-### Executar como MCP
-
-```bash
-npx dev mcp
-```
-
----
-
-## Integração MCP
-
-O repositório expõe via MCP:
-
-- Contexto de memória (Camadas 1, 2, 3)
-- Diretrizes de diretórios (claude.md por nicho)
-- Specs de projetos (SPEC.md)
-- Histórico de erros (Error Memory)
+O `CLAUDE.md` por nicho/subpasta usa o `[[Niche CLAUDE Template]]` como base. **Não escrever do zero.**
 
 ---
 
@@ -308,7 +233,10 @@ O repositório expõe via MCP:
 
 ## Referências
 
-- [[Session Protocol]] — Boot/shutdown
-- [[Preferencias Dev]] — Stack completa
-- [[Project Lifecycle Pipeline]] — Fluxo
-- [[Immunological Error Memory]] — Sistema de erros
+- `[[Master Pipeline & Enforcement]]` — **Matriz canon Gatilho → Template (fonte da verdade)**
+- `[[Session Protocol]]` — Boot/shutdown canônico
+- `[[Preferencias Dev]]` — Stack completa
+- `[[Project Lifecycle Pipeline]]` — Fluxo de fases
+- `[[Immunological Error Memory]]` — Sistema de erros
+- `[[Project INIT Template]]` — Template do INIT.md per-projeto
+- `[[Niche CLAUDE Template]]` — Template do CLAUDE.md por nicho
