@@ -188,10 +188,28 @@ data_inicio: "2026-04-05"
 
 ## Pendentes para Próxima Sessão
 
-- [ ] Continuar Rodada 4 — próxima sub-rodada 4.2 (design/), depois 4.3 (motion/), 4.4 (products/), ...
-- [ ] Considerar criar branch dedicada por rodada pra facilitar rollback
-- [ ] T-extra-1: melhorar validator pra suportar projetos pre-existentes (sem setup.js obrigatório)
-- [ ] T-extra-2: melhorar validator pra suportar auto-contrato (sem cláusulas jurídicas obrigatórias)
+- [x] ~~Continuar Rodada 4~~ — **COMPLETA (todas as sub-rodadas 4.1 → 4.10)**
+- [x] ~~T-extra-1: melhorar validator pra projetos pre-existentes~~ — **DONE** (flag `bootstrap: "pre-existente"` no frontmatter pula check de `setup.js`)
+- [x] ~~T-extra-2: melhorar validator pra auto-contrato~~ — **DONE** (flag `tipo_contrato: "auto"` pula seções jurídicas + cláusulas imutáveis)
+- [x] ~~Rodar Playwright E2E~~ — **DONE: 33 tests passaram em 1.3min** (após `pnpm exec playwright install chromium`)
+- [x] ~~Rodar validator com --code-path~~ — **DONE: 7 OK, 0 erros após fix Next.js Standalone detection + flags**
+- [x] ~~Decisão Hexagonal vs Layered registrada~~ — **DONE em 01-Escopo §5.3** (5/6 sinais favoráveis a Hex)
+- [ ] **T-extra-3 (novo):** reescrever 10 testes em `src/test/order-status-form.test.tsx` pra padrão Radix Select (click trigger + click option em portal). Hoje usam `user.selectOptions` que só funciona em `<select>` nativo. Não são flakes — são test bugs. Esses 10 são os "10 failing" do baseline.
+- [ ] **Lighthouse audit** (≥ 90 Performance) — não rodou nesta sessão pq `pnpm start` (Next 16 prod) não bindou a porta no ambiente atual. Rodar local depois do build limpo: `pnpm build && pnpm start &` + `npx lighthouse http://localhost:3000`.
+- [ ] **Smoke manual** completo (home, cart, login, signup, checkout, admin) — depende de Postgres + .env configurados localmente; user precisa rodar `pnpm dev`.
+- [ ] Considerar criar branch dedicada por rodada pra facilitar rollback (não aplicável a posteriori — todas as rodadas ficaram em `refactor/hexagonal-rounds-2-4` agora)
+
+## Validação final aplicada nesta rodada
+
+| Item | Status | Evidência |
+|---|---|---|
+| `tsc --noEmit` | ✅ verde | rodado após cada sub-rodada 4.X |
+| Vitest unit | ✅ baseline mantido (419 passing, 10 falhando — test bugs Radix) | rodado após cada sub-rodada |
+| `pnpm build` | ✅ verde | rodado final da Rodada 4.1 e novamente após 4.10 |
+| Playwright E2E | ✅ **33 passed** | `pnpm exec playwright test` chromium + mobile |
+| Validator vault | ✅ **7 OK, 0 erros** | `node tools/validate-project.js ... --code-path ...` |
+| Lighthouse Performance | ⏸️ pendente local | `pnpm start` não bindou porta no ambiente atual |
+| Smoke manual | ⏸️ pendente user | depende do user rodar `pnpm dev` e clicar |
 
 ## Rodada 4.1 — shared/ (concluída 2026-05-30)
 

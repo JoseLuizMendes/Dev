@@ -8,15 +8,20 @@
 
 ## Estado Atual
 
-- **Projeto em andamento:** **Belessence (Mari Beauty)** — **Refatoração Full-stack COMPLETA** (Rodadas 1, 2, 3 e 4 fechadas)
-- **Fase:** Rodada 4 (Hexagonal em `src/lib/`) finalizada com sucesso — 11 bounded contexts criados, `src/lib/` top-level vazio
-- **Último progresso:** Rodada 4 sub-rodadas 4.1 → 4.10 commitadas em sequência (2026-05-30). 11 bounded contexts: `shared/`, `design/`, `motion/`, `products/`, `cart/`, `wishlist/`, `auth/`, `coupons/`, `shipping/`, `payment/`, `reviews/`. Estrutura Hexagonal soft (Domain + Infrastructure + Presentation conforme aplicável). Validação após cada sub-rodada: tsc verde, 419 passing / 10 failing (baseline pré-existente mantido).
-- **Próxima fase (futuro):** extrair use cases para `application/use-cases/` + ports para `application/ports/` quando houver duplicação evidente (promoção tardia conforme `[[Preferencias Dev]]` §3 Hexagonal).
+- **Projeto em andamento:** **Belessence (Mari Beauty)** — **Refatoração Full-stack COMPLETA + Verificação Final OK**
+- **Fase:** Rodadas 1-4 fechadas. Épico 5 (Verificação Final): validator passa, Playwright E2E 33/33 ✅, Lighthouse e smoke manual pendentes localmente.
+- **Último progresso:** Validator evoluído (`tools/validate-project.js`) com 3 flags novas no frontmatter: `bootstrap`, `tipo_contrato`, `architecture`. Belessence agora passa 7/7 OK + 0 erros. Playwright instalado (chromium) e suite full passou: 33 tests em 1.3min (Desktop Chrome + Mobile Pixel 7). Aprendizado: os "10 flakes" do baseline são test bugs reais — `order-status-form.test.tsx` usa `user.selectOptions` em Radix Select (shadcn), que não funciona; pra `<select>` nativo só. Registrado como T-extra-3.
 
 ---
 
 ## Decisões Recentes
 
+- [2026-05-30] **Belessence — Épico 5 (Verificação Final):**
+  - **Validator evoluído** com 3 flags opcionais no frontmatter (`bootstrap`, `tipo_contrato`, `architecture`) — documentado em `tools/README.md`. Belessence (auto-contrato + pre-existente + Next.js Standalone) agora passa 7/7 OK sem erros.
+  - **Bug detectado no validator:** detecção de Next.js Standalone confundia "sem NestJS" no `backend_stack` com presença de NestJS (string match `.includes("nest")`). Fixado: heurística agora exclui `"sem nest"`, `"standalone"`, `"monolito"`, `"n/a"`; flag explícita `architecture` no frontmatter sobrescreve.
+  - **Playwright E2E full passou:** instalado chromium binary (`pnpm exec playwright install chromium`), suite total 33/33 verde em 1.3min (Desktop Chrome + Mobile Pixel 7) — cobre Homepage, Cart, Catálogo, Coleções, Produto, Checkout, Admin CRUD, Admin auth, Static pages, Contact, Help, Search, Meus Pedidos.
+  - **Diagnóstico dos "10 flakes":** investigação revelou que NÃO são flakes — são test bugs em `src/test/order-status-form.test.tsx`. Os testes usam `user.selectOptions` que só funciona em `<select>` HTML nativo, mas o componente usa Radix Select (shadcn) que renderiza `<button role="combobox">` com opções em portal. Fix correto: reescrever testes pra padrão Radix (`user.click(trigger)` + `user.click(option)`). Registrado como T-extra-3 em `05-Dev-Log.md`.
+  - **Lighthouse e smoke manual:** pendentes pra execução local. `pnpm start` (Next 16 prod) não bindou porta no ambiente desta sessão.
 - [2026-05-30] **Belessence — Rodada 4 (Hexagonal em src/lib/) — COMPLETA:**
   - 10 sub-rodadas executadas em sequência (4.1 → 4.10) com TDD light (tsc + Vitest a cada commit).
   - 11 bounded contexts criados em `src/lib/`: `shared/` (Prisma singleton + Zod schemas), `design/` (OKLCH tokens), `motion/` (GSAP helpers), `products/` (catálogo + status + image), `cart/` (privado por usuário), `wishlist/` (privado por usuário), `auth/` (Auth.js v5 + admin TOTP + Arctic OAuth), `coupons/`, `shipping/` (ViaCEP), `payment/` (Mercado Pago), `reviews/`.

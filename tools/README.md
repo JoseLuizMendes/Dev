@@ -16,6 +16,27 @@ node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow"
 node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow" --code-path "C:\Freelas\Sentinel-Flow"
 ```
 
+### Flags no frontmatter de `01-Escopo.md`
+
+O validator respeita 2 flags opcionais no frontmatter pra acomodar casos legítimos:
+
+- **`bootstrap: "pre-existente"`** — pula check de `setup.js`. Use quando o projeto **NÃO** foi bootstrapped via `[[Protocol-Bootstrap]]` (já tinha código pré-existente). Default: `"via-protocol"`.
+- **`tipo_contrato: "auto"`** — pula seções jurídicas obrigatórias (Objeto, Forma de Execução, Obrigações, Vigência) + cláusulas imutáveis (IP, Escopo, NDA, Disputas) em `02-Contrato.md`. Use quando cliente = dev (auto-contrato). Default: `"comercial"`.
+- **`architecture: "next-standalone-fullstack"`** — força detecção de Next.js Standalone (sem NestJS). Default: heurística (string match no `backend_stack`).
+
+Exemplo aplicado em Belessence:
+
+```yaml
+---
+cliente: "Belessence (Mari Beauty)"
+projeto: "Belessence"
+frontend_stack: "Next.js 16 (App Router) + React 19 + Tailwind 4 + Shadcn/ui"
+backend_stack: "Next.js Route Handlers + Prisma 7 + PostgreSQL — monolito"
+bootstrap: "pre-existente"
+tipo_contrato: "auto"
+---
+```
+
 **O que valida (sem `--code-path`):**
 
 - Cada artefato obrigatório existe (`01-Escopo.md` até `06-Erros.md` + `setup.js`)
