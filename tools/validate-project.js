@@ -94,6 +94,24 @@ const errors = [];
 const warnings = [];
 const passed = [];
 
+// Flags lidas do frontmatter de 01-Escopo.md (T-extra-1 e T-extra-2)
+// - bootstrap: "pre-existente" | "via-protocol" (default) — pula check de setup.js
+// - tipo_contrato: "auto" | "comercial" (default) — pula seções jurídicas + cláusulas imutáveis em 02-Contrato
+const projectFlags = (() => {
+  const escopoPath = path.join(projectPath, "01-Escopo.md");
+  if (!fs.existsSync(escopoPath)) return { bootstrap: "via-protocol", tipo_contrato: "comercial" };
+  const content = fs.readFileSync(escopoPath, "utf8");
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return { bootstrap: "via-protocol", tipo_contrato: "comercial" };
+  const fm = match[1];
+  const bootstrapMatch = fm.match(/^bootstrap:\s*"?([^"\n]+)"?/m);
+  const tipoMatch = fm.match(/^tipo_contrato:\s*"?([^"\n]+)"?/m);
+  return {
+    bootstrap: bootstrapMatch ? bootstrapMatch[1].trim() : "via-protocol",
+    tipo_contrato: tipoMatch ? tipoMatch[1].trim() : "comercial",
+  };
+})();
+
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return null;
@@ -106,6 +124,15 @@ function parseFrontmatter(content) {
 }
 
 function checkArtifact(filename, spec) {
+  // T-extra-1: projetos pre-existentes (sem Protocol-Bootstrap) pulam setup.js
+  if (filename === "setup.js" && projectFlags.bootstrap === "pre-existente") {
+    passed.push(`${filename} (pulado — bootstrap: pre-existente)`);
+    return;
+  }
+
+  // T-extra-2: auto-contratos pulam seções jurídicas + cláusulas imutáveis
+  const isAutoContrato = filename === "02-Contrato.md" && projectFlags.tipo_contrato === "auto";
+
   const filepath = path.join(projectPath, filename);
   if (!fs.existsSync(filepath)) {
     errors.push(`[FALTA] ${filename} nao existe no projeto`);
@@ -127,7 +154,7 @@ function checkArtifact(filename, spec) {
     }
   }
 
-  if (spec.requiredSections) {
+  if (spec.requiredSections && !isAutoContrato) {
     spec.requiredSections.forEach((section) => {
       if (!content.includes(section)) {
         errors.push(`[${filename}] seção obrigatória ausente: "${section}"`);
@@ -143,7 +170,7 @@ function checkArtifact(filename, spec) {
     });
   }
 
-  if (spec.immutableClauses) {
+  if (spec.immutableClauses && !isAutoContrato) {
     spec.immutableClauses.forEach((clause) => {
       if (!content.toLowerCase().includes(clause.toLowerCase())) {
         warnings.push(`[${filename}] cláusula imutável "${clause}" parece ausente`);
@@ -157,7 +184,11 @@ function checkArtifact(filename, spec) {
   }
 
   if (errors.filter((e) => e.includes(`[${filename}]`)).length === 0) {
-    passed.push(filename);
+    if (isAutoContrato) {
+      passed.push(`${filename} (auto-contrato — seções jurídicas dispensadas)`);
+    } else {
+      passed.push(filename);
+    }
   }
 }
 
@@ -169,10 +200,14 @@ function checkCodeStructure(codePath, fm) {
 
   const fe = (fm.frontend_stack || "").toLowerCase();
   const be = (fm.backend_stack || "").toLowerCase();
+  const arch = (fm.architecture || "").toLowerCase();
   const stack = `${fe} / ${be}`;
 
+  // Detecção explícita primeiro (arquitetura no frontmatter); fallback heurístico.
+  const isStandalone = arch.includes("standalone") || be.includes("standalone") || be.includes("monolito") || be.includes("sem nest") || be.includes("n/a");
+
   const isNext = fe.includes("next") || fe.includes("react");
-  const isNest = be.includes("nest");
+  const isNest = !isStandalone && be.includes("nest");
   const isCSharp = be.includes(".net") || be.includes("asp.net") || be.includes("c#") || be.includes("dotnet");
   const isSpring = be.includes("spring") || be.includes("java");
   const isVue = fe.includes("vue");
@@ -183,7 +218,9 @@ function checkCodeStructure(codePath, fm) {
   if (isNext && isNest) {
     expected.push("back", "front", "shared", "infra", "pnpm-workspace.yaml");
   } else if (isNext && !isNest) {
-    expected.push("src/app", "package.json");
+    // Next.js Standalone Fullstack: src/app + src/lib + src/components + prisma (se Prisma)
+    expected.push("src/app", "src/lib", "src/components", "package.json");
+    if (be.includes("prisma")) expected.push("prisma");
   } else if (isCSharp) {
     expected.push("src", "tests");
     const srcEntries = fs.readdirSync(path.join(codePath, "src")).filter((e) =>

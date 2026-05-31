@@ -26,6 +26,8 @@ dependencies: "next-auth @auth/prisma-adapter arctic bcryptjs jose otplib mercad
 email_service: "Resend"
 storage_service: "Cloudinary"
 payment_gateway: "Mercado Pago"
+bootstrap: "pre-existente"
+tipo_contrato: "auto"
 ---
 
 # 📋 Formulário de Escopo e Requisitos: Belessence (Mari Beauty)
