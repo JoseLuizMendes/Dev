@@ -188,10 +188,21 @@ data_inicio: "2026-04-05"
 
 ## Pendentes para Próxima Sessão
 
-- [ ] Iniciar Rodada 2 (Limpeza + CLAUDE.md universal)
+- [ ] Continuar Rodada 4 — próxima sub-rodada 4.2 (design/), depois 4.3 (motion/), 4.4 (products/), ...
 - [ ] Considerar criar branch dedicada por rodada pra facilitar rollback
 - [ ] T-extra-1: melhorar validator pra suportar projetos pre-existentes (sem setup.js obrigatório)
 - [ ] T-extra-2: melhorar validator pra suportar auto-contrato (sem cláusulas jurídicas obrigatórias)
+
+## Rodada 4.1 — shared/ (concluída 2026-05-30)
+
+- ✅ Estrutura criada: `src/lib/shared/{domain,infrastructure}/` + 3 CLAUDE.md (R8)
+- ✅ `git mv src/lib/prisma.ts → src/lib/shared/infrastructure/prisma-client.ts`
+- ✅ `git mv src/lib/validations.ts → src/lib/shared/domain/zod-schemas.ts`
+- ✅ Replace bulk via sed em 43 arquivos `.ts/.tsx` (`@/lib/prisma` → `@/lib/shared/infrastructure/prisma-client`, `@/lib/validations` → `@/lib/shared/domain/zod-schemas`)
+- ✅ Fix manual em `src/lib/coupons.ts` (relativo `./prisma` → absoluto novo path)
+- ✅ Fix em `src/test/setup.ts` (mock global de Prisma atualizado pro novo path)
+- ✅ Validação: `tsc --noEmit` verde; `pnpm test:run` igual baseline (419 passing, 10 failing pré-existentes — `user.selectOptions` flakes em order-status-form.test.tsx, não relacionados); `pnpm build` verde
+- **Lição aprendida:** mocks globais de Vitest referenciam path por string. Sempre conferir `src/test/setup.ts` ao mover arquivos. Registrar como aprendizado em `06-Erros.md` se virar regressão recorrente.
 
 ---
 

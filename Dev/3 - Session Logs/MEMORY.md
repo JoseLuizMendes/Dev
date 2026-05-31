@@ -8,14 +8,24 @@
 
 ## Estado Atual
 
-- **Projeto em andamento:** **Belessence (Mari Beauty)** — Refatoração Full-stack em curso (Rodadas 1 e 2 completas, Rodadas 3-4 pendentes)
-- **Fase:** Rodadas 3 (rename `src/api/`) e 4 (Hexagonal em `src/lib/`) pendentes
-- **Último progresso:** Rodada 2 completa (2026-05-30): mixed package managers limpos (só pnpm), `.gitignore` atualizado, `noImplicitOverride` no tsconfig, package name = `mari-beauty`, órfãos do parent dir movidos pra `trash/`, `.agents`/`_agents` consolidados, **75 `CLAUDE.md` criados via script** (`tools/generate-claude-md.js`) atendendo R8 em 89 pastas do repo. Validation: `pnpm install` OK, `tsc --noEmit` OK.
+- **Projeto em andamento:** **Belessence (Mari Beauty)** — **Refatoração Full-stack COMPLETA** (Rodadas 1, 2, 3 e 4 fechadas)
+- **Fase:** Rodada 4 (Hexagonal em `src/lib/`) finalizada com sucesso — 11 bounded contexts criados, `src/lib/` top-level vazio
+- **Último progresso:** Rodada 4 sub-rodadas 4.1 → 4.10 commitadas em sequência (2026-05-30). 11 bounded contexts: `shared/`, `design/`, `motion/`, `products/`, `cart/`, `wishlist/`, `auth/`, `coupons/`, `shipping/`, `payment/`, `reviews/`. Estrutura Hexagonal soft (Domain + Infrastructure + Presentation conforme aplicável). Validação após cada sub-rodada: tsc verde, 419 passing / 10 failing (baseline pré-existente mantido).
+- **Próxima fase (futuro):** extrair use cases para `application/use-cases/` + ports para `application/ports/` quando houver duplicação evidente (promoção tardia conforme `[[Preferencias Dev]]` §3 Hexagonal).
 
 ---
 
 ## Decisões Recentes
 
+- [2026-05-30] **Belessence — Rodada 4 (Hexagonal em src/lib/) — COMPLETA:**
+  - 10 sub-rodadas executadas em sequência (4.1 → 4.10) com TDD light (tsc + Vitest a cada commit).
+  - 11 bounded contexts criados em `src/lib/`: `shared/` (Prisma singleton + Zod schemas), `design/` (OKLCH tokens), `motion/` (GSAP helpers), `products/` (catálogo + status + image), `cart/` (privado por usuário), `wishlist/` (privado por usuário), `auth/` (Auth.js v5 + admin TOTP + Arctic OAuth), `coupons/`, `shipping/` (ViaCEP), `payment/` (Mercado Pago), `reviews/`.
+  - **Hexagonal soft:** cada bounded context usa as camadas que fazem sentido (Domain + Infrastructure + Presentation), sem forçar application/use-cases/ports onde não há duplicação. Promoção tardia permitida quando virar dor.
+  - **R8 satisfeita:** CLAUDE.md em cada nova pasta de bounded context + cada camada hex (~30 arquivos criados nesta rodada).
+  - **Aprendizado importante:** mocks globais em `src/test/setup.ts` (vi.mock by path string) precisam ser atualizados ao mover arquivos referenciados. Registrado em 4.1; aplicado em todas as sub-rodadas subsequentes.
+  - **`src/lib/` top-level vazio** ao final — todos os arquivos viraram bounded contexts. `ls src/lib/*.ts` retorna "No such file or directory".
+- [2026-05-30] **Belessence — Rodada 3 (rename src/api/) — COMPLETA:**
+  - `git mv src/api → src/shadcn-utils` + atualização de `components.json` (aliases utils + lib) + replace em ~200 imports `@/api/` → `@/shadcn-utils/`. Validação: testes verdes (baseline mantido), build verde.
 - [2026-05-30] **Belessence — Rodada 2 (Limpeza + CLAUDE.md universal):**
   - **Limpeza de package managers:** `package-lock.json` + `pnpm-lock.yaml.110687101` deletados. `.gitignore` ganhou `package-lock.json`, `yarn.lock`, `bun.lockb`, `pnpm-lock.yaml.*` (preventivo), e `/src/generated` (cobrindo todo o Prisma client). `pnpm install` validou: name = `mari-beauty`, Prisma generate OK.
   - **TypeScript hardening:** `noImplicitOverride: true` adicionado ao `tsconfig.json`; `tsc --noEmit` passou sem erros (nenhuma classe do projeto tinha override implícito).
