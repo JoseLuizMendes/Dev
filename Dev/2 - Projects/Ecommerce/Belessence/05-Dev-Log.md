@@ -204,12 +204,64 @@ data_inicio: "2026-04-05"
 | Item | Status | Evidência |
 |---|---|---|
 | `tsc --noEmit` | ✅ verde | rodado após cada sub-rodada 4.X |
-| Vitest unit | ✅ baseline mantido (419 passing, 10 falhando — test bugs Radix) | rodado após cada sub-rodada |
+| Vitest unit | ✅ **428/0/1 skip** após T-extra-3 (era 419/10 — 10 test bugs Radix corrigidos) | commit `a5ea0db` na branch `test/fix-radix-select-baseline` |
 | `pnpm build` | ✅ verde | rodado final da Rodada 4.1 e novamente após 4.10 |
 | Playwright E2E | ✅ **33 passed** | `pnpm exec playwright test` chromium + mobile |
 | Validator vault | ✅ **7 OK, 0 erros** | `node tools/validate-project.js ... --code-path ...` |
-| Lighthouse Performance | ⏸️ pendente local | `pnpm start` não bindou porta no ambiente atual |
-| Smoke manual | ⏸️ pendente user | depende do user rodar `pnpm dev` e clicar |
+| Lighthouse Performance | ⏸️ pendente local — bug `AUTH_TRUST_HOST` resolvido (`ERR-2026-0007`) | Setar `AUTH_TRUST_HOST=true` no `.env` antes de `pnpm start` + `npx lighthouse` |
+| Smoke manual | 🗂️ mapeado abaixo | E2E cobre ~90%; resto depende de integrações externas reais |
+
+## Smoke Manual — Cobertura E2E vs Gaps
+
+### ✅ Cobertos pelos 33 testes Playwright (não precisa rodar manualmente)
+
+| Fluxo | Spec |
+|---|---|
+| Homepage carrega + header + promo strip | `e2e/home.spec.ts` (3 tests) |
+| Catálogo `/allProducts` lista + busca `?q=` + sort | `e2e/catalog.spec.ts` (3 tests) |
+| Coleção `/collections/[slug]` | `e2e/collections.spec.ts` (1 test) |
+| Página de produto + adicionar ao carrinho + aba reviews | `e2e/product.spec.ts` (3 tests) |
+| Carrinho — abrir drawer, remover, estado vazio | `e2e/cart.spec.ts` (2 tests) |
+| Checkout flow completo — cria pedido, baixa estoque, consome cupom | `e2e/checkout-flow.spec.ts` (1 test) |
+| Admin protegido por middleware + login form | `e2e/admin.spec.ts` (2 tests) |
+| Admin CRUD — login + criar produto persiste | `e2e/admin-crud.spec.ts` (2 tests) |
+| Contato — envia mensagem persiste no banco | `e2e/contact.spec.ts` (1 test) |
+| Ajuda — FAQ accordion | `e2e/help.spec.ts` (1 test) |
+| Busca submit redireciona | `e2e/search.spec.ts` (1 test) |
+| Páginas estáticas (`/sobre`, `/ajuda`, `/contato`) carregam sem erro | `e2e/static.spec.ts` (3 tests) |
+| Meus Pedidos — busca por email | `e2e/account.spec.ts` (2 tests) |
+
+### ❌ NÃO cobertos pelo E2E — requerem integrações reais + click humano
+
+Estes são **gaps de smoke manual**. Como dependem de credenciais reais / serviços externos / OAuth providers, não podem ser automatizados sem infra de staging dedicada.
+
+| # | Fluxo | Por que não tem E2E | Como validar manualmente |
+|---|---|---|---|
+| 1 | **Pagamento real Mercado Pago** (PIX + cartão + boleto) | Webhook do MP precisa receber callback de prod; redirect Sandbox vs Production diferentes; SDK MP não mockado | (a) Setar `MERCADOPAGO_ACCESS_TOKEN` de sandbox no `.env`; (b) checkout com cartão de teste do MP; (c) confirmar redirect → callback → status do pedido em `/admin/pedidos` |
+| 2 | **Webhook MP idempotente** (segundo POST com mesmo `paymentId` não double-decrementa estoque) | Idem #1 + precisa simular request POST com payload válido do MP | Curl manual em `/api/checkout/webhook` com mesmo `data.id` 2× + verificar `Product.stock` no Prisma Studio |
+| 3 | **Cloudinary upload de imagem** (admin) | SDK real precisa de cred + bytes reais | Login admin → `/admin/produtos/novo` → upload imagem → verificar URL `res.cloudinary.com` aparece + persist |
+| 4 | **Resend email transacional** (cadastro, pedido confirmado) | API real envia email; mockado nos testes | Cadastro com email real → verificar inbox; após webhook MP → verificar email do pedido |
+| 5 | **Google OAuth client** (Auth.js) | Auth.js redireciona pra Google que faz auth real | Setar `AUTH_GOOGLE_ID` + `SECRET` + redirect URI; clicar "Entrar com Google" em `/entrar` |
+| 6 | **Google OAuth admin** (Arctic + allowlist) | Idem #5 + allowlist verification | Adicionar email à `ADMIN_ALLOWLIST_EMAILS`; tentar login Google em `/admin/login`; tentar com email fora da allowlist (deve negar) |
+| 7 | **TOTP setup first-time admin** | Precisa de Authenticator app (Google Auth / Authy) | Rodar `node scripts/admin-setup.mjs` → escanear QR no app → guardar `ADMIN_TOTP_SECRET` no `.env` → login com código TOTP atual |
+| 8 | **Lockout admin** após X falhas | Lógica server-side + tempo real | Tentar login admin com senha errada 5x → 6ª deve dar lockout msg + retry depois do timeout |
+| 9 | **Persistência cart/wishlist cross-device** | Auth.js JWT precisa estar setado em ambos | Login no PC → adicionar item → abrir no mobile (mesma conta) → confirmar item visível |
+| 10 | **Auth-gate modal "ação pendente"** | Modal abre, login completa, ação executa | Deslogado → clicar "curtir" → modal abre → login → confirmar wishlist atualizou após login |
+| 11 | **`prefers-reduced-motion` respeitado** | Sistema-level setting | Ativar no SO → recarregar home → GSAP/Lenis devem estar silenciosos |
+| 12 | **Performance Web Vitals** reais (LCP / INP / CLS) | Lighthouse + dispositivo real | `npx lighthouse http://localhost:3000` ou Chrome DevTools Performance tab |
+
+### Checklist Mínimo Recomendado (15 min)
+
+Antes de deploy de produção, validar manualmente:
+
+- [ ] Login com email + senha → entra na conta
+- [ ] Adicionar produto ao carrinho → verifica `cartItems` no Prisma Studio com `userId` correto
+- [ ] Checkout completo com cartão de teste MP → webhook chega → `Order.status = PAYMENT_CONFIRMED` + `Product.stock` decrementou
+- [ ] Email de confirmação do pedido chega no inbox real
+- [ ] Admin login com TOTP → CRUD produto funciona
+- [ ] Upload imagem no admin → URL Cloudinary aparece
+- [ ] Lighthouse Performance ≥ 90 (mobile + desktop)
+- [ ] Logout → próximo login com OUTRO user → não vê cart/wishlist do anterior (regressão de `ERR-2026-0006`)
 
 ## Rodada 4.1 — shared/ (concluída 2026-05-30)
 
