@@ -144,6 +144,62 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
     - "[[4 - Error's Memory/by-stack/Prisma]]"
     - "[[4 - Error's Memory/by-category/Deployment]]"
 
+- id: ERR-2026-0007
+  título: "Auth.js v5 UntrustedHost ao rodar pnpm start (prod mode) em localhost"
+  categoria: Auth & Security
+  stack:
+    - Next-Auth
+    - Next.js
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-05-30
+  sintoma: |
+    Ao rodar `pnpm build && pnpm start` localmente (modo produção do Next), toda
+    chamada a `/api/auth/*` retorna erro server-side:
+    ```
+    [auth][error] UntrustedHost: Host must be trusted.
+    URL was: http://localhost:3000/api/auth/session.
+    Read more at https://errors.authjs.dev#untrustedhost
+    ```
+    O erro pipoca a cada request. Lighthouse + smoke manual falham porque o auth
+    não responde.
+  causa_raiz: |
+    Auth.js v5 (NextAuth 5 beta) ativa proteção CSRF/redirect baseada em host
+    trust quando `NODE_ENV=production`. `localhost` não é considerado trusted
+    por padrão fora do Vercel — Vercel injeta `AUTH_TRUST_HOST=true`
+    automaticamente, mas execução local em prod mode não.
+
+    Em dev (`pnpm dev`) a proteção é relaxada, então o erro só aparece em
+    `pnpm start` ou em deploy fora do Vercel sem config explícita.
+  solução: |
+    Adicionar ao `.env` ANTES de `pnpm start`:
+    ```
+    AUTH_TRUST_HOST=true
+    ```
+
+    Alternativas equivalentes:
+    - Setar `AUTH_URL=http://localhost:3000` no `.env`
+    - Adicionar `trustHost: true` ao `NextAuth({ ... })` em
+      `src/lib/auth/infrastructure/external/auth.ts`
+
+    **Em produção real (Vercel):** não setar `AUTH_TRUST_HOST=true` cegamente —
+    Vercel já injeta. Setar `AUTH_URL=https://seu-dominio.com` explícita é o
+    canon. Em outras plataformas de deploy (Render, Fly, EC2), setar
+    `AUTH_TRUST_HOST=true` no env do servidor.
+  prevenção: |
+    1. Ao subir Auth.js v5 em projeto novo: documentar no `INIT.md` que o user
+       deve setar `AUTH_TRUST_HOST=true` no `.env` local **antes** de rodar
+       `pnpm start` pela primeira vez.
+    2. CI/CD: em pipelines que rodam `next start` (smoke E2E em prod build),
+       injetar `AUTH_TRUST_HOST=true` no environment do job.
+    3. **Não confundir com dev:** `pnpm dev` funciona sem essa env var.
+  recorrências: 0
+  propagado_para_global: false
+  links:
+    - "[[4 - Error's Memory/INDEX]]"
+    - "[[4 - Error's Memory/by-stack/Next-Auth]]"
+    - "[[4 - Error's Memory/by-category/Auth & Security]]"
+
 - id: ERR-2026-0006
   título: "Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser"
   categoria: Auth & Security

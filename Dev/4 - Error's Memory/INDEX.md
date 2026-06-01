@@ -10,7 +10,7 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 6 |
+| **Total de erros registrados** | 7 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
 | **Última atualização** | 2026-05-30 |
@@ -23,7 +23,7 @@
 |---|---|---|
 | Conflitos de dependências | [[Dependency Breaks]] | 0 |
 | Integração de APIs | [[API Integration]] | 0 |
-| Autenticação e segurança | [[Auth & Security]] | 3 |
+| Autenticação e segurança | [[Auth & Security]] | 4 |
 | Performance | [[Performance]] | 0 |
 | Gerenciamento de estado | [[State Management]] | 0 |
 | Deploy e infraestrutura | [[Deployment]] | 3 |
@@ -38,7 +38,8 @@
 | NestJS | [[NestJS]] | 0 |
 | Tailwind + Shadcn | [[Tailwind & Shadcn]] | 0 |
 | GSAP + Lenis | [[GSAP & Lenis]] | 0 |
-| Next-Auth (Auth.js v5) | [[Next-Auth]] | 2 |
+| Next-Auth (Auth.js v5) | [[Next-Auth]] | 3 |
+| Next.js | [[Next.js]] | 1 |
 | Prisma | [[Prisma]] | 1 |
 | PostgreSQL | [[PostgreSQL]] | 1 |
 | Zustand | [[Zustand]] | 1 |
@@ -137,6 +138,24 @@
   links:
     - "[[Ecommerce/Belessence/06-Erros]]"
     - "[[Deployment]]"
+
+- id: ERR-2026-0007
+  título: "Auth.js v5 UntrustedHost ao rodar pnpm start (prod mode) em localhost"
+  categoria: Auth & Security
+  stack:
+    - Next-Auth
+    - Next.js
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-05-30
+  sintoma: "Erro [auth][error] UntrustedHost a cada chamada de /api/auth/*; auth/session retorna 500 em pnpm start (NODE_ENV=production); Lighthouse/smoke quebrados"
+  causa_raiz: "Auth.js v5 ativa proteção baseada em host trust em production; localhost não é trusted fora do Vercel (que injeta AUTH_TRUST_HOST=true automaticamente)"
+  solução: "Setar AUTH_TRUST_HOST=true no .env antes de pnpm start; ou AUTH_URL=http://localhost:3000; ou trustHost: true no NextAuth config. Em prod Vercel: AUTH_URL=https://dominio.com; em outros deploys (Render/Fly/EC2): AUTH_TRUST_HOST=true no env do servidor."
+  prevenção: "Documentar no INIT.md de qualquer projeto Auth.js v5 que AUTH_TRUST_HOST=true é necessário pra pnpm start local. Em CI/CD, injetar no env do job de E2E."
+  recorrências: 0
+  links:
+    - "[[Ecommerce/Belessence/06-Erros]]"
+    - "[[Auth & Security]]"
 
 - id: ERR-2026-0006
   título: "Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser"
