@@ -19,3 +19,9 @@ Gemfile.lock
 
 # MCP config (contém chave de API)
 .mcp.json
+
+# Estado de UI do Obsidian (não é conteúdo)
+.obsidian/workspace.json
+
+# Worktrees locais do Claude Code
+**/.claude/worktrees/
