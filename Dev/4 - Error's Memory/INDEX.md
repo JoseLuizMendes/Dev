@@ -10,10 +10,10 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 2 |
+| **Total de erros registrados** | 6 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
-| **Última atualização** | 2026-03-31 |
+| **Última atualização** | 2026-05-30 |
 
 ---
 
@@ -23,10 +23,10 @@
 |---|---|---|
 | Conflitos de dependências | [[Dependency Breaks]] | 0 |
 | Integração de APIs | [[API Integration]] | 0 |
-| Autenticação e segurança | [[Auth & Security]] | 0 |
+| Autenticação e segurança | [[Auth & Security]] | 3 |
 | Performance | [[Performance]] | 0 |
 | Gerenciamento de estado | [[State Management]] | 0 |
-| Deploy e infraestrutura | [[Deployment]] | 0 |
+| Deploy e infraestrutura | [[Deployment]] | 3 |
 
 ---
 
@@ -34,10 +34,14 @@
 
 | Tecnologia | Arquivo | Qtd. Erros |
 |---|---|---|
-| React.js | [[React]] | 0 |
+| React.js | [[React]] | 1 |
 | NestJS | [[NestJS]] | 0 |
 | Tailwind + Shadcn | [[Tailwind & Shadcn]] | 0 |
 | GSAP + Lenis | [[GSAP & Lenis]] | 0 |
+| Next-Auth (Auth.js v5) | [[Next-Auth]] | 2 |
+| Prisma | [[Prisma]] | 1 |
+| PostgreSQL | [[PostgreSQL]] | 1 |
+| Zustand | [[Zustand]] | 1 |
 
 ---
 
@@ -79,4 +83,76 @@
   recorrências: 0
   links:
     - "[[GLOBAL-ERRORS]]"
+
+- id: ERR-2026-0003
+  título: "Auth.js v5 com Credentials Provider exige session.strategy='jwt'"
+  categoria: Auth & Security
+  stack:
+    - Next-Auth
+    - React
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-04
+  sintoma: "Sessão de credentials não persiste; usuário deslogado logo após login"
+  causa_raiz: "Auth.js v5 com Credentials NÃO suporta session.strategy='database' — só 'jwt'"
+  solução: "Definir explicitamente session.strategy='jwt' no auth.ts; callback session adiciona token.sub como user.id"
+  prevenção: "Consultar Context7 Auth.js v5 antes de usar Credentials. JWT obrigatório se misturar Credentials com OAuth."
+  recorrências: 0
+  links:
+    - "[[Ecommerce/Belessence/06-Erros]]"
+    - "[[Auth & Security]]"
+
+- id: ERR-2026-0004
+  título: "PrismaAdapter exige tabelas/campos em snake_case (Account, Session, VerificationToken)"
+  categoria: Auth & Security
+  stack:
+    - Next-Auth
+    - Prisma
+  severidade: média
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-04
+  sintoma: "Erros 'Unknown field' ou 'Cannot find table' ao tentar login OAuth/credentials"
+  causa_raiz: "@auth/prisma-adapter espera schema específico com @map() snake_case (provider_account_id, expires_at, etc)"
+  solução: "Copiar schema oficial do @auth/prisma-adapter — não renomear os campos snake_case"
+  prevenção: "Não 'limpar' o snake_case dos campos OAuth. Usar schema de exemplo da doc oficial."
+  recorrências: 0
+  links:
+    - "[[Ecommerce/Belessence/06-Erros]]"
+    - "[[Auth & Security]]"
+
+- id: ERR-2026-0005
+  título: "Postgres SSL warning em produção sem driver adapter (Prisma 7)"
+  categoria: Deployment
+  stack:
+    - Prisma
+    - PostgreSQL
+  severidade: média
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-05
+  sintoma: "Warning de SSL em logs Vercel; incerteza se a conexão é encriptada"
+  causa_raiz: "Prisma 7 sem driver adapter não respeita sslmode=require corretamente em runtimes serverless"
+  solução: "Usar @prisma/adapter-pg com Pool configurado explicitamente (ssl + connectionString); previewFeatures=['driverAdapters'] no prisma.config.ts"
+  prevenção: "Em Prisma 7+, sempre usar driver adapter em ambientes serverless/Edge. Verificar warnings SSL no primeiro deploy."
+  recorrências: 0
+  links:
+    - "[[Ecommerce/Belessence/06-Erros]]"
+    - "[[Deployment]]"
+
+- id: ERR-2026-0006
+  título: "Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser"
+  categoria: Auth & Security
+  stack:
+    - Zustand
+    - React
+  severidade: crítica
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-04
+  sintoma: "Usuário A faz logout, B faz login no mesmo browser, B vê itens do carrinho/favoritos de A"
+  causa_raiz: "Zustand com middleware persist({ name: 'cart' }) salvava em localStorage SEM vinculo com userId; logout não limpava o store; localStorage é por origin (não por usuário)"
+  solução: "Modelar cart/wishlist em banco com userId FK + @@unique([userId, productId]); Zustand vira CACHE do servidor (sem persist); login hidrata stores, logout zera. Preço relido do banco no servidor."
+  prevenção: "REGRA INEGOCIÁVEL — Dados privados por usuário NUNCA podem viver em localStorage global. Stores Zustand: ou usam persist com name por-usuário E limpam no logout, OU não usam persist e são puro cache do servidor."
+  recorrências: 0
+  links:
+    - "[[Ecommerce/Belessence/06-Erros]]"
+    - "[[Auth & Security]]"
 ```
