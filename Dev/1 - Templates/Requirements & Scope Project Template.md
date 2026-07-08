@@ -1,6 +1,6 @@
 ---
 template: "Requirements & Scope"
-version: 2.1
+version: 2.2
 status: "Template"
 tags:
   - template
@@ -24,6 +24,7 @@ dependencies: "{{DEPENDENCIES}}"
 email_service: "{{EMAIL_SERVICE}}"
 storage_service: "{{STORAGE_SERVICE}}"
 payment_gateway: "{{PAYMENT_GATEWAY}}"
+midia: "{{MEDIA}}" # "sim" (default) | "nao" — "nao" pula instalação do Higgsfield no bootstrap
 ---
 
 # 📋 Formulário de Escopo e Requisitos: {{PROJECT_NAME}}

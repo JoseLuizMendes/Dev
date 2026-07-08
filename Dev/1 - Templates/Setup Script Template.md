@@ -1,6 +1,6 @@
 ---
 template: "Setup Script"
-versão: 2.0
+versão: 3.0
 status: "Template"
 tags:
   - template
@@ -41,7 +41,7 @@ Salvo em: `Dev/2 - Projects/[Nicho]/[Projeto]/setup.js`
 
 ---
 
-## Estrutura obrigatória — 6 seções na ordem exata
+## Estrutura obrigatória — 7 seções na ordem exata
 
 ```
 // Seção 1 — HEADER         comentário: nome do projeto, data, referências, uso
@@ -49,7 +49,8 @@ Salvo em: `Dev/2 - Projects/[Nicho]/[Projeto]/setup.js`
 // Seção 3 — STACK INIT     scaffold do framework (ex: npx create-next-app)
 // Seção 4 — DEPENDENCIES   npm install prod + dev — extraídas do frontmatter parseado
 // Seção 5 — UTILITIES      config files: tsconfig, next.config, vitest.config, .env.example
-// Seção 6 — CONFIRMATION   mensagem final com próximos passos
+// Seção 6 — TOOLING        ferramentas obrigatórias: SpecKit, Impeccable, Higgsfield (opt-out), skills Next.js
+// Seção 7 — CONFIRMATION   mensagem final com próximos passos (incl. rodar /impeccable init no Claude Code)
 ```
 
 ---
@@ -84,6 +85,7 @@ const PROJECT    = (get("cliente") + "-" + get("projeto"))
   .toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 const PKG_MGR    = get("package_manager") || "npm"; // pnpm | npm | yarn | bun
 const DEPENDENCIES = get("dependencies");
+const MEDIA      = get("midia") || "sim"; // "sim" (default) | "nao" — controla instalação do Higgsfield
 ```
 
 ## Package Manager Abstraction — padrão obrigatório
@@ -141,6 +143,42 @@ O script aplica exatamente estes arquivos de configuração — nada mais:
 
 ---
 
+## Seção 6 — TOOLING (ferramentas obrigatórias)
+
+> Canon: `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]`. Executada dentro da pasta do projeto recém-criado.
+
+```javascript
+// Seção 6 — TOOLING
+const run = (cmd, label) => {
+  try {
+    console.log(`\n🔧 ${label}...`);
+    execSync(cmd, { cwd: projectDir, stdio: "inherit" });
+  } catch (e) {
+    console.error(`⚠️ Falha em "${label}" — revalidar comando via Context7/site oficial e atualizar a KB.`);
+  }
+};
+
+run("uvx --from git+https://github.com/github/spec-kit.git specify init .", "SpecKit (specify init)");
+run("npx skills add pbakaus/impeccable", "Impeccable (skills)");
+
+if (MEDIA !== "nao") {
+  run("npx skills add higgsfield-ai/skills", "Higgsfield skills");
+} else {
+  console.log("\n⏭️ Higgsfield PULADO — opt-out midia: \"nao\" no 01-Escopo.md (registrar no 05-Dev-Log).");
+}
+
+if (/next/i.test(get("frontend_stack"))) {
+  run("npx skills add vercel/next.js", "Skills Next.js (oficiais, do repo vercel/next.js)");
+}
+```
+
+Regras da seção TOOLING:
+- Falha de um comando de tooling **não aborta** o setup (o try/catch registra o aviso) — mas o Quality Gate do [[Protocol-Bootstrap]] só fecha com tudo instalado ou opt-out registrado.
+- `/impeccable init` **não entra aqui** — é comando de agente, roda no Claude Code após o setup (a Seção 7 instrui isso).
+- Comandos verificados em 2026-07-08; se algum mudar, atualizar este template + [[Impeccable Reference]]/[[Higgsfield Skills Reference]].
+
+---
+
 ## Variáveis extraídas do frontmatter de 01-Escopo.md
 
 | Variável | Campo no frontmatter | Valores aceitos |
@@ -151,6 +189,7 @@ O script aplica exatamente estes arquivos de configuração — nada mais:
 | `DEPENDENCIES` | `dependencies` | pacotes separados por espaço, ou `N/A` |
 | `EMAIL_SERVICE` | `email_service` | ex: `Resend`, ou `N/A` |
 | `CLOUD_STACK` | `cloud_stack` | ex: `Vercel`, ou `N/A` |
+| `MEDIA` | `midia` | `sim` (default) \| `nao` — se `nao`, pula Higgsfield na Seção 6 |
 
 > `package_manager` é obrigatório — define todos os comandos `add`, `addDev` e `create`. Padrão: `npm` se ausente.
 
@@ -162,8 +201,9 @@ O script aplica exatamente estes arquivos de configuração — nada mais:
 2. `strict: true` no `tsconfig.json` — sem exceção
 3. Stack conforme [[Preferencias Dev]] — nunca inventar dependências
 4. Dependências extras instaladas **somente** se presentes no frontmatter de `01-Escopo.md`
-5. Script encerra com mensagem clara de próximos passos (Seção 6)
+5. Script encerra com mensagem clara de próximos passos (Seção 7) — incluindo instrução de rodar `/impeccable init` no Claude Code
 6. Sem componentes, tipos, schemas ou dados hardcoded no script
+7. Seção TOOLING sempre presente — Higgsfield condicionado a `MEDIA !== "nao"`, skills Next.js condicionadas a `frontend_stack`
 
 ---
 
@@ -172,13 +212,14 @@ O script aplica exatamente estes arquivos de configuração — nada mais:
 Antes de salvar o `setup.js` no vault:
 
 - [ ] `PROJECT` em kebab-case sem maiúsculas
-- [ ] Seções 1–6 presentes na ordem correta
+- [ ] Seções 1–7 presentes na ordem correta
 - [ ] `01-Escopo.md` lido via `path.join(__dirname, "01-Escopo.md")`
 - [ ] Validação de existência do arquivo antes de `readFileSync`
 - [ ] `tsconfig.json` com `strict: true`
 - [ ] `.env.example` gerado sem valores reais
 - [ ] Nenhum componente, tipo ou schema hardcoded
-- [ ] Seção 6 com mensagem de confirmação e próximos passos
+- [ ] Seção 6 (TOOLING) presente: SpecKit + Impeccable sempre; Higgsfield condicionado a `MEDIA`; skills Next.js condicionadas à stack
+- [ ] Seção 7 com mensagem de confirmação e próximos passos (incl. `/impeccable init` no Claude Code)
 
 ---
 

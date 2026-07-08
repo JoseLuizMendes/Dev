@@ -61,13 +61,16 @@ Ao iniciar qualquer sessão, o agente DEVE:
 - **Stack é definida por projeto** no `INIT.md` de cada projeto — ver [[Preferencias Dev]] para as opções aprovadas
 - **Erros recorrentes** devem ser propagados de `06-Erros.md` do projeto → `4 - Error's Memory/`
 - **Context7 MCP** deve ser consultado antes de usar qualquer biblioteca ou framework
+- **Bootstrap de projeto novo instala tooling obrigatório** — SpecKit + Impeccable + Higgsfield (opt-out por escopo) + skills Next.js quando aplicável. Canon: [[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]] + matriz canon linha 17 de [[Master Pipeline & Enforcement]]
+- **Knowledge Base condicional** — `0.4 - Knowledge Base/` não entra no boot R6; é lida conforme a stack do projeto (ver [[Dev/0.4 - Knowledge Base/INDEX|KB INDEX]])
 
 ## Stack (Variável por Projeto)
 
 A stack é definida no `INIT.md` de cada projeto. Stacks aprovadas:
 
-- **Principal:** TypeScript + NestJS + React/Next.js
-- **Adicionais:** C# (.NET) | Java (Spring Boot) | Vue.js 3+ | Angular
+- **Principal:** TypeScript + NestJS + React/Next.js **ou** TanStack Start
+- **Frameworks frontend de primeira classe:** Next.js 16+ | TanStack Start | Vue.js 3+ (matriz de decisão em [[Preferencias Dev#Frameworks Frontend de Primeira Classe]])
+- **Adicionais:** C# (.NET) | Java (Spring Boot) | Angular
 
 > Consultar [[Preferencias Dev]] para regras inegociáveis de cada tecnologia.
 
@@ -81,10 +84,12 @@ Dev/
 ├── 0.1 - Methodology/            ← agentes de auditoria
 ├── 0.2 - Audit/                  ← templates e diretrizes de auditoria
 ├── 0.3 - Claude Skills Export/   ← skills especializadas
+├── 0.4 - Knowledge Base/         ← conhecimento por stack (Next.js, TanStack, Impeccable, Higgsfield)
 ├── 1 - Templates/                ← moldes reutilizáveis
 ├── 2 - Projects/                 ← projetos ativos por nicho
 ├── 3 - Session Logs/             ← MEMORY.md + logs de sessão
 ├── 4 - Error's Memory/           ← memória imunológica
+├── 5 - Publicações/              ← artigos e conteúdo para publicar (LinkedIn etc.)
 └── 9 - Archive/                  ← projetos encerrados
 ```
 
@@ -101,6 +106,11 @@ Dev/
 | Registrar erro encontrado | `06-Erros.md` do projeto → [[4 - Error's Memory/INDEX]] |
 | Pipeline de desenvolvimento | [[Project Lifecycle Pipeline]] |
 | Skills especializadas | `0.3 - Claude Skills Export/` |
+| Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
+| Escolher Next vs TanStack vs Vue | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
+| Design system / anti-AI-slop | [[Impeccable Reference]] |
+| Gerar mídia com IA | [[Higgsfield Skills Reference]] |
+| Briefing completo recebido → execução automática | Matriz canon linha 18 de [[Master Pipeline & Enforcement]] |
 
 ## Testes
 
@@ -113,3 +123,5 @@ Dev/
 - **Context7** — documentação de bibliotecas em tempo real (obrigatório)
 - **Obsidian MCP** — gestão do vault via `uvx mcp-obsidian` (porta 27124)
 - **MarketingCopywrite** — copywriting especializado
+- **Impeccable** — skills de design para o agente (`npx skills add pbakaus/impeccable`) — [[Impeccable Reference]]
+- **Higgsfield skills** — geração de mídia (`npx skills add higgsfield-ai/skills`, opt-out por escopo) — [[Higgsfield Skills Reference]]

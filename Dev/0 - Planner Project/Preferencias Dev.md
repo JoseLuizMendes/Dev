@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 4.2
+versão: 5.0
 status: "Ativo"
 tags:
   - preferences
@@ -29,16 +29,38 @@ tags:
 | **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` obrigatório |
 | **Backend** | NestJS 10.x + Fastify | Modular + DI. Lógica nos Services, nunca nos Controllers |
 | **Banco de Dados** | PostgreSQL + Prisma ORM | Schema declarativo no `schema.prisma` |
-| **Frontend** | React 19+ / Next.js 16+ | Functional components + hooks. Server Components quando aplicável |
+| **Frontend** | React 19+ / Next.js 16+ **ou** TanStack Start | Functional components + hooks. Server Components quando aplicável. Escolha registrada no `03-Planejamento` + `INIT.md` (ver §Frameworks Frontend de Primeira Classe) |
+| **Routing** | Next App Router (Next.js) / TanStack Router (fora do Next) | Nunca misturar os dois no mesmo app |
 | **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
 | **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
+| **Design QA** | Impeccable | `/impeccable init` + `DESIGN.md` obrigatórios no bootstrap — ver [[Impeccable Reference]] |
+| **Mídia IA** | Higgsfield skills | Padrão com opt-out via campo `midia` do escopo — ver [[Higgsfield Skills Reference]] |
 | **Animações** | GSAP 3.12+ + Lenis | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado |
 | **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
-| **Fetching** | React Query / SWR | `useEffect` para data fetching proibido |
+| **Fetching** | TanStack Query (React/Vue) — padrão | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes |
 | **Infra** | Docker multi-stage + Compose | Containers isolados. Ambiente local via Compose |
 | **Package Manager** | pnpm | npm, yarn e bun banidos |
-| **Pipeline** | Spec-Kit (Spacify) | SDD+TDD obrigatório |
+| **Pipeline** | Spec-Kit (SDD+TDD) + Impeccable (design) + Higgsfield (mídia, opt-out) | Ver §Ferramentas Obrigatórias de Bootstrap |
 | **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite | Docs em tempo real, gestão de cofre, copywriting |
+
+### Frameworks Frontend de Primeira Classe
+
+> Três frameworks aprovados em pé de igualdade. A escolha é **por projeto**, feita no `03-Planejamento.md` e registrada no `INIT.md`, usando esta matriz. Detalhamento técnico e comparação completa: [[TanStack Reference]] e [[Next.js Foundations (Vercel Academy)]].
+
+| Critério do projeto | Next.js 16+ | TanStack Start | Vue.js 3+ |
+|---|---|---|---|
+| Conteúdo/SEO pesado (ecommerce, blog, marketing) | ✅ preferido | Razoável | Razoável |
+| RSC + cache granular (`"use cache"`, PPR) necessários | ✅ único | ❌ | ❌ |
+| Deploy/ecossistema Vercel | ✅ otimizado | Neutro | Neutro |
+| App rica SPA-first, type-safety total de rotas | Razoável | ✅ preferido | Razoável |
+| Server functions type-safe end-to-end (`createServerFn`) | ❌ (Server Actions) | ✅ | ❌ |
+| Projeto lightweight / prototipagem / time Vue | — | — | ✅ preferido |
+| Maturidade | Estável | Release Candidate | Estável |
+
+**Regras por framework:**
+- **Next.js 16+** — App Router; Server Components por padrão; regras em §Frontend (React / Next.js). Skills Next.js do Claude instaladas no bootstrap.
+- **TanStack Start** — TanStack Router + Query nativos; server functions com validação Zod; scaffold `pnpx create-start-app`. Status RC: consultar Context7 para breaking changes antes de iniciar projeto.
+- **Vue.js 3+** — primeira classe (promovido da lista de adicionais na v5.0); regras em §Vue.js 3+.
 
 ### Stacks Adicionais (Variáveis por Projeto)
 
@@ -46,7 +68,6 @@ tags:
 |---|---|---|
 | **C# (.NET)** | Projetos enterprise, APIs robustas, microservices | Stack definida no `INIT.md` do projeto |
 | **Java (Spring Boot)** | Projetos enterprise, Android, sistemas legados | Stack definida no `INIT.md` do projeto |
-| **Vue.js 3+** | Projetos lightweight, prototipagem rápida | Composition API obrigatório. Options API proibida |
 | **Angular** | Projetos enterprise em larga escala | Em adoção futura. Stack definida no `INIT.md` |
 
 ### Stack Estendida — Ecommerce
@@ -392,8 +413,23 @@ src/app/
 | **Forms/Validação** | `pnpm add react-hook-form @hookform/resolvers zod` |
 | **Testes** | `pnpm add -D vitest @vitest/ui @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom` |
 | **Extras** | declarados em `{{DEPENDENCIES}}` — `pnpm add [deps]` |
+| **Tooling obrigatório** | SpecKit + Impeccable + Higgsfield (opt-out) + skills Next.js — ver §Ferramentas Obrigatórias de Bootstrap |
 
 > Fonte dos comandos: [pnpm docs](https://pnpm.io/cli/add) | [Next.js installation](https://nextjs.org/docs/app/getting-started/installation)
+
+### Ferramentas Obrigatórias de Bootstrap
+
+> **Inegociável (sob R7 + matriz canon linha 17 de [[Master Pipeline & Enforcement]]).** Todo projeto novo bootstrapped via [[Protocol-Bootstrap]] instala este tooling. Comandos verificados em 2026-07-08 — se algum falhar, revalidar via Context7/site oficial e atualizar a KB.
+
+| Ferramenta | Comando | Condição | Referência |
+|---|---|---|---|
+| **SpecKit** | `uvx --from git+https://github.com/github/spec-kit.git specify init .` | Sempre | [[Spec-Kit Reference]] |
+| **Impeccable** | `npx skills add pbakaus/impeccable` → depois `/impeccable init` no Claude Code (gera `DESIGN.md`) | Sempre que o projeto tem UI | [[Impeccable Reference]] |
+| **Higgsfield skills** | `npx skills add higgsfield-ai/skills` | Padrão; **pular se** `midia: "nao"` no frontmatter do `01-Escopo.md` (registrar opt-out no `05-Dev-Log`) | [[Higgsfield Skills Reference]] |
+| **Context7 MCP** | Verificar disponibilidade + consultar antes de qualquer decisão de lib | Sempre | §Context7 (MCP) |
+| **Skills Next.js** | `npx skills add vercel/next.js` (oficiais; `next dev` 16.3+ também gera AGENTS.md/CLAUDE.md com docs bundled) | Se `frontend_stack` contém Next.js | [[Next.js Foundations (Vercel Academy)]] |
+
+> ⚠️ Comandos `npx`/`uvx` são de terminal (entram no `setup.js`, seção TOOLING). `/impeccable init` é comando de **agente** — roda no Claude Code após o setup, nunca dentro do `setup.js`.
 
 ### Regras do Bootstrap
 
@@ -402,6 +438,8 @@ src/app/
 - Após bootstrap: registrar dependências instaladas com versões em `05-Dev-Log.md`.
 - `setup.js` lê `01-Escopo.md` em runtime via `path.join(__dirname, ...)` — sem dados hardcoded.
 - `setup.js` usa o campo `package_manager` do frontmatter para gerar os comandos corretos — nunca hardcoda `npm` ou `pnpm` diretamente.
+- `setup.js` lê o campo `midia` do frontmatter (default `"sim"`): se `"nao"`, pula a instalação do Higgsfield e o registra como opt-out.
+- Bootstrap não termina sem o Quality Gate de tooling do [[Protocol-Bootstrap]] (SpecKit init, Impeccable + `DESIGN.md`, Higgsfield ou opt-out, skills Next.js se aplicável, Context7 consultado).
 
 ---
 
@@ -419,12 +457,22 @@ src/app/
 ### Frontend (React / Next.js)
 - Componentes funcionais e hooks. Server Components quando aplicável.
 - UI não mistura renderização com chamadas de rede sem camada de dados.
+- Fetching client-side via TanStack Query (`@tanstack/react-query`) — `useEffect` para data fetching proibido.
+- Projeto Next.js: ler [[Next.js Foundations (Vercel Academy)]] antes de `/speckit.plan`.
+
+### TanStack Start
+- TanStack Router como roteamento (type-safe, nativo do framework).
+- Server functions via `createServerFn()` com validação Zod obrigatória em toda entrada.
+- TanStack Query para fetching/cache; scaffold via `pnpx create-start-app` (pnpm).
+- Status Release Candidate: consultar Context7 para breaking changes antes de iniciar o projeto.
+- Detalhes: [[TanStack Reference]].
 
 ### Vue.js 3+
 - Composition API obrigatório. Options API proibida.
 - `<script setup>` como padrão. Props e emits tipados com `defineProps` / `defineEmits`.
 - Pinia para state management (Vuex banido).
 - Vite como bundler padrão.
+- Fetching via `@tanstack/vue-query` (padrão de fetching do vault, ver [[TanStack Reference]]).
 
 ### C# (.NET)
 - Clean Architecture ou Vertical Slice Architecture — definida no `INIT.md` do projeto.

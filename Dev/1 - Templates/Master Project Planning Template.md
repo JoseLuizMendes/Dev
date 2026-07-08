@@ -94,6 +94,7 @@ stack_confirmada: "{{FRONTEND_STACK}} | {{BACKEND_STACK}} | {{CLOUD_STACK}}"
 
 ### 🔌 3.1 Integrações (APIs)
 - **Pagamentos:** {{PAYMENT_GATEWAY}} | **E-mail:** {{EMAIL_SERVICE}} | **Storage:** {{STORAGE_SERVICE}}
+- **Projeto usa mídia gerada por IA (fotos de produto, banners, vídeos)?** {{MEDIA}} — `sim` (default) | `nao`. Alimenta o campo `midia` do `01-Escopo.md`; `nao` pula o Higgsfield no bootstrap ([[Higgsfield Skills Reference]]).
 
 ### 📦 3.2 Dependências Extras do Projeto
 > **Para IA:** instalar via `pnpm add` no bootstrap. Dependências base da stack são instaladas automaticamente — não listar aqui.

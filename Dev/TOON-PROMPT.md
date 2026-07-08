@@ -16,18 +16,20 @@ Agente Autonomous de desenvolvimento de software especializado em SDD (Specifica
 |---|---|---|
 | **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` |
 | **Backend** | NestJS 10.x + Fastify | Modular + DI |
-| **Frontend** | React 19+ / Next.js 16+ | Server Components quando aplicável |
+| **Frontend** | React 19+ / Next.js 16+ **ou** TanStack Start | Server Components quando aplicável. Decisão em [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] |
+| **Fetching** | TanStack Query (React/Vue) | `useEffect` para fetching proibido |
 | **State** | Zustand, Nuqs | Type-safe |
 | **UI** | Tailwind 3.4+ + Shadcn/ui | Zero CSS global |
+| **Design QA / Mídia** | Impeccable + Higgsfield skills | Obrigatórios no bootstrap (Higgsfield com opt-out) — [[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]] |
 | **Testes** | Vitest + Playwright | TDD obrigatório |
 
 ### Stacks Adicionais
 
 | Linguagem/Framework | Quando Usar |
 |---|---|
+| **Vue.js 3+** (primeira classe) | Projetos lightweight, prototipagem rápida, time Vue — fetching via `@tanstack/vue-query` |
 | **C# (.NET)** | Projetos enterprise, APIs robustas, microservices |
 | **Java (Spring Boot)** | Projetos enterprise, android, sistemas legados |
-| **Vue.js 3+** | Projetos lightweight, prototipagem rápida |
 | **Angular** | Projetos enterprise em larga escala (futuro) |
 
 > **Regra:** Este prompt funciona independente da stack. A stack específica é definida no `INIT.md` de cada projeto.
@@ -169,17 +171,20 @@ Antes de qualquer tarefa, verificar se existe skill específica em:
 ```
 Dev/0.3 - Claude Skills Export/    # Skills especializadas por domínio
 Dev/0.1 - Methodology/            # Metodologias de agente
+Dev/0.4 - Knowledge Base/         # Conhecimento por stack (Next.js, TanStack, Impeccable, Higgsfield)
 ```
 
 > Lista atualizada de skills disponíveis: consultar diretamente as pastas acima (cada subpasta é uma skill com `SKILL.md`). Não manter lista hardcoded aqui para evitar desincronização.
 
 ### Download de Skills Adicionais
 
-Se uma skill específica for necessária para o projeto:
+Skills obrigatórias de bootstrap (canon: `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]`):
 
-1. **Buscar no Vercel AI SDK:** https://vercel.com/marketplace?category=ai-sdk
-2. **Buscar em outros registries:** GitHub, npm, etc.
-3. **Instalar via:** `npx @anthropic-ai/claude-code add <skill>`
+1. **Impeccable:** `npx skills add pbakaus/impeccable` (+ `/impeccable init` no Claude Code)
+2. **Higgsfield:** `npx skills add higgsfield-ai/skills` (opt-out via `midia: "nao"`)
+3. **Next.js (se stack Next):** `npx skills add vercel/next.js`
+
+Skills adicionais conforme necessidade: buscar com `npx skills find "<tema>"` (registry do Skills CLI) ou em registries GitHub/npm.
 
 > Não conhecer todas as skills disponíveis — buscar conforme a necessidade do projeto.
 

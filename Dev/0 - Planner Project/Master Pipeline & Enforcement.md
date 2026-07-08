@@ -1,7 +1,7 @@
 ---
 módulo: M0
 título: "Master Pipeline & Enforcement"
-versão: 1.0
+versão: 2.0
 status: "Ativo"
 canonicidade: "Fonte da verdade do fluxo macro + matriz Gatilho → Template → Output"
 tags:
@@ -62,7 +62,9 @@ flowchart TD
     O1 -->|Planning Template| O3
     O3 -->|Tasks Template| O4
     O4 -->|Setup + Dev Log + Errors + Project INIT Templates| O5
-    O5 --> F2
+    Tooling[SpecKit + Impeccable + Higgsfield + Skills]:::artifact
+    O5 -->|Ferramentas Obrigatórias de Bootstrap| Tooling
+    Tooling --> F2
     F2 --> Cod
     Cod --> F3
     F3 -->|Audit Template| Rel
@@ -106,6 +108,8 @@ flowchart TD
 | 14 | Auditoria de código | `[[Audit Template]]` | Relatório de auditoria | Aplicar correções |
 | 15 | Change Request (escopo muda) | — (atualizar `01-Escopo` + `02-Contrato` + replan) | `01-Escopo.md`/`02-Contrato.md` atualizados | `/speckit.plan` |
 | 16 | Recorrência ≥ 2 de erro | — (promoção automática a regra) | Nova entrada em "Regras Promovidas" do `[[Preferencias Dev]]` | Aplicação preventiva |
+| 17 | Bootstrap concluído (setup.js + 05/06/INIT gerados) | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) | SpecKit inicializado + Impeccable instalado + `/impeccable init` (`DESIGN.md`) + Higgsfield (salvo opt-out `midia: "nao"`) + skills Next.js (se stack Next) + Context7 verificado | `/speckit.implement` |
+| 18 | **Modo automático:** dev entrega arquivo de briefing/requisitos e autoriza execução completa | Cadeia mecânica: linhas 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 17, **sem parada** — exceto pontos de aprovação não pré-aprovados no briefing e campos `[PENDENTE]` (R3) | Projeto completo: 6 artefatos + setup.js + INIT.md + tooling instalado | Desenvolvimento (`/speckit.implement`) |
 
 ---
 
@@ -117,7 +121,7 @@ flowchart TD
 4. **Versão resumida do template é proibida.** Se uma seção não se aplica ao projeto, ela aparece com a marcação `N/A — [motivo]`, não é omitida.
 5. **Banners `⚠️` nos protocols** declaram GATILHO + TEMPLATE OBRIGATÓRIO + OUTPUT + PRÓXIMO PASSO antes do conteúdo. A IA lê o banner antes de qualquer ação.
 6. **Mudanças no template canon** exigem incremento da `version` no frontmatter + entrada em `[[MEMORY]]` documentando o motivo.
-7. **Regras constitucionais R1–R7** do `[[CLAUDE]]` raiz precedem qualquer instrução deste arquivo. Em caso de conflito, vencem as constitucionais.
+7. **Regras constitucionais R1–R8** do `[[CLAUDE]]` raiz precedem qualquer instrução deste arquivo. Em caso de conflito, vencem as constitucionais.
 8. **Validação mecânica** via `node tools/validate-project.js "Dev/2 - Projects/[Nicho]/[Projeto]" [--code-path <repo>]` é o gatekeeper final antes de declarar o onboarding completo.
 9. **Teste de aceitação** via `[[Mock Pipeline Test]]` deve ser executado mentalmente sempre que um template ou protocol for editado.
 10. **Filosofia de Construção** (`[[Preferencias Dev#Filosofia de Construção]]`) — SOLID + Clean Code + Hexagonal — rege todo código produzido. R7 obriga validação prévia.
@@ -177,6 +181,8 @@ Sem template — atualiza `01-Escopo.md` + `02-Contrato.md` (cláusula de Contro
 | Fim de sessão, gerar log | `[[Session Log Template]]` |
 | Registrando erro local | `[[Errors Template]]` |
 | Rodando auditoria de código | `[[Audit Template]]` |
+| Bootstrap concluído — instalar tooling | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
+| Dev entregou briefing e autorizou execução completa | Cadeia mecânica da matriz (linha 18): 0→1→2→3→4→5→6→7→8→9→17 sem parada |
 
 ---
 

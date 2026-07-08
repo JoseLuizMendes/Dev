@@ -1,7 +1,7 @@
 ---
 módulo: M1
 título: "Cognitive Vault Architecture"
-versão: 1.2
+versão: 2.0
 status: "Ativo"
 tags:
   - planner-mode
@@ -18,45 +18,68 @@ Este módulo define **como o vault `Dev/` é organizado** e **como os agentes de
 ## Estrutura de Pastas Definitiva
 
 ```
-Dev/
-├── 0 - Planner Project/          ← Meta-documentação e visão do sistema
-│   ├── Cognitive Vault Architecture.md  (este arquivo)
-│   ├── Session Protocol.md
+Dev/                              ← conteúdo cognitivo (dentro do repo, que também tem tools/ e docs/ na RAIZ)
+├── CLAUDE.md                     ← constituição (R1–R8) + boot obrigatório
+├── INDEX.md                      ← mapa de navegação
+├── TOON-PROMPT.md                ← prompt standalone (redundante por design)
+├── redundancias-vault.md         ← auto-auditoria histórica
+│
+├── 0 - Planner Project/          ← Cérebro operacional (14 arquivos)
+│   ├── Master Pipeline & Enforcement.md   ← FONTE DA VERDADE do fluxo (matriz canon)
+│   ├── Preferencias Dev.md                ← stack + regras inegociáveis (v5)
+│   ├── Session Protocol.md                ← boot/shutdown canônico
+│   ├── Cognitive Vault Architecture.md    (este arquivo)
 │   ├── Project Lifecycle Pipeline.md
+│   ├── Pre-Sale Protocol.md
 │   ├── Client Onboarding Protocol.md
+│   ├── Protocol-Contract.md
+│   ├── Protocol-Bootstrap.md
+│   ├── Protocol-SpecKit.md
+│   ├── Spec-Kit Reference.md
 │   ├── Dynamic Contract Engine.md
 │   ├── Immunological Error Memory.md
-│   └── Preferencias Dev.md
+│   └── Mock Pipeline Test.md
 │
 ├── 0.1 - Methodology/            ← Agentes norteadores (3 arquivos)
 │   ├── ai-portfolio-product-strategist.md
 │   ├── ai-web-designer-agent.md
 │   └── ai-portfolio-copy-architect.md
 │
-├── 0.2 - Audit/                  ← Templates e logs de auditoria
+├── 0.2 - Audit/                  ← Audit Template.md + Diretrizes.md
 │
 ├── 0.3 - Claude Skills Export/   ← Skills exportadas para uso externo (satélite)
 │   ├── cognitive-vault-manager/SKILL.md
-│   ├── portfolio-copy-architect/SKILL.md
-│   ├── portfolio-product-strategist/SKILL.md
-│   └── ui-web-designer-architect/SKILL.md
+│   ├── portfolio-copy-architect/SKILL.md          (stub → 0.1)
+│   ├── portfolio-product-strategist/SKILL.md      (stub → 0.1)
+│   ├── ui-web-designer-architect/SKILL.md         (stub → 0.1)
+│   ├── ai-senior-web-designer-agent/*.skill       (empacotada)
+│   └── backend-interview-agent/*.skill            (empacotada)
 │
-├── 1 - Templates/                ← Templates reutilizáveis
-│   ├── Contract Template.md
+├── 0.4 - Knowledge Base/         ← Conhecimento por stack (leitura condicional, fora do boot R6)
+│   ├── INDEX.md
+│   ├── Next.js Foundations (Vercel Academy).md
+│   ├── TanStack Reference.md
+│   ├── Impeccable Reference.md
+│   └── Higgsfield Skills Reference.md
+│
+├── 1 - Templates/                ← Templates canon (11 arquivos)
 │   ├── Master Project Planning Template.md
 │   ├── Requirements & Scope Project Template.md
+│   ├── Contract Template.md
 │   ├── Planning Template.md
+│   ├── Tasks Template.md
+│   ├── Setup Script Template.md
+│   ├── Dev Log Template.md
+│   ├── Errors Template.md
+│   ├── Project INIT Template.md
+│   ├── Niche CLAUDE Template.md
 │   └── Session Log Template.md
 │
-├── 2 - Projects/                 ← Projetos isolados por nicho
+├── 2 - Projects/                 ← Projetos isolados por nicho (Ecommerce, Portfolio, Casamento, ...)
 │   └── [Nicho]/
 │       └── [Cliente-Projeto]/
-│           ├── 01-Escopo.md
-│           ├── 02-Contrato.md
-│           ├── 03-Planejamento.md
-│           ├── 04-Tarefas.md
-│           ├── 05-Dev-Log.md
-│           └── 06-Erros.md
+│           ├── 01-Escopo.md ... 06-Erros.md
+│           └── setup.js
 │
 ├── 3 - Session Logs/             ← Camada 1 de memória (buffer bruto)
 │   └── MEMORY.md                 ← Camada 2 (índice episódico curado)
@@ -64,13 +87,17 @@ Dev/
 ├── 4 - Error's Memory/           ← 🛡️ Memória imunológica GLOBAL
 │   ├── INDEX.md
 │   ├── GLOBAL-ERRORS.md
-│   ├── by-category/
-│   └── by-stack/
+│   ├── by-category/              (6 categorias)
+│   └── by-stack/                 (react, nestjs, tailwind-shadcn, gsap-lenis, next-auth, prisma, postgresql, zustand)
+│
+├── 5 - Publicações/              ← Artigos e conteúdo para publicar (LinkedIn etc.)
 │
 └── 9 - Archive/                  ← Documentos históricos arquivados
 ```
 
 > **`0.3 - Claude Skills Export/`:** pasta satélite com skills exportadas para contextos externos (Claude.ai, Claude Code). Não faz parte do pipeline interno e não deve ser referenciada em wikilinks de projetos.
+>
+> **`tools/` e `docs/` vivem na RAIZ do repositório (fora de `Dev/`):** código utilitário (`tools/validate-project.js`, `tools/generate-claude-md.js`) e specs de design não entram no vault cognitivo. Os comandos documentados (`node tools/validate-project.js ...`) rodam a partir da raiz do repo.
 
 ---
 
@@ -92,9 +119,12 @@ Dev/
 | 1 | `01-Escopo.md` | Escopo e requisitos do cliente | [[Requirements & Scope Project Template]] |
 | 2 | `02-Contrato.md` | Contrato gerado com cláusulas dinâmicas | [[Contract Template]] |
 | 3 | `03-Planejamento.md` | Plano técnico (EAP, cronograma, stack) | [[Planning Template]] |
-| 4 | `04-Tarefas.md` | Tarefas granulares de desenvolvimento | Gerado via `/speckit.tasks` |
-| 5 | `05-Dev-Log.md` | Diário de decisões, progresso, dependências instaladas | Livre |
-| 6 | `06-Erros.md` | Erros locais (espelhados para `4 - Error's Memory/`) | Schema do [[Immunological Error Memory]] |
+| 4 | `04-Tarefas.md` | Tarefas granulares de desenvolvimento | [[Tasks Template]] (via `/speckit.tasks`) |
+| 5 | `05-Dev-Log.md` | Diário de decisões, progresso, dependências instaladas | [[Dev Log Template]] |
+| 6 | `06-Erros.md` | Erros locais (espelhados para `4 - Error's Memory/`) | [[Errors Template]] + schema do [[Immunological Error Memory]] |
+| 7 | `setup.js` | Bootstrap portátil do projeto (scaffold + deps + tooling obrigatório) | [[Setup Script Template]] |
+
+> O `INIT.md` (via [[Project INIT Template]]) **não fica no vault** — é gerado na raiz do repositório de código. O `CLAUDE.md` por subpasta usa o [[Niche CLAUDE Template]].
 
 ---
 

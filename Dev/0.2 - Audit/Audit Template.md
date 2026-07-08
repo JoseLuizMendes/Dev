@@ -51,7 +51,7 @@ auditor: "{{AUDITOR_NAME}}"
 - [ ] Componentes funcionais (React 19+)
 - [ ] Hooks bem estruturados
 - [ ] Separação clara: UI vs. Data fetching
-- [ ] React Query ou SWR para chamadas de API
+- [ ] TanStack Query para chamadas de API (SWR só como legado permitido)
 
 ### 2.4 Styling (Tailwind + Shadcn)
 - [ ] Zero CSS global (exceto bootstrap)

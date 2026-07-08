@@ -1,6 +1,6 @@
 ---
 template: "Project INIT"
-version: 1.0
+version: 2.0
 status: "Template"
 tags:
   - template
@@ -47,6 +47,21 @@ init_sequence:
     propósito: "Estado atual e decisões recentes"
 
   - passo: 5
+    ação: "Ler knowledge base da stack (condicional)"
+    condição: "se stack_principal contém Next.js"
+    arquivo: "Dev/0.4 - Knowledge Base/Next.js Foundations (Vercel Academy).md"
+    propósito: "Padrões Next 16: App Router, cache components, Suspense, segurança"
+    nota: "TanStack na stack → ler Dev/0.4 - Knowledge Base/TanStack Reference.md"
+
+  - passo: 6
+    ação: "Verificar ferramentas obrigatórias (sanidade)"
+    checagens:
+      - ".specify/ existe (SpecKit inicializado)"
+      - "DESIGN.md existe (Impeccable init rodado)"
+      - "skills instaladas (Impeccable; Higgsfield salvo opt-out; Next.js se aplicável)"
+    se_faltar: "Executar Passo 7 do [[Protocol-Bootstrap]] antes de qualquer trabalho"
+
+  - passo: 7
     ação: "Resumir + aguardar instrução"
     formato: "3 bullets: contexto, estado, próximos passos"
 ```
@@ -67,6 +82,8 @@ init_sequence:
 | Erros do projeto | `[[06-Erros]]` |
 | Stack aprovada | `[[Preferencias Dev]]` |
 | Memória global de erros | `[[4 - Error's Memory/INDEX]]` |
+| Knowledge base da stack (Next.js, TanStack, Impeccable, Higgsfield) | `Dev/0.4 - Knowledge Base/` ([[Dev/0.4 - Knowledge Base/INDEX\|KB INDEX]]) |
+| Sistema de design do projeto (Impeccable) | `./DESIGN.md` (raiz do código) |
 
 ---
 

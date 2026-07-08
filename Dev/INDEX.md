@@ -1,6 +1,6 @@
 ---
 título: "Vault Index"
-versão: 1.0
+versão: 2.0
 status: "Ativo"
 tags:
   - index
@@ -21,10 +21,15 @@ tags:
 Dev/
 ├── INDEX.md                        ← você está aqui
 ├── 0 - Planner Project/            ← cérebro operacional
+├── 0.1 - Methodology/              ← agentes de auditoria
+├── 0.2 - Audit/                    ← templates e diretrizes de auditoria
+├── 0.3 - Claude Skills Export/     ← skills especializadas
+├── 0.4 - Knowledge Base/           ← conhecimento por stack (Next.js, TanStack, Impeccable, Higgsfield)
 ├── 1 - Templates/                  ← moldes reutilizáveis
 ├── 2 - Projects/                   ← projetos ativos por nicho
 ├── 3 - Session Logs/               ← registro de sessões
 ├── 4 - Error's Memory/             ← memória imunológica
+├── 5 - Publicações/                ← artigos e conteúdo para publicar
 └── 9 - Archive/                    ← projetos encerrados
 ```
 
@@ -90,6 +95,21 @@ Dev/
 | Fim de sessão → log | `[[Session Log Template]]` |
 | Registrando erro local | `[[Errors Template]]` |
 | Auditoria de código | `[[Audit Template]]` (em `Dev/0.2 - Audit/`) |
+| Bootstrap concluído → instalar tooling obrigatório | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
+| Briefing completo entregue + execução autorizada | Cadeia mecânica — matriz canon linha 18 de `[[Master Pipeline & Enforcement]]` |
+
+---
+
+## 0.4 - Knowledge Base (leitura condicional por stack)
+
+> Não entra no boot obrigatório (R6). Índice completo com regra de consumo: [[Dev/0.4 - Knowledge Base/INDEX|KB INDEX]].
+
+| Documento | Ler quando |
+|---|---|
+| [[Next.js Foundations (Vercel Academy)]] | Projeto com Next.js na stack (antes do `/speckit.plan`) |
+| [[TanStack Reference]] | TanStack Start/Query/Router na stack, ou decisão de framework |
+| [[Impeccable Reference]] | Todo projeto com UI (bootstrap + auditoria de design) |
+| [[Higgsfield Skills Reference]] | Projetos que geram mídia com IA |
 
 ---
 
@@ -140,6 +160,11 @@ Dev/
 | Novo cliente / onboarding (cliente devolveu Master) | [[Client Onboarding Protocol]] |
 | Implementar tarefa do backlog | `04-Tarefas.md` do projeto → [[Preferencias Dev]] |
 | Registrar erro encontrado | [[4 - Error's Memory/INDEX]] → [[Immunological Error Memory]] |
+| Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
+| Escolher framework (Next vs TanStack vs Vue) | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
+| Design system / eliminar AI slop | [[Impeccable Reference]] |
+| Gerar mídia com IA | [[Higgsfield Skills Reference]] |
+| Publicar artigo (LinkedIn) | `5 - Publicações/` |
 | Gerar contrato | [[Protocol-Contract]] + [[Dynamic Contract Engine]] |
 | Criar setup do projeto | [[Protocol-Bootstrap]] + [[Setup Script Template]] |
 | Revisar stack aprovada | [[Preferencias Dev]] |
