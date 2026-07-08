@@ -22,6 +22,9 @@ deploy: "Vercel — https://mendeshift.vercel.app"
 repositorio: "F:/1-ZECA/1-Repositorio/Documentos/MeusProjetos/MendeShift/mendeshift"
 ---
 
+> [!note] Projeto pré-canon concluído
+> Este projeto foi finalizado antes da matriz canon atual. O arquivo foi renomeado de `Requirements & Scope.md` para `01-Escopo.md` na reestruturação de 2026-07-08; os artefatos `02-Contrato` a `06-Erros` e `setup.js` foram dispensados retroativamente (registro em [[MEMORY]]).
+
 # 📋 MendeShift — Portfólio Pessoal
 
 > Portfólio profissional de José Luiz Mendes (Zeca) — Product Engineer. Site bilíngue (EN/PT), dark theme, animações com GSAP + Lenis, arquitetura Next.js 16 App Router com i18n customizado sem dependência de plugin webpack.

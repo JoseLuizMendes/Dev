@@ -13,7 +13,7 @@
 | **Total de erros registrados** | 6 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
-| **Última atualização** | 2026-05-30 |
+| **Última atualização** | 2026-07-08 |
 
 ---
 
@@ -21,12 +21,12 @@
 
 | Categoria | Arquivo | Qtd. Erros |
 |---|---|---|
-| Conflitos de dependências | [[Dependency Breaks]] | 0 |
-| Integração de APIs | [[API Integration]] | 0 |
-| Autenticação e segurança | [[Auth & Security]] | 3 |
-| Performance | [[Performance]] | 0 |
-| Gerenciamento de estado | [[State Management]] | 0 |
-| Deploy e infraestrutura | [[Deployment]] | 3 |
+| Conflitos de dependências | [[dependency-breaks\|Dependency Breaks]] | 0 |
+| Integração de APIs | [[api-integration\|API Integration]] | 0 |
+| Autenticação e segurança | [[auth-security\|Auth & Security]] | 3 |
+| Performance | [[performance\|Performance]] | 0 |
+| Gerenciamento de estado | [[state-management\|State Management]] | 0 |
+| Deploy e infraestrutura | [[deployment\|Deployment]] | 3 |
 
 ---
 
@@ -34,14 +34,14 @@
 
 | Tecnologia | Arquivo | Qtd. Erros |
 |---|---|---|
-| React.js | [[React]] | 1 |
-| NestJS | [[NestJS]] | 0 |
-| Tailwind + Shadcn | [[Tailwind & Shadcn]] | 0 |
-| GSAP + Lenis | [[GSAP & Lenis]] | 0 |
-| Next-Auth (Auth.js v5) | [[Next-Auth]] | 2 |
-| Prisma | [[Prisma]] | 1 |
-| PostgreSQL | [[PostgreSQL]] | 1 |
-| Zustand | [[Zustand]] | 1 |
+| React.js | [[react\|React]] | 2 |
+| NestJS | [[nestjs\|NestJS]] | 0 |
+| Tailwind + Shadcn | [[tailwind-shadcn\|Tailwind & Shadcn]] | 0 |
+| GSAP + Lenis | [[gsap-lenis\|GSAP & Lenis]] | 0 |
+| Next-Auth (Auth.js v5) | [[next-auth\|Next-Auth]] | 2 |
+| Prisma | [[prisma\|Prisma]] | 2 |
+| PostgreSQL | [[postgresql\|PostgreSQL]] | 1 |
+| Zustand | [[zustand\|Zustand]] | 1 |
 
 ---
 
@@ -99,8 +99,8 @@
   prevenção: "Consultar Context7 Auth.js v5 antes de usar Credentials. JWT obrigatório se misturar Credentials com OAuth."
   recorrências: 0
   links:
-    - "[[Ecommerce/Belessence/06-Erros]]"
-    - "[[Auth & Security]]"
+    - "[[Dev/2 - Projects/Ecommerce/Belessence/06-Erros|Belessence/06-Erros]]"
+    - "[[auth-security|Auth & Security]]"
 
 - id: ERR-2026-0004
   título: "PrismaAdapter exige tabelas/campos em snake_case (Account, Session, VerificationToken)"
@@ -117,8 +117,8 @@
   prevenção: "Não 'limpar' o snake_case dos campos OAuth. Usar schema de exemplo da doc oficial."
   recorrências: 0
   links:
-    - "[[Ecommerce/Belessence/06-Erros]]"
-    - "[[Auth & Security]]"
+    - "[[Dev/2 - Projects/Ecommerce/Belessence/06-Erros|Belessence/06-Erros]]"
+    - "[[auth-security|Auth & Security]]"
 
 - id: ERR-2026-0005
   título: "Postgres SSL warning em produção sem driver adapter (Prisma 7)"
@@ -135,8 +135,8 @@
   prevenção: "Em Prisma 7+, sempre usar driver adapter em ambientes serverless/Edge. Verificar warnings SSL no primeiro deploy."
   recorrências: 0
   links:
-    - "[[Ecommerce/Belessence/06-Erros]]"
-    - "[[Deployment]]"
+    - "[[Dev/2 - Projects/Ecommerce/Belessence/06-Erros|Belessence/06-Erros]]"
+    - "[[deployment|Deployment]]"
 
 - id: ERR-2026-0006
   título: "Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser"
@@ -153,6 +153,6 @@
   prevenção: "REGRA INEGOCIÁVEL — Dados privados por usuário NUNCA podem viver em localStorage global. Stores Zustand: ou usam persist com name por-usuário E limpam no logout, OU não usam persist e são puro cache do servidor."
   recorrências: 0
   links:
-    - "[[Ecommerce/Belessence/06-Erros]]"
-    - "[[Auth & Security]]"
+    - "[[Dev/2 - Projects/Ecommerce/Belessence/06-Erros|Belessence/06-Erros]]"
+    - "[[auth-security|Auth & Security]]"
 ```

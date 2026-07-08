@@ -24,6 +24,9 @@ repositorio: "F:/1-ZECA/1-Repositorio/Documentos/MeusProjetos/Wedding-New/weddin
 github: "https://github.com/JoseLuizMendes/Wedding-New"
 ---
 
+> [!note] Projeto pré-canon concluído
+> Este projeto foi finalizado antes da matriz canon atual. O arquivo foi renomeado de `Requirements & Scope.md` para `01-Escopo.md` na reestruturação de 2026-07-08; os artefatos `02-Contrato` a `06-Erros` e `setup.js` foram dispensados retroativamente (registro em [[MEMORY]]).
+
 # 💍 Wedding-New — Plataforma de Casamento
 
 > Site completo para o casamento de José Luiz Mendes (Zeca) e Marjorie. Inclui RSVP para dois eventos, lista de presentes integrada, fundo de lua de mel com Pix transparente via Mercado Pago, galeria de fotos colaborativa com Cloudinary, e suporte a dark mode.

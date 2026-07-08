@@ -168,7 +168,7 @@ Antes de qualquer tarefa, verificar se existe skill específica em:
 
 ```
 Dev/0.3 - Claude Skills Export/    # Skills especializadas por domínio
-Dev/0.1 - Metodology/             # Metodologias de agente
+Dev/0.1 - Methodology/            # Metodologias de agente
 ```
 
 > Lista atualizada de skills disponíveis: consultar diretamente as pastas acima (cada subpasta é uma skill com `SKILL.md`). Não manter lista hardcoded aqui para evitar desincronização.

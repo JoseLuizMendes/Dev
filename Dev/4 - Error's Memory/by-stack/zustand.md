@@ -1,6 +1,6 @@
-# Erros: React.js
+# Erros: Zustand
 
-> Erros agrupados por tecnologia: React.js (hooks, Server Components, hydration, re-renders).
+> Erros agrupados por tecnologia: Zustand (persist, stores, hidratação, dados por usuário).
 > Índice global: [[INDEX]]
 
 ---
@@ -9,7 +9,6 @@
 
 | ID | Título | Severidade | Projeto |
 |---|---|---|---|
-| ERR-2026-0003 | Auth.js v5 com Credentials Provider exige `session.strategy='jwt'` | alta | Ecommerce/Belessence |
 | ERR-2026-0006 | Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser | crítica | Ecommerce/Belessence |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]

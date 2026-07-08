@@ -78,7 +78,7 @@ Dev/
 ├── CLAUDE.md                     ← você está aqui (diretrizes globais)
 ├── INDEX.md                      ← mapa de navegação
 ├── 0 - Planner Project/          ← cérebro operacional (leitura obrigatória)
-├── 0.1 - Metodology/             ← agentes de auditoria
+├── 0.1 - Methodology/            ← agentes de auditoria
 ├── 0.2 - Audit/                  ← templates e diretrizes de auditoria
 ├── 0.3 - Claude Skills Export/   ← skills especializadas
 ├── 1 - Templates/                ← moldes reutilizáveis

@@ -10,10 +10,10 @@ Valida que um projeto em `Dev/2 - Projects/[Nicho]/[Projeto]/` segue 100% a matr
 
 ```bash
 # Validação só do vault (artefatos)
-node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow"
+node tools/validate-project.js "Dev/2 - Projects/Ecommerce/Belessence"
 
 # Validação completa: vault + estrutura de pastas do repo de código
-node tools/validate-project.js "Dev/2 - Projects/Automacao/Sentinel-Flow" --code-path "C:\Freelas\Sentinel-Flow"
+node tools/validate-project.js "Dev/2 - Projects/Ecommerce/Belessence" --code-path "C:\Freelas\Belessence"
 ```
 
 ### Flags no frontmatter de `01-Escopo.md`
