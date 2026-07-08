@@ -11,10 +11,14 @@
             "id": "c5e411ccaef99a1a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Dev/1 - Templates/Project INIT Template.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nova aba"
+              "title": "Project INIT Template"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "CLAUDE.md",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,7 +74,8 @@
               "title": "Marcadores"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -192,5 +197,10 @@
     }
   },
   "active": "c5e411ccaef99a1a",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "docs/superpowers/specs/2026-05-30-vault-pente-fino-design.md",
+    "Dev/docs/superpowers/specs/2026-05-30-vault-pente-fino-design.md",
+    "Dev/2 - Projects/Automacao/Sentinel-Flow/05-Dev-Log.md",
+    "Dev/0 - Planner Project/Preferencias Dev.md"
+  ]
 }
