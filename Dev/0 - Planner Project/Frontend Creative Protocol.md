@@ -62,6 +62,7 @@ flowchart TD
 | Dribbble | https://dribbble.com/ | Componentes, UI shots, direção de arte |
 | Pinterest | https://www.pinterest.com/ | Moodboards, direção visual, paletas |
 | Squarespace | https://www.squarespace.com/templates | Templates, estruturas de sections |
+| v0 | https://v0.app/templates/ | UI components, projects, pages and layouts |
 
 **1.3 Sites-referência de inspiração (paleta + nível de qualidade que o dev admira):**
 
