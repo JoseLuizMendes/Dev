@@ -97,7 +97,7 @@ Contrato vigente desde **2026-05-30** até a conclusão da Rodada 4 com `tools/v
 ## 7. Disposições Gerais
 
 - LGPD aplicável aos dados de usuárias reais do ecommerce (já implementado: privacidade de cart/wishlist por usuário).
-- Comunicação via commits + sessões do vault (`[[3 - Session Logs]]`).
+- Comunicação via commits + sessões do vault (pasta `3 - Session Logs/`, índice em `[[MEMORY]]`).
 
 ---
 

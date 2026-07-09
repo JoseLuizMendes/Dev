@@ -32,7 +32,7 @@ Ao realizar a auditoria do código-fonte submetido, a IA deverá compilar e entr
 
 1. **Diagnóstico Metodológico:** Listar explicitamente onde o código fornecido converge ou diverge das regras contidas em [[ai-portfolio-product-strategist]], [[ai-web-designer-agent]] e [[ai-portfolio-copy-architect]].
 
-2. **Identificação de Erros Históricos:** Cruzar as vulnerabilidades do código atual pesquisando na pasta `[[4 - Error's Memory]]` (Memória Imunológica Global) e no arquivo local para garantir que problemas, falhas de segurança ou _bugs_ documentados no passado não sejam repetidos.
+2. **Identificação de Erros Históricos:** Cruzar as vulnerabilidades do código atual pesquisando via `[[4 - Error's Memory/INDEX]]` (Memória Imunológica Global) e no arquivo local para garantir que problemas, falhas de segurança ou _bugs_ documentados no passado não sejam repetidos.
 
 3. **Plano de Refatoração:** Propor a correção imediata em código de todas as falhas de arquitetura, design e copy encontradas _antes_ de tentar adicionar ou gerar qualquer novo recurso solicitado no Planejamento.
 

@@ -8,14 +8,23 @@
 
 ## Estado Atual
 
-- **Projeto em andamento:** **Belessence (Mari Beauty)** — **Refatoração Full-stack COMPLETA + Verificação Final OK**
-- **Fase:** Rodadas 1-4 fechadas. Épico 5 (Verificação Final): validator passa, Playwright E2E 33/33 ✅, Lighthouse e smoke manual pendentes localmente.
-- **Último progresso:** Validator evoluído (`tools/validate-project.js`) com 3 flags novas no frontmatter: `bootstrap`, `tipo_contrato`, `architecture`. Belessence agora passa 7/7 OK + 0 erros. Playwright instalado (chromium) e suite full passou: 33 tests em 1.3min (Desktop Chrome + Mobile Pixel 7). Aprendizado: os "10 flakes" do baseline são test bugs reais — `order-status-form.test.tsx` usa `user.selectOptions` em Radix Select (shadcn), que não funciona; pra `<select>` nativo só. Registrado como T-extra-3.
+- **Último trabalho:** **Reestruturação do vault como repositório-mestre (2026-07-08)** — saneamento completo + `0.4 - Knowledge Base` + Preferencias Dev v5 (TanStack/Vue 1ª classe) + ferramentas obrigatórias de bootstrap na matriz canon (linhas 17-18) + artigo LinkedIn em `5 - Publicações/`. Log completo: `[[2026-07-08-Reestruturacao-Vault-KB-TanStack]]`.
+- **Fluxo novo disponível:** modo briefing→automático (matriz canon linha 18 de `[[Master Pipeline & Enforcement]]`) — dev entrega briefing/requisitos e autoriza; a cadeia 0→17 roda sem parada (exceto aprovações não pré-aprovadas e campos `[PENDENTE]`), terminando com SpecKit + Impeccable + Higgsfield (opt-out) + skills Next.js instalados.
+- **Projeto de código mais recente:** Belessence (Mari Beauty) — Refatoração Full-stack completa, validator 7/7 OK, Playwright E2E 33/33 ✅ (Lighthouse e smoke manual pendentes localmente; test bugs de Radix Select registrados como T-extra-3).
 
 ---
 
 ## Decisões Recentes
 
+- [2026-07-08] **Reestruturação do vault — repositório-mestre para bootstrap automático:**
+  - **Bumps de versão (enforcement regra 6):** `[[Preferencias Dev]]` 4.2→**5.0**, `[[Master Pipeline & Enforcement]]` 1.0→**2.0**, `[[Protocol-Bootstrap]]` 1.0→**2.0**, `[[Setup Script Template]]` 2.0→**3.0**, `[[Project INIT Template]]` 1.0→**2.0**, `[[Requirements & Scope Project Template]]` 2.1→**2.2**, `[[Cognitive Vault Architecture]]` 1.2→**2.0**, `[[INDEX]]` raiz 1.0→**2.0**.
+  - **TanStack formalizado:** Start = framework de 1ª classe ao lado do Next.js 16 (status RC verificado via Context7); TanStack Query = fetching canônico React E Vue (substitui a marca "React Query / SWR"; SWR rebaixado a legado); `@tanstack/vue-query` nas regras Vue. **Vue.js 3+ promovido** de stack adicional a 1ª classe.
+  - **Ferramentas obrigatórias de bootstrap** (seção nova em Preferencias + matriz canon linha 17): SpecKit (`uvx ... specify init`), Impeccable (`npx skills add pbakaus/impeccable` + `/impeccable init` → `DESIGN.md`), Higgsfield (`npx skills add higgsfield-ai/skills`, **opt-out** `midia: "nao"` no escopo), Context7 sempre, skills Next.js (`npx skills add vercel/next.js`) se stack Next. Setup Script ganhou Seção 6 TOOLING + variável `MEDIA`.
+  - **Modo briefing→automático** (matriz canon linha 18): cadeia mecânica 0→17 sem parada quando o dev entrega briefing e autoriza.
+  - **`0.4 - Knowledge Base/` criada** (leitura condicional, fora do boot R6): Next.js Foundations (Vercel Academy — curso Next 16 completo), TanStack Reference, Impeccable Reference, Higgsfield Skills Reference. `5 - Publicações/` criada com artigo LinkedIn TanStack Start vs Next.js (rascunho).
+  - **Saneamento:** worktree espelho removido; `tools/`+`docs/` deduplicados (canônico na **raiz do repo**); typos corrigidos (`0.1 - Methodology`, `Portfolio`, `Planner Mode`); MendeShift e Wedding-New migrados para `01-Escopo.md` (nota pré-canon; artefatos 02-06 dispensados — sem fabricação retroativa, R3); **Sentinel-Flow excluído** (descontinuado, por ordem do dev); placeholder `[Nicho]` e projeto fantasma Advocacia removidos do INDEX; Memória Imunológica consistente (4 by-stack novos: next-auth, prisma, postgresql, zustand; stubs populados; wikilinks com alias; contagens corretas).
+  - **ERR-2026-0007 registrado:** validator quebrava com CRLF no Windows (regex `^---\n`); fix = normalizar `\r\n→\n` nos `readFileSync`. Belessence revalidado 7/7 OK.
+  - **Decisão:** sem R9 — obrigatoriedade do tooling ancorada na matriz canon via R4.
 - [2026-05-30] **Belessence — Épico 5 (Verificação Final):**
   - **Validator evoluído** com 3 flags opcionais no frontmatter (`bootstrap`, `tipo_contrato`, `architecture`) — documentado em `tools/README.md`. Belessence (auto-contrato + pre-existente + Next.js Standalone) agora passa 7/7 OK sem erros.
   - **Bug detectado no validator:** detecção de Next.js Standalone confundia "sem NestJS" no `backend_stack` com presença de NestJS (string match `.includes("nest")`). Fixado: heurística agora exclui `"sem nest"`, `"standalone"`, `"monolito"`, `"n/a"`; flag explícita `architecture` no frontmatter sobrescreve.
@@ -41,7 +50,7 @@
   - Auditoria do repo Belessence vs vault identificou 14 desvios. Plan em `C:\Users\ADM\.claude\plans\f-1-zeca-1-repositorio-documentos-meusp-foamy-barto.md` sequencia em 4 rodadas (vault → limpeza → rename src/api/ → Hexagonal).
   - `[[Preferencias Dev]]` ganhou: variante "Next.js Standalone Fullstack — Layered" + variante "— Hexagonal" + §Stack Estendida — Ecommerce (Auth.js v5, Arctic, adapter-pg, bcryptjs, jose, otplib, mercadopago, cloudinary, next-cloudinary, resend, react-email, recharts) + §Filosofia §4 "CLAUDE.md Universal".
   - `[[CLAUDE]]` raiz ganhou **R8** — toda pasta visível DEVE ter CLAUDE.md; primeiro arquivo numa pasta nova é o CLAUDE.md.
-  - Projeto Belessence em `[[Dev/2 - Projects/Ecommerce/Belessence]]` refatorado: `Requirements & Scope.md` renomeado pra `01-Escopo.md` v3.0 com classificação mudada de "Refatoração de Frontend" → **"Refatoração Full-stack"**. Frontmatter expandido com `projeto`, `package_manager`, `frontend_stack`, `backend_stack`, `cloud_stack`, `dependencies`, `email_service`, `storage_service`, `payment_gateway`. 5+ novos módulos retroativos (auth, cart/wishlist privados, MP, admin, email, mídia).
+  - Projeto Belessence em `[[Dev/2 - Projects/Ecommerce/Belessence/01-Escopo|Belessence]]` refatorado: `Requirements & Scope.md` renomeado pra `01-Escopo.md` v3.0 com classificação mudada de "Refatoração de Frontend" → **"Refatoração Full-stack"**. Frontmatter expandido com `projeto`, `package_manager`, `frontend_stack`, `backend_stack`, `cloud_stack`, `dependencies`, `email_service`, `storage_service`, `payment_gateway`. 5+ novos módulos retroativos (auth, cart/wishlist privados, MP, admin, email, mídia).
   - Gerados: `02-Contrato.md` (cláusulas dinâmicas Full-stack — auditoria prévia + isenção downtime), `03-Planejamento.md` (EAP Rodadas 2-4 + matriz Hexagonal 5/6 favorável), `04-Tarefas.md` (backlog granular T-1.X até T-4.10.X com TDD), `05-Dev-Log.md` (decisões retroativas + dependências instaladas), `06-Erros.md` (4 erros novos propagados).
   - `[[Dev/4 - Error's Memory/INDEX]]` atualizado: 6 erros totais (ERR-2026-0003 a 0006 novos), 3 categorias afetadas (Auth & Security 3, Deployment 3), 4 novas stacks indexadas (Next-Auth, Prisma, PostgreSQL, Zustand).
   - `INIT.md` criado em `Belessence/frontend/belessence/INIT.md` apontando pros 6 artefatos canon do vault.
@@ -79,7 +88,9 @@
 
 ## Problemas em Aberto
 
-- [ ] Próxima rodada: melhorias em `[[Preferencias Dev]]` (já agendada com o usuário)
+- [ ] Revisar e publicar o artigo `[[2026-07 - TanStack Start vs Next.js (LinkedIn)]]` (rascunho; falta imagem de capa)
+- [ ] Testar o modo briefing→automático (matriz linha 18) ponta a ponta com projeto real
+- [ ] Considerar `.gitattributes` com `*.md text` para eliminar ruído CRLF/LF (decisão adiada)
 
 ---
 

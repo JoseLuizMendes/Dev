@@ -56,8 +56,8 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
   propagado_para_global: false
   links:
     - "[[4 - Error's Memory/INDEX]]"
-    - "[[4 - Error's Memory/by-stack/Next-Auth]]"
-    - "[[4 - Error's Memory/by-category/Auth & Security]]"
+    - "[[next-auth|Next-Auth]]"
+    - "[[auth-security|Auth & Security]]"
 
 - id: ERR-2026-0004
   título: "PrismaAdapter exige tabelas em snake_case (Account, Session, VerificationToken)"
@@ -94,8 +94,8 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
   propagado_para_global: false
   links:
     - "[[4 - Error's Memory/INDEX]]"
-    - "[[4 - Error's Memory/by-stack/Next-Auth]]"
-    - "[[4 - Error's Memory/by-category/Auth & Security]]"
+    - "[[next-auth|Next-Auth]]"
+    - "[[auth-security|Auth & Security]]"
 
 - id: ERR-2026-0005
   título: "Postgres SSL warning em produção sem driver adapter (Prisma 7)"
@@ -141,8 +141,8 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
   propagado_para_global: false
   links:
     - "[[4 - Error's Memory/INDEX]]"
-    - "[[4 - Error's Memory/by-stack/Prisma]]"
-    - "[[4 - Error's Memory/by-category/Deployment]]"
+    - "[[prisma|Prisma]]"
+    - "[[deployment|Deployment]]"
 
 - id: ERR-2026-0006
   título: "Carrinho/Wishlist em localStorage GLOBAL vazava entre usuários no mesmo browser"
@@ -188,9 +188,9 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
   propagado_para_global: false
   links:
     - "[[4 - Error's Memory/INDEX]]"
-    - "[[4 - Error's Memory/by-stack/Zustand]]"
-    - "[[4 - Error's Memory/by-stack/React]]"
-    - "[[4 - Error's Memory/by-category/Auth & Security]]"
+    - "[[zustand|Zustand]]"
+    - "[[react|React]]"
+    - "[[auth-security|Auth & Security]]"
 ```
 
 ---

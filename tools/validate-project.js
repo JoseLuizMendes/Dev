@@ -100,7 +100,7 @@ const passed = [];
 const projectFlags = (() => {
   const escopoPath = path.join(projectPath, "01-Escopo.md");
   if (!fs.existsSync(escopoPath)) return { bootstrap: "via-protocol", tipo_contrato: "comercial" };
-  const content = fs.readFileSync(escopoPath, "utf8");
+  const content = fs.readFileSync(escopoPath, "utf8").replace(/\r\n/g, "\n");
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return { bootstrap: "via-protocol", tipo_contrato: "comercial" };
   const fm = match[1];
@@ -113,6 +113,8 @@ const projectFlags = (() => {
 })();
 
 function parseFrontmatter(content) {
+  // CRLF-safe: normaliza line-endings antes de parsear (arquivos podem estar em \r\n no Windows)
+  content = content.replace(/\r\n/g, "\n");
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return null;
   const fm = {};
@@ -139,7 +141,7 @@ function checkArtifact(filename, spec) {
     return;
   }
 
-  const content = fs.readFileSync(filepath, "utf8");
+  const content = fs.readFileSync(filepath, "utf8").replace(/\r\n/g, "\n");
 
   if (spec.requiredFrontmatter) {
     const fm = parseFrontmatter(content);

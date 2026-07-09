@@ -10,7 +10,7 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 6 |
+| **Total de erros registrados** | 7 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
 | **Última atualização** | 2026-07-08 |
@@ -26,7 +26,7 @@
 | Autenticação e segurança | [[auth-security\|Auth & Security]] | 3 |
 | Performance | [[performance\|Performance]] | 0 |
 | Gerenciamento de estado | [[state-management\|State Management]] | 0 |
-| Deploy e infraestrutura | [[deployment\|Deployment]] | 3 |
+| Deploy e infraestrutura | [[deployment\|Deployment]] | 4 |
 
 ---
 
@@ -155,4 +155,19 @@
   links:
     - "[[Dev/2 - Projects/Ecommerce/Belessence/06-Erros|Belessence/06-Erros]]"
     - "[[auth-security|Auth & Security]]"
+
+- id: ERR-2026-0007
+  título: "Regex de frontmatter sem tolerância a CRLF quebrava o validator no Windows"
+  categoria: Deployment
+  stack: []
+  severidade: média
+  projeto_origem: "Vault/tools"
+  data_descoberta: 2026-07-08
+  sintoma: "validate-project.js reportava 'sem frontmatter YAML' e 'setup.js nao existe' em projeto que antes passava 7/7 (Belessence); flags do frontmatter (bootstrap, tipo_contrato) deixavam de ser lidas"
+  causa_raiz: "Regex /^---\\n/ só aceita LF; com core.autocrlf=true no Windows os .md do vault ficam em CRLF (---\\r\\n) e o match falha, cascateando falsos erros"
+  solução: "Normalizar line-endings na leitura: content.replace(/\\r\\n/g, '\\n') nos 3 readFileSync de tools/validate-project.js antes de qualquer regex"
+  prevenção: "Todo parser de arquivo texto em scripts Node do vault DEVE normalizar \\r\\n → \\n logo após readFileSync. Testar validators em arquivos CRLF antes de declarar verde."
+  recorrências: 0
+  links:
+    - "[[deployment|Deployment]]"
 ```
