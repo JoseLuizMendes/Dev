@@ -109,7 +109,8 @@ Dev/
 | Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
 | Escolher Next vs TanStack vs Vue | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / anti-AI-slop | [[Impeccable Reference]] |
-| Gerar mídia com IA | [[Higgsfield Skills Reference]] |
+| Iniciar front / referências visuais / paleta / mídia WEBP | [[Frontend Creative Protocol]] (matriz canon linha 19) |
+| Gerar mídia com IA | [[Higgsfield Skills Reference]] (pago) ou [[Frontend Creative Protocol]] §Fase 6 (gratuitas) |
 | Briefing completo recebido → execução automática | Matriz canon linha 18 de [[Master Pipeline & Enforcement]] |
 
 ## Testes

@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 5.0
+versão: 5.1
 status: "Ativo"
 tags:
   - preferences
@@ -34,8 +34,8 @@ tags:
 | **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
 | **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
 | **Design QA** | Impeccable | `/impeccable init` + `DESIGN.md` obrigatórios no bootstrap — ver [[Impeccable Reference]] |
-| **Mídia IA** | Higgsfield skills | Padrão com opt-out via campo `midia` do escopo — ver [[Higgsfield Skills Reference]] |
-| **Animações** | GSAP 3.12+ + Lenis | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado |
+| **Mídia IA** | Higgsfield skills (pago) → alternativas gratuitas como fallback | Opt-out via campo `midia` do escopo — ver [[Higgsfield Skills Reference]] + [[Frontend Creative Protocol]] §Fase 6 |
+| **Animações** | GSAP 3.12+ + Lenis (+ Three.js quando couber) | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado. Three.js: ver §Three.js |
 | **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
 | **Fetching** | TanStack Query (React/Vue) — padrão | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes |
 | **Infra** | Docker multi-stage + Compose | Containers isolados. Ambiente local via Compose |
@@ -443,6 +443,32 @@ src/app/
 
 ---
 
+## Fluxo Criativo de Front-end
+
+> **Canon completo: [[Frontend Creative Protocol]].** Todo projeto com front/UI passa por ele ANTES de qualquer código de front. Resumo das regras que também valem como preferência permanente:
+
+### Referências Visuais
+
+- **Fontes de busca canônicas:** Awwwards, Dribbble, Pinterest, Squarespace (templates) — sites inteiros, sections, componentes, efeitos e insights.
+- **Sites-inspiração do dev** (paleta e nível de qualidade a perseguir): landonorris.com · igloo.inc · species-in-pieces.com · loiseau.framer.website · nextsense.io · buckssauce.com · nymphaicosmetics.com · more-nutrition.webflow.io · cipherdigital.com · day1-run.webflow.io · nudot.com.tw · terminal-industries.com · oryzo.ai — lista completa com URLs em [[Frontend Creative Protocol]] §Fase 1.3.
+- **Código-fonte extraído das refs** vive em `refs/` na raiz do repo do projeto, em `.md` — **gitignored sempre** (nunca commitado), deletada após conclusão do front. CF é estudo/fidelidade; implementação final é re-escrita na stack canon.
+
+### Identidade Visual
+
+- **Default: tons pastéis** — equilíbrio visual, contraste WCAG e tom. Paleta registrada no `DESIGN.md` (Impeccable) e nos tokens do Tailwind.
+
+### Mídia para Web
+
+- **WEBP é inegociável:** toda imagem PNG/JPEG destinada ao navegador é convertida para WEBP (lote via `sharp`; avulsa via Squoosh).
+- **Enhance:** Upscayl (open source, local, gratuito).
+- **Geração:** Higgsfield quando houver créditos/orçamento; sem orçamento → alternativas gratuitas ([[Frontend Creative Protocol]] §Fase 6): Google AI Studio, Recraft, Leonardo.ai/Ideogram, ComfyUI/Fooocus local; vídeo via Kling/Hailuo/Luma ou substituição por GSAP/Three.js.
+
+### Princípios de Web Design (inegociáveis em todo front)
+
+Arquitetura da informação · hierarquia visual · multi-dispositivo · acessível e inclusivo · cores com equilíbrio/contraste/tom · layout que conduz os olhos · espaço negativo destacando conteúdo · informação importante primeiro · navegação fácil · design que se destaca. Checklist completo em [[Frontend Creative Protocol]] §Fase 7.
+
+---
+
 ## Regras Inegociáveis por Tecnologia
 
 ### TypeScript
@@ -502,6 +528,16 @@ src/app/
 ### GSAP + Lenis
 - `useGSAP` obrigatório no React para auto-cleanup. Respeitar `prefers-reduced-motion`.
 - Animações não bloqueiam main thread. ScrollTrigger integrado ao Lenis via `requestAnimationFrame`.
+
+### Three.js
+- **Aprovado na stack** — usar **quando couber**: peso do bundle vs. impacto visual avaliado e registrado no `03-Planejamento`.
+- Cena 3D nunca bloqueia o first paint — lazy load do canvas + fallback estático (imagem WEBP) para dispositivos fracos e `prefers-reduced-motion`.
+- Consultar Context7 antes de usar (API muda com frequência entre releases).
+
+### Imagens e Mídia Web
+- **WEBP obrigatório** para todo asset raster servido ao navegador (conversão de PNG/JPEG via `sharp` em script do projeto, ou Squoosh).
+- Enhance/upscale via Upscayl antes da conversão, quando necessário.
+- Geração de mídia: [[Frontend Creative Protocol]] §Fase 6 (Higgsfield ou alternativas gratuitas).
 
 ### Vitest + Playwright
 - Testes escritos antes ou junto com a implementação.

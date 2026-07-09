@@ -1,7 +1,7 @@
 ---
 módulo: M0
 título: "Master Pipeline & Enforcement"
-versão: 2.0
+versão: 2.1
 status: "Ativo"
 canonicidade: "Fonte da verdade do fluxo macro + matriz Gatilho → Template → Output"
 tags:
@@ -64,7 +64,10 @@ flowchart TD
     O4 -->|Setup + Dev Log + Errors + Project INIT Templates| O5
     Tooling[SpecKit + Impeccable + Higgsfield + Skills]:::artifact
     O5 -->|Ferramentas Obrigatórias de Bootstrap| Tooling
-    Tooling --> F2
+    Refs[refs/ + Mapa de Referencias + paleta]:::artifact
+    Tooling -->|se projeto tem UI: Frontend Creative Protocol| Refs
+    Refs --> F2
+    Tooling -->|sem UI| F2
     F2 --> Cod
     Cod --> F3
     F3 -->|Audit Template| Rel
@@ -109,7 +112,8 @@ flowchart TD
 | 15 | Change Request (escopo muda) | — (atualizar `01-Escopo` + `02-Contrato` + replan) | `01-Escopo.md`/`02-Contrato.md` atualizados | `/speckit.plan` |
 | 16 | Recorrência ≥ 2 de erro | — (promoção automática a regra) | Nova entrada em "Regras Promovidas" do `[[Preferencias Dev]]` | Aplicação preventiva |
 | 17 | Bootstrap concluído (setup.js + 05/06/INIT gerados) | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) | SpecKit inicializado + Impeccable instalado + `/impeccable init` (`DESIGN.md`) + Higgsfield (salvo opt-out `midia: "nao"`) + skills Next.js (se stack Next) + Context7 verificado | `/speckit.implement` |
-| 18 | **Modo automático:** dev entrega arquivo de briefing/requisitos e autoriza execução completa | Cadeia mecânica: linhas 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 17, **sem parada** — exceto pontos de aprovação não pré-aprovados no briefing e campos `[PENDENTE]` (R3) | Projeto completo: 6 artefatos + setup.js + INIT.md + tooling instalado | Desenvolvimento (`/speckit.implement`) |
+| 18 | **Modo automático:** dev entrega arquivo de briefing/requisitos e autoriza execução completa | Cadeia mecânica: linhas 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 17 → 19 (se UI), **sem parada** — exceto pontos de aprovação não pré-aprovados no briefing e campos `[PENDENTE]` (R3). Referências não fornecidas no briefing = `[PENDENTE]` na linha 19 | Projeto completo: 6 artefatos + setup.js + INIT.md + tooling instalado + refs/paleta (se UI) | Desenvolvimento (`/speckit.implement`) |
+| 19 | Projeto com front/UI — tooling instalado, antes de qualquer código de front | `[[Frontend Creative Protocol]]` | `refs/` (local, gitignored) + `refs/00-MAPA.md` + paleta aprovada (default pastel) + pipeline de mídia (WEBP/Upscayl/geração) | Desenvolvimento do front (`/speckit.implement`) — GSAP + Lenis (+ Three.js quando couber) |
 
 ---
 
@@ -139,6 +143,7 @@ Cada protocolo tem seu sub-fluxograma Mermaid dentro do próprio arquivo. Este M
 | Contrato | `[[Protocol-Contract]]` |
 | Planejamento + Tarefas | `[[Protocol-SpecKit]]` |
 | Bootstrap (setup.js + 05/06/INIT) | `[[Protocol-Bootstrap]]` |
+| Fluxo criativo de front (refs/ + paleta + mídia) | `[[Frontend Creative Protocol]]` |
 | Boot/Shutdown de sessão | `[[Session Protocol]]` |
 | Propagação de erro | `[[Immunological Error Memory]]` |
 | Auditoria | `[[0.2 - Audit/Diretrizes]]` |
@@ -182,7 +187,8 @@ Sem template — atualiza `01-Escopo.md` + `02-Contrato.md` (cláusula de Contro
 | Registrando erro local | `[[Errors Template]]` |
 | Rodando auditoria de código | `[[Audit Template]]` |
 | Bootstrap concluído — instalar tooling | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
-| Dev entregou briefing e autorizou execução completa | Cadeia mecânica da matriz (linha 18): 0→1→2→3→4→5→6→7→8→9→17 sem parada |
+| Projeto com UI — vou começar o front | `[[Frontend Creative Protocol]]` (linha 19): refs/ + mapa + paleta ANTES de código |
+| Dev entregou briefing e autorizou execução completa | Cadeia mecânica da matriz (linha 18): 0→1→2→3→4→5→6→7→8→9→17→19 (se UI) sem parada |
 
 ---
 

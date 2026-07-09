@@ -1,6 +1,6 @@
 ---
 título: "Vault Index"
-versão: 2.0
+versão: 2.1
 status: "Ativo"
 tags:
   - index
@@ -46,6 +46,7 @@ Dev/
 | [[Spec-Kit Reference]] | Comandos `/speckit.*` + fallback manual | Sempre que rodar SDD pipeline (Fase 4) |
 | [[Mock Pipeline Test]] | Fixture de aceitação — dry-run do pipeline | Ao mexer em template/protocolo |
 | [[Client Onboarding Protocol]] | Orquestrador do fluxo de onboarding | Cliente devolve Master aprovado |
+| [[Frontend Creative Protocol]] | Fluxo criativo do front: refs/ + paleta + mídia WEBP | Projeto com UI, antes de qualquer código de front |
 | [[Protocol-Contract]] | Geração do contrato dinâmico | Via Client Onboarding Protocol |
 | [[Protocol-Bootstrap]] | Geração do setup.js e estrutura de pastas | Via Client Onboarding Protocol |
 | [[Protocol-SpecKit]] | Inicialização do Spec-Kit SDD+TDD | Via Client Onboarding Protocol |
@@ -96,6 +97,7 @@ Dev/
 | Registrando erro local | `[[Errors Template]]` |
 | Auditoria de código | `[[Audit Template]]` (em `Dev/0.2 - Audit/`) |
 | Bootstrap concluído → instalar tooling obrigatório | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
+| Projeto com UI → começar o front | `[[Frontend Creative Protocol]]` (matriz canon linha 19) |
 | Briefing completo entregue + execução autorizada | Cadeia mecânica — matriz canon linha 18 de `[[Master Pipeline & Enforcement]]` |
 
 ---
@@ -163,7 +165,8 @@ Dev/
 | Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
 | Escolher framework (Next vs TanStack vs Vue) | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / eliminar AI slop | [[Impeccable Reference]] |
-| Gerar mídia com IA | [[Higgsfield Skills Reference]] |
+| Buscar referências visuais / iniciar front | [[Frontend Creative Protocol]] (fontes de busca + sites-inspiração + refs/) |
+| Gerar mídia com IA | [[Higgsfield Skills Reference]] (pago) ou [[Frontend Creative Protocol]] §Fase 6 (gratuitas) |
 | Publicar artigo (LinkedIn) | `5 - Publicações/` |
 | Gerar contrato | [[Protocol-Contract]] + [[Dynamic Contract Engine]] |
 | Criar setup do projeto | [[Protocol-Bootstrap]] + [[Setup Script Template]] |
