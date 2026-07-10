@@ -37,6 +37,7 @@ tags:
 | [[Higgsfield Skills Reference]] | higgsfield-skills-guide.vercel.app | soul-id, generate, product-photoshoot, regra de opt-out (`midia: "nao"`) |
 | [[Asset Sizing Standard]] | Padrão interno (Tailwind/Next + gpt-image-2/Higgsfield) | Protocolo "compute before generate", matriz de assets (card/hero/OG/avatar…) com px + ratio + @2x + resolução de geração + formato AVIF/WebP |
 | [[GPT-Image Prompt Galleries]] | github.com/wuyoscar/GPT-Image2-Skill (MIT) | Bibliotecas de prompts curados; **4 galerias preferidas pelo dev** (Architecture/Interior, Beauty/Lifestyle, Fashion Editorial, Product/Food) + `craft.md` |
+| [[Agent Tooling & Plugins]] | Instalação local 2026-07-09 | ecc (plugin CC pesado), graphify (`/graphify`), pxpipe (proxy de tokens opt-in) — o que são, ativação, custo e caveats |
 
 ## Manutenção
 
