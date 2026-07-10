@@ -16,6 +16,8 @@ ler_quando: "Projetos que geram mídia (imagens, vídeos, product shots) — ins
 
 > **Ferramenta padrão de bootstrap com opt-out** (ver [[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]). Pacote de skills de geração de mídia/marketing para agentes de IA (Claude Code, Codex etc.), gerenciado pelo Skills CLI da Vercel Labs.
 
+> ⚠️ **Antes de gerar qualquer imagem, defina o tamanho:** [[Asset Sizing Standard]] (protocolo "compute before generate" — ratio + resolução + formato). Para prompts, ver [[GPT-Image Prompt Galleries]]. Gerar no tamanho certo de primeira = custo mínimo e zero retrabalho de redimensionamento.
+
 ---
 
 ## O que é

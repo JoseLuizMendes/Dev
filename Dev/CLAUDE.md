@@ -63,6 +63,8 @@ Ao iniciar qualquer sessão, o agente DEVE:
 - **Context7 MCP** deve ser consultado antes de usar qualquer biblioteca ou framework
 - **Bootstrap de projeto novo instala tooling obrigatório** — SpecKit + Impeccable + Higgsfield (opt-out por escopo) + skills Next.js quando aplicável. Canon: [[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]] + matriz canon linha 17 de [[Master Pipeline & Enforcement]]
 - **Knowledge Base condicional** — `0.4 - Knowledge Base/` não entra no boot R6; é lida conforme a stack do projeto (ver [[Dev/0.4 - Knowledge Base/INDEX|KB INDEX]])
+- **Skills de design têm precedência definida** — em qualquer trabalho de UI/UX, as skills **primárias** são [[motion-design-engineering]] (motion, interação, gesto, polish, tipografia) e [[ui-ux-pro-max]] (estilo, cor, tipografia, layout, checklist anti-AI-slop). Em divergência com skills de design mais antigas ([[ai-web-designer-agent]]), **vencem as primárias**; a antiga fica como complementar (extração de design system a partir de código).
+- **Imagem/asset: definir tamanho ANTES de gerar** — consultar [[Asset Sizing Standard]] (protocolo "compute before generate") sempre antes de qualquer geração de imagem, para custo mínimo e zero retrabalho. Prompts em [[GPT-Image Prompt Galleries]].
 
 ## Stack (Variável por Projeto)
 
@@ -106,6 +108,9 @@ Dev/
 | Registrar erro encontrado | `06-Erros.md` do projeto → [[4 - Error's Memory/INDEX]] |
 | Pipeline de desenvolvimento | [[Project Lifecycle Pipeline]] |
 | Skills especializadas | `0.3 - Claude Skills Export/` |
+| **UX/UI — skills PRIMÁRIAS** (usar antes das demais de design) | [[motion-design-engineering]] + [[ui-ux-pro-max]] |
+| Definir tamanho de imagem ANTES de gerar (anti-retrabalho) | [[Asset Sizing Standard]] |
+| Prompts de geração de imagem (gpt-image-2) | [[GPT-Image Prompt Galleries]] |
 | Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
 | Escolher Next vs TanStack vs Vue | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / anti-AI-slop | [[Impeccable Reference]] |
