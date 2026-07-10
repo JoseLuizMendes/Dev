@@ -21,7 +21,8 @@ tags:
 | TanStack Start, Query ou Router (React ou Vue) | [[TanStack Reference]] |
 | UI / design (todo projeto com frontend) | [[Impeccable Reference]] |
 | Geração de mídia (imagens, vídeos, product shots) | [[Higgsfield Skills Reference]] |
-| **Gerar QUALQUER imagem/asset** (definir tamanho antes) | [[Asset Sizing Standard]] |
+| **Gerar QUALQUER imagem/vídeo/asset** (definir tamanho antes) | [[Asset Sizing Standard]] |
+| Vídeo / mídia animada (transcode, Lottie, image-to-video) | [[Asset Sizing Standard]] §Vídeo + §Mídia animada |
 | Escrever prompt de imagem (gpt-image-2) | [[GPT-Image Prompt Galleries]] |
 | Escolher framework frontend (Next vs TanStack vs Vue) | [[TanStack Reference]] §Matriz de decisão + [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] |
 
@@ -35,7 +36,7 @@ tags:
 | [[TanStack Reference]] | Context7 (verificado 2026-07-08) | TanStack Start (RC), server functions, Query como fetching canônico, Router, `@tanstack/vue-query`, matriz de decisão vs Next.js |
 | [[Impeccable Reference]] | impeccable.style | 23 comandos de design, AI-slop detector, `DESIGN.md`, instalação e uso no pipeline |
 | [[Higgsfield Skills Reference]] | higgsfield-skills-guide.vercel.app | soul-id, generate, product-photoshoot, regra de opt-out (`midia: "nao"`) |
-| [[Asset Sizing Standard]] | Padrão interno (Tailwind/Next + gpt-image-2/Higgsfield) | Protocolo "compute before generate", matriz de assets (card/hero/OG/avatar…) com px + ratio + @2x + resolução de geração + formato AVIF/WebP |
+| [[Asset Sizing Standard]] | Padrão interno (Tailwind/Next + gpt-image-2/Higgsfield + ffmpeg) | Protocolo "compute before generate", matriz de assets (card/hero/OG/avatar…) com px + ratio + @2x + formato AVIF/WebP; **v2.0:** vídeo cinematográfico (slots, WebM+MP4, ffmpeg, poster), árvore de mídia animada (Lottie, GIF proibido), frames inicial/final para image-to-video, bleed e alpha |
 | [[GPT-Image Prompt Galleries]] | github.com/wuyoscar/GPT-Image2-Skill (MIT) | Bibliotecas de prompts curados; **4 galerias preferidas pelo dev** (Architecture/Interior, Beauty/Lifestyle, Fashion Editorial, Product/Food) + `craft.md` |
 | [[Agent Tooling & Plugins]] | Instalação local 2026-07-09 | ecc (plugin CC pesado), graphify (`/graphify`), pxpipe (proxy de tokens opt-in) — o que são, ativação, custo e caveats |
 

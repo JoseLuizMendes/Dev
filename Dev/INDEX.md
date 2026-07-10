@@ -1,6 +1,6 @@
 ---
 título: "Vault Index"
-versão: 2.1
+versão: 2.2
 status: "Ativo"
 tags:
   - index
@@ -46,7 +46,8 @@ Dev/
 | [[Spec-Kit Reference]] | Comandos `/speckit.*` + fallback manual | Sempre que rodar SDD pipeline (Fase 4) |
 | [[Mock Pipeline Test]] | Fixture de aceitação — dry-run do pipeline | Ao mexer em template/protocolo |
 | [[Client Onboarding Protocol]] | Orquestrador do fluxo de onboarding | Cliente devolve Master aprovado |
-| [[Frontend Creative Protocol]] | Fluxo criativo do front: refs/ + paleta + mídia WEBP | Projeto com UI, antes de qualquer código de front |
+| [[Frontend Creative Protocol]] | Fluxo criativo do front: refs/ + paleta + ingestão de assets + mídia AVIF/WebP + SEO + segurança | Projeto com UI, antes de qualquer código de front |
+| [[Deploy Protocol]] | Publicação em produção: pré-deploy + DNS + smoke test + rollback | Front concluído + UAT aprovado (matriz linha 21) |
 | [[Protocol-Contract]] | Geração do contrato dinâmico | Via Client Onboarding Protocol |
 | [[Protocol-Bootstrap]] | Geração do setup.js e estrutura de pastas | Via Client Onboarding Protocol |
 | [[Protocol-SpecKit]] | Inicialização do Spec-Kit SDD+TDD | Via Client Onboarding Protocol |
@@ -72,6 +73,7 @@ Dev/
 | [[Errors Template]] | Gerar `06-Erros.md` via Protocol-Bootstrap |
 | [[Setup Script Template]] | Gerar `setup.js` via Protocol-Bootstrap |
 | [[Project INIT Template]] | Gerar `INIT.md` per-projeto (raiz do projeto de código) |
+| [[Project Kickoff Input Template]] | Gerar `00-Input.md` — porta de entrada que starta o projeto (matriz linha 20) |
 | [[Niche CLAUDE Template]] | Gerar `CLAUDE.md` em subpastas/nichos do projeto |
 | [[Session Log Template]] | Gerar entradas em `3 - Session Logs/` |
 
@@ -98,7 +100,9 @@ Dev/
 | Auditoria de código | `[[Audit Template]]` (em `Dev/0.2 - Audit/`) |
 | Bootstrap concluído → instalar tooling obrigatório | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
 | Projeto com UI → começar o front | `[[Frontend Creative Protocol]]` (matriz canon linha 19) |
+| "Vou iniciar um projeto" / `00-Input.md` entregue | `[[Project Kickoff Input Template]]` (matriz canon linha 20) → Kickoff Output (`00-DNA.md`) |
 | Briefing completo entregue + execução autorizada | Cadeia mecânica — matriz canon linha 18 de `[[Master Pipeline & Enforcement]]` |
+| Front concluído + UAT → publicar | `[[Deploy Protocol]]` (matriz canon linha 21) |
 
 ---
 
@@ -121,6 +125,8 @@ Dev/
 2 - Projects/
 └── [Nicho]/
     └── [Cliente-Projeto]/
+        ├── 00-Input.md        ← kickoff input (cópia preenchida do template — linha 20)
+        ├── 00-DNA.md          ← Kickoff Output: DNA + prompts + passos (gerado pelo agente)
         ├── 01-Escopo.md       ← requisitos + US + BDD
         ├── 02-Contrato.md     ← contrato dinâmico assinado
         ├── 03-Planejamento.md ← EAP, cronograma, riscos, DoD
@@ -166,7 +172,10 @@ Dev/
 | Escolher framework (Next vs TanStack vs Vue) | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / eliminar AI slop | [[Impeccable Reference]] |
 | Buscar referências visuais / iniciar front | [[Frontend Creative Protocol]] (fontes de busca + sites-inspiração + refs/) |
-| Gerar mídia com IA | [[Higgsfield Skills Reference]] (pago) ou [[Frontend Creative Protocol]] §Fase 6 (gratuitas) |
+| Iniciar um projeto novo (input → DNA) | [[Project Kickoff Input Template]] → `00-Input.md` → `00-DNA.md` |
+| Gerar mídia com IA | Skills SEMPRE: Higgsfield skills + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]] — [[Frontend Creative Protocol]] §Fase 6 (inclui alternativas gratuitas) |
+| Gerar/entregar vídeo ou mídia animada | [[Asset Sizing Standard]] §Vídeo (cinematográfico, WebM+MP4, ffmpeg, Lottie; GIF proibido) |
+| Publicar em produção | [[Deploy Protocol]] |
 | Publicar artigo (LinkedIn) | `5 - Publicações/` |
 | Gerar contrato | [[Protocol-Contract]] + [[Dynamic Contract Engine]] |
 | Criar setup do projeto | [[Protocol-Bootstrap]] + [[Setup Script Template]] |

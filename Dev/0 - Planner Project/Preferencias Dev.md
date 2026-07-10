@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 5.1
+versão: 5.2
 status: "Ativo"
 tags:
   - preferences
@@ -34,7 +34,9 @@ tags:
 | **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
 | **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
 | **Design QA** | Impeccable | `/impeccable init` + `DESIGN.md` obrigatórios no bootstrap — ver [[Impeccable Reference]] |
-| **Mídia IA** | Higgsfield skills (pago) → alternativas gratuitas como fallback | Opt-out via campo `midia` do escopo — ver [[Higgsfield Skills Reference]] + [[Frontend Creative Protocol]] §Fase 6 |
+| **Mídia IA** | Higgsfield skills (pago) → alternativas gratuitas como fallback | Geração SEMPRE via skills instaladas + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]]. Opt-out via campo `midia` do escopo — ver [[Frontend Creative Protocol]] §Fase 6 |
+| **Formatos de mídia** | AVIF + WebP (imagem) · WebM VP9 + MP4 fallback (vídeo, ≥1080p) | WEBP puro = mínimo aceitável. GIF proibido. Ver §Imagens e Mídia Web + [[Asset Sizing Standard]] |
+| **DX** | Prettier + prettier-plugin-tailwindcss + Husky + lint-staged + EditorConfig | Obrigatório em todo projeto, instalado no bootstrap — ver §Dependências Obrigatórias de DX |
 | **Animações** | GSAP 3.12+ + Lenis (+ Three.js quando couber) | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado. Three.js: ver §Three.js |
 | **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
 | **Fetching** | TanStack Query (React/Vue) — padrão | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes |
@@ -413,6 +415,7 @@ src/app/
 | **Forms/Validação** | `pnpm add react-hook-form @hookform/resolvers zod` |
 | **Testes** | `pnpm add -D vitest @vitest/ui @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom` |
 | **Extras** | declarados em `{{DEPENDENCIES}}` — `pnpm add [deps]` |
+| **DX obrigatória** | `pnpm add -D prettier prettier-plugin-tailwindcss husky lint-staged` — ver §Dependências Obrigatórias de DX |
 | **Tooling obrigatório** | SpecKit + Impeccable + Higgsfield (opt-out) + skills Next.js — ver §Ferramentas Obrigatórias de Bootstrap |
 
 > Fonte dos comandos: [pnpm docs](https://pnpm.io/cli/add) | [Next.js installation](https://nextjs.org/docs/app/getting-started/installation)
@@ -430,6 +433,24 @@ src/app/
 | **Skills Next.js** | `npx skills add vercel/next.js` (oficiais; `next dev` 16.3+ também gera AGENTS.md/CLAUDE.md com docs bundled) | Se `frontend_stack` contém Next.js | [[Next.js Foundations (Vercel Academy)]] |
 
 > ⚠️ Comandos `npx`/`uvx` são de terminal (entram no `setup.js`, seção TOOLING). `/impeccable init` é comando de **agente** — roda no Claude Code após o setup, nunca dentro do `setup.js`.
+
+### Dependências Obrigatórias de DX
+
+> **Inegociável (sob R7).** Todo projeto novo instala e configura estas ferramentas no bootstrap (via `setup.js`, seção TOOLING). Objetivo: experiência de desenvolvimento lisa — formatação, ordenação de classes e qualidade garantidas automaticamente, sem depender de disciplina manual.
+
+| Pacote | Papel | Configuração canônica mínima |
+|---|---|---|
+| **`prettier`** | Formatação automática de todo o código | `.prettierrc` na raiz: `{ "semi": true, "singleQuote": false, "printWidth": 100, "plugins": ["prettier-plugin-tailwindcss"] }` |
+| **`prettier-plugin-tailwindcss`** | **Ordena as classes Tailwind automaticamente** (ordem recomendada oficial) | Declarado em `plugins` do `.prettierrc` — deve ser o **último** plugin da lista |
+| **`husky`** | Git hooks versionados | `pnpm exec husky init` → hook `pre-commit` chama `lint-staged` |
+| **`lint-staged`** | Roda lint + format **só nos arquivos staged** (commit rápido) | `package.json`: `"lint-staged": { "*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"], "*.{md,json,css}": ["prettier --write"] }` |
+| **ESLint** (flat config) | Lint — já vem do `create-next-app` / scaffold do framework | `eslint.config.mjs` do scaffold; nunca desativar regras sem justificativa no `05-Dev-Log` |
+| **`.editorconfig`** | Consistência de indentação/EOL entre editores | `indent_style = space`, `indent_size = 2`, `end_of_line = lf`, `insert_final_newline = true` |
+| **TypeScript `strict`** | Já regra da stack (§TypeScript) | `"strict": true` no `tsconfig.json` — verificado no bootstrap |
+
+**Opcional documentado (não obrigatório):** `commitlint` + `@commitlint/config-conventional` quando o projeto exigir histórico de commits padronizado (conventional commits).
+
+> Comandos: `pnpm add -D prettier prettier-plugin-tailwindcss husky lint-staged` + `pnpm exec husky init`. O `setup.js` gera `.prettierrc`, `.editorconfig` e o hook `pre-commit` — [[Setup Script Template]].
 
 ### Regras do Bootstrap
 
@@ -459,9 +480,13 @@ src/app/
 
 ### Mídia para Web
 
-- **WEBP é inegociável:** toda imagem PNG/JPEG destinada ao navegador é convertida para WEBP (lote via `sharp`; avulsa via Squoosh).
+- **Formato de imagem: AVIF (1ª escolha) + WebP (fallback)** — conversão em lote via `sharp`; avulsa via Squoosh. WEBP puro é o **mínimo aceitável** quando AVIF não for viável. Matriz completa em [[Asset Sizing Standard]].
+- **Vídeo: padrão cinematográfico** — máster ≥ 1080p (4K para hero), entrega WebM VP9 + MP4 fallback via ffmpeg, poster frame obrigatório. [[Asset Sizing Standard]] §Vídeo. **GIF proibido**; vetor animado via Lottie.
+- **Ingestão de assets do cliente:** o cliente apenas envia; **o dev inputa** (inventário no Kickoff/`00-DNA.md`). Normalização obrigatória: enhance → resize pela matriz → AVIF+WebP / transcode ffmpeg. Asset abaixo do padrão = pedir original melhor ou regenerar — [[Frontend Creative Protocol]] §Fase 6.0.
 - **Enhance:** Upscayl (open source, local, gratuito).
-- **Geração:** Higgsfield quando houver créditos/orçamento; sem orçamento → alternativas gratuitas ([[Frontend Creative Protocol]] §Fase 6): Google AI Studio, Recraft, Leonardo.ai/Ideogram, ComfyUI/Fooocus local; vídeo via Kling/Hailuo/Luma ou substituição por GSAP/Three.js.
+- **Geração:** SEMPRE via skills instaladas — Higgsfield skills (bootstrap linha 17) ou MCP de geração conectado + [[GPT-Image Prompt Galleries]] + [[Asset Sizing Standard]]; prompts complexos e completos derivados da paleta/identidade (`DESIGN.md`). Sem orçamento → alternativas gratuitas ([[Frontend Creative Protocol]] §Fase 6): Google AI Studio, Recraft, Leonardo.ai/Ideogram, ComfyUI/Fooocus local; vídeo via Kling/Hailuo/Luma ou substituição por GSAP/Three.js.
+- **Image-to-video:** slot que pode virar vídeo → gerar **frame inicial + frame final** (mesmo ratio/estilo/seed); imagem que será animada no site → bleed extra ~10–15%; fundo transparente → declarado no prompt com saída alpha. [[Asset Sizing Standard]] §Imagens para animação.
+- **Porta de entrada de projeto:** `00-Input.md` gerado a partir do [[Project Kickoff Input Template]] (matriz canon linha 20) — DNA do projeto (refs + identidade + paleta + assets) pronto ANTES do front.
 
 ### Princípios de Web Design (inegociáveis em todo front)
 
@@ -535,9 +560,26 @@ Arquitetura da informação · hierarquia visual · multi-dispositivo · acessí
 - Consultar Context7 antes de usar (API muda com frequência entre releases).
 
 ### Imagens e Mídia Web
-- **WEBP obrigatório** para todo asset raster servido ao navegador (conversão de PNG/JPEG via `sharp` em script do projeto, ou Squoosh).
-- Enhance/upscale via Upscayl antes da conversão, quando necessário.
-- Geração de mídia: [[Frontend Creative Protocol]] §Fase 6 (Higgsfield ou alternativas gratuitas).
+- **AVIF (1ª escolha) + WebP (fallback) obrigatório** para todo asset raster servido ao navegador (conversão de PNG/JPEG via `sharp` em script do projeto, ou Squoosh). WEBP puro = mínimo aceitável quando AVIF não for viável no pipeline. Matriz de tamanhos/formatos: [[Asset Sizing Standard]].
+- **Vídeo ≥ 1080p** (4K para hero full-bleed), entrega **WebM VP9 + MP4 H.264 fallback** via ffmpeg, poster frame AVIF/WebP obrigatório, `prefers-reduced-motion` → poster. [[Asset Sizing Standard]] §Vídeo.
+- **GIF proibido** em entrega web — transcodificar para WebM/MP4. Vetor animado → **Lottie** (aprovado).
+- Enhance/upscale via Upscayl antes da conversão, quando necessário. Nunca upscale de vídeo/imagem final.
+- Geração de mídia **sempre via skills instaladas** (Higgsfield skills / MCP de geração + [[GPT-Image Prompt Galleries]] + [[Asset Sizing Standard]]): [[Frontend Creative Protocol]] §Fase 6.
+- Slots animáveis: frames inicial/final para image-to-video, bleed ~10–15%, alpha declarado no prompt — [[Asset Sizing Standard]] §Imagens para animação.
+
+### Segurança de Front-end (Cybersecurity)
+
+> Inegociável em todo projeto com front — site institucional, landing page ou app. Checklist aplicado no [[Frontend Creative Protocol]] §Fase 10 antes do Quality Gate final.
+
+- **Security headers obrigatórios** (via `next.config.ts` headers / middleware, ou equivalente da stack):
+  `Content-Security-Policy` (CSP — bloquear inline script não autorizado), `Strict-Transport-Security` (HSTS), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` (desativar câmera/mic/geo não usados), `frame-ancestors 'none'` na CSP (anti-clickjacking; substitui X-Frame-Options).
+- **Zero segredos no client:** apenas variáveis explicitamente públicas recebem prefixo `NEXT_PUBLIC_` (ou equivalente); API keys, tokens e secrets vivem só no server. Env vars validadas com **zod** no boot da aplicação (falha rápida se faltar/vazar).
+- **XSS:** `dangerouslySetInnerHTML` proibido sem sanitização via **DOMPurify**; toda entrada de usuário validada com **zod no client E no server**; nunca contornar o output encoding padrão do React/Vue.
+- **Formulários públicos** (contato, newsletter, orçamento): validação server-side sempre + **rate limiting** + honeypot e/ou **Cloudflare Turnstile** (anti-spam/bot). E-mail de destino nunca exposto no HTML.
+- **Cookies/sessão:** `httpOnly`, `secure`, `sameSite: 'lax'|'strict'` — token de sessão em `localStorage` proibido.
+- **Dependências:** `pnpm audit` no CI (falha em vulnerabilidade `high`/`critical`); lockfile sempre commitado; dependência nova só dentro da stack aprovada (R7).
+- **Embeds/terceiros:** iframes com `sandbox` + `referrerpolicy`; scripts de terceiros só com justificativa registrada no `03-Planejamento`.
+- **Uploads/mídia** (quando o front aceita arquivos): validar tipo MIME real e tamanho **no server**; nunca confiar na extensão/`Content-Type` do client.
 
 ### Vitest + Playwright
 - Testes escritos antes ou junto com a implementação.

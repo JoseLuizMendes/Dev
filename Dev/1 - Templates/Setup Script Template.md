@@ -1,6 +1,6 @@
 ---
 template: "Setup Script"
-versão: 3.0
+versão: 3.1
 status: "Template"
 tags:
   - template
@@ -136,6 +136,9 @@ O script aplica exatamente estes arquivos de configuração — nada mais:
 | `vitest.config.ts` | Criar | Environment jsdom, globals, aliases `@/*`, `jsdom.url` |
 | `src/test/setup.ts` | Criar | `import "@testing-library/jest-dom"` |
 | `.env.example` | Criar | Variáveis do escopo, sem valores reais |
+| `.prettierrc` | Criar | `{ "semi": true, "singleQuote": false, "printWidth": 100, "plugins": ["prettier-plugin-tailwindcss"] }` — canon: [[Preferencias Dev#Dependências Obrigatórias de DX]] |
+| `.editorconfig` | Criar | `indent_style = space` · `indent_size = 2` · `end_of_line = lf` · `insert_final_newline = true` |
+| `package.json` (merge) | **MERGE** | Bloco `"lint-staged"`: `{ "*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"], "*.{md,json,css}": ["prettier --write"] }` |
 
 > ⚠️ `noUncheckedIndexedAccess` **excluído intencionalmente** do tsconfig — incompatível com tipos gerados pelo Next.js (fonte: Context7 / Next.js docs).
 
@@ -170,6 +173,12 @@ if (MEDIA !== "nao") {
 if (/next/i.test(get("frontend_stack"))) {
   run("npx skills add vercel/next.js", "Skills Next.js (oficiais, do repo vercel/next.js)");
 }
+
+// DX obrigatória — canon: Preferencias Dev §Dependências Obrigatórias de DX
+run(`${PACKAGE_MANAGER} add -D prettier prettier-plugin-tailwindcss husky lint-staged`, "DX (prettier + tailwind sort + husky + lint-staged)");
+run(`${PACKAGE_MANAGER} exec husky init`, "Husky (git hooks)");
+// hook pre-commit → lint-staged
+fs.writeFileSync(path.join(projectDir, ".husky", "pre-commit"), "pnpm exec lint-staged\n");
 ```
 
 Regras da seção TOOLING:
@@ -204,6 +213,7 @@ Regras da seção TOOLING:
 5. Script encerra com mensagem clara de próximos passos (Seção 7) — incluindo instrução de rodar `/impeccable init` no Claude Code
 6. Sem componentes, tipos, schemas ou dados hardcoded no script
 7. Seção TOOLING sempre presente — Higgsfield condicionado a `MEDIA !== "nao"`, skills Next.js condicionadas a `frontend_stack`
+8. DX obrigatória sempre instalada e configurada (prettier + prettier-plugin-tailwindcss + husky + lint-staged + `.prettierrc` + `.editorconfig` + hook `pre-commit`) — canon: [[Preferencias Dev#Dependências Obrigatórias de DX]]
 
 ---
 
@@ -217,6 +227,7 @@ Antes de salvar o `setup.js` no vault:
 - [ ] Validação de existência do arquivo antes de `readFileSync`
 - [ ] `tsconfig.json` com `strict: true`
 - [ ] `.env.example` gerado sem valores reais
+- [ ] DX na Seção 6: prettier + prettier-plugin-tailwindcss + husky + lint-staged instalados, `.prettierrc`/`.editorconfig`/hook `pre-commit` gerados
 - [ ] Nenhum componente, tipo ou schema hardcoded
 - [ ] Seção 6 (TOOLING) presente: SpecKit + Impeccable sempre; Higgsfield condicionado a `MEDIA`; skills Next.js condicionadas à stack
 - [ ] Seção 7 com mensagem de confirmação e próximos passos (incl. `/impeccable init` no Claude Code)

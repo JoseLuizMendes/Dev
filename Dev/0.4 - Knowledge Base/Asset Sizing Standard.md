@@ -1,16 +1,19 @@
 ---
 template: "Knowledge Base Doc"
-version: 1.0
-fonte: "Padrão interno — alinhado a Tailwind v4 / Next.js Image, gpt-image-2 e Higgsfield"
+version: 2.0
+fonte: "Padrão interno — alinhado a Tailwind v4 / Next.js Image, gpt-image-2, Higgsfield e ffmpeg"
 data_incorporacao: 2026-07-09
+data_atualizacao: 2026-07-10
 tags:
   - knowledge-base
   - assets
   - imagens
+  - video
+  - midia-animada
   - design
   - midia
   - custo
-ler_quando: "SEMPRE antes de pedir a geração de qualquer imagem/asset — para definir o tamanho-alvo uma única vez e evitar retrabalho/custo"
+ler_quando: "SEMPRE antes de pedir a geração de qualquer imagem/vídeo/asset — para definir tamanho, formato e prompt uma única vez e evitar retrabalho/custo"
 ---
 
 # Asset Sizing Standard — calcular ANTES de gerar
@@ -117,6 +120,84 @@ para **zero CLS** (Core Web Vitals). Nunca fazer **upscale** de um asset gerado 
 
 ---
 
+## Vídeo — padrão cinematográfico (high-ticket)
+
+> **Regra de qualidade:** vídeo em projeto do dev é entregável high-ticket. Fonte/máster **mínimo
+> 1080p (1920×1080)**; para hero full-bleed, preferir máster **4K (3840×2160)** e fazer downscale na
+> entrega. **Nunca upscale** — vídeo recebido/gerado abaixo de 1080p é rejeitado (pedir original melhor
+> ao cliente ou regenerar). Mesmo princípio "compute before generate": slot primeiro, geração depois.
+
+**Matriz de slots de vídeo (canônica):**
+
+| Slot | Ratio | Máster (gerar/receber) | Entregar | Duração | Bitrate alvo (VP9) | Peso alvo |
+|---|---|---|---|---|---|---|
+| **Hero background loop** | 16:9 | 4K (ou 1080p mín.) | 1920×1080 | 6–12s loop, sem áudio | ~2–4 Mbps | ≤ 8 MB |
+| **Section inline / feature** | 16:9 | 1080p+ | 1280×720 | ≤ 30s | ~1.5–2.5 Mbps | ≤ 6 MB |
+| **Showcase / modal (foco)** | 16:9 | 4K preferido | 1920×1080 | livre | ~3–5 Mbps | ≤ 15 MB |
+| **Vertical mobile / story** | 9:16 | 1080×1920+ | 1080×1920 | 6–15s | ~2–3 Mbps | ≤ 8 MB |
+
+**Entrega web (inegociável):**
+
+- Formato: **WebM (VP9 — ou AV1 quando o pipeline suportar) + MP4 (H.264) como fallback** via `<video><source>` duplo.
+- **Poster frame obrigatório** (AVIF/WebP, mesmo ratio do vídeo) — é o que aparece antes do load e no `prefers-reduced-motion`.
+- Background/loop: `muted autoplay playsinline loop preload="metadata"` + lazy (só carrega perto do viewport).
+- **`prefers-reduced-motion: reduce` → pausar/não iniciar o vídeo e exibir o poster estático.** Sem exceção.
+- Áudio: vídeo de background **sempre sem trilha de áudio no arquivo** (faixa removida no transcode, não só `muted`).
+
+**Pipeline ffmpeg (comandos canônicos):**
+
+```bash
+# WebM VP9 2-pass (background loop 1080p, sem áudio)
+ffmpeg -i master.mp4 -vf scale=1920:-2 -c:v libvpx-vp9 -b:v 0 -crf 32 -pass 1 -an -f null NUL
+ffmpeg -i master.mp4 -vf scale=1920:-2 -c:v libvpx-vp9 -b:v 0 -crf 32 -pass 2 -an hero.webm
+
+# MP4 H.264 fallback (compatibilidade)
+ffmpeg -i master.mp4 -vf scale=1920:-2 -c:v libx264 -crf 23 -preset slow -movflags +faststart -an hero.mp4
+
+# Poster frame (frame representativo → AVIF/WebP)
+ffmpeg -i master.mp4 -ss 00:00:02 -frames:v 1 poster.png   # depois: sharp/Squoosh → AVIF+WebP
+```
+
+> CRF de referência: VP9 `crf 30–34` (background), `crf 26–30` (showcase). H.264 `crf 22–24`.
+> Ajustar até bater o **peso alvo** da matriz — peso estoura = comprimir mais ou encurtar o loop.
+
+---
+
+## Mídia animada — árvore de decisão
+
+Escolher o formato **antes** de produzir. A escolha muda o peso da página em ordem de grandeza.
+
+| Preciso de... | Usar | Nunca |
+|---|---|---|
+| Micro-interação, hover, transição de UI | **GSAP / CSS** (código, zero asset) | vídeo/GIF |
+| Ilustração vetorial animada (ícones, mascote, loader) | **Lottie** (`lottie-web` / `@lottiefiles/dotlottie-web`) | GIF |
+| Cena "filmada" / render / footage | **WebM VP9 + MP4** (matriz acima) | GIF |
+| Vídeo com transparência (sobre fundo do site) | **WebM VP9 com alpha** (`-pix_fmt yuva420p`) + fallback poster | GIF/APNG |
+| 3D interativo | **Three.js** (quando couber — peso vs. impacto no `03-Planejamento`) | vídeo pesado fingindo 3D |
+
+> **GIF é PROIBIDO** em entrega web deste vault: 5–20× o peso de um WebM equivalente, 256 cores,
+> incompatível com padrão high-ticket. Se chegar GIF do cliente, transcodificar para WebM/MP4 na ingestão.
+
+---
+
+## Imagens para animação e image-to-video
+
+Regras extras quando a imagem gerada **não é estática de fato**:
+
+1. **Slot que pode virar vídeo (image-to-video):** gerar **frame inicial E frame final** — mesmo ratio
+   do vídeo alvo (matriz de vídeo acima), mesmo estilo/paleta/seed (consistência de cena). Os dois
+   frames alimentam geradores first/last-frame (Kling, Luma, Higgsfield etc.). Nomear
+   `<slot>-frame-inicial.*` / `<slot>-frame-final.*` e registrar o par no Dev-Log.
+2. **Imagem que sofrerá animação no site** (parallax, mask reveal, pan, zoom, Ken Burns): gerar com
+   **bleed extra de ~10–15%** em cada dimensão além do slot — a animação desloca/corta a imagem e não
+   pode expor borda nem quebrar a estética. Registrar no prompt: "extend scene beyond frame edges".
+3. **Fundo transparente:** quando o slot exige asset sem fundo (logo animável, produto flutuante,
+   recorte sobre section), isso **DEVE constar explicitamente no prompt** ("transparent background,
+   isolated subject, no backdrop") e a saída DEVE ter canal alpha (PNG → WebP com alpha na entrega).
+   Se o gerador não suportar alpha, gerar em fundo chroma sólido + `remove background` na pós.
+
+---
+
 ## Exemplo de cálculo (fim-a-fim)
 
 > Card de portfólio, grid 3 colunas em `lg`, container `max-w-6xl`, ratio 4:3.
@@ -133,10 +214,24 @@ Resultado: uma geração, zero redimensionamento manual, custo mínimo.
 
 ## Checklist antes de gerar (cole no pedido)
 
+**Imagem:**
+
 - [ ] Slot e largura de exibição no maior breakpoint definidos
 - [ ] Aspect ratio fixado pela UI (não pelo gerador)
 - [ ] DPR aplicado (2× fotográfico / 1.5× hero grande)
 - [ ] Tamanho nativo do gerador escolhido (≥ alvo @2x, sem upscale)
 - [ ] `--quality` proporcional ao uso (draft vs final)
 - [ ] Formato de entrega decidido (AVIF+WebP / PNG-OG / SVG)
+- [ ] Slot pode virar vídeo? → frame inicial + frame final gerados (mesmo ratio/estilo/seed)
+- [ ] Imagem vai ser animada no site? → bleed extra ~10–15% no prompt
+- [ ] Precisa de fundo transparente? → declarado no prompt + saída com alpha
 - [ ] Tamanho registrado no projeto para regeneração idêntica
+
+**Vídeo:**
+
+- [ ] Slot da matriz de vídeo identificado (hero loop / inline / showcase / vertical)
+- [ ] Máster ≥ 1080p (4K para hero) — nada abaixo entra no projeto
+- [ ] Transcode WebM VP9 + MP4 H.264 fallback (ffmpeg, comandos canônicos)
+- [ ] Poster frame extraído (AVIF/WebP)
+- [ ] Background: sem faixa de áudio + `muted autoplay playsinline loop` + `prefers-reduced-motion` → poster
+- [ ] Peso dentro do budget do slot

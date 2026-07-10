@@ -64,7 +64,8 @@ Ao iniciar qualquer sessão, o agente DEVE:
 - **Bootstrap de projeto novo instala tooling obrigatório** — SpecKit + Impeccable + Higgsfield (opt-out por escopo) + skills Next.js quando aplicável. Canon: [[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]] + matriz canon linha 17 de [[Master Pipeline & Enforcement]]
 - **Knowledge Base condicional** — `0.4 - Knowledge Base/` não entra no boot R6; é lida conforme a stack do projeto (ver [[Dev/0.4 - Knowledge Base/INDEX|KB INDEX]])
 - **Skills de design têm precedência definida** — em qualquer trabalho de UI/UX, as skills **primárias** são [[motion-design-engineering]] (motion, interação, gesto, polish, tipografia) e [[ui-ux-pro-max]] (estilo, cor, tipografia, layout, checklist anti-AI-slop). Em divergência com skills de design mais antigas ([[ai-web-designer-agent]]), **vencem as primárias**; a antiga fica como complementar (extração de design system a partir de código).
-- **Imagem/asset: definir tamanho ANTES de gerar** — consultar [[Asset Sizing Standard]] (protocolo "compute before generate") sempre antes de qualquer geração de imagem, para custo mínimo e zero retrabalho. Prompts em [[GPT-Image Prompt Galleries]].
+- **Imagem/asset: definir tamanho ANTES de gerar** — consultar [[Asset Sizing Standard]] (protocolo "compute before generate") sempre antes de qualquer geração de imagem OU vídeo, para custo mínimo e zero retrabalho. Prompts em [[GPT-Image Prompt Galleries]]. **Geração sempre via skills instaladas** (Higgsfield skills / MCP de geração) — nunca "de cabeça".
+- **Formatos de mídia canon** — imagem: AVIF (1ª escolha) + WebP (fallback); vídeo: ≥1080p cinematográfico, WebM VP9 + MP4 fallback via ffmpeg, poster obrigatório; GIF proibido; vetor animado via Lottie. Canon: [[Asset Sizing Standard]] + [[Preferencias Dev#Imagens e Mídia Web]].
 
 ## Stack (Variável por Projeto)
 
@@ -114,9 +115,12 @@ Dev/
 | Desenvolver com Next.js | [[Next.js Foundations (Vercel Academy)]] |
 | Escolher Next vs TanStack vs Vue | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / anti-AI-slop | [[Impeccable Reference]] |
-| Iniciar front / referências visuais / paleta / mídia WEBP | [[Frontend Creative Protocol]] (matriz canon linha 19) |
-| Gerar mídia com IA | [[Higgsfield Skills Reference]] (pago) ou [[Frontend Creative Protocol]] §Fase 6 (gratuitas) |
+| Iniciar front / referências visuais / paleta / mídia AVIF+WebP | [[Frontend Creative Protocol]] (matriz canon linha 19) |
+| "Vou iniciar um projeto" / recebi `00-Input.md` | [[Project Kickoff Input Template]] (matriz canon linha 20) → Kickoff Output (`00-DNA.md`) |
+| Gerar mídia com IA | Skills SEMPRE acionadas: Higgsfield skills + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]] — [[Frontend Creative Protocol]] §Fase 6 |
+| Vídeo / mídia animada (padrão cinematográfico) | [[Asset Sizing Standard]] §Vídeo (WebM+MP4, ffmpeg, Lottie; GIF proibido) |
 | Briefing completo recebido → execução automática | Matriz canon linha 18 de [[Master Pipeline & Enforcement]] |
+| Front concluído + UAT aprovado → publicar | [[Deploy Protocol]] (matriz canon linha 21) |
 
 ## Testes
 
