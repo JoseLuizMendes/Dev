@@ -42,9 +42,12 @@ a antiga fica complementar (extração de design system a partir de código).
 
 ## Ativação (como as skills entram em uso)
 
-Não há pasta de plugin local (`~/.claude/skills` inexistente); as skills `anthropic-skills:*` são
-injetadas pelo ambiente da sessão a partir dos exports do vault. Logo: os `SKILL.md` novos entram em
-vigor no **próximo sync/sessão** desse mecanismo. Nada a rodar em runtime nesta sessão.
+As duas skills foram **copiadas para `~/.claude/skills/`** (`motion-design-engineering/` e
+`ui-ux-pro-max/`), que é o diretório de skills pessoais que o Claude Code carrega **no início da
+sessão** (mesmo mecanismo usado pelo `graphify install`). Logo: entram em vigor ao **reiniciar** o
+Claude Code — nada roda na sessão corrente. A cópia canônica/fonte permanece em
+`0.3 - Claude Skills Export/` (versionada no git); `~/.claude/skills/` é o alvo de execução.
+Para atualizar depois de editar a fonte, recopiar as pastas para `~/.claude/skills/`.
 
 ## Fora de escopo (decidido)
 
