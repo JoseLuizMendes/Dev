@@ -20,15 +20,19 @@ ler_quando: "Para saber quais ferramentas/plugins de agente estão instalados na
 
 ---
 
-## 1. ecc — `ecc@ecc` (plugin Claude Code) ✅ instalado + habilitado
+## 1. ecc — `ecc@ecc` (plugin Claude Code) ✅ instalado · ⛔ **DESABILITADO** (decisão do dev, 2026-07-09)
 
 - **O que é:** operador "harness-native" — **67 agents, 372 skills** (278 + shims), 7 hooks, rules, workflows.
   Repo: `github.com/affaan-m/ECC` (MIT). Site: ecc.tools.
-- **Instalação feita:** `claude plugin marketplace add affaan-m/ECC` + `claude plugin install ecc@ecc` (scope user). Status: **enabled**.
-- **Ativação:** reiniciar sessão do Claude Code.
-- ⚠️ **CUSTO (ler antes de manter):** adiciona **~23.8k tokens always-on em TODA sessão** + hooks
-  (`SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `Stop`…) que rodam sempre. É pesado e pode
-  interagir com as regras constitucionais do [[CLAUDE]] e com o Superpowers. Avalie manter vs. usar sob demanda.
+- **Instalação feita:** `claude plugin marketplace add affaan-m/ECC` + `claude plugin install ecc@ecc` (scope user).
+- **Status atual:** `disabled` — instalado, mas **não carrega**. Motivo: custo (abaixo).
+- ⚠️ **CUSTO (motivo do disable):** adiciona **~23.8k tokens always-on em TODA sessão** + hooks
+  (`SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `Stop`…) que rodam sempre — inclusive um
+  `gateguard` que bloqueia o primeiro `Bash`/`Edit` da sessão exigindo "fact-forcing". Pesado, e atrita com
+  as regras constitucionais do [[CLAUDE]] e com o Superpowers.
+- **Reativar quando precisar:** `claude plugin enable ecc@ecc` (+ reiniciar). Padrão sugerido: ativar
+  pontualmente, fazer o trabalho, desativar de novo.
+- **Escapes dos hooks (se reativar):** `ECC_GATEGUARD=off` ou `ECC_DISABLED_HOOKS=pre:bash:gateguard-fact-force`.
 - **Inspecionar / gerenciar:**
   ```bash
   claude plugin details ecc      # inventário + custo projetado por componente
@@ -74,6 +78,6 @@ ler_quando: "Para saber quais ferramentas/plugins de agente estão instalados na
 
 | Ferramenta | Tipo | Status | Ativa quando | Cuidado |
 |---|---|---|---|---|
-| **ecc** | Plugin CC | enabled | reiniciar sessão | +23.8k tok/sessão + hooks — pesado |
+| **ecc** | Plugin CC | instalado, **disabled** | `claude plugin enable ecc@ecc` + reiniciar | +23.8k tok/sessão + hooks — pesado |
 | **graphify** | Skill `/graphify` + CLI/MCP | instalado | reiniciar sessão | — |
 | **pxpipe** | Proxy npm global | instalado | manual (proxy + BASE_URL) | degrada em Opus; usar só Fable 5 |

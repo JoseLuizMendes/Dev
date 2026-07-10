@@ -131,4 +131,4 @@ Dev/
 - **MarketingCopywrite** — copywriting especializado
 - **Impeccable** — skills de design para o agente (`npx skills add pbakaus/impeccable`) — [[Impeccable Reference]]
 - **Higgsfield skills** — geração de mídia (`npx skills add higgsfield-ai/skills`, opt-out por escopo) — [[Higgsfield Skills Reference]]
-- **ecc / graphify / pxpipe** — plugins/ferramentas de agente instalados na máquina (ecc = plugin CC pesado ~23.8k tok/sessão; graphify = `/graphify`; pxpipe = proxy de tokens opt-in, degrada em Opus) — ver [[Agent Tooling & Plugins]]
+- **ecc / graphify / pxpipe** — ferramentas de agente instaladas na máquina (ecc = plugin CC **instalado mas DESABILITADO**, ~23.8k tok/sessão; graphify = `/graphify`, ativo; pxpipe = proxy de tokens opt-in, degrada em Opus) — ver [[Agent Tooling & Plugins]]
