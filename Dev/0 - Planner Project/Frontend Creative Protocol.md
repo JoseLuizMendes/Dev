@@ -76,21 +76,23 @@ flowchart TD
 
 **1.3 Sites-referência de inspiração (paleta + nível de qualidade que o dev admira):**
 
-| # | Site | URL |
-|---|---|---|
-| 1 | Lando Norris | https://landonorris.com/ |
-| 2 | Igloo Inc | https://www.igloo.inc/ |
-| 3 | Species in Pieces | http://species-in-pieces.com/# |
-| 4 | Loiseau | https://loiseau.framer.website/ |
-| 5 | NextSense | https://nextsense.io/ |
-| 6 | Bucks Sauce | https://buckssauce.com/ |
-| 7 | Nymphai Cosmetics | https://nymphaicosmetics.com/ |
-| 8 | More Nutrition | https://more-nutrition.webflow.io/ |
-| 9 | Cipher Digital | https://cipherdigital.com/ |
-| 10 | Day 1 Run | https://day1-run.webflow.io/ |
-| 11 | Nudot | https://nudot.com.tw/ |
-| 12 | Terminal Industries | https://terminal-industries.com/ |
-| 13 | Oryzo | https://oryzo.ai/ |
+| #   | Site                | URL                                                             |
+| --- | ------------------- | --------------------------------------------------------------- |
+| 1   | Lando Norris        | https://landonorris.com/                                        |
+| 2   | Igloo Inc           | https://www.igloo.inc/                                          |
+| 3   | Species in Pieces   | http://species-in-pieces.com/#                                  |
+| 4   | Loiseau             | https://loiseau.framer.website/                                 |
+| 5   | NextSense           | https://nextsense.io/                                           |
+| 6   | Bucks Sauce         | https://buckssauce.com/                                         |
+| 7   | Nymphai Cosmetics   | https://nymphaicosmetics.com/                                   |
+| 8   | More Nutrition      | https://more-nutrition.webflow.io/                              |
+| 9   | Cipher Digital      | https://cipherdigital.com/                                      |
+| 10  | Day 1 Run           | https://day1-run.webflow.io/                                    |
+| 11  | Nudot               | https://nudot.com.tw/                                           |
+| 12  | Terminal Industries | https://terminal-industries.com/                                |
+| 13  | Oryzo               | https://oryzo.ai/                                               |
+| 14  | Luxury Ecommerce    | https://vm-premium-luxury-e-commerce-template.vusercontent.net/ |
+|     |                     |                                                                 |
 
 > Esta lista é viva: novos sites que o dev admirar entram aqui (bump de versão + entrada em `[[MEMORY]]`).
 

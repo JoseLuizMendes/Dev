@@ -117,10 +117,11 @@ Dev/
 | Design system / anti-AI-slop | [[Impeccable Reference]] |
 | Iniciar front / referências visuais / paleta / mídia AVIF+WebP | [[Frontend Creative Protocol]] (matriz canon linha 19) |
 | "Vou iniciar um projeto" / recebi `00-Input.md` | [[Project Kickoff Input Template]] (matriz canon linha 20) → Kickoff Output (`00-DNA.md`) |
+| Projeto com back → começar o servidor (dados PRIMEIRO) | [[Backend Onboarding Protocol]] (matriz canon linha 22) |
 | Gerar mídia com IA | Skills SEMPRE acionadas: Higgsfield skills + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]] — [[Frontend Creative Protocol]] §Fase 6 |
 | Vídeo / mídia animada (padrão cinematográfico) | [[Asset Sizing Standard]] §Vídeo (WebM+MP4, ffmpeg, Lottie; GIF proibido) |
 | Briefing completo recebido → execução automática | Matriz canon linha 18 de [[Master Pipeline & Enforcement]] |
-| Front concluído + UAT aprovado → publicar | [[Deploy Protocol]] (matriz canon linha 21) |
+| Front/back concluídos + UAT aprovado → publicar | [[Deploy Protocol]] (matriz canon linha 21) — Vercel ou VPS Hostinger por porte |
 
 ## Testes
 

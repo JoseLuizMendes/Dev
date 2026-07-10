@@ -1,6 +1,6 @@
 ---
 título: "Preferências Dev"
-versão: 5.2
+versão: 5.5
 status: "Ativo"
 tags:
   - preferences
@@ -27,7 +27,7 @@ tags:
 | Camada | Tecnologia | Regra Principal |
 |---|---|---|
 | **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` obrigatório |
-| **Backend** | NestJS 10.x + Fastify | Modular + DI. Lógica nos Services, nunca nos Controllers |
+| **Backend** | NestJS 10.x + Fastify (default quando TS) | Modular + DI. Lógica nos Services, nunca nos Controllers. **Escolha por projeto, multi-fator** (Fastify puro/NestJS/Java/C#) — ver §Escolha de Backend |
 | **Banco de Dados** | PostgreSQL + Prisma ORM | Schema declarativo no `schema.prisma` |
 | **Frontend** | React 19+ / Next.js 16+ **ou** TanStack Start | Functional components + hooks. Server Components quando aplicável. Escolha registrada no `03-Planejamento` + `INIT.md` (ver §Frameworks Frontend de Primeira Classe) |
 | **Routing** | Next App Router (Next.js) / TanStack Router (fora do Next) | Nunca misturar os dois no mesmo app |
@@ -40,7 +40,9 @@ tags:
 | **Animações** | GSAP 3.12+ + Lenis (+ Three.js quando couber) | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado. Three.js: ver §Three.js |
 | **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
 | **Fetching** | TanStack Query (React/Vue) — padrão | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes |
+| **Auth** | Auth.js v5 (`next-auth` 5 + Prisma adapter) | Default canon. API NestJS separada → JWT/Passport como exceção documentada — ver [[Backend Onboarding Protocol]] §Fase 5 |
 | **Infra** | Docker multi-stage + Compose | Containers isolados. Ambiente local via Compose |
+| **Deploy** | Vercel (pequeno/médio) · VPS Hostinger via Docker (médio/grande) | Porte decide — ver [[Deploy Protocol]]. Em VPS o framework é reavaliado (TanStack candidato) |
 | **Package Manager** | pnpm | npm, yarn e bun banidos |
 | **Pipeline** | Spec-Kit (SDD+TDD) + Impeccable (design) + Higgsfield (mídia, opt-out) | Ver §Ferramentas Obrigatórias de Bootstrap |
 | **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite | Docs em tempo real, gestão de cofre, copywriting |
@@ -64,12 +66,31 @@ tags:
 - **TanStack Start** — TanStack Router + Query nativos; server functions com validação Zod; scaffold `pnpx create-start-app`. Status RC: consultar Context7 para breaking changes antes de iniciar projeto.
 - **Vue.js 3+** — primeira classe (promovido da lista de adicionais na v5.0); regras em §Vue.js 3+.
 
+### Escolha de Backend (multi-fator — "depende")
+
+> **Não existe mapeamento mecânico.** A escolha de linguagem/framework do back é **por projeto** — regra do dev: "depende". Tamanho/escopo é **um** dos parâmetros, não o critério. A decisão é pesada no Tech Brief/`03-Planejamento` e registrada no `INIT.md`. **Sinais ambíguos ou conflitantes = perguntar ao dev (R3/R5)** — o agente nunca auto-decide a stack do back.
+
+**Parâmetros de decisão (pesar em conjunto, nenhum decide sozinho):**
+
+| Parâmetro | O que observar |
+|---|---|
+| **Tamanho/escopo** | Exemplo do dev: pequeno → dá pra pensar em Fastify puro; grande → dá pra pensar em NestJS, Java, C# |
+| **Complexidade do domínio** | Muitos módulos/regras de negócio → DI e modularidade (NestJS) pagam o overhead |
+| **Ecossistema do cliente/time** | Time ou legado Java/.NET → Spring Boot / C# ganham força |
+| **Integrações e requisitos enterprise** | Mensageria, compliance, sistemas legados, SLAs |
+| **Performance/concorrência** | Perfil de carga pode ditar runtime/framework |
+| **Prazo/orçamento** | TS end-to-end reaproveita tipos/zod entre front e back — favorece Fastify/NestJS |
+| **Infra alvo** | Vercel (Next standalone) restringe; VPS (Docker) aceita qualquer stack |
+| **Manutenção futura** | Quem mantém depois da entrega e o que essa equipe domina |
+
+**Candidatos aprovados:** Fastify puro (TS) · route handlers/server actions do Next standalone · **NestJS + Fastify** (default quando TS) · **Java (Spring Boot)** · **C# (.NET)** — regras por tecnologia em §Regras Inegociáveis.
+
 ### Stacks Adicionais (Variáveis por Projeto)
 
 | Linguagem/Framework | Quando Usar | Observação |
 |---|---|---|
-| **C# (.NET)** | Projetos enterprise, APIs robustas, microservices | Stack definida no `INIT.md` do projeto |
-| **Java (Spring Boot)** | Projetos enterprise, Android, sistemas legados | Stack definida no `INIT.md` do projeto |
+| **C# (.NET)** | Projetos enterprise, APIs robustas, microservices | Stack definida no `INIT.md` do projeto — ver §Escolha de Backend |
+| **Java (Spring Boot)** | Projetos enterprise, Android, sistemas legados | Stack definida no `INIT.md` do projeto — ver §Escolha de Backend |
 | **Angular** | Projetos enterprise em larga escala | Em adoção futura. Stack definida no `INIT.md` |
 
 ### Stack Estendida — Ecommerce
@@ -108,6 +129,17 @@ tags:
 3. **Incrementalismo rigoroso:** uma tarefa por vez, completamente finalizada antes de avançar.
 4. **Zero débito técnico intencional:** código de produção desde o dia 1.
 5. **Rastreabilidade total:** cada commit referencia uma tarefa do `04-Tarefas.md`, que referencia uma User Story do `01-Escopo.md`.
+
+### Fluxo SDD (SpecKit) — front E back
+
+> **O dev trabalha fortemente em SDD, com SpecKit, tanto no front quanto no back.** O TDD roda DENTRO do ciclo SDD — spec primeiro, sempre:
+
+```
+/speckit.specify  →  /speckit.plan  →  /speckit.tasks  →  /speckit.implement (TDD por tarefa)
+```
+
+- Nenhuma implementação de front ou back começa sem a spec correspondente aprovada ([[Spec-Kit Reference]] — inclui fallback manual).
+- [[Frontend Creative Protocol]] e [[Backend Onboarding Protocol]] alimentam as specs (DNA/refs/mapa no front; Tech Brief/modelo de dados/contrato de API no back) — o `/speckit.implement` só roda depois deles.
 
 ### Fluxo TDD por Tarefa
 
@@ -494,6 +526,22 @@ Arquitetura da informação · hierarquia visual · multi-dispositivo · acessí
 
 ---
 
+## Fluxo de Back-end
+
+> **Canon completo: [[Backend Onboarding Protocol]]** (matriz linha 22). Todo projeto com back passa por ele ANTES de qualquer código de servidor. Resumo das regras que também valem como preferência permanente:
+
+- **Dados PRIMEIRO** — filosofia do dev: entidades e relacionamentos no `schema.prisma` são a fundação; DTOs, endpoints e casos de uso derivam do modelo de dados, nunca o contrário.
+- **SDD forte com SpecKit (front E back):** specs via `/speckit.specify → plan → tasks` ANTES do implement — ver §Fluxo SDD (SpecKit).
+- **Stack do back: decisão multi-fator por projeto ("depende")** — tamanho/escopo é só um dos parâmetros (complexidade de domínio, ecossistema do cliente, integrações, performance, prazo, infra, manutenção) — checklist em §Escolha de Backend; sinais ambíguos = perguntar ao dev.
+- **Entrevista canônica:** requisitos de back levantados pela skill **`backend-interview-agent`** (instalada) → Tech Brief completo. Requisito sem resposta = `[PENDENTE]`, nunca inventado (R3).
+- **Contrato de API:** DTOs explícitos (nunca expor entidades Prisma), zod em toda entrada, formato de erro padrão único, paginação e status codes definidos antes do código.
+- **Auth default: Auth.js v5** + Prisma adapter (validado no Belessence com OAuth + TOTP admin); API NestJS separada → JWT/Passport com justificativa registrada.
+- **Segurança de back:** rate limiting, CORS restrito, secrets só em env validada com zod, erros sem stack trace em produção, logs sem PII, webhooks com assinatura — checklist na Fase 7 do protocolo.
+- **Observabilidade:** pino (nativo do Fastify) + health check endpoint; error tracking opcional por porte.
+- **Deploy por porte:** pequeno/médio → Vercel (Next standalone); médio/grande → **VPS Hostinger** (Docker + Caddy/Nginx + backup diário do Postgres) — [[Deploy Protocol]] §Fase 4.
+
+---
+
 ## Regras Inegociáveis por Tecnologia
 
 ### TypeScript
@@ -509,6 +557,7 @@ Arquitetura da informação · hierarquia visual · multi-dispositivo · acessí
 - Componentes funcionais e hooks. Server Components quando aplicável.
 - UI não mistura renderização com chamadas de rede sem camada de dados.
 - Fetching client-side via TanStack Query (`@tanstack/react-query`) — `useEffect` para data fetching proibido.
+- **Private folders no App Router (inegociável):** toda pasta dentro de `app/` que **não** seja rota de página DEVE ter prefixo **`_`** — `_components`, `_lib`, `_hooks`, `_utils`, `_assets` etc. (opt-out do roteamento, convenção oficial Next.js). Pasta sem `_` dentro de `app/` = declara intenção de rota. Exceção técnica: `node_modules` (raiz do projeto, gerenciada pelo pnpm, gitignored — não renomeável).
 - Projeto Next.js: ler [[Next.js Foundations (Vercel Academy)]] antes de `/speckit.plan`.
 
 ### TanStack Start

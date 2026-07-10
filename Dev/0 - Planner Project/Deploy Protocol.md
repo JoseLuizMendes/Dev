@@ -1,6 +1,6 @@
 ---
 título: "Deploy Protocol"
-versão: 1.0
+versão: 1.1
 status: "Ativo"
 tags:
   - protocol
@@ -12,7 +12,7 @@ tags:
 
 # Deploy Protocol
 
-> ⚠️ **GATILHO:** Front concluído + UAT aprovado → publicar em produção (matriz canon linha 21 de [[Master Pipeline & Enforcement]]).
+> ⚠️ **GATILHO:** Front (e back, quando houver) concluído + UAT aprovado → publicar em produção (matriz canon linha 21 de [[Master Pipeline & Enforcement]]).
 > ⚠️ **TEMPLATE OBRIGATÓRIO:** Este protocolo (protocolo puro — checklists abaixo).
 > ⚠️ **OUTPUT:** Projeto em produção (domínio ativo) + registro completo no `05-Dev-Log.md`.
 > ⚠️ **PRÓXIMO PASSO:** Encerramento do projeto (deleção da `refs/`, log de sessão, eventual move para `9 - Archive/`).
@@ -23,7 +23,14 @@ tags:
 
 Publicar é parte do entregável high-ticket — não um "detalhe final". Este protocolo garante que nenhum deploy sai improvisado: memória de erros consultada, checklist pré-deploy verificado, domínio configurado e smoke test pós-deploy registrado.
 
-**Alvo padrão:** **Vercel** (stack Next.js/TanStack — ver matriz de frameworks em [[Preferencias Dev#Frameworks Frontend de Primeira Classe]]). Outro alvo (VPS, Cloudflare, etc.) = decisão registrada no `03-Planejamento` com justificativa.
+**Alvo padrão — decidido pelo PORTE do projeto (regra do dev):**
+
+| Porte | Alvo | Framework |
+|---|---|---|
+| **Pequeno/médio** | **Vercel** | Next.js (canon atual) |
+| **Médio/grande** | **VPS Hostinger** (Docker) | Reavaliado por projeto na matriz de frameworks — TanStack Start é candidato forte; decisão no `03-Planejamento` |
+
+Outro alvo = decisão registrada no `03-Planejamento` com justificativa. A classificação de porte vem do `00-Input.md`/Tech Brief e é registrada no `03-Planejamento`.
 
 ---
 
@@ -78,11 +85,32 @@ Publicar é parte do entregável high-ticket — não um "detalhe final". Este p
 
 ---
 
+## Fase 4 — Back-end em VPS (projetos médios/grandes — Hostinger)
+
+Quando o alvo é a VPS ([[Backend Onboarding Protocol]] concluído + porte médio/grande):
+
+**Preparação:**
+- [ ] Docker multi-stage + Compose de produção (canon de infra — [[Preferencias Dev]]): app + PostgreSQL + reverse proxy
+- [ ] Reverse proxy com HTTPS automático (**Caddy** preferido pela simplicidade; Nginx + certbot como alternativa) — decisão registrada no `03-Planejamento`
+- [ ] Env vars no servidor via `.env` fora do repo (permissão restrita) — espelho exato do `.env.example`
+- [ ] `prisma migrate deploy` como passo do release (nunca `migrate dev` em produção)
+
+**Operação:**
+- [ ] **Backup automático do PostgreSQL** agendado (`pg_dump` diário + retenção) ANTES do primeiro deploy com dados reais — inegociável
+- [ ] Health check (`/health` do [[Backend Onboarding Protocol]] Fase 8) monitorado (uptime monitor externo gratuito)
+- [ ] Logs do container acessíveis (`docker logs` / pino) e firewall da VPS restrito (só 80/443 + SSH com chave)
+- [ ] Rollback: manter imagem anterior taggeada — `docker compose up` da tag anterior restaura em minutos
+
+**Smoke test do back:** endpoints críticos respondendo (auth, health, 1 CRUD), webhook de pagamento em modo teste, e-mail transacional real enviado.
+
+---
+
 ## Quality Gate
 
 - [ ] Fase 0 executada (memória de erros lida ANTES do deploy)
 - [ ] Checklist pré-deploy 100% verificado (não declarado — R2)
 - [ ] Domínio + HTTPS ativos e testados
+- [ ] Se back em VPS: backup do PostgreSQL agendado + firewall restrito + rollback por tag testado (Fase 4)
 - [ ] Smoke test pós-deploy completo registrado no `05-Dev-Log`
 - [ ] `refs/` deletada após conclusão (regra do [[Frontend Creative Protocol]]) — registrada no `05-Dev-Log`
 

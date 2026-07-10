@@ -1,6 +1,6 @@
 ---
 template: "Project Kickoff Input"
-version: 1.1
+version: 1.2
 status: "Template"
 tags:
   - template
@@ -77,13 +77,15 @@ data: "{{DATE}}"
 
 ## 3. Back-end (se `tipo: front+back`)
 
-> ⚠️ Onboarding de back canon **ainda não existe** → `[PENDENTE — criar Back Onboarding Protocol]`. Até lá, o back segue o fluxo geral de onboarding (matriz canon linhas 2–5), sem protocolo criativo próprio.
+> Canon: [[Backend Onboarding Protocol]] (matriz linha 22). Estes campos são os **insumos brutos** da entrevista da Fase 1 (skill `backend-interview-agent` → Tech Brief) — preencha o que souber; a entrevista completa o resto.
 
 | Campo | Valor |
 |---|---|
 | **Requisitos de back** | {{BACK_REQUISITOS}} |
-| **Integrações** (pagamento, e-mail, APIs) | {{INTEGRACOES}} |
-| **Dados / entidades principais** | {{DADOS}} |
+| **Dados / entidades principais** (fundação — dados primeiro) | {{DADOS}} |
+| **Integrações** (pagamento, e-mail, storage, APIs externas) | {{INTEGRACOES}} |
+| **Auth** (quem loga? admin? OAuth?) | {{AUTH}} <!-- vazio = default Auth.js v5 --> |
+| **Porte do projeto** | {{PORTE}} <!-- pequeno/médio → Vercel + Next; médio/grande → VPS Hostinger (framework reavaliado) — define o alvo do [[Deploy Protocol]] --> |
 
 ---
 

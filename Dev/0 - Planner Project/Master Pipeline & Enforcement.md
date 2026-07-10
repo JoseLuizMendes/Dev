@@ -1,7 +1,7 @@
 ---
 módulo: M0
 título: "Master Pipeline & Enforcement"
-versão: 2.2
+versão: 2.3
 status: "Ativo"
 canonicidade: "Fonte da verdade do fluxo macro + matriz Gatilho → Template → Output"
 tags:
@@ -69,9 +69,12 @@ flowchart TD
     Tooling[SpecKit + Impeccable + Higgsfield + Skills]:::artifact
     O5 -->|Ferramentas Obrigatórias de Bootstrap| Tooling
     Refs[refs/ + Mapa de Referencias + paleta + assets ingeridos]:::artifact
+    Back[Tech Brief + schema.prisma + contrato de API]:::artifact
     Tooling -->|se projeto tem UI: Frontend Creative Protocol| Refs
+    Tooling -->|se projeto tem back: Backend Onboarding Protocol| Back
     Refs --> F2
-    Tooling -->|sem UI| F2
+    Back --> F2
+    Tooling -->|sem UI e sem back proprio| F2
     F2 --> Cod
     Cod --> F3
     F3 -->|Audit Template| Rel
@@ -118,10 +121,11 @@ flowchart TD
 | 15 | Change Request (escopo muda) | — (atualizar `01-Escopo` + `02-Contrato` + replan) | `01-Escopo.md`/`02-Contrato.md` atualizados | `/speckit.plan` |
 | 16 | Recorrência ≥ 2 de erro | — (promoção automática a regra) | Nova entrada em "Regras Promovidas" do `[[Preferencias Dev]]` | Aplicação preventiva |
 | 17 | Bootstrap concluído (setup.js + 05/06/INIT gerados) | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) | SpecKit inicializado + Impeccable instalado + `/impeccable init` (`DESIGN.md`) + Higgsfield (salvo opt-out `midia: "nao"`) + skills Next.js (se stack Next) + Context7 verificado | `/speckit.implement` |
-| 18 | **Modo automático:** dev entrega arquivo de briefing/requisitos (formato canônico: `00-Input.md` da linha 20, quando existir) e autoriza execução completa | Cadeia mecânica: linhas 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 17 → 19 (se UI) → 21, **sem parada** — exceto pontos de aprovação não pré-aprovados no input e campos `[PENDENTE]` (R3). Referências não fornecidas = `[PENDENTE]` na linha 19 | Projeto completo: 6 artefatos + setup.js + INIT.md + tooling + DX instalados + refs/paleta/assets (se UI) | Desenvolvimento (`/speckit.implement`) → Deploy (linha 21) |
+| 18 | **Modo automático:** dev entrega arquivo de briefing/requisitos (formato canônico: `00-Input.md` da linha 20, quando existir) e autoriza execução completa | Cadeia mecânica: linhas 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 17 → 19 (se UI) / 22 (se back) → 21, **sem parada** — exceto pontos de aprovação não pré-aprovados no input e campos `[PENDENTE]` (R3). Referências não fornecidas = `[PENDENTE]` na linha 19; requisitos de back não fornecidos = entrevista da linha 22 | Projeto completo: 6 artefatos + setup.js + INIT.md + tooling + DX instalados + refs/paleta/assets (se UI) + Tech Brief/modelo de dados (se back) | Desenvolvimento (`/speckit.implement`) → Deploy (linha 21) |
 | 19 | Projeto com front/UI — tooling instalado, antes de qualquer código de front | `[[Frontend Creative Protocol]]` | `refs/` (local, gitignored) + `refs/00-MAPA.md` + paleta aprovada (default pastel) + assets ingeridos/normalizados (Fase 6.0) + pipeline de mídia (**AVIF+WebP**/vídeo WebM+MP4/Upscayl/geração via skills) + checklists SEO (Fase 9) e segurança (Fase 10) | Desenvolvimento do front (`/speckit.implement`) — GSAP + Lenis (+ Three.js quando couber) → linha 21 |
 | 20 | **Kickoff:** dev diz "vou iniciar um projeto" / entrega `00-Input.md` preenchido | `[[Project Kickoff Input Template]]` | **Kickoff Output** salvo como `00-DNA.md` na pasta do projeto: DNA consolidado (refs + identidade + paleta + inventário de assets) + **proto-design system extraído das refs** (paleta hex/OKLCH → proto-tokens, tipografia, espaçamentos) + prompts completos de geração (frames inicial/final, alpha) + direções e passos numerados + lista de `[PENDENTE]` | Linha 18 (se `execucao_automatica: sim`) ou linha 0 |
-| 21 | Front concluído + UAT aprovado → publicar | `[[Deploy Protocol]]` | Projeto em produção (domínio + HTTPS + smoke test) + registro no `05-Dev-Log` + `refs/` deletada | Encerramento / `9 - Archive/` |
+| 21 | Front (e back, quando houver) concluído + UAT aprovado → publicar | `[[Deploy Protocol]]` | Projeto em produção (Vercel se pequeno/médio; VPS Hostinger se médio/grande — domínio + HTTPS + smoke test + backup de DB se VPS) + registro no `05-Dev-Log` + `refs/` deletada | Encerramento / `9 - Archive/` |
+| 22 | Projeto com back-end (`tipo: front+back` ou back-only) — tooling instalado, antes de qualquer código de back | `[[Backend Onboarding Protocol]]` (Fase 1 via skill `backend-interview-agent`) | Tech Brief + modelagem de dados (`schema.prisma` draft, **dados primeiro**) + contrato de API (DTOs/zod/erros) + arquitetura decidida + auth (Auth.js v5 default) + integrações + checklists de segurança/observabilidade/testes | Desenvolvimento do back (`/speckit.implement`, TDD) → linha 21 |
 
 ---
 
@@ -152,6 +156,7 @@ Cada protocolo tem seu sub-fluxograma Mermaid dentro do próprio arquivo. Este M
 | Planejamento + Tarefas | `[[Protocol-SpecKit]]` |
 | Bootstrap (setup.js + 05/06/INIT) | `[[Protocol-Bootstrap]]` |
 | Fluxo criativo de front (refs/ + paleta + mídia + SEO + segurança) | `[[Frontend Creative Protocol]]` |
+| Onboarding de back (Tech Brief + dados + API + auth + segurança) | `[[Backend Onboarding Protocol]]` |
 | Deploy em produção | `[[Deploy Protocol]]` |
 | Boot/Shutdown de sessão | `[[Session Protocol]]` |
 | Propagação de erro | `[[Immunological Error Memory]]` |
@@ -198,9 +203,10 @@ Sem template — atualiza `01-Escopo.md` + `02-Contrato.md` (cláusula de Contro
 | Bootstrap concluído — instalar tooling | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
 | Projeto com UI — vou começar o front | `[[Frontend Creative Protocol]]` (linha 19): refs/ + mapa + paleta + assets ANTES de código |
 | Dev diz "vou iniciar um projeto" / entrega `00-Input.md` | `[[Project Kickoff Input Template]]` (linha 20): processar input → Kickoff Output (`00-DNA.md` + prompts + passos) |
-| Dev entregou briefing/Kickoff e autorizou execução completa | Cadeia mecânica da matriz (linha 18): 0→1→2→3→4→5→6→7→8→9→17→19 (se UI)→21 sem parada |
+| Dev entregou briefing/Kickoff e autorizou execução completa | Cadeia mecânica da matriz (linha 18): 0→1→2→3→4→5→6→7→8→9→17→19 (se UI)/22 (se back)→21 sem parada |
 | Gerar imagem/vídeo para o projeto | Skills instaladas SEMPRE: Higgsfield skills + `[[Asset Sizing Standard]]` + `[[GPT-Image Prompt Galleries]]` (via `[[Frontend Creative Protocol]]` §6.1) |
-| Front concluído + UAT aprovado — publicar | `[[Deploy Protocol]]` (linha 21) |
+| Projeto com back — vou começar o servidor | `[[Backend Onboarding Protocol]]` (linha 22): entrevista `backend-interview-agent` → dados PRIMEIRO → contrato de API, ANTES de código |
+| Front/back concluídos + UAT aprovado — publicar | `[[Deploy Protocol]]` (linha 21): Vercel (pequeno/médio) ou VPS Hostinger (médio/grande) |
 
 ---
 

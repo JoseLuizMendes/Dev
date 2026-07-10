@@ -1,6 +1,6 @@
 ---
 título: "Vault Index"
-versão: 2.2
+versão: 2.3
 status: "Ativo"
 tags:
   - index
@@ -47,7 +47,8 @@ Dev/
 | [[Mock Pipeline Test]] | Fixture de aceitação — dry-run do pipeline | Ao mexer em template/protocolo |
 | [[Client Onboarding Protocol]] | Orquestrador do fluxo de onboarding | Cliente devolve Master aprovado |
 | [[Frontend Creative Protocol]] | Fluxo criativo do front: refs/ + paleta + ingestão de assets + mídia AVIF/WebP + SEO + segurança | Projeto com UI, antes de qualquer código de front |
-| [[Deploy Protocol]] | Publicação em produção: pré-deploy + DNS + smoke test + rollback | Front concluído + UAT aprovado (matriz linha 21) |
+| [[Backend Onboarding Protocol]] | Onboarding do back: entrevista → Tech Brief → dados PRIMEIRO → API + auth + segurança | Projeto com back, antes de qualquer código de servidor (matriz linha 22) |
+| [[Deploy Protocol]] | Publicação em produção: Vercel ou VPS Hostinger (por porte) + DNS + smoke test + rollback | Front/back concluídos + UAT aprovado (matriz linha 21) |
 | [[Protocol-Contract]] | Geração do contrato dinâmico | Via Client Onboarding Protocol |
 | [[Protocol-Bootstrap]] | Geração do setup.js e estrutura de pastas | Via Client Onboarding Protocol |
 | [[Protocol-SpecKit]] | Inicialização do Spec-Kit SDD+TDD | Via Client Onboarding Protocol |
@@ -101,8 +102,9 @@ Dev/
 | Bootstrap concluído → instalar tooling obrigatório | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
 | Projeto com UI → começar o front | `[[Frontend Creative Protocol]]` (matriz canon linha 19) |
 | "Vou iniciar um projeto" / `00-Input.md` entregue | `[[Project Kickoff Input Template]]` (matriz canon linha 20) → Kickoff Output (`00-DNA.md`) |
+| Projeto com back → começar o servidor | `[[Backend Onboarding Protocol]]` (matriz canon linha 22) |
 | Briefing completo entregue + execução autorizada | Cadeia mecânica — matriz canon linha 18 de `[[Master Pipeline & Enforcement]]` |
-| Front concluído + UAT → publicar | `[[Deploy Protocol]]` (matriz canon linha 21) |
+| Front/back concluídos + UAT → publicar | `[[Deploy Protocol]]` (matriz canon linha 21) |
 
 ---
 
@@ -173,6 +175,7 @@ Dev/
 | Design system / eliminar AI slop | [[Impeccable Reference]] |
 | Buscar referências visuais / iniciar front | [[Frontend Creative Protocol]] (fontes de busca + sites-inspiração + refs/) |
 | Iniciar um projeto novo (input → DNA) | [[Project Kickoff Input Template]] → `00-Input.md` → `00-DNA.md` |
+| Desenhar o back (dados, API, auth) | [[Backend Onboarding Protocol]] (entrevista `backend-interview-agent` → Tech Brief) |
 | Gerar mídia com IA | Skills SEMPRE: Higgsfield skills + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]] — [[Frontend Creative Protocol]] §Fase 6 (inclui alternativas gratuitas) |
 | Gerar/entregar vídeo ou mídia animada | [[Asset Sizing Standard]] §Vídeo (cinematográfico, WebM+MP4, ffmpeg, Lottie; GIF proibido) |
 | Publicar em produção | [[Deploy Protocol]] |
