@@ -8,7 +8,8 @@
 
 ## Estado Atual
 
-- **Último trabalho:** **Reestruturação do vault como repositório-mestre (2026-07-08)** — saneamento completo + `0.4 - Knowledge Base` + Preferencias Dev v5 (TanStack/Vue 1ª classe) + ferramentas obrigatórias de bootstrap na matriz canon (linhas 17-18) + artigo LinkedIn em `5 - Publicações/`. Log completo: `[[2026-07-08-Reestruturacao-Vault-KB-TanStack]]`.
+- **Último trabalho:** **Frontend Creative Protocol canonizado (2026-07-09)** — fluxo criativo de front do dev virou protocolo canon (`[[Frontend Creative Protocol]]` v1.0) + matriz canon linha 19 + Preferencias Dev v5.1 (Three.js aprovado, WEBP inegociável, alternativas gratuitas de mídia, sites-inspiração). Ver decisão [2026-07-09] abaixo.
+- **Trabalho anterior:** **Reestruturação do vault como repositório-mestre (2026-07-08)** — saneamento completo + `0.4 - Knowledge Base` + Preferencias Dev v5 (TanStack/Vue 1ª classe) + ferramentas obrigatórias de bootstrap na matriz canon (linhas 17-18) + artigo LinkedIn em `5 - Publicações/`. Log completo: `[[2026-07-08-Reestruturacao-Vault-KB-TanStack]]`.
 - **Fluxo novo disponível:** modo briefing→automático (matriz canon linha 18 de `[[Master Pipeline & Enforcement]]`) — dev entrega briefing/requisitos e autoriza; a cadeia 0→17 roda sem parada (exceto aprovações não pré-aprovadas e campos `[PENDENTE]`), terminando com SpecKit + Impeccable + Higgsfield (opt-out) + skills Next.js instalados.
 - **Projeto de código mais recente:** Belessence (Mari Beauty) — Refatoração Full-stack completa, validator 7/7 OK, Playwright E2E 33/33 ✅ (Lighthouse e smoke manual pendentes localmente; test bugs de Radix Select registrados como T-extra-3).
 
@@ -16,6 +17,12 @@
 
 ## Decisões Recentes
 
+- [2026-07-09] **Frontend Creative Protocol — fluxo criativo do dev canonizado:**
+  - **Bumps de versão (enforcement regra 6):** `[[Master Pipeline & Enforcement]]` 2.0→**2.1**, `[[Preferencias Dev]]` 5.0→**5.1**, `[[INDEX]]` raiz 2.0→**2.1**. Novo: `[[Frontend Creative Protocol]]` **v1.0** em `0 - Planner Project/`.
+  - **Protocolo novo (matriz canon linha 19):** todo projeto com front/UI passa pelo fluxo criativo ANTES de código: (1) referências com cliente ou solo em Awwwards/Dribbble/Pinterest/Squarespace; (2) extração de código-fonte (HTML/CSS/JS) das refs em `.md` dentro de `refs/` na raiz do repo — **gitignored sempre, nunca commitada, deletada após conclusão do front**; CF é estudo/fidelidade, implementação re-escrita (copyright); (3) `refs/00-MAPA.md` — dev declara componente X da ref Y no lugar Z, agente só implementa o que está no mapa; (4) paleta default **tons pastéis**; (5) skills Context7/Impeccable/UX-UI; (6) pipeline de mídia; (7) checklist de 10 princípios de web design; (8) GSAP+Lenis sempre, Three.js quando couber.
+  - **13 sites-inspiração do dev registrados** no protocolo §Fase 1.3 (landonorris.com, igloo.inc, species-in-pieces.com, loiseau.framer.website, nextsense.io, buckssauce.com, nymphaicosmetics.com, more-nutrition.webflow.io, cipherdigital.com, day1-run.webflow.io, nudot.com.tw, terminal-industries.com, oryzo.ai) — lista viva.
+  - **Preferencias Dev v5.1:** seção nova "Fluxo Criativo de Front-end"; **Three.js aprovado** na stack (quando couber, lazy load + fallback WEBP); regra nova "Imagens e Mídia Web" — **WEBP obrigatório** pra todo raster no navegador (`sharp` em lote / Squoosh avulso), enhance via **Upscayl**; Higgsfield rebaixado a "quando houver orçamento" com **alternativas gratuitas aprovadas** (Google AI Studio, Recraft, Leonardo/Ideogram, ComfyUI/Fooocus local; vídeo Kling/Hailuo/Luma ou GSAP/Three.js no lugar).
+  - **Linha 18 (modo automático) atualizada:** cadeia agora termina em →19 quando o projeto tem UI; refs não fornecidas no briefing viram `[PENDENTE]`.
 - [2026-07-08] **Reestruturação do vault — repositório-mestre para bootstrap automático:**
   - **Bumps de versão (enforcement regra 6):** `[[Preferencias Dev]]` 4.2→**5.0**, `[[Master Pipeline & Enforcement]]` 1.0→**2.0**, `[[Protocol-Bootstrap]]` 1.0→**2.0**, `[[Setup Script Template]]` 2.0→**3.0**, `[[Project INIT Template]]` 1.0→**2.0**, `[[Requirements & Scope Project Template]]` 2.1→**2.2**, `[[Cognitive Vault Architecture]]` 1.2→**2.0**, `[[INDEX]]` raiz 1.0→**2.0**.
   - **TanStack formalizado:** Start = framework de 1ª classe ao lado do Next.js 16 (status RC verificado via Context7); TanStack Query = fetching canônico React E Vue (substitui a marca "React Query / SWR"; SWR rebaixado a legado); `@tanstack/vue-query` nas regras Vue. **Vue.js 3+ promovido** de stack adicional a 1ª classe.
