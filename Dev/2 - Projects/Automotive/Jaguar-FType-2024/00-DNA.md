@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.1
-status: "Prompts aprovados + vídeos de detalhe (§3.8) e motor (§3.9) adicionados — geração bloqueada por créditos Higgsfield (caminhos A/B na Parte 4.2)"
+version: 1.2
+status: "4 vídeos de detalhe GERADOS via Higgsfield MCP (Parte 7, 2026-07-11) — másters 720p aguardando decisão de upscale/regeneração pro; marca/traseira/motor pendentes de recarga"
 tags:
   - dna
   - kickoff-output
@@ -391,6 +391,7 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 | 6 | Back-end | Haverá captura de lead / agendamento de test-drive? (definiria `front+back` → linha 22) |
 | 7 | Texto no OG | Gerar OG com texto no prompt ou compor texto via código (recomendado)? |
 | 8 | Áudio no vídeo do motor (§3.9) | O showcase do motor é o único slot que pode ter som (start-up do V8, off por default no player). Gerar com trilha (Kling/Veo com áudio) ou entregar mudo? |
+| 9 | Másters 720p da Parte 7 | Upscale via Higgsfield (`upscale_video` 2K, recarga), regenerar em Kling `pro`/`4k` (recarga), ou re-rodar os pares de frames no Kling web free em 1080p? |
 
 ---
 
@@ -405,6 +406,25 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 | Vídeo — "Jaguar commercial authentic sound" (Veo) | MP4 H.264 **1280×720**, 8s, 24fps, **com trilha de áudio**, watermark "Veo" no canto | Preloader (3.1) / brand film | ❌ **Rejeitado como asset final** (aprovado como prova de conceito de mood): (1) 720p < mínimo 1080p — vídeo nunca é upscaled, regenerar; (2) watermark visível; (3) áudio embutido (slots de background são sem áudio); (4) coreografia divergente do preloader — o carro passa pela câmera e **se afasta** (termina na traseira), enquanto o preloader exige carro saindo da curva **em direção à câmera** (barra de load = velocidade de aproximação) |
 
 **Leitura de direção de arte:** as 3 mídias validam o DNA na prática — carro preto fosco + DRL âmbar como única fonte quente + floresta/névoa prata = exatamente o "Black Jaguar / Liquid Metal" do Ato I, com a paleta de proto-tokens confirmada em imagem real. A decisão do acento âmbar (#E8A33D) se prova correta. O que falta não é direção, é **spec técnica** (resolução/áudio/watermark/coreografia) e **cobertura**: os Atos II (alpino) e III (estúdio) e o jaguar animal seguem sem nenhum candidato — 9 slots a gerar.
+
+---
+
+## Parte 7 — Geração via Higgsfield MCP (2026-07-11, plano basic)
+
+> Dev autorizou a geração ("preciso que você gere...") com saldo inicial de **51,18 créditos**. Modelos: `cinematic_studio_2_5` (frames 2K, 2 cr) + `kling3_0` std/sound-off (vídeo 6s start+end frame, 9 cr). Referência de consistência: imagem 2 do dev (importada como `media_id f0153307`) usada em todos os frames iniciais; frames finais gerados a partir do job do frame inicial. Gasto total: **50 créditos** (saldo final 1,18).
+
+| Take | Frames (2752×1536) | Vídeo (job) | Specs do máster |
+|---|---|---|---|
+| Farol — "O Despertar" | `c7a66b4e` (OFF) → `49b1c17f` (ON) | `93ef1346` | MP4 1280×720, 6s, sem áudio |
+| Roda — "Torque parado" | `9191c108` → `59d83386` (girada ~30°) | `1224d8b6` | MP4 1280×720, 6s, sem áudio |
+| Volante — macro (take extra pedido pelo dev) | `0deca295` (só inicial) | `e18fc097` | MP4 1280×720, 6s, sem áudio |
+| Interior — "Cockpit acorda" | `4a591dba` (OFF) → `0cbbbd51` (âmbar ON) | `0a79d91f` | MP4 1280×720, 6s, sem áudio |
+
+**⚠️ Gate de resolução:** o modo `std` do Kling 3.0 entrega **720p** — abaixo do mínimo 1080p do [[Asset Sizing Standard]]. Os frames 2K passam no gate; os vídeos NÃO entram no site como estão. Caminhos (decisão do dev, pendência #9): **(a)** `upscale_video` do Higgsfield para 2K por vídeo (recarga necessária); **(b)** regenerar em modo `pro`/`4k` (custo maior, recarga); **(c)** re-rodar os mesmos pares de frames no Kling web (créditos diários grátis) em 1080p. Os pares de frames estão prontos e reutilizáveis em qualquer caminho.
+
+**Falhas registradas:** 1 job de imagem falhou (interior, `8f10a478`) sem cobrança — regenerado com prompt reformulado. O guard de preset do Higgsfield ("IN THE DARK") foi recusado 2× (`declined_preset_id`) para manter os prompts canon.
+
+**Restam a gerar (recarga):** marca/emblema (§3.8b, ~13 cr), traseira (§3.8e, ~13 cr), motor showcase (§3.9, ~15 cr em 8s), preloader (3.1), hero alpino (3.2), jaguar statement/motion (3.3/3.4), imagens de estúdio (3.5), showcase alpino (3.6), OG (3.7).
 
 ---
 
