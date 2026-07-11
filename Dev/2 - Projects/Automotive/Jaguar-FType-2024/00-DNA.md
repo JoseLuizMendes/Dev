@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.0
-status: "Prompts aprovados — geração bloqueada por créditos Higgsfield (caminhos A/B na Parte 4.2)"
+version: 1.1
+status: "Prompts aprovados + vídeos de detalhe (§3.8) e motor (§3.9) adicionados — geração bloqueada por créditos Higgsfield (caminhos A/B na Parte 4.2)"
 tags:
   - dna
   - kickoff-output
@@ -39,7 +39,7 @@ fonte_input: "[[00-Input]]"
 
 **Identidade visual:** paleta **dark luxury monocromática** (desvio consciente do default pastel, registrado aqui): preto fosco + grafite + prata metálica + branco gelo + **um único acento**. Mood: cinematográfico, predatório, silencioso e veloz.
 
-**Inventário de assets:** nenhum asset recebido (sem press kit); **7 slots a gerar** (Parte 3). Validado contra o [[Frontend Creative Protocol]] Fase 6 (geração via skills + Asset Sizing + galerias; AVIF+WebP; vídeo WebM VP9+MP4+poster; GIF proibido).
+**Inventário de assets:** nenhum asset de press kit recebido; **9 slots a gerar** (Parte 3 — §3.8 vídeos de detalhe e §3.9 motor adicionados na v1.1; mídias geradas pelo dev em 2026-07-11 avaliadas na Parte 6). Validado contra o [[Frontend Creative Protocol]] Fase 6 (geração via skills + Asset Sizing + galerias; AVIF+WebP; vídeo WebM VP9+MP4+poster; GIF proibido).
 
 ---
 
@@ -275,12 +275,105 @@ single amber accent. Avoid: unreadable microtext, fake sponsor logos, cluttered 
 
 > Alternativa sem risco tipográfico: gerar SEM texto e compor o texto via código (recomendado — tipografia real do site, zero garbled text). Decisão do dev.
 
+### 3.8 · Detalhes do carro — Vídeos de Estúdio (5 micro-loops) `[adicionado v1.1 — pedido do dev 2026-07-11]`
+
+> Companheiros em vídeo das imagens do 3.5 — cada "parte importante" (farol, marca, roda, interior, traseira) ganha um micro-loop de estúdio para as sections de detalhe. **As imagens 3.5 continuam existindo** (poster/fallback `prefers-reduced-motion` de cada vídeo — custo já pago vira poster).
+
+**Specs (Asset Sizing §Vídeo):** slot **Section inline / feature**: 16:9, máster **1080p+ (pedir o máximo do gerador)**, entrega **1280×720 WebM VP9 (crf 30–34) + MP4 H.264 fallback ≤ 6MB**, **4–6s micro-loop sem áudio**, poster AVIF/WebP obrigatório, `muted autoplay playsinline loop preload="metadata"` + lazy. ⚠️ Frames inicial/final em **16:9 `wide 2048×1152`** (mesmo ratio do vídeo — regra do Asset Sizing; NÃO reaproveitar as gerações 3:2/1:1 do 3.5 como frames). Par nomeado `detail-{nome}-video-frame-inicial/final.png`.
+
+**Config base dos frames (varia só `CORE_ASSETS.detail_state` — herda ambiente/paleta do 3.5):**
+
+```text
+/* PRODUCT_RENDER_CONFIG: FType-Studio-Motion-{farol|marca|roda|interior|traseira}
+   VERSION: 1.1  AESTHETIC: Premium Automotive Studio Film */
+{
+  "GLOBAL_SETTINGS": {
+    "aspect_ratio": "16:9 wide, 2048x1152",
+    "style": "hyper-realistic automotive studio cinematography, editorial finish, frozen film frame",
+    "camera": "macro-to-medium detail shot, 100mm, extremely shallow depth of field, locked tripod",
+    "render_flags": ["8K_master_detail", "micro_texture", "sharp_foreground", "no_CGI_tell"],
+    "scene_extension": "extend composition beyond frame edges (safe bleed)"
+  },
+  "ENVIRONMENT": {
+    "background": "graphite studio void #141416, soft gradient falloff to pure black",
+    "lighting": "single cold silver rim light sweeping the body line + faint amber practical glow #E8A33D",
+    "atmosphere": ["faint floating dust in the light beam", "soft floor reflection"]
+  },
+  "CORE_ASSETS": {
+    "primary_subject": "2024 Jaguar F-Type R75, satin matte black — same car across the whole set, consistent appearance",
+    "detail_state": "{ver tabela abaixo}"
+  },
+  "OUTPUT": {
+    "mood": "precision, tactile luxury, desire",
+    "avoid": ["oversaturation", "fake badges or invented logos", "busy reflections", "people", "text"]
+  }
+}
+```
+
+**`detail_state` + motion por vídeo (motion = prompt image-to-video, first/last frame, locked camera, no cuts, no people, no text, 24fps):**
+
+| # | Vídeo | Frame inicial (`detail_state`) | Frame final (`detail_state`) | Motion (4–6s) |
+|---|---|---|---|---|
+| a | **Farol — "O Despertar"** | "slim LED headlight OFF, satin hood edge traced only by the cold silver rim light, headlight glass dark and dormant" | "same framing — full LED signature LIT, amber bloom #E8A33D swelling through the studio haze onto the satin hood, dust motes glowing in the beam" | "The slim LED signature ignites from the inner edge outward, amber bloom swelling softly through the haze, dust motes drifting through the light beam, silver rim light constant. 4s." |
+| b | **Marca — emblema** ⚠️ | "front grille quarter view in near-darkness, gloss black mesh barely readable, the growler badge in shadow" | "same framing — the cold silver rim light has swept across, grazing the authentic Jaguar growler grille badge, metal relief catching crisp speculars" | "A single slow sweep of cold silver light crosses the grille from left to right, revealing the badge relief in passing, speculars rolling over the gloss mesh, then settling. 5s." |
+| c | **Roda — "Torque parado"** | "gloss black five-spoke wheel static, black caliper, carbon-ceramic disc, rim light grazing the spoke edges" | "same framing — wheel rotated ~30°, identical lighting, speculars shifted across the spokes" | "The wheel rotates slowly in place (one-eighth turn), chrome-like speculars rolling spoke to spoke, carbon-ceramic disc glinting behind, floor reflection alive. Seamless-ready. 5s." |
+| d | **Interior — "Cockpit acorda"** | "driver cockpit dim: black leather with silver stitching in low key, ambient light strip OFF, steering wheel quarter view" | "same framing — amber ambient light strip LIT tracing the dashboard line, stitching catching warm speculars, instruments faintly aglow" | "The amber ambient strip fades on, warm light traveling along the dashboard line, silver stitching catching light one seam after another, gentle glow on the wheel rim. 6s." |
+| e | **Traseira — "Assinatura"** | "rear three-quarter, ducktail spoiler line, slim LED taillight OFF, quad exhaust tips in dark chrome, cold rim light only" | "same framing — taillight LIT in deep red signature, faint heat shimmer rising from the quad exhausts, amber-warm reflections on the floor" | "The slim taillight signature ignites in one fluid sweep, heat shimmer starting to rise from the quad exhaust tips, reflections blooming on the studio floor. 4s." |
+
+> ⚠️ **Nota (b — marca):** emblema em macro é o take de maior risco de alucinação (relevo/tipografia do growler). Mitigação no prompt: "authentic Jaguar growler grille badge, no invented text". Se o gerador corromper o emblema em 2 tentativas, **abandonar o take** — a section de marca do site já é servida canonicamente pelo jaguar animal (3.3 statement + 3.4 motion), que é marca sem risco de fake badge.
+>
+> Cor do caliper: **preto** (decisão do acento âmbar aprovada — vermelho-caliper descartado até de uso gráfico, coerência com 3.5).
+
+### 3.9 · Motor — "O Coração" (vídeo showcase) `[adicionado v1.1 — pedido do dev 2026-07-11]`
+
+**Specs:** slot **Showcase / modal**: 16:9, máster **4K preferido (mín. 1080p)**, entrega 1920×1080 WebM VP9 (crf 26–30) + MP4 **≤ 15MB**, **6–8s**, poster obrigatório. Único slot que pode ter **áudio** (start-up do V8; off por default no player) — decisão do dev em `[PENDENTE #8]`. Par: `motor-video-frame-inicial/final.png` (16:9 `wide 2048×1152`).
+
+**Frame inicial:**
+
+```text
+/* PRODUCT_RENDER_CONFIG: FType-Motor-Frame-Inicial
+   VERSION: 1.1  AESTHETIC: Premium Automotive Studio Film */
+{
+  "GLOBAL_SETTINGS": {
+    "aspect_ratio": "16:9 wide, 2048x1152",
+    "style": "hyper-realistic automotive studio cinematography — the mechanical heart as sculpture",
+    "camera": "medium-close over the open engine bay, slight high angle, 65mm, shallow depth of field on bay edges",
+    "render_flags": ["8K_master_detail", "micro_texture", "sharp_foreground", "no_CGI_tell"],
+    "scene_extension": "extend composition beyond frame edges (safe bleed)"
+  },
+  "ENVIRONMENT": {
+    "background": "graphite studio void #141416, hood raised out of frame, gradient falloff to pure black",
+    "lighting": "single cold silver rim light raking across the engine architecture + faint amber practical glow #E8A33D from deep in the bay",
+    "atmosphere": ["faint floating dust in the light beam", "cold metal, still air"]
+  },
+  "CORE_ASSETS": {
+    "primary_subject": "supercharged 5.0-litre V8 of the 2024 Jaguar F-Type R75, dormant",
+    "materials": ["cast aluminium intake plenum with satin sheen", "black crackle-finish engine cover", "braided lines and dark chrome fittings", "carbon trim on the bay braces"]
+  },
+  "OUTPUT": {
+    "mood": "latent violence at rest, engineering as luxury, the predator's heart",
+    "avoid": ["invented engine text or fake logos", "people, tools, workshop clutter", "cartoonish glow", "oversaturation"]
+  }
+}
+```
+
+**Frame final (mesmo config — só muda o estado):** `"primary_subject": "same supercharged V8, absolutely consistent — now ALIVE at idle: micro vibration blur on the supercharger housing, heat shimmer rising through the silver light beam, amber glow deepened, dust in the beam trembling"`.
+
+**Motion (image-to-video, first/last frame, 6–8s):**
+
+```text
+The dormant V8 wakes: one sharp ignition shudder rocks the engine, then it settles into a low idle —
+constant micro-vibration on the supercharger housing, heat shimmer rising and bending the silver light beam,
+dust motes trembling with the pulse, speculars quivering on the cast aluminium. Camera: locked, no cuts,
+no zoom. Cinematic realism, consistent lighting and palette. No people, no text, no fake engine badges.
+```
+
 ---
 
 ## Parte 4 — Direções e Próximos Passos
 
 1. **Dev revisa este DNA** — em especial: acento (âmbar ✅ recomendado vs vermelho), tipografia proposta, prompts 3.1–3.7 (ajustes de cena/mood são baratos agora, caros depois). Este é o ponto de parada (aprovação não pré-autorizada).
-2. **Verificar créditos Higgsfield** — ✅ VERIFICADO em 2026-07-10 via MCP (`balance`): **1,42 créditos, plano free**. Modelos de terceiros (GPT Image 2, Kling O1, Seedream 4.5) retornam `403 minimum_basic_plan_required`; nativos (Cinema Studio 2.5) custam 2 créditos — **Higgsfield inviável no estado atual, nenhum crédito gasto**. Fallback canônico ativado: **[[01-Prompt-Pack]]** pronto para o free tier (Google AI Studio p/ imagens; Kling/Hailuo/Luma web p/ vídeo first/last frame). Se o dev assinar basic/recarregar: agente gera direto pelo MCP (`cinematic_studio_2_5` stills 2k–4k; `seedance_2_0`/`kling3_0` vídeo com start+end frame — modelos já mapeados). **Regra:** manter consistência de seed/estilo dentro de cada par de frames.
+2. **Verificar créditos Higgsfield** — ✅ VERIFICADO em 2026-07-10 via MCP (`balance`): **1,42 créditos, plano free** (re-verificado 2026-07-11: **1,18 créditos, free** — segue bloqueado). Modelos de terceiros (GPT Image 2, Kling O1, Seedream 4.5) retornam `403 minimum_basic_plan_required`; nativos (Cinema Studio 2.5) custam 2 créditos — **Higgsfield inviável no estado atual, nenhum crédito gasto**. Fallback canônico ativado: **[[01-Prompt-Pack]]** pronto para o free tier (Google AI Studio p/ imagens; Kling/Hailuo/Luma web p/ vídeo first/last frame). Se o dev assinar basic/recarregar: agente gera direto pelo MCP (`cinematic_studio_2_5` stills 2k–4k; `seedance_2_0`/`kling3_0` vídeo com start+end frame — modelos já mapeados). **Regra:** manter consistência de seed/estilo dentro de cada par de frames.
 3. **Normalização (Fase 6 do protocolo):** Upscayl só se algum máster vier abaixo do alvo (nunca upscale de vídeo — regenerar); `sharp` → AVIF+WebP em lote; ffmpeg → WebM VP9 + MP4 + poster (comandos canônicos do [[Asset Sizing Standard]]); extração dos 48 frames do preloader (`fps=12,scale=960:-2`); registrar cada tamanho gerado no futuro `05-Dev-Log`.
 4. **Depois das mídias aprovadas:** seguir a matriz — linhas 0–17 (escopo→contrato→planejamento→tarefas→bootstrap) quando o dev quiser formalizar o projeto, e **linha 19** ([[Frontend Creative Protocol]]: `refs/` + `00-MAPA.md` + `DESIGN.md` consumindo os proto-tokens daqui) quando o repo de código nascer. Se entrar captura de lead/test-drive → `tipo: front+back` → **linha 22**.
 
@@ -297,6 +390,21 @@ single amber accent. Avoid: unreadable microtext, fake sponsor logos, cluttered 
 | 5 | igloo.inc | Proto-tokens inacessíveis via fetch (WebGL) — `[PENDENTE — extrair na Fase 2 via refs/]` |
 | 6 | Back-end | Haverá captura de lead / agendamento de test-drive? (definiria `front+back` → linha 22) |
 | 7 | Texto no OG | Gerar OG com texto no prompt ou compor texto via código (recomendado)? |
+| 8 | Áudio no vídeo do motor (§3.9) | O showcase do motor é o único slot que pode ter som (start-up do V8, off por default no player). Gerar com trilha (Kling/Veo com áudio) ou entregar mudo? |
+
+---
+
+## Parte 6 — Ingestão de mídias geradas pelo dev (Fase 6.0 — 2026-07-11)
+
+> O dev gerou por conta própria 2 imagens + 1 vídeo (Veo) no mood do Ato I (floresta úmida) e enviou para avaliação. Validação contra [[Asset Sizing Standard]] + gates do [[Frontend Creative Protocol]] Fase 6.0:
+
+| Mídia | Specs medidas | Slot candidato | Veredito |
+|---|---|---|---|
+| Imagem 1 — F-Type preto fosco, DRL âmbar, curva de floresta com névoa (frontal ¾, meio da curva) | JPEG **1376×768** | Preloader / floresta (3.1) | ⚠️ **Aprovada como referência de mood/estilo; rejeitada como asset final** — abaixo do alvo de geração 2048×1152 (entrega @2x 1920×1080). Recuperável via Upscayl 2× em último caso; recomendação: regenerar no tamanho certo usando-a como imagem-referência |
+| Imagem 2 — mesmo carro/cenário, frontal ¾ mais próximo, curva com muro de pedra | JPEG **1376×768** | Preloader / floresta (3.1) | ⚠️ Idem imagem 1. O par 1+2 funciona como proto frame-inicial/final do 3.1 (consistência de carro/cena excelente) |
+| Vídeo — "Jaguar commercial authentic sound" (Veo) | MP4 H.264 **1280×720**, 8s, 24fps, **com trilha de áudio**, watermark "Veo" no canto | Preloader (3.1) / brand film | ❌ **Rejeitado como asset final** (aprovado como prova de conceito de mood): (1) 720p < mínimo 1080p — vídeo nunca é upscaled, regenerar; (2) watermark visível; (3) áudio embutido (slots de background são sem áudio); (4) coreografia divergente do preloader — o carro passa pela câmera e **se afasta** (termina na traseira), enquanto o preloader exige carro saindo da curva **em direção à câmera** (barra de load = velocidade de aproximação) |
+
+**Leitura de direção de arte:** as 3 mídias validam o DNA na prática — carro preto fosco + DRL âmbar como única fonte quente + floresta/névoa prata = exatamente o "Black Jaguar / Liquid Metal" do Ato I, com a paleta de proto-tokens confirmada em imagem real. A decisão do acento âmbar (#E8A33D) se prova correta. O que falta não é direção, é **spec técnica** (resolução/áudio/watermark/coreografia) e **cobertura**: os Atos II (alpino) e III (estúdio) e o jaguar animal seguem sem nenhum candidato — 9 slots a gerar.
 
 ---
 
@@ -307,4 +415,6 @@ single amber accent. Avoid: unreadable microtext, fake sponsor logos, cluttered 
 - [x] Prompts completos para TODOS os slots da §2.4 do Input, com tamanho/ratio calculados antes ([[Asset Sizing Standard]]), frames inicial+final onde `vira vídeo = sim`, alpha declarado onde marcado, bleed onde anima
 - [x] `[PENDENTE]` usados onde falta fonte — nada inventado (R3)
 - [x] Prompts aprovados pelo dev ("bora", 2026-07-10 — recomendações aceitas: acento âmbar, OG sem texto/texto via código)
+- [ ] Prompts v1.1 (§3.8 vídeos de detalhe + §3.9 motor) aprovados pelo dev — aguardando revisão
+- [x] Mídias geradas pelo dev (2 imagens + 1 vídeo Veo) ingeridas e avaliadas contra o Asset Sizing (Parte 6, 2026-07-11)
 - [ ] Mídias geradas + normalizadas (bloqueado: Higgsfield free/1,42 créditos → caminho A: assinar basic e o agente gera via MCP; caminho B: dev gera no free tier com o [[01-Prompt-Pack]] e o agente normaliza — Fase 6 do [[Frontend Creative Protocol]])
