@@ -1,7 +1,7 @@
 ---
 template: "Prompt Pack (derivado do 00-DNA — Parte 3)"
-version: 1.0
-status: "Pronto para uso (free tier)"
+version: 1.1
+status: "Pronto para uso (free tier) — vídeos de detalhe (12–16) e motor (17) adicionados"
 tags:
   - midia
   - prompts
@@ -35,6 +35,12 @@ data: "2026-07-10"
 | 9 | Estúdio dark ×4 (farol/roda/interior/traseira) | Google AI Studio · 3:2 e 1:1 | `detail-{farol,roda,interior,traseira}.png` |
 | 10 | Showcase alpino 6–8s | Kling (first = frame final do #5) | `showcase-alpino-master.mp4` |
 | 11 | OG 1200×630 (SEM texto — texto via código) | Google AI Studio · 3:2 → crop | `og-base.png` |
+| 12 | Vídeo detalhe — farol (frames + 4s) | AI Studio + Kling · 16:9 1080p | `detail-farol-video-master.mp4` |
+| 13 | Vídeo detalhe — marca/emblema (frames + 5s) ⚠️ | AI Studio + Kling · 16:9 1080p | `detail-marca-video-master.mp4` |
+| 14 | Vídeo detalhe — roda (frames + 5s) | AI Studio + Kling · 16:9 1080p | `detail-roda-video-master.mp4` |
+| 15 | Vídeo detalhe — interior (frames + 6s) | AI Studio + Kling · 16:9 1080p | `detail-interior-video-master.mp4` |
+| 16 | Vídeo detalhe — traseira (frames + 4s) | AI Studio + Kling · 16:9 1080p | `detail-traseira-video-master.mp4` |
+| 17 | Motor — showcase (frames + 6–8s, som opcional) | AI Studio + Kling · 16:9 1080p+ | `motor-video-master.mp4` |
 
 ---
 
@@ -131,6 +137,75 @@ From standstill the car launches forward, controlled slide through the first ben
 Hyper-realistic cinematic composition, 3:2 landscape: satin matte black 2024 Jaguar F-Type, three-quarter front, on wet alpine asphalt, snowy peaks soft in the background, amber LED headlights on. Subject weighted to the LEFT third; generous clean negative space on the right (dark sky/mist) for overlay text. Palette: matte black, graphite, silver, ice white, single amber accent. Avoid: any text, logos, watermarks, busy background on the right side.
 ```
 
+## 12–16 · Vídeos de detalhe — estúdio dark (fonte: [[00-DNA]] §3.8)
+
+> **Fluxo por vídeo:** gerar frame inicial no AI Studio (16:9, MAIOR resolução) → frame final **no mesmo chat** → vídeo no Kling (modo start+end frame, 1080p, sem áudio). Slot: section inline (entrega 1280×720 WebM+MP4 ≤6MB, poster = imagem 3.5/§9 correspondente).
+
+**Frame base — cole e troque só a linha `State:`:**
+
+```text
+Hyper-realistic automotive studio cinematography, editorial finish, 16:9 wide, frozen film frame. Camera: macro-to-medium detail shot, 100mm, extremely shallow depth of field, locked tripod. Extend composition beyond frame edges (safe bleed).
+
+Environment: graphite studio void with soft gradient falloff to pure black; single cold silver rim light sweeping the body line plus a faint warm amber practical glow; faint floating dust in the light beam; soft floor reflection.
+
+Subject: 2024 Jaguar F-Type R75, satin matte black — same car across the whole set, consistent appearance.
+State: {VER LISTA}
+
+Mood: precision, tactile luxury, desire. Avoid: oversaturation, fake badges or invented logos, busy reflections, people, text. Micro-texture, sharp foreground, no CGI tell.
+```
+
+**`State:` + prompt de vídeo por item (frame final SEMPRE no mesmo chat: "Same framing, same lighting, same car — change only: {estado final}"):**
+
+**12 · Farol — "O Despertar" (4s):**
+- Frame inicial `State:` `slim LED headlight OFF, satin hood edge traced only by the cold silver rim light, headlight glass dark and dormant`
+- Frame final: `full LED signature LIT, warm amber bloom swelling through the studio haze onto the satin hood, dust motes glowing in the beam`
+- Vídeo (Kling): `The slim LED signature ignites from the inner edge outward, amber bloom swelling softly through the haze, dust motes drifting through the light beam, silver rim light constant. Locked camera, no cuts, no people, no text.`
+
+**13 · Marca — emblema ⚠️ (5s):**
+- Frame inicial `State:` `front grille quarter view in near-darkness, gloss black mesh barely readable, the authentic Jaguar growler grille badge in shadow, no invented text`
+- Frame final: `the cold silver rim light has swept across, grazing the growler badge, metal relief catching crisp speculars`
+- Vídeo: `A single slow sweep of cold silver light crosses the grille from left to right, revealing the badge relief in passing, speculars rolling over the gloss mesh, then settling. Locked camera, no cuts, no text.`
+- ⚠️ Emblema corrompido em 2 tentativas = abandonar o take; a section de marca é servida pelo jaguar animal (#7/#8).
+
+**14 · Roda — "Torque parado" (5s):**
+- Frame inicial `State:` `gloss black five-spoke wheel static, black caliper, carbon-ceramic disc, rim light grazing the spoke edges`
+- Frame final: `wheel rotated about 30 degrees, identical lighting, speculars shifted across the spokes`
+- Vídeo: `The wheel rotates slowly in place (one-eighth turn), chrome-like speculars rolling spoke to spoke, carbon-ceramic disc glinting behind, floor reflection alive. Locked camera, seamless-ready, no cuts.`
+
+**15 · Interior — "Cockpit acorda" (6s):**
+- Frame inicial `State:` `driver cockpit dim: black leather with silver stitching in low key, ambient light strip OFF, steering wheel quarter view`
+- Frame final: `amber ambient light strip LIT tracing the dashboard line, stitching catching warm speculars, instruments faintly aglow`
+- Vídeo: `The amber ambient strip fades on, warm light traveling along the dashboard line, silver stitching catching light one seam after another, gentle glow on the wheel rim. Locked camera, no cuts, no people.`
+
+**16 · Traseira — "Assinatura" (4s):**
+- Frame inicial `State:` `rear three-quarter, ducktail spoiler line, slim LED taillight OFF, quad exhaust tips in dark chrome, cold rim light only`
+- Frame final: `taillight LIT in deep red signature, faint heat shimmer rising from the quad exhausts, warm reflections on the floor`
+- Vídeo: `The slim taillight signature ignites in one fluid sweep, heat shimmer starting to rise from the quad exhaust tips, reflections blooming on the studio floor. Locked camera, no cuts, no text.`
+
+## 17 · Motor — "O Coração" (showcase 6–8s, único slot que PODE ter som — fonte: [[00-DNA]] §3.9)
+
+**Frame inicial — cole:**
+
+```text
+Hyper-realistic automotive studio cinematography, 16:9 wide — the mechanical heart as sculpture. Camera: medium-close over the open engine bay, slight high angle, 65mm, shallow depth of field on bay edges. Extend composition beyond frame edges (safe bleed).
+
+Environment: graphite studio void, hood raised out of frame, gradient falloff to pure black. Lighting: single cold silver rim light raking across the engine architecture plus a faint warm amber practical glow from deep in the bay; faint floating dust in the light beam; cold metal, still air.
+
+Subject: the supercharged 5.0-litre V8 of the 2024 Jaguar F-Type R75, dormant. Materials: cast aluminium intake plenum with satin sheen, black crackle-finish engine cover, braided lines and dark chrome fittings, carbon trim on the bay braces.
+
+Mood: latent violence at rest, engineering as luxury, the predator's heart. Avoid: invented engine text or fake logos, people, tools, workshop clutter, cartoonish glow, oversaturation. Micro-texture, no CGI tell.
+```
+
+**Frame final — mesmo chat:** `Same engine bay, same framing, same lighting — the V8 is now ALIVE at idle: micro vibration blur on the supercharger housing, heat shimmer rising through the silver light beam, amber glow deepened, dust in the beam trembling. Keep everything else identical.`
+
+**Vídeo (Kling, start+end frame, 1080p+, 6–8s):**
+
+```text
+The dormant V8 wakes: one sharp ignition shudder rocks the engine, then it settles into a low idle — constant micro-vibration on the supercharger housing, heat shimmer rising and bending the silver light beam, dust motes trembling with the pulse, speculars quivering on the cast aluminium. Camera: locked, no cuts, no zoom. Cinematic realism. No people, no text, no fake engine badges.
+```
+
+> Áudio: decisão pendente do dev ([[00-DNA]] Parte 5 #8). Se com som: gerar em modo com áudio (start-up + idle de V8); player com som **off por default**. Se mudo: transcodificar com `-an` como os demais.
+
 ---
 
 ## Pós-processamento (depois de gerar — o agente executa)
@@ -147,6 +222,9 @@ ffmpeg -i _masters/hero-alpino-master.mp4 -vf scale=1920:-2 -c:v libvpx-vp9 -b:v
 ffmpeg -i _masters/hero-alpino-master.mp4 -vf scale=1920:-2 -c:v libvpx-vp9 -b:v 0 -crf 32 -pass 2 -an hero.webm
 ffmpeg -i _masters/hero-alpino-master.mp4 -vf scale=1920:-2 -c:v libx264 -crf 23 -preset slow -movflags +faststart -an hero.mp4
 ffmpeg -i _masters/hero-alpino-master.mp4 -ss 00:00:02 -frames:v 1 poster.png   # → AVIF+WebP
+
+# 2b. Vídeos de detalhe (12–16): mesma receita do hero com scale=1280:-2 (entrega 720p, ≤6MB) + poster = imagem #9 correspondente
+#     Motor (17): scale=1920:-2, crf 28 (showcase); áudio conforme decisão #8 (com som: manter faixa AAC no MP4; sem: -an)
 
 # 3. Imagens: sharp em lote → AVIF (q≈50) + WebP; OG → crop 1200×630 PNG/JPEG q80
 # 4. Jaguar statement: remove-bg se veio com fundo → WebP com alpha
