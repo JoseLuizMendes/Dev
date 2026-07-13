@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.3
-status: "Estratégia de Mídia v2 + preloader 'A Curva' v2 (drift noturno em silhueta, 3,7s por tempo) registrados em 2026-07-13 (Parte 8 + §3.1 v2 + P8); másters 720p da Parte 7 aguardando decisão (#9); marca/traseira/motor pendentes de recarga"
+version: 1.4
+status: "Blueprint de seções & motion (Parte 9 — base Zenith, paleta canon, mapa 'O Território') registrado em 2026-07-13; Estratégia de Mídia v2 (Parte 8) + preloader v2 (§3.1) na mesma data; másters 720p da Parte 7 aguardando decisão (#9); marca/traseira/motor pendentes de recarga"
 tags:
   - dna
   - kickoff-output
@@ -55,6 +55,10 @@ fonte_input: "[[00-Input]]"
 | igloo.inc | `[PENDENTE — extrair na Fase 2 via refs/]` (página 100% WebGL, sem conteúdo extraível via fetch) | Referência de imersão 3D/transições — estudar CF na Fase 2 |
 | nextsense.io | Hierarquia tipográfica limpa (H1 ~2.5–3rem, H2 ~1.8–2rem, body ~1rem); whitespace generoso; cantos quase retos; sombras mínimas | Escala tipográfica e respiro; radii mínimos combinam com o mood "lâmina" |
 | terminal-industries.com | Dark navy/charcoal + acento único; fotografia escura; **counter animations**; logos em grayscale; alto contraste | Counters (0→100) são a linguagem perfeita para specs do carro (0–100 km/h, hp, Nm) e para a barra do preloader |
+| Pinterest "Zenith Hypercars" (pin 343681015339983742, 2026-07-13 — **favorita do dev**) | Hero full-bleed + **stats bar de 4 counters gigantes** logo abaixo; cards de versões com preço; section técnica dark (bateria); interior full-width; logos de imprensa; form final; grotesk moderna com 1 acento vívido | **LAYOUT-BASE do site** (decisão do dev): a estrutura de sections vem daqui — ver Parte 9. O acento verde-neon da ref é substituído pelo âmbar canon |
+| Pinterest "Aurex Motors" (pin 709105903877076108, 2026-07-13) | **Mapa com rota numerada** (01→05) desenhada sobre a section escura; grid de lifestyle 5-up; clube/membership | O mapa vira **"O Território"** — rota do test-drive na serra, com a curva do preloader como ponto 01 (decisão do dev); linha desenhada no scroll |
+| Pinterest "Sahara Velocity" (pin 709105903877076205, 2026-07-13) | Stats bar com **0–100 em destaque**; macros de materiais (couro, carbono, alcantara) como **grade de swatches**; dark quente monocromático | Valida a stats bar com o 3,7s como herói; a grade de swatches entra na section de detalhes (materiais do cockpit) |
+| Pinterest "Monarch Riviera" (pin 709105903877076167, 2026-07-13) | Alternância de ritmo editorial (texto/imagem em blocos assimétricos); craftsmanship em macro (mão + emblema); depoimento em serif itálico | Ref secundária de RITMO — a paleta clara/creme dela foi **descartada pelo dev** (paleta canon dark+âmbar mantida, sem migração) |
 
 **Proto-tokens propostos** (ponto de partida da Fase 4 do protocolo → `tailwind.config.ts` + `DESIGN.md` via `/impeccable init`; **não é a versão final**):
 
@@ -397,12 +401,15 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 | 1 | Nome/logotipo do site | Qual o nome do site/domínio? (afeta OG 3.7, futura identidade e SEO) |
 | 2 | Acento final da paleta | Âmbar-farol (recomendado, WCAG ✅) ou vermelho-caliper (só gráfico)? |
 | 3 | Tipografia | Valida a proposta display grotesk (Archivo/Space Grotesk) + Inter, ou prefere outra direção? |
-| 4 | Refs adicionais | Há sites automotivos específicos que admira para entrar na 2.1? |
+| 4 | ~~Refs adicionais~~ | ✅ **RESOLVIDA (2026-07-13):** dev enviou 4 refs Pinterest (Zenith favorita, Aurex, Sahara, Monarch) — registradas na Parte 2 e no [[00-Input]] §2.1 refs 7–10 |
 | 5 | igloo.inc | Proto-tokens inacessíveis via fetch (WebGL) — `[PENDENTE — extrair na Fase 2 via refs/]` |
 | 6 | Back-end | Haverá captura de lead / agendamento de test-drive? (definiria `front+back` → linha 22) |
 | 7 | Texto no OG | Gerar OG com texto no prompt ou compor texto via código (recomendado)? |
 | 8 | Áudio no vídeo do motor (§3.9) | O showcase do motor é o único slot que pode ter som (start-up do V8, off por default no player). Gerar com trilha (Kling/Veo com áudio) ou entregar mudo? |
 | 9 | Másters 720p da Parte 7 | Upscale via Higgsfield (`upscale_video` 2K, recarga), regenerar em Kling `pro`/`4k` (recarga), ou re-rodar os pares de frames no Kling web free em 1080p? |
+| 10 | Copy das headlines (Parte 9) | Hero em 3 linhas estilo Zenith + títulos de section — dev escreve ou agente propõe (com [[MarketingCopywrite]]) para revisão? |
+| 11 | Specs oficiais do trim | Confirmar os 4 números da stats bar para o trim anunciado (R 75: 0–100 3,7s / 575 PS / 700 Nm / vel. máx) — fonte oficial antes de publicar |
+| 12 | Logos de imprensa (Parte 9 §9) | Projeto de estudo: usar logos reais de imprensa (Top Gear etc., como nas refs) ou marcas fictícias? |
 
 ---
 
@@ -471,6 +478,29 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 
 ---
 
+## Parte 9 — Blueprint de Seções & Motion (base Zenith, paleta canon — 2026-07-13)
+
+> Decisões do dev (2026-07-13, refs Pinterest da Parte 2): **layout-base = "Zenith Hypercars"** (favorita), **paleta permanece a canon** dark + âmbar (zero retrabalho nas mídias geradas), **mapa estilo Aurex = rota do test-drive**. Motion: **GSAP + Lenis** (canon [[Preferencias Dev#GSAP + Lenis]] — `useGSAP`, ScrollTrigger integrado ao Lenis via `requestAnimationFrame`, `prefers-reduced-motion` → estados estáticos) + preloader §3.1 v2. Nenhum slot de mídia novo: todas as sections consomem a Parte 3 (regras R-M1/2/3 da Parte 8 valem).
+
+| # | Section | Conteúdo (ref) | Mídia (slot da Parte 3) | Motion (GSAP/Lenis) |
+|---|---|---|---|---|
+| 0 | **Preloader "A Curva"** | Assinatura do site | §3.1 v2 — ~60 frames AVIF em canvas | Tempo fixo 3,7s; barra = velocímetro 0→100; stat final "0–100 km/h · 3,7s"; dissolve no hero |
+| 1 | **Hero** | Full-bleed estilo Zenith; headline curta em 3 linhas `[PENDENTE #10 — copy]`; CTA duplo (reservar / ver filme) | Loop alpino §3.2 (A1) + poster | Reveal pós-preloader (o stat 3,7s "vira" o primeiro counter); parallax sutil no vídeo (bleed 10%); nav aparece após o reveal |
+| 2 | **Stats bar** | 4 counters gigantes (Zenith/Sahara): **0–100 em 3,7s** (herói) + potência + torque + vel. máx `[PENDENTE #11 — confirmar specs oficiais do trim]` | — (tipografia display) | Counters GSAP disparados por ScrollTrigger; contagem com o mesmo ease do velocímetro do preloader |
+| 3 | **Os 3 Atos** | 3 cards escuros estilo "Built to Perform": Habitat (floresta) / Domínio (alpino) / Detalhe (estúdio) | Stills §3.5 + §3.6 (A1/A3) | Stagger de entrada; hover: zoom leve na mídia (bleed); cada card ancora para sua section |
+| 4 | **Motor "O Coração"** | Section técnica dark (análoga à battery da Zenith): V8 5.0 supercharged + 3 mini-specs | Vídeo §3.9 (showcase, som opt-in — pendência #8) | Pin curto da section; vídeo entra com clip-path reveal; mini-specs em stagger |
+| 5 | **Detalhes de estúdio** | Faróis / roda / traseira em blocos alternados; grade de swatches de materiais (Sahara) | Micro-loops §3.8 + macros (A6) | ScrollTrigger: cada take entra quando 60% visível; loops só tocam em viewport (economia); swatches em stagger |
+| 6 | **Cockpit** | Interior full-width estilo "Pure Connection" | Still/vídeo interior §3.8d (A7) | Parallax lento; legenda em fade sequencial |
+| 7 | **"O Território"** | Mapa da rota do test-drive (Aurex): pontos numerados 01→0n nos cenários dos atos — **01 = a curva do preloader**; termina no CTA de test-drive | Fundo: still floresta/alpino escurecido; mapa = SVG (código, sem mídia) | Linha SVG desenhada no scroll (`stroke-dashoffset` via ScrollTrigger scrub); pontos acendem em âmbar ao passar |
+| 8 | **Jaguar statement** | Divider com o animal (fio condutor da marca) | §3.3 (alpha) / §3.4 | Reveal no scroll (máscara); olhos âmbar acendem por último |
+| 9 | **Prova social** | Logos de imprensa em grayscale (Zenith) + 1 depoimento serif itálico (Monarch) | — `[PENDENTE #12 — logos reais ou fictícios? projeto de estudo]` | Fade em stagger; grayscale → cor no hover |
+| 10 | **Inquiry / test-drive** | Form estilo "Own the Future" | Fundo `surface-1` + still discreto | Campos em stagger; submit com micro-feedback. ⚠️ Captura real de lead → `front+back` (linha 22, pendência #6) |
+| 11 | **Footer** | Colunas padrão + assinatura | — | — |
+
+**Regras transversais de motion:** Lenis na raiz; `gsap.ticker` ↔ `lenis.raf`; `useGSAP` obrigatório (auto-cleanup); NENHUMA animação bloqueia main thread; `prefers-reduced-motion` desativa preloader (poster+fade), counters (valor final direto), parallax e scrub. Vídeos: `muted autoplay playsinline loop preload="metadata"` + poster (canon [[Asset Sizing Standard]]).
+
+---
+
 ## Quality Gate (do Kickoff — R2: só marcado o que foi feito)
 
 - [x] `00-DNA.md` gerado com as 5 partes do contrato de resposta
@@ -481,4 +511,5 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 - [ ] Prompts v1.1 (§3.8 vídeos de detalhe + §3.9 motor) aprovados pelo dev — aguardando revisão
 - [x] Mídias geradas pelo dev (2 imagens + 1 vídeo Veo) ingeridas e avaliadas contra o Asset Sizing (Parte 6, 2026-07-11)
 - [ ] Estratégia de Mídia v2 (Parte 8) + §3.1 v2 + prompt P8 revisados pelo dev (abordagem aprovada em plano na sessão 2026-07-13; texto final aguardando leitura)
+- [ ] Blueprint de seções & motion (Parte 9) revisado pelo dev (decisões base Zenith/paleta canon/mapa test-drive tomadas via AskUserQuestion 2026-07-13; tabela final aguardando leitura)
 - [ ] Mídias geradas + normalizadas (bloqueado: Higgsfield free/1,42 créditos → caminho A: assinar basic e o agente gera via MCP; caminho B: dev gera no free tier com o [[01-Prompt-Pack]] e o agente normaliza — Fase 6 do [[Frontend Creative Protocol]])

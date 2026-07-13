@@ -59,7 +59,10 @@ Vender um Jaguar F-Type 2024 por meio de uma experiência web cinematográfica d
 | 4 | https://www.igloo.inc/ | Imersão 3D/WebGL de altíssimo nível, transições de cena (Fase 1.3) |
 | 5 | https://nextsense.io/ | Sofisticação dark, tipografia e ritmo de sections (Fase 1.3) |
 | 6 | https://terminal-industries.com/ | Estética tech premium dark, uso de vídeo em sections (Fase 1.3) |
-| 7 | `[PENDENTE — perguntar ao dev: há mais referências específicas de sites automotivos que admira?]` | — |
+| 7 | https://br.pinterest.com/pin/343681015339983742/ — "Zenith Hypercars" (enviada 2026-07-13, **favorita do dev**) | **Layout-base do site:** hero full-bleed + stats bar de 4 counters gigantes + cards de versões + section técnica dark + interior + prova social + form. Grotesk moderna, 1 acento vívido |
+| 8 | https://br.pinterest.com/pin/709105903877076108/ — "Aurex Motors" (enviada 2026-07-13) | **Section de mapa com rota numerada** (dev destacou o mapa) — vira "O Território" (rota do test-drive); grid de lifestyle |
+| 9 | https://br.pinterest.com/pin/709105903877076205/ — "Sahara Velocity" (enviada 2026-07-13) | Stats bar com 0–100 em destaque; macros de materiais (couro/carbono) como grade de swatches |
+| 10 | https://br.pinterest.com/pin/709105903877076167/ — "Monarch Riviera" (enviada 2026-07-13) | Ritmo editorial e craftsmanship em macro (ref secundária — paleta clara descartada pelo dev, paleta canon mantida) |
 
 ### 2.2 Identidade visual
 
