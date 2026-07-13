@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.2
-status: "4 vídeos de detalhe GERADOS via Higgsfield MCP (Parte 7, 2026-07-11) — másters 720p aguardando decisão de upscale/regeneração pro; marca/traseira/motor pendentes de recarga"
+version: 1.3
+status: "Estratégia de Mídia v2 + preloader 'A Curva' v2 (drift noturno em silhueta, 3,7s por tempo) registrados em 2026-07-13 (Parte 8 + §3.1 v2 + P8); másters 720p da Parte 7 aguardando decisão (#9); marca/traseira/motor pendentes de recarga"
 tags:
   - dna
   - kickoff-output
@@ -29,13 +29,13 @@ fonte_input: "[[00-Input]]"
 
 | Ato | Cenário | Onde no site | Papel emocional |
 |---|---|---|---|
-| **I — Habitat** | Floresta úmida de serra, névoa, asfalto molhado | **Preloader** (carro sai da curva; barra de load = velocidade) | Predador em casa; tensão e antecipação |
+| **I — Habitat** | Floresta úmida de serra, névoa, asfalto molhado (preloader: à NOITE) | **Preloader** (drift noturno em silhueta; barra = velocímetro 0→100 km/h) | Predador em casa; tensão e antecipação |
 | **II — Domínio** | Estrada alpina com neve, luz fria lateral (1ª ref do dev) | **Hero loop** + section alpina | O predador domina qualquer território; vastidão |
 | **III — Detalhe** | Estúdio dark, rim light prata | Sections de specs/detalhes (faróis, roda, interior, traseira) | Precisão, luxo tátil, desejo de posse |
 
 **Fio condutor:** o jaguar animal (preto metálico, alpha) aparece como elemento de identidade — reveal no scroll, divider de sections, e a section de herança da marca (jaguar-motion).
 
-**Preloader (assinatura do site):** vídeo IA de 3–5s → ~48 frames AVIF → GSAP toca a sequência em `<canvas>` amarrada ao progresso REAL de load (carro acelera conforme os assets carregam; easing segura o clímax para nunca parecer instantâneo nem lento). Duração percebida alvo: **2,5–4s**.
+**Preloader (assinatura do site — v2, 2026-07-13):** vídeo IA ≥1080p → ~60 frames AVIF → GSAP toca a sequência em `<canvas>` por **TEMPO fixo de 3,7s** — o 0–100 km/h real do F-Type R 75. A barra de load é um **velocímetro 0→100** sincronizado aos frames; o load real só decide QUANDO a sequência começa (e segura em 99% no último frame se a rede for lenta). Coreografia: drift noturno em silhueta que termina com o carro estourando pela câmera. Spec completa: §3.1 v2.
 
 **Identidade visual:** paleta **dark luxury monocromática** (desvio consciente do default pastel, registrado aqui): preto fosco + grafite + prata metálica + branco gelo + **um único acento**. Mood: cinematográfico, predatório, silencioso e veloz.
 
@@ -84,39 +84,58 @@ fonte_input: "[[00-Input]]"
 >
 > ⚠️ Nota de marca: projeto de estudo/teste de pipeline. Prompts citam o F-Type real (produto anunciado), mas pedem `no extra badges or fake logos` para evitar emblemas alucinados.
 
-### 3.1 · Preloader — "A Curva" (vídeo → sequência de frames)
+### 3.1 · Preloader — "A Curva" v2 (drift noturno em silhueta → frames por tempo)
 
-**Specs (Asset Sizing):** slot próprio (fullscreen 16:9). Máster de vídeo **1920×1080 mín.** (4K se o gerador der), 3–5s, 24fps. Entrega: **~48 frames** extraídos → AVIF **960×540** (@1x 640 / @2x 1280 ficam cobertos por 960 com canvas scale) → alvo **≤ 2MB total** (~20–35KB/frame AVIF q≈45). Frames nomeados `preloader-curva-f001.avif`…; par gerador `preloader-curva-frame-inicial.png` / `preloader-curva-frame-final.png`. Bleed ~10% (o canvas pode sofrer scale sutil).
+> **v2 (2026-07-13, decisão do dev):** coreografia nova — noite, drift, o carro passa pela câmera e sai do campo de visão — e mecânica nova: frames tocados por **TEMPO fixo de 3,7s** (o 0–100 km/h real do F-Type R 75), não pelo progresso de load. A v1 (dia, sem drift, frames amarrados ao load real) fica no histórico git; motivos da troca na **Parte 8**.
+
+**Conceito:** a tela abre em névoa escura. Quatro pontos âmbar dobram a curva ao fundo — os olhos do predador. O carro atravessa a curva em **drift, em silhueta** (só faróis, spray e reflexo no asfalto molhado), endireita, acelera direto na câmera e **estoura pelo campo de visão**, saindo do frame. A barra de load é um **velocímetro 0→100 km/h** sincronizado aos frames; ao cravar 100, aparece o stat **"0–100 km/h · 3,7s"** e o preloader dissolve no hero. O visitante *sente* a aceleração real do carro antes de ler qualquer texto.
+
+**Mecânica (canvas + GSAP):**
+
+- Sequência de **~60 frames AVIF** (16fps × 3,7s) tocada por **tempo fixo** em `<canvas>`; easing da barra = curva de aceleração real (ease-out: ganho rápido no início, afunilando perto dos 100).
+- O **load real só gateia o início**: a sequência dispara quando os frames estão decodificados; se o resto dos assets ainda carrega ao fim dos 3,7s, a barra segura em 99% sobre o último frame (névoa vazia + rastro de luz) — o carro nunca anda aos trancos nem congela no meio do drift.
+- Barra = velocímetro: número + barra `0–100 km/h`; aos 100, stat final "0–100 km/h em 3,7s".
+- `prefers-reduced-motion`: pula a sequência — poster estático (frame inicial) + fade + barra simples.
+
+**Timeline dos 3,7s (frames × velocímetro):**
+
+| Tempo | Cena | Velocímetro |
+|---|---|---|
+| 0,0–0,8s | Névoa escura; 4 pontos âmbar dobram a curva ao fundo | 0 → 25 |
+| 0,8–2,2s | Drift em silhueta pela curva: traseira desliza, spray de água, rastro âmbar varrendo a névoa | 25 → 70 |
+| 2,2–3,4s | Carro endireita e acelera direto na câmera, crescendo rápido no frame, faróis em flare | 70 → 98 |
+| 3,4–3,7s | Carro estoura pela câmera (borda direita) e sai do campo de visão; névoa se fechando + rastro de luz | 100 + stat "3,7s" |
+
+**Specs (Asset Sizing):** slot fullscreen 16:9. Máster de vídeo **≥1080p** (nunca 720p — vídeo não se upscala, regenera), 8s do gerador → **trim/retime da janela do drift para 3,7s na pós**. Entrega: ~60 frames AVIF **960×540** q≈45 → alvo **≤ 2,5MB total**; nomes `preloader-curva-f001.avif`…; par gerador `preloader-curva-noite-frame-inicial.png` / `-final.png` (16:9 `wide 2048×1152`). Bleed ~10% (canvas pode sofrer scale sutil).
 
 **Frame inicial (imagem, 16:9 `wide 2048×1152`):**
 
 ```text
-/* SCENE_RENDER_CONFIG: FType-Preloader-Frame-Inicial
-   VERSION: 1.0  AESTHETIC: Cinematic Automotive Film Still */
+/* SCENE_RENDER_CONFIG: FType-Preloader-Noite-Frame-Inicial
+   VERSION: 2.0  AESTHETIC: Cinematic Automotive Night Film Still */
 {
   "GLOBAL_SETTINGS": {
     "aspect_ratio": "16:9 wide, 2048x1152",
-    "style": "hyper-realistic cinematic film still, in the lineage of Tarkovsky's slow cinema — dense silver mist, contemplative dread before speed",
-    "camera": "low three-quarter front angle, 35mm anamorphic feel, camera height ~60cm, shallow depth of field on background",
-    "render_flags": ["8K_master_detail", "sharp_subject", "subtle_filmic_grain", "no_CGI_tell"],
-    "scene_extension": "extend scene beyond frame edges (safe bleed for UI animation)"
+    "style": "hyper-realistic cinematic NIGHT film still — near-black frame, dense silver fog; the car exists only as headlights, spray and reflections",
+    "camera": "locked low tripod at ~50cm height on the inside of the corner exit, 32mm wide lens, deep night exposure",
+    "render_flags": ["8K_master_detail", "true_blacks", "subtle_filmic_grain", "no_CGI_tell"],
+    "scene_extension": "extend scene beyond frame edges (safe bleed for canvas scale)"
   },
   "ENVIRONMENT": {
-    "location": "narrow two-lane mountain road curving through dense humid rainforest — jaguar habitat",
-    "concrete_elements": ["wet asphalt with mirror-like reflections", "low rolling fog between dark tree trunks",
-      "dark green ferns and moss on rock cuts", "dripping canopy leaves overhead", "faint god rays through mist",
-      "worn double yellow center line", "low roadside stone barrier"],
-    "lighting": "overcast diffused cold daylight; the car's LED headlights are the only warm source",
-    "palette": "matte black #0A0A0B, graphite, silver metallic #C7CBD1, ice white; single amber accent #E8A33D from headlights"
+    "location": "narrow two-lane mountain road curving through dense humid rainforest at NIGHT — jaguar habitat after dark",
+    "concrete_elements": ["wet asphalt mirroring amber light", "thick low fog between black tree silhouettes",
+      "faint cold ambient sheen on the mist", "worn center line vanishing into the bend"],
+    "lighting": "near-total darkness; the car's FOUR amber LED headlights are the ONLY warm light source, blooming through the fog — no streetlights, no moon disc, no neon",
+    "palette": "black #0A0A0B, graphite, cold silver mist #C7CBD1; single amber accent #E8A33D"
   },
   "CORE_ASSETS": {
-    "primary_subject": "2024 Jaguar F-Type R75 coupe, satin matte black finish",
-    "vehicle_state": "entering the corner far side, three-quarter front visible, slight body roll, frozen action",
-    "materials": ["satin black paint with soft speculars", "gloss black 20-inch five-spoke wheels", "slim LED headlight signature on", "fine water spray behind rear wheels"]
+    "primary_subject": "2024 Jaguar F-Type R75 coupe as a SILHOUETTE — body barely readable against the fog, no visible details or badges",
+    "vehicle_state": "small in frame at the far bend, mid-corner with the rear stepping out (controlled drift), all FOUR amber headlights (two per side) cutting the fog toward camera, fine water spray behind the rear wheels, frozen action",
+    "materials": ["satin black silhouette", "amber light volume in fog", "mirror reflection on wet asphalt"]
   },
   "OUTPUT": {
-    "mood": "predatory, silent speed about to be unleashed, high-ticket luxury",
-    "avoid": ["oversaturation", "toy-like proportions", "extra badges or fake logos", "people, other cars", "lens flare excess"]
+    "mood": "the predator's eyes in the dark; violence about to arrive; high-ticket luxury",
+    "avoid": ["visible body details or badges", "daylight", "people, other cars", "streetlights or neon", "oversaturation"]
   }
 }
 ```
@@ -125,23 +144,15 @@ fonte_input: "[[00-Input]]"
 
 ```text
 "CORE_ASSETS": {
-  "primary_subject": "same 2024 Jaguar F-Type R75 coupe, satin matte black — absolutely consistent in appearance and coloring with the initial frame",
-  "vehicle_state": "exiting the apex toward camera, near full-frontal, low and planted, full LED headlights flared through the mist, water spray arcing off both rear wheels",
-  "materials": ["satin black paint catching a cold silver rim light", "amber headlight bloom cutting the fog", "motion energy held (frozen action)"]
+  "primary_subject": "same 2024 Jaguar F-Type R75 silhouette — absolutely consistent in appearance with the initial frame",
+  "vehicle_state": "HUGE in frame, passing the camera at the right edge, mostly out of frame already, headlight flare washing the lens, fog torn open behind it, water spray frozen mid-air",
+  "materials": ["amber lens flare", "motion energy held (frozen action)", "wet asphalt glow fading back to black"]
 }
 ```
 
-**Prompt de motion (image-to-video, first/last frame — Higgsfield/Kling/Luma):**
+**Prompt de motion (image-to-video ou text-to-video):** usar o **P8** do [[02-Prompt-Pack-Video-Premium]] (padrão anti-alucinação completo, timeline 8s beat a beat). Este é o **único take do projeto com carro em movimento permitido** (regra R-M1 da Parte 8) — viável porque a silhueta esconde exatamente o que a genAI alucina.
 
-```text
-First frame: car entering the corner far side. Last frame: car exiting the apex toward camera, headlights flared.
-Motion: the matte black Jaguar F-Type accelerates smoothly through the wet forest corner toward the camera,
-progressive speed build (slow-in, strong-out), subtle body roll then settle, water spray increasing with speed,
-fog parting around the body. Camera: locked tripod, no pan, no zoom, no cuts. Duration 4s, 24fps,
-cinematic realism, consistent lighting and palette across all frames. No people, no other vehicles, no text.
-```
-
-**Pós:** `ffmpeg -i master.mp4 -vf "fps=12,scale=960:-2" preloader/f%03d.png` → `sharp` → AVIF q45 + WebP fallback. 12fps × 4s = 48 frames (GSAP interpola a percepção; menos peso que 24fps).
+**Pós:** máster ≥1080p → trim/retime da janela do drift para 3,7s (`ffmpeg -ss/-t` + `setpts`) → `fps=16,scale=960:-2` → `sharp` → AVIF q45 + WebP fallback = ~60 frames.
 
 ### 3.2 · Hero background loop — "Domínio Alpino" (vídeo)
 
@@ -428,6 +439,38 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 
 ---
 
+## Parte 8 — Estratégia de Mídia v2 (2026-07-13)
+
+> Gatilho: frustração do dev com a qualidade das gerações ("as mídias não estão num nível bom pra um site high-ticket... precisam ficar muito boas não só em qualidade de pixels mas em marketing"). Diagnóstico + regras operacionais decididas nesta sessão. Estas regras valem para **todo prompt novo do projeto** e prevalecem sobre instruções mais antigas da Parte 3 em caso de conflito.
+
+### Diagnóstico — por que estava quebrando
+
+1. **GenAI de vídeo é estruturalmente fraca em identidade de produto.** Cada geração reinventa o carro (1 farol, 6 faróis, narração inventada, cortes) — prompt melhor *reduz* o problema, não elimina (prova: saga P1 v1→v3). Sites high-ticket reais não usam genAI no hero; usam fotografia ou render do CAD.
+2. **Onde ela funciona:** carro **parado** + luz/câmera se movendo (P2–P5 entregaram bem). **Onde quebra:** qualquer coreografia com o carro em movimento — drift é o pior caso possível.
+3. **Qualidade "de marketing" não é resolução** — é ângulo, lente e luz deliberados. Prompts anteriores geravam cenas bonitas sem declarar o ângulo de catálogo que valoriza o produto.
+
+### Regras operacionais
+
+- **R-M1 — Carro parado.** Nenhum prompt de vídeo pede movimento do carro. **Única exceção:** o preloader (§3.1 v2), que usa a técnica de **silhueta noturna** — corpo em silhueta na névoa; o que se vê são os 4 faróis âmbar, spray e reflexos. A IA não consegue alucinar o que não aparece.
+- **R-M2 — Stills-first.** Todo take vira primeiro uma IMAGEM 2K (barata, fácil de rejeitar e refazer). Vídeo só é gerado DEPOIS do still aprovado pelo dev, via image-to-video com o still como frame — nunca text-to-video direto. (Os frames 2K da Parte 7 já cumprem esta regra para farol/roda/volante/interior.)
+- **R-M3 — Catálogo de ângulos.** Todo still declara qual ângulo do catálogo abaixo executa (campo `camera` do SCENE_RENDER_CONFIG referencia o código A1–A7). Ângulo fora do catálogo = justificar antes de gerar.
+
+### Catálogo de ângulos de marketing (o que valoriza o F-Type)
+
+| # | Ângulo | Lente | Altura de câmera | O que valoriza |
+|---|---|---|---|---|
+| A1 | ¾ frontal baixo (hero) | 35mm | ~60cm | Presença e agressividade — nariz + haunch traseiro no mesmo quadro |
+| A2 | Head-on simétrico | 85mm | ~65cm (altura do farol) | O "olhar do predador" — os 4 faróis em simetria |
+| A3 | Perfil puro | 50mm | ~90cm (cintura do carro) | Silhueta e proporção do coupé: capô longo, cabine recuada |
+| A4 | ¾ traseiro baixo | 85mm | ~50cm | Haunch traseiro (assinatura do F-Type) + quad exhaust |
+| A5 | Top-down ¾ elevado | 35mm | ~2,5m | Formato felino do capô/teto; linhas orgânicas |
+| A6 | Macro de detalhe | 100mm macro | altura do elemento | Textura como joia: farol, roda, costura, emblema |
+| A7 | Cockpit driver-side | 100mm | ombro do motorista | Materiais e posse — "o lugar é seu" |
+
+**Pipeline resultante:** still 2K no ângulo A(n) → QA do dev → image-to-video restrito (luz/câmera se movem, carro não) → pós (Fase 6). Os slots pendentes da Parte 7 seguem este fluxo.
+
+---
+
 ## Quality Gate (do Kickoff — R2: só marcado o que foi feito)
 
 - [x] `00-DNA.md` gerado com as 5 partes do contrato de resposta
@@ -437,4 +480,5 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 - [x] Prompts aprovados pelo dev ("bora", 2026-07-10 — recomendações aceitas: acento âmbar, OG sem texto/texto via código)
 - [ ] Prompts v1.1 (§3.8 vídeos de detalhe + §3.9 motor) aprovados pelo dev — aguardando revisão
 - [x] Mídias geradas pelo dev (2 imagens + 1 vídeo Veo) ingeridas e avaliadas contra o Asset Sizing (Parte 6, 2026-07-11)
+- [ ] Estratégia de Mídia v2 (Parte 8) + §3.1 v2 + prompt P8 revisados pelo dev (abordagem aprovada em plano na sessão 2026-07-13; texto final aguardando leitura)
 - [ ] Mídias geradas + normalizadas (bloqueado: Higgsfield free/1,42 créditos → caminho A: assinar basic e o agente gera via MCP; caminho B: dev gera no free tier com o [[01-Prompt-Pack]] e o agente normaliza — Fase 6 do [[Frontend Creative Protocol]])
