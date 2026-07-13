@@ -42,7 +42,7 @@ NEGATIVE (exclude completely): lista de exclusão
 
 | # | Take | Duração | Observação |
 |---|---|---|---|
-| P1 **v2** | Faróis — "O Despertar" | 8s | **Revisado (feedback do dev 2026-07-12):** OS DOIS faróis, câmera em orbit único (¾ esquerdo → frontal simétrico), carro parado; bloco `AUDIO — LOCKED` (sem narrador/voz/música — só room tone + idle fraco opcional) + negative anti-voz. v1 (macro 1 farol, câmera travada) descartada: gerador cortou pra 2s, mostrou 1 farol só e inventou narração |
+| P1 **v3** | Faróis — "O Despertar" | 8s | **Revisado 2× (feedback do dev 2026-07-12):** QUATRO faróis (dois por lado, correção do dev sobre a v2 que dizia "both"), acendendo juntos; câmera em orbit único (¾ esquerdo → frontal simétrico), carro parado; bloco `AUDIO — LOCKED` (sem narrador/voz/música — só room tone + idle fraco opcional) + negative anti-voz e guarda de contagem (`only two headlights, six or more`). v1 (macro 1 farol, câmera travada) descartada: gerador cortou pra 2s, mostrou 1 farol e inventou narração |
 | P2 | Roda — "Torque parado" | 8s | 1/8 de volta, corpo parado |
 | P3 | Volante — macro | 8s | âmbar acorda atrás do volante |
 | P4 | Interior — "Cockpit acorda" | 8s | luz viaja pelo painel |
