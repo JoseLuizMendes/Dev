@@ -18,6 +18,8 @@ data: "2026-07-12"
 > **Blindagem usada em todos:** (1) um único take contínuo, zero cortes; (2) câmera travada declarada 2×; (3) identidade do carro fixada em bloco próprio; (4) timeline segundo a segundo; (5) bloco NEGATIVE explícito; (6) paleta canon (preto fosco / prata fria / âmbar #E8A33D).
 >
 > **Como usar:** duração 8s (ou 6s se o gerador limitar), 16:9, 1080p+ SEMPRE (720p reprova no gate). Se o gerador aceitar imagem inicial (image-to-video), anexar o frame 2K correspondente da Parte 7 do [[00-DNA]] — os prompts funcionam com ou sem. Campo de negative prompt separado: mover o bloco NEGATIVE pra lá.
+>
+> ⚠️ **Regra de áudio (aprendizado da rodada P1 v1, 2026-07-12):** em gerador com áudio nativo (Veo 3 etc.), TODO prompt deve levar o bloco `AUDIO — LOCKED: NO narrator, NO voiceover, NO speech, NO music. Only quiet ambient room tone; optionally a faint low engine idle.` + `narrator, voiceover, voice, speech, music, soundtrack` no NEGATIVE. Sem isso o gerador inventa narração. Decisão do dev: nenhuma voz em nenhum take; no máximo som do carro.
 
 Os 7 prompts completos estão registrados na conversa da sessão 2026-07-12 e espelhados abaixo (fonte canônica).
 
@@ -40,7 +42,7 @@ NEGATIVE (exclude completely): lista de exclusão
 
 | # | Take | Duração | Observação |
 |---|---|---|---|
-| P1 | Farol — "O Despertar" | 8s | LED acende da ponta interna pra fora |
+| P1 **v2** | Faróis — "O Despertar" | 8s | **Revisado (feedback do dev 2026-07-12):** OS DOIS faróis, câmera em orbit único (¾ esquerdo → frontal simétrico), carro parado; bloco `AUDIO — LOCKED` (sem narrador/voz/música — só room tone + idle fraco opcional) + negative anti-voz. v1 (macro 1 farol, câmera travada) descartada: gerador cortou pra 2s, mostrou 1 farol só e inventou narração |
 | P2 | Roda — "Torque parado" | 8s | 1/8 de volta, corpo parado |
 | P3 | Volante — macro | 8s | âmbar acorda atrás do volante |
 | P4 | Interior — "Cockpit acorda" | 8s | luz viaja pelo painel |
