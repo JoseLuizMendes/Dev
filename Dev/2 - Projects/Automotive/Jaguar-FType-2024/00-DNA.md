@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.4
-status: "Blueprint de seções & motion (Parte 9 — base Zenith, paleta canon, mapa 'O Território') registrado em 2026-07-13; Estratégia de Mídia v2 (Parte 8) + preloader v2 (§3.1) na mesma data; másters 720p da Parte 7 aguardando decisão (#9); marca/traseira/motor pendentes de recarga"
+version: 1.5
+status: "Preloader v3 = carro 3D ao vivo (React Three Fiber, modelo Sketchfab CC) substituindo a silhueta genAI (§3.1, 2026-07-13); P8/silhueta rebaixado a plano B; Blueprint (Parte 9) base Zenith/paleta canon; Estratégia de Mídia v2 (Parte 8); másters 720p da Parte 7 aguardando decisão (#9); marca/traseira/motor pendentes de recarga"
 tags:
   - dna
   - kickoff-output
@@ -29,13 +29,13 @@ fonte_input: "[[00-Input]]"
 
 | Ato | Cenário | Onde no site | Papel emocional |
 |---|---|---|---|
-| **I — Habitat** | Floresta úmida de serra, névoa, asfalto molhado (preloader: à NOITE) | **Preloader** (drift noturno em silhueta; barra = velocímetro 0→100 km/h) | Predador em casa; tensão e antecipação |
+| **I — Habitat** | Floresta úmida de serra, névoa, asfalto molhado (preloader: à NOITE) | **Preloader** (carro 3D ao vivo na curva; barra = velocímetro 0→100 km/h) | Predador em casa; tensão e antecipação |
 | **II — Domínio** | Estrada alpina com neve, luz fria lateral (1ª ref do dev) | **Hero loop** + section alpina | O predador domina qualquer território; vastidão |
 | **III — Detalhe** | Estúdio dark, rim light prata | Sections de specs/detalhes (faróis, roda, interior, traseira) | Precisão, luxo tátil, desejo de posse |
 
 **Fio condutor:** o jaguar animal (preto metálico, alpha) aparece como elemento de identidade — reveal no scroll, divider de sections, e a section de herança da marca (jaguar-motion).
 
-**Preloader (assinatura do site — v2, 2026-07-13):** vídeo IA ≥1080p → ~60 frames AVIF → GSAP toca a sequência em `<canvas>` por **TEMPO fixo de 3,7s** — o 0–100 km/h real do F-Type R 75. A barra de load é um **velocímetro 0→100** sincronizado aos frames; o load real só decide QUANDO a sequência começa (e segura em 99% no último frame se a rede for lenta). Coreografia: drift noturno em silhueta que termina com o carro estourando pela câmera. Spec completa: §3.1 v2.
+**Preloader (assinatura do site — v3, 2026-07-13):** **carro 3D real em tempo real** (React Three Fiber; modelo GLB grátis do Sketchfab, sem Blender nem ferramenta paga). O carro segue uma **curva** com as rodas girando; a barra de load é um **velocímetro 0→100** por **TEMPO fixo de 3,7s** (0–100 km/h real do R 75); o load só decide QUANDO começa (segura em 99% se a rede for lenta). Geometria real = movimento determinístico, zero alucinação. A silhueta genAI (v2/P8) vira plano B. Spec completa: §3.1 v3.
 
 **Identidade visual:** paleta **dark luxury monocromática** (desvio consciente do default pastel, registrado aqui): preto fosco + grafite + prata metálica + branco gelo + **um único acento**. Mood: cinematográfico, predatório, silencioso e veloz.
 
@@ -88,31 +88,44 @@ fonte_input: "[[00-Input]]"
 >
 > ⚠️ Nota de marca: projeto de estudo/teste de pipeline. Prompts citam o F-Type real (produto anunciado), mas pedem `no extra badges or fake logos` para evitar emblemas alucinados.
 
-### 3.1 · Preloader — "A Curva" v2 (drift noturno em silhueta → frames por tempo)
+### 3.1 · Preloader — "A Curva" v3 (carro 3D ao vivo / React Three Fiber)
 
-> **v2 (2026-07-13, decisão do dev):** coreografia nova — noite, drift, o carro passa pela câmera e sai do campo de visão — e mecânica nova: frames tocados por **TEMPO fixo de 3,7s** (o 0–100 km/h real do F-Type R 75), não pelo progresso de load. A v1 (dia, sem drift, frames amarrados ao load real) fica no histórico git; motivos da troca na **Parte 8**.
+> **v3 (2026-07-13, decisão do dev via AskUserQuestion):** o preloader deixa de ser vídeo/frames de genAI e passa a ser um **carro 3D REAL renderizado em tempo real** no navegador (React Three Fiber). Gatilho: o dev quis reproduzir um tutorial (Figma → Tripo.ai → Blender) de um carro 3D seguindo uma curva com velocímetro + contorno de rota — mas **não sabe Blender** e **não paga** ferramentas. Substitutos gratuitos e no terreno dele (código React/TS): **Blender → R3F**, **Tripo → modelo grátis do Sketchfab (CC)**. Ganho decisivo: geometria real = **carro em movimento determinístico, zero alucinação** — resolve a dor que originou a Parte 8. A v2 (silhueta genAI, prompt **P8**) fica como **plano B / insumo para clipe OG-social** (ver Parte 8 e [[02-Prompt-Pack-Video-Premium]]).
+>
+> ⚠️ **R7 (Preferencias Dev):** Three.js/R3F + GSAP + Lenis são canon ([[Preferencias Dev#GSAP + Lenis]]; Three.js aprovado). Sem violação. A implementação ocorre no bootstrap do front (matriz linha 19) — esta seção é a **spec**, não código (R8: nada de código no vault).
 
-**Conceito:** a tela abre em névoa escura. Quatro pontos âmbar dobram a curva ao fundo — os olhos do predador. O carro atravessa a curva em **drift, em silhueta** (só faróis, spray e reflexo no asfalto molhado), endireita, acelera direto na câmera e **estoura pelo campo de visão**, saindo do frame. A barra de load é um **velocímetro 0→100 km/h** sincronizado aos frames; ao cravar 100, aparece o stat **"0–100 km/h · 3,7s"** e o preloader dissolve no hero. O visitante *sente* a aceleração real do carro antes de ler qualquer texto.
+**Conceito:** a tela abre em névoa escura sobre um piso molhado espelhado. O carro 3D preto fosco entra numa **curva**, as rodas giram, os 4 faróis âmbar cortam a névoa, e ele acelera em direção à câmera. Um **velocímetro 0→100 km/h** + o **contorno da rota** (canto inferior, como no tutorial) preenchem conforme o carro avança; ao cravar 100, aparece o stat **"0–100 km/h · 3,7s"** e a cena dissolve no hero. O contorno da rota é a semente do mapa **"O Território"** (Parte 9 §7) — a curva do preloader é o ponto 01.
 
-**Mecânica (canvas + GSAP):**
+**Pipeline sem Blender/pago (substituição direta do tutorial):**
 
-- Sequência de **~60 frames AVIF** (16fps × 3,7s) tocada por **tempo fixo** em `<canvas>`; easing da barra = curva de aceleração real (ease-out: ganho rápido no início, afunilando perto dos 100).
-- O **load real só gateia o início**: a sequência dispara quando os frames estão decodificados; se o resto dos assets ainda carrega ao fim dos 3,7s, a barra segura em 99% sobre o último frame (névoa vazia + rastro de luz) — o carro nunca anda aos trancos nem congela no meio do drift.
-- Barra = velocímetro: número + barra `0–100 km/h`; aos 100, stat final "0–100 km/h em 3,7s".
-- `prefers-reduced-motion`: pula a sequência — poster estático (frame inicial) + fade + barra simples.
+| Passo do tutorial (pago/Blender) | Substituto grátis adotado |
+|---|---|
+| Figma → frame com logo/nome/specs/título/arco | Overlay em **HTML/CSS/SVG** sobre o `<canvas>` (ou desenhar antes no Figma via MCP) |
+| Tripo.ai → gerar carro 3D (multiview → GLB) | **GLB grátis do Sketchfab (CC)** — esportivo limpo (F-Type se houver, senão genérico); alt.: `generate_3d` do Higgsfield a partir da imagem-referência |
+| Blender → animar na curva + rodas + render | **React Three Fiber** (código): carro segue `CatmullRomCurve3`, rodas giram por comprimento de arco, render em tempo real no browser |
+| Blender → iluminação/câmera | **Luzes R3F** (key âmbar + rim frio) + **HDRI CC0** (Poly Haven); câmera por ângulo do catálogo A1–A4 |
 
-**Timeline dos 3,7s (frames × velocímetro):**
+**Mecânica (R3F + GSAP + Lenis):**
 
-| Tempo | Cena | Velocímetro |
+- **Modelo:** GLB do Sketchfab comprimido com **Draco** (`useGLTF`/`drei`); rodas como meshes separadas para rotação independente; material preto fosco acetinado + rim prata (paleta canon).
+- **Movimento:** carro posicionado ao longo de um `CatmullRomCurve3` (a curva); progresso `t` 0→1 por **tween de tempo fixo 3,7s** no primeiro load (0–100 km/h do R 75), com ease-out (ganho rápido, afunila perto dos 100); rodas giram proporcional ao comprimento de arco percorrido. `gsap.ticker` ↔ `lenis.raf`; `useGSAP` (auto-cleanup); nenhuma anim bloqueia main thread.
+- **Load gating:** o tween de 3,7s só dispara quando GLB + HDRI estão decodificados; se o resto dos assets ainda carrega ao fim, o velocímetro segura em 99% com o carro parado no fim da curva — nunca anda aos trancos.
+- **Velocímetro:** número + barra `0–100 km/h` acoplados ao `t`; aos 100, stat "0–100 km/h em 3,7s".
+- **Fallbacks:** sem WebGL → **poster estático** + fade; `prefers-reduced-motion` → poster + fade + barra simples (sem render animado). O poster pode ser um still R3F exportado ou o frame SCENE_RENDER_CONFIG abaixo.
+- **Perf budget:** GLB ≤ ~poucos MB (Draco), draw calls enxutos, mount lazy, pausa o loop fora do viewport.
+
+**Timeline dos 3,7s (curva × velocímetro):**
+
+| Tempo | Cena (carro 3D na curva) | Velocímetro |
 |---|---|---|
-| 0,0–0,8s | Névoa escura; 4 pontos âmbar dobram a curva ao fundo | 0 → 25 |
-| 0,8–2,2s | Drift em silhueta pela curva: traseira desliza, spray de água, rastro âmbar varrendo a névoa | 25 → 70 |
-| 2,2–3,4s | Carro endireita e acelera direto na câmera, crescendo rápido no frame, faróis em flare | 70 → 98 |
-| 3,4–3,7s | Carro estoura pela câmera (borda direita) e sai do campo de visão; névoa se fechando + rastro de luz | 100 + stat "3,7s" |
+| 0,0–0,8s | Névoa escura; o carro surge no fundo da curva, faróis âmbar acendendo | 0 → 25 |
+| 0,8–2,2s | Carro percorre a curva, rodas girando, reflexo no piso molhado varrendo âmbar | 25 → 70 |
+| 2,2–3,4s | Carro endireita e acelera em direção à câmera, crescendo no frame | 70 → 98 |
+| 3,4–3,7s | Carro passa pela câmera / freia no ponto de hero; contorno da rota completa | 100 + stat "3,7s" |
 
-**Specs (Asset Sizing):** slot fullscreen 16:9. Máster de vídeo **≥1080p** (nunca 720p — vídeo não se upscala, regenera), 8s do gerador → **trim/retime da janela do drift para 3,7s na pós**. Entrega: ~60 frames AVIF **960×540** q≈45 → alvo **≤ 2,5MB total**; nomes `preloader-curva-f001.avif`…; par gerador `preloader-curva-noite-frame-inicial.png` / `-final.png` (16:9 `wide 2048×1152`). Bleed ~10% (canvas pode sofrer scale sutil).
+**Specs (Asset Sizing):** slot fullscreen 16:9. Render em tempo real (sem máster de vídeo). Poster de fallback: 1 still 16:9 `wide 2048×1152` → AVIF+WebP (@2x 1920×1080). Assets 3D fora do git em `_masters/3d/` (GLB + HDRI); no repo entra o GLB otimizado (Draco) em `public/`.
 
-**Frame inicial (imagem, 16:9 `wide 2048×1152`):**
+**Poster / frame de fallback (imagem, 16:9 `wide 2048×1152` — reduced-motion & no-WebGL):**
 
 ```text
 /* SCENE_RENDER_CONFIG: FType-Preloader-Noite-Frame-Inicial
@@ -144,19 +157,9 @@ fonte_input: "[[00-Input]]"
 }
 ```
 
-**Frame final (imagem, mesmo config — só muda o bloco `CORE_ASSETS`):**
+> O bloco acima é o **poster de fallback** (reduced-motion / no-WebGL) — o still noturno em silhueta que aparece no lugar do render 3D. Gera-se por imagem (Higgsfield/genAI) OU exporta-se um frame do próprio R3F.
 
-```text
-"CORE_ASSETS": {
-  "primary_subject": "same 2024 Jaguar F-Type R75 silhouette — absolutely consistent in appearance with the initial frame",
-  "vehicle_state": "HUGE in frame, passing the camera at the right edge, mostly out of frame already, headlight flare washing the lens, fog torn open behind it, water spray frozen mid-air",
-  "materials": ["amber lens flare", "motion energy held (frozen action)", "wet asphalt glow fading back to black"]
-}
-```
-
-**Prompt de motion (image-to-video ou text-to-video):** usar o **P8** do [[02-Prompt-Pack-Video-Premium]] (padrão anti-alucinação completo, timeline 8s beat a beat). Este é o **único take do projeto com carro em movimento permitido** (regra R-M1 da Parte 8) — viável porque a silhueta esconde exatamente o que a genAI alucina.
-
-**Pós:** máster ≥1080p → trim/retime da janela do drift para 3,7s (`ffmpeg -ss/-t` + `setpts`) → `fps=16,scale=960:-2` → `sharp` → AVIF q45 + WebP fallback = ~60 frames.
+**Plano B (preloader genAI — silhueta):** se o 3D não for viável em algum momento, o prompt de vídeo **P8** do [[02-Prompt-Pack-Video-Premium]] reproduz a v2 (drift noturno em silhueta, 8s → retime 3,7s → ~60 frames AVIF). Mantido como fallback e como possível clipe **OG/social**, não mais como o preloader primário.
 
 ### 3.2 · Hero background loop — "Domínio Alpino" (vídeo)
 
@@ -410,6 +413,9 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 | 10 | Copy das headlines (Parte 9) | Hero em 3 linhas estilo Zenith + títulos de section — dev escreve ou agente propõe (com [[MarketingCopywrite]]) para revisão? |
 | 11 | Specs oficiais do trim | Confirmar os 4 números da stats bar para o trim anunciado (R 75: 0–100 3,7s / 575 PS / 700 Nm / vel. máx) — fonte oficial antes de publicar |
 | 12 | Logos de imprensa (Parte 9 §9) | Projeto de estudo: usar logos reais de imprensa (Top Gear etc., como nas refs) ou marcas fictícias? |
+| 13 | Modelo 3D do preloader (§3.1 v3) | Qual GLB do Sketchfab (licença CC — CC-BY exige crédito no site)? F-Type exato se existir, ou esportivo genérico? Alt.: gerar via Higgsfield `generate_3d` da imagem-referência |
+| 14 | HDRI de ambiente (§3.1 v3) | Qual HDRI CC0 (Poly Haven) para a iluminação do preloader 3D — estúdio dark / noite? |
+| 15 | Clipe OG do preloader | Gravar também um `.mp4` da cena 3D (canvas capture) para OG/social, ou usar o P8/silhueta como clipe? (adiado) |
 
 ---
 
@@ -458,7 +464,7 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 
 ### Regras operacionais
 
-- **R-M1 — Carro parado.** Nenhum prompt de vídeo pede movimento do carro. **Única exceção:** o preloader (§3.1 v2), que usa a técnica de **silhueta noturna** — corpo em silhueta na névoa; o que se vê são os 4 faróis âmbar, spray e reflexos. A IA não consegue alucinar o que não aparece.
+- **R-M1 — Carro parado.** Nenhum prompt de vídeo pede movimento do carro. **Única exceção:** o preloader — e desde 2026-07-13 (§3.1 **v3**) ele não é mais genAI e sim **3D real em tempo real (R3F)**: para a única necessidade de carro em movimento, a resposta determinística é geometria real, não IA. A silhueta genAI (§3.1 v2 / prompt P8) fica como **fallback / clipe OG-social** — viável só porque a silhueta esconde o que a IA alucina.
 - **R-M2 — Stills-first.** Todo take vira primeiro uma IMAGEM 2K (barata, fácil de rejeitar e refazer). Vídeo só é gerado DEPOIS do still aprovado pelo dev, via image-to-video com o still como frame — nunca text-to-video direto. (Os frames 2K da Parte 7 já cumprem esta regra para farol/roda/volante/interior.)
 - **R-M3 — Catálogo de ângulos.** Todo still declara qual ângulo do catálogo abaixo executa (campo `camera` do SCENE_RENDER_CONFIG referencia o código A1–A7). Ângulo fora do catálogo = justificar antes de gerar.
 
@@ -484,7 +490,7 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 
 | # | Section | Conteúdo (ref) | Mídia (slot da Parte 3) | Motion (GSAP/Lenis) |
 |---|---|---|---|---|
-| 0 | **Preloader "A Curva"** | Assinatura do site | §3.1 v2 — ~60 frames AVIF em canvas | Tempo fixo 3,7s; barra = velocímetro 0→100; stat final "0–100 km/h · 3,7s"; dissolve no hero |
+| 0 | **Preloader "A Curva"** | Assinatura do site | §3.1 **v3** — carro 3D ao vivo (R3F; GLB Sketchfab CC) | Carro segue `CatmullRomCurve3`, rodas giram; tempo fixo 3,7s; barra = velocímetro 0→100; contorno da rota (semente do §7); dissolve no hero. Three.js/R3F canon (R7 ok) |
 | 1 | **Hero** | Full-bleed estilo Zenith; headline curta em 3 linhas `[PENDENTE #10 — copy]`; CTA duplo (reservar / ver filme) | Loop alpino §3.2 (A1) + poster | Reveal pós-preloader (o stat 3,7s "vira" o primeiro counter); parallax sutil no vídeo (bleed 10%); nav aparece após o reveal |
 | 2 | **Stats bar** | 4 counters gigantes (Zenith/Sahara): **0–100 em 3,7s** (herói) + potência + torque + vel. máx `[PENDENTE #11 — confirmar specs oficiais do trim]` | — (tipografia display) | Counters GSAP disparados por ScrollTrigger; contagem com o mesmo ease do velocímetro do preloader |
 | 3 | **Os 3 Atos** | 3 cards escuros estilo "Built to Perform": Habitat (floresta) / Domínio (alpino) / Detalhe (estúdio) | Stills §3.5 + §3.6 (A1/A3) | Stagger de entrada; hover: zoom leve na mídia (bleed); cada card ancora para sua section |
@@ -512,4 +518,5 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 - [x] Mídias geradas pelo dev (2 imagens + 1 vídeo Veo) ingeridas e avaliadas contra o Asset Sizing (Parte 6, 2026-07-11)
 - [ ] Estratégia de Mídia v2 (Parte 8) + §3.1 v2 + prompt P8 revisados pelo dev (abordagem aprovada em plano na sessão 2026-07-13; texto final aguardando leitura)
 - [ ] Blueprint de seções & motion (Parte 9) revisado pelo dev (decisões base Zenith/paleta canon/mapa test-drive tomadas via AskUserQuestion 2026-07-13; tabela final aguardando leitura)
+- [ ] Preloader v3 (§3.1 — carro 3D ao vivo R3F, modelo Sketchfab CC) revisado pelo dev (decisões 3D-ao-vivo/Sketchfab/substitui-silhueta tomadas via AskUserQuestion 2026-07-13; spec aguardando leitura; implementação no bootstrap do front)
 - [ ] Mídias geradas + normalizadas (bloqueado: Higgsfield free/1,42 créditos → caminho A: assinar basic e o agente gera via MCP; caminho B: dev gera no free tier com o [[01-Prompt-Pack]] e o agente normaliza — Fase 6 do [[Frontend Creative Protocol]])

@@ -49,7 +49,7 @@ NEGATIVE (exclude completely): lista de exclusão
 | P5 | Traseira — "Assinatura" | 8s | taillight + heat shimmer |
 | P6 | Marca — emblema | 8s | ⚠️ risco de badge alucinado; fallback = jaguar animal (DNA 3.3/3.4) |
 | P7 | Motor — "O Coração" | 8s | único take que PODE ter som (pendência #8) |
-| P8 | Preloader — "A Curva" (drift silhueta noturna) | 8s → 3,7s na pós | **Único take com carro em movimento permitido** (R-M1, Parte 8 do [[00-DNA]]): corpo em silhueta na névoa, só os 4 faróis âmbar + spray + reflexos visíveis — a IA não alucina o que não aparece. Texto integral abaixo |
+| P8 | Preloader — "A Curva" (drift silhueta noturna) | 8s → 3,7s na pós | ⚠️ **Plano B (2026-07-13):** o preloader primário virou **3D ao vivo / R3F** (§3.1 v3 do [[00-DNA]]). Este prompt fica como fallback e insumo para um clipe OG-social. Corpo em silhueta na névoa, só os 4 faróis âmbar + spray + reflexos — a IA não alucina o que não aparece. Texto integral abaixo |
 
 > Texto integral dos prompts P1–P7: ver mensagem da sessão (chat) de 2026-07-12 — mantidos em inglês, prontos para colar. Em caso de regeneração, copiar SEMPRE o prompt inteiro, nunca resumir (a blindagem está na redundância).
 
