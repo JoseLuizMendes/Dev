@@ -1,7 +1,7 @@
 ---
 template: "Prompt Pack (derivado do 00-DNA — §3.8/3.9, versão premium anti-alucinação)"
-version: 1.1
-status: "Pronto para uso em qualquer gerador de vídeo (Veo / Sora / Kling / Runway / Hailuo) — P8 (preloader drift silhueta) adicionado em 2026-07-13"
+version: 1.2
+status: "Pronto para uso em qualquer gerador de vídeo (Veo / Sora / Kling / Runway / Hailuo) — P9 (preloader dia nublado, carro velado) é o preloader primário; P8 (silhueta noturna) vira fallback/OG (2026-07-13)"
 tags:
   - midia
   - prompts
@@ -49,13 +49,45 @@ NEGATIVE (exclude completely): lista de exclusão
 | P5 | Traseira — "Assinatura" | 8s | taillight + heat shimmer |
 | P6 | Marca — emblema | 8s | ⚠️ risco de badge alucinado; fallback = jaguar animal (DNA 3.3/3.4) |
 | P7 | Motor — "O Coração" | 8s | único take que PODE ter som (pendência #8) |
-| P8 | Preloader — "A Curva" (drift silhueta noturna) | 8s → 3,7s na pós | ⚠️ **Plano B (2026-07-13):** o preloader primário virou **3D ao vivo / R3F** (§3.1 v3 do [[00-DNA]]). Este prompt fica como fallback e insumo para um clipe OG-social. Corpo em silhueta na névoa, só os 4 faróis âmbar + spray + reflexos — a IA não alucina o que não aparece. Texto integral abaixo |
+| **P9** | Preloader — "A Curva" (**dia nublado, estrada de montanha, carro velado**) | 8s → 3,7s na pós | ✅ **Preloader PRIMÁRIO (§3.1 v4 do [[00-DNA]], 2026-07-13):** dia encoberto, estrada na margem da mata, o carro **surge na curva velado pela névoa**, desacelera na curva, acelera e passa pela câmera. Névoa densa = blindagem anti-alucinação (carro visível de dia). Ação na zona central 9:16 (crop retrato). Texto integral abaixo |
+| P8 | Preloader — "A Curva" (drift silhueta noturna) | 8s → 3,7s na pós | ⚠️ **Fallback / clipe OG-social (2026-07-13).** Corpo em silhueta na névoa noturna. Texto integral abaixo |
 
 > Texto integral dos prompts P1–P7: ver mensagem da sessão (chat) de 2026-07-12 — mantidos em inglês, prontos para colar. Em caso de regeneração, copiar SEMPRE o prompt inteiro, nunca resumir (a blindagem está na redundância).
 
 ---
 
-## P8 — Preloader "A Curva" (texto integral, 2026-07-13)
+## P9 — Preloader "A Curva" · PRIMÁRIO (dia nublado, carro velado — texto integral, 2026-07-13)
+
+> Par de frames inicial/final para image-to-video: §3.1 v4 do [[00-DNA]] (`FType-Preloader-Dia-Frame-Inicial/Final`, 2048×1152; frame inicial = estrada VAZIA = poster). Pós: máster ≥1080p (preferir 4K) → trim/retime da janela para **3,7s** → ~60 frames AVIF. **Enquadrar a ação-chave na zona central 9:16** (crop retrato do celular). Se o gerador tiver campo de negative separado, mover o bloco NEGATIVE pra lá.
+
+```text
+Ultra-photorealistic luxury automotive brand film, overcast daytime, the quality of an official Jaguar launch commercial. One single continuous shot, 8 seconds, 16:9, cinema-grade. Keep all key action within the central 9:16 region of the frame (safe for a vertical crop).
+
+SUBJECT — LOCKED IDENTITY (do not alter at any point): exactly ONE 2024 Jaguar F-Type coupe in SATIN MATTE BLACK, kept PARTIALLY VEILED by dense fog at all times — its body is softly obscured by mist, never fully crisp. What reads clearly: exactly FOUR amber LED headlights (two slim blades on EACH side of the front — four lights total: outer-left, inner-left, inner-right, outer-right) glowing warm amber (#E8A33D) through the haze, and the wet-asphalt reflection under the car. No badges, no readable logos. The paint is matte black (never glossy, never grey, never another color).
+
+SET & LIGHTING — LOCKED: an open two-lane mountain road running along the MARGIN of a highland forest/valley, by day under a heavy OVERCAST sky. Dense low fog swallows the far misty green hills; wet asphalt with soft reflections; desaturated green-grey slopes at the roadside; the road bends in a curve. Flat, cool, diffuse daylight — no sun disc, no sun flare, no harsh shadows. Moody, desaturated, slightly underexposed dark-luxury grade (NOT bright, NOT high-key). The only warm color in the whole frame is the car's amber lights.
+
+CAMERA — LOCKED: single locked tripod position, low, ~60cm height, on the inside of the corner exit, 32mm wide lens. NO pan, NO zoom, NO dolly, NO shake, NO focus change, NO cuts — the camera NEVER moves; all motion comes from the car.
+
+TIMELINE:
+0.0–0.6s — EMPTY scene: only the misty mountain road and valley, drifting fog. No car yet.
+0.6–1.4s — the car EMERGES around the far bend, veiled in fog, amber headlights switching on and growing brighter as it approaches down the road.
+1.4–2.3s — the car SLOWS to take the curve (visibly braking for the corner), tracing the bend, still half-veiled by mist.
+2.3–3.3s — the car ACCELERATES out of the curve straight toward the camera, growing in the frame, headlights flaring through the haze, wet asphalt spray rising.
+3.3–4.0s — the car passes the camera FAST and half-hidden by fog and motion, exiting the right edge of frame. The shot ends on the fog closing back over the empty road.
+
+AUDIO — LOCKED: NO narrator, NO voiceover, NO speech, NO dialogue, NO music, NO soundtrack. Only ambient mountain wind and, optionally, the natural sound of the engine and tires on wet asphalt. Nothing else.
+
+STYLE: high-end automotive launch-film cinematography, desaturated overcast palette, true blacks, controlled amber highlights, subtle filmic grain, heavy volumetric fog. Mood: the predator emerging from its misty territory — restrained, expensive, fast.
+
+STRICT RULES: single continuous take, NO cuts, NO transitions; the camera never moves — only the car moves; the car is ALWAYS partially veiled by fog (never fully crisp, even close to camera); the headlight count is always exactly FOUR (two per side) whenever the front is visible — never two, never six; the scene starts with NO car in frame; the car exits the frame completely before the end; exactly one car; keep the car within the central 9:16 safe zone.
+
+NEGATIVE (exclude completely): narrator, voiceover, voice, speech, singing, music, soundtrack, people, visible driver, text, letters, numbers, subtitles, captions, watermarks, logos or badges, night, darkness, sunny blue sky, sun disc, lens flare, glossy paint, grey or colored paint, color shift, second car, other vehicles, city, buildings, streetlights, neon, crash, smoke, fire, camera movement, camera shake, pans, zooms, cuts, only two headlights, six or more headlights, fully crisp unveiled car, cartoon or CGI look, morphing shapes.
+```
+
+---
+
+## P8 — Preloader "A Curva" · FALLBACK/OG (silhueta noturna — texto integral, 2026-07-13)
 
 > Par de frames inicial/final para image-to-video: §3.1 v2 do [[00-DNA]] (`FType-Preloader-Noite-Frame-Inicial/Final`, 2048×1152). Pós: máster ≥1080p → trim/retime da janela do drift para **3,7s** (0–100 km/h real do R 75) → ~60 frames AVIF 960×540.
 
