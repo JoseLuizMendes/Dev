@@ -63,6 +63,7 @@ Vender um Jaguar F-Type 2024 por meio de uma experiência web cinematográfica d
 | 8 | https://br.pinterest.com/pin/709105903877076108/ — "Aurex Motors" (enviada 2026-07-13) | **Section de mapa com rota numerada** (dev destacou o mapa) — vira "O Território" (rota do test-drive); grid de lifestyle |
 | 9 | https://br.pinterest.com/pin/709105903877076205/ — "Sahara Velocity" (enviada 2026-07-13) | Stats bar com 0–100 em destaque; macros de materiais (couro/carbono) como grade de swatches |
 | 10 | https://br.pinterest.com/pin/709105903877076167/ — "Monarch Riviera" (enviada 2026-07-13) | Ritmo editorial e craftsmanship em macro (ref secundária — paleta clara descartada pelo dev, paleta canon mantida) |
+| 11 | Imagem enviada pelo dev (2026-07-13) — SUV Jaguar **preto fosco** em estrada de montanha na margem de um vale, **névoa densa, tempo nublado** (highland) | **Ref de CENÁRIO do preloader v4** (§3.1): estrada aberta na margem da mata, névoa, dia encoberto, asfalto molhado — o clima "estilo anúncio de carro". ⚠️ O carro na imagem é um **F-Pace SUV — IGNORADO** (o produto é o F-Type coupé); vale só a estrada/névoa/luz |
 
 ### 2.2 Identidade visual
 
