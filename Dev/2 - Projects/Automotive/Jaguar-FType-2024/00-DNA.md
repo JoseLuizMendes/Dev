@@ -1,7 +1,7 @@
 ---
 template: "Kickoff Output (via Project Kickoff Input Template v1.2)"
-version: 1.6
-status: "Preloader v4 = vídeo cinematográfico dia-nublado/carro velado, responsivo (máster central-seguro + cover) e placeholder swap-ready (§3.1, 2026-07-13); R3F-3D relocado p/ futura seção showcase (#16); prompt P9; Blueprint (Parte 9) base Zenith/paleta canon; Estratégia de Mídia v2 (Parte 8); pendências abertas #8–#17"
+version: 1.7
+status: "Design System v2 extraído das references/ (Parte 10) — DM Sans + Geist Mono, base fria, âmbar, escala fluida do nudot, Lenis lerp 0.09; protótipo jaguar-ftype-site rodando (repo de código, fora do vault). Preloader v4 (§3.1) placeholder swap-ready; R3F-3D → showcase (#16); prompt P9; Blueprint (Parte 9); pendências abertas #8–#20"
 tags:
   - dna
   - kickoff-output
@@ -526,6 +526,28 @@ no zoom. Cinematic realism, consistent lighting and palette. No people, no text,
 | 11 | **Footer** | Colunas padrão + assinatura | — | — |
 
 **Regras transversais de motion:** Lenis na raiz; `gsap.ticker` ↔ `lenis.raf`; `useGSAP` obrigatório (auto-cleanup); NENHUMA animação bloqueia main thread; `prefers-reduced-motion` desativa preloader (poster+fade), counters (valor final direto), parallax e scrub. Vídeos: `muted autoplay playsinline loop preload="metadata"` + poster (canon [[Asset Sizing Standard]]).
+
+---
+
+## Parte 10 — Design System v2 (extraído das `references/` — 2026-07-14/15)
+
+> O dev enviou o **código-fonte real** de 4 sites de referência (pasta `references/` deste projeto: `cipher-digital.md`, `luxury-ecommerce.md`, `nudot.md`, `terminal.md`) e pediu um design system **sintetizado desses fontes**, personalizado (Zenith = só organização de conteúdo; o visual é mesclado). Extração feita lendo CSS/JS de cada um. **Home de implementação:** `DESIGN.md` do repo de código `jaguar-ftype-site` (fora do vault — R8).
+
+**Tokens extraídos por referência:**
+
+| Decisão | Fonte (ref real) | Valor |
+|---|---|---|
+| Tipografia grotesk + mono | nudot (`DM Sans`) + terminal (`SuisseIntl`/`Geist Mono`) + cipher (`articulat-cf`/`Roboto Mono`) | **DM Sans** (títulos/corpo) + **Geist Mono** (números/labels) |
+| Escala de tipo fluida `clamp()` + tracking + leading | nudot (`:root`) | `--text-2xs…--text-display-lg`, `--text-watermark`, `--tracking-caps 0.18em`, `--leading-display 0.88` |
+| Base fria quase-preta | cipher (`--base-color #052424`) + nudot (`#000`) | `--surface-0 #080a0a` (nunca `#000` puro) |
+| Acento | jaguar + nudot (menu dourado `#c89a45`) / cipher (lima `#ABFF02`) | **âmbar `#E8A33D`** (assinatura; lima considerada e descartada) |
+| Seção clara | nudot (creme `#efe6d8`) | `--surface-light #eceae4` (warm paper; nunca `#fff`) |
+| Scroll suave | nudot (`new Lenis`) | **lerp 0.09 + easeOutCubic** + `gsap.ticker.lagSmoothing(0)` |
+| Labels/índices em mono, hairlines | terminal + cipher | `001 —`, `0–100 KM/H` em Geist Mono caps |
+
+**Stack de motion descoberta no nudot (roadmap):** GSAP 3.12 + ScrollTrigger + **Lenis 1.0.42** + **Three.js r128 (hero WebGL)** + **Flip** + **ScrambleText** + page-transitions (curtain). Já implementados: GSAP + Lenis. A adicionar no hero cinematográfico: Three.js, SplitType, ScrambleText.
+
+**Estado da implementação (repo `jaguar-ftype-site`):** protótipo v2 rodando (build OK) — design tokens, preloader "A Curva" placeholder swap-ready, pintas adaptativas (`mix-blend-mode: difference`), hero + stats bar (mono) + seção manifesto clara. Entregue ao dev como pacote `.tar.gz` + `setup-jaguar-full.sh` (script self-contained, testado). Ajuste pendente: reposicionar pintas p/ não encostar em texto.
 
 ---
 
