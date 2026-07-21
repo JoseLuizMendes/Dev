@@ -139,6 +139,7 @@ Dev/
 ```
 
 **Projetos:**
+- [[Dev/2 - Projects/Produtividade/BipDay/00-DNA|Produtividade / BipDay]] 🧬 Kickoff concluído (planejamento)
 - [[Dev/2 - Projects/Ecommerce/Belessence/01-Escopo|Ecommerce / Belessence]] 🔧 Em Desenvolvimento
 - [[Dev/2 - Projects/Portfolio/Pessoal/MendeShift/01-Escopo|Portfólio / MendeShift]] ✅ Concluído
 - [[Dev/2 - Projects/Casamento/Wedding-New/01-Escopo|Casamento / Wedding-New]] ✅ Concluído
