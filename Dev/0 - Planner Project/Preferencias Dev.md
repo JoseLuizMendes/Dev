@@ -24,28 +24,28 @@ tags:
 
 ### Stack Principal (Mais Usada)
 
-| Camada | Tecnologia | Regra Principal |
-|---|---|---|
-| **Linguagem** | TypeScript 5.x | `any` proibido. `strict: true` obrigatório |
-| **Backend** | NestJS 10.x + Fastify (default quando TS) | Modular + DI. Lógica nos Services, nunca nos Controllers. **Escolha por projeto, multi-fator** (Fastify puro/NestJS/Java/C#) — ver §Escolha de Backend |
-| **Banco de Dados** | PostgreSQL + Prisma ORM | Schema declarativo no `schema.prisma` |
-| **Frontend** | React 19+ / Next.js 16+ **ou** TanStack Start | Functional components + hooks. Server Components quando aplicável. Escolha registrada no `03-Planejamento` + `INIT.md` (ver §Frameworks Frontend de Primeira Classe) |
-| **Routing** | Next App Router (Next.js) / TanStack Router (fora do Next) | Nunca misturar os dois no mesmo app |
-| **State & UI** | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide | Type-safe, zero boilerplate |
-| **Styling** | Tailwind 3.4+ + Shadcn/ui / Origin UI | Zero CSS global. Tokens do config. WCAG obrigatório |
-| **Design QA** | Impeccable | `/impeccable init` + `DESIGN.md` obrigatórios no bootstrap — ver [[Impeccable Reference]] |
-| **Mídia IA** | Higgsfield skills (pago) → alternativas gratuitas como fallback | Geração SEMPRE via skills instaladas + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]]. Opt-out via campo `midia` do escopo — ver [[Frontend Creative Protocol]] §Fase 6 |
-| **Formatos de mídia** | AVIF + WebP (imagem) · WebM VP9 + MP4 fallback (vídeo, ≥1080p) | WEBP puro = mínimo aceitável. GIF proibido. Ver §Imagens e Mídia Web + [[Asset Sizing Standard]] |
-| **DX** | Prettier + prettier-plugin-tailwindcss + Husky + lint-staged + EditorConfig | Obrigatório em todo projeto, instalado no bootstrap — ver §Dependências Obrigatórias de DX |
-| **Animações** | GSAP 3.12+ + Lenis (+ Three.js quando couber) | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado. Three.js: ver §Three.js |
-| **Testes** | Vitest + Playwright (E2E) | TDD obrigatório. Cobertura total |
-| **Fetching** | TanStack Query (React/Vue) — padrão | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes |
-| **Auth** | Auth.js v5 (`next-auth` 5 + Prisma adapter) | Default canon. API NestJS separada → JWT/Passport como exceção documentada — ver [[Backend Onboarding Protocol]] §Fase 5 |
-| **Infra** | Docker multi-stage + Compose | Containers isolados. Ambiente local via Compose |
-| **Deploy** | Vercel (pequeno/médio) · VPS Hostinger via Docker (médio/grande) | Porte decide — ver [[Deploy Protocol]]. Em VPS o framework é reavaliado (TanStack candidato) |
-| **Package Manager** | pnpm | npm, yarn e bun banidos |
-| **Pipeline** | Spec-Kit (SDD+TDD) + Impeccable (design) + Higgsfield (mídia, opt-out) | Ver §Ferramentas Obrigatórias de Bootstrap |
-| **MCPs** | Context7 + Skill Obsidian + MarketingCopywrite | Docs em tempo real, gestão de cofre, copywriting |
+| Camada                | Tecnologia                                                                  | Regra Principal                                                                                                                                                                     |
+| --------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Linguagem**         | TypeScript 5.x                                                              | `any` proibido. `strict: true` obrigatório                                                                                                                                          |
+| **Backend**           | NestJS 10.x + Fastify (default quando TS)                                   | Modular + DI. Lógica nos Services, nunca nos Controllers. **Escolha por projeto, multi-fator** (Fastify puro/NestJS/Java/C#) — ver §Escolha de Backend                              |
+| **Banco de Dados**    | PostgreSQL + Prisma ORM                                                     | Schema declarativo no `schema.prisma`                                                                                                                                               |
+| **Frontend**          | React 19+ / Next.js 16+ **ou** TanStack Start                               | Functional components + hooks. Server Components quando aplicável. Escolha registrada no `03-Planejamento` + `INIT.md` (ver §Frameworks Frontend de Primeira Classe)                |
+| **Routing**           | Next App Router (Next.js) / TanStack Router (fora do Next)                  | Nunca misturar os dois no mesmo app                                                                                                                                                 |
+| **State & UI**        | Zustand, Nuqs, React Hook Form + Zod, Sonner, Lucide                        | Type-safe, zero boilerplate                                                                                                                                                         |
+| **Styling**           | Tailwind 3.4+ + Shadcn/ui / Origin UI                                       | Zero CSS global. Tokens do config. WCAG obrigatório                                                                                                                                 |
+| **Design QA**         | Impeccable                                                                  | `/impeccable init` + `DESIGN.md` obrigatórios no bootstrap — ver [[Impeccable Reference]]                                                                                           |
+| **Mídia IA**          | Higgsfield skills (pago) → alternativas gratuitas como fallback             | Geração SEMPRE via skills instaladas + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]]. Opt-out via campo `midia` do escopo — ver [[Frontend Creative Protocol]] §Fase 6 |
+| **Formatos de mídia** | AVIF + WebP (imagem) · WebM VP9 + MP4 fallback (vídeo, ≥1080p)              | WEBP puro = mínimo aceitável. GIF proibido. Ver §Imagens e Mídia Web + [[Asset Sizing Standard]]                                                                                    |
+| **DX**                | Prettier + prettier-plugin-tailwindcss + Husky + lint-staged + EditorConfig | Obrigatório em todo projeto, instalado no bootstrap — ver §Dependências Obrigatórias de DX                                                                                          |
+| **Animações**         | GSAP 3.12+ + Lenis (+ Three.js quando couber)                               | `useGSAP` obrigatório. `prefers-reduced-motion` respeitado. Three.js: ver §Three.js                                                                                                 |
+| **Testes**            | Vitest + Playwright (E2E)                                                   | TDD obrigatório. Cobertura total                                                                                                                                                    |
+| **Fetching**          | TanStack Query (React/Vue) — padrão                                         | `useEffect` para data fetching proibido. SWR só como legado permitido em projetos existentes                                                                                        |
+| **Auth**              | Auth.js v5 (`next-auth` 5 + Prisma adapter)                                 | Default canon. API NestJS separada → JWT/Passport como exceção documentada — ver [[Backend Onboarding Protocol]] §Fase 5                                                            |
+| **Infra**             | Docker multi-stage + Compose                                                | Containers isolados. Ambiente local via Compose                                                                                                                                     |
+| **Deploy**            | Vercel (pequeno/médio) · VPS Hostinger via Docker (médio/grande)            | Porte decide — ver [[Deploy Protocol]]. Em VPS o framework é reavaliado (TanStack candidato)                                                                                        |
+| **Package Manager**   | pnpm                                                                        | npm, yarn e bun banidos                                                                                                                                                             |
+| **Pipeline**          | Spec-Kit (SDD+TDD) + Impeccable (design) + Higgsfield (mídia, opt-out)      | Ver §Ferramentas Obrigatórias de Bootstrap                                                                                                                                          |
+| **MCPs**              | Context7 + Skill Obsidian + MarketingCopywrite                              | Docs em tempo real, gestão de cofre, copywriting                                                                                                                                    |
 
 ### Frameworks Frontend de Primeira Classe
 
