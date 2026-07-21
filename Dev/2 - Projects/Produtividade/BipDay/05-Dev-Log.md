@@ -22,15 +22,17 @@ data_inicio: "2026-07-17"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-07-21 12:00 |
-| **Fase atual** | **Épico 1 (Fundação/Auth) ✅ COMPLETO** (US1+US2+US3, DoD batido) → próximo: Épico 2 (app-core, `specs/002`) |
-| **Tarefa em progresso** | Nenhuma. Milestone fechado. (Sugestão: commit + criar remote GitHub antes do Épico 2) |
-| **Bloqueios** | Nenhum |
+| **Timestamp** | 2026-07-21 15:30 |
+| **Fase atual** | **Épico 2 (App Core) EM PROGRESSO** — US1 (Compromissos) ~80%: criar + ver prontos, falta editar/excluir. Épico 1 ✅ COMPLETO |
+| **Tarefa em progresso** | **Próximo: editar/excluir compromisso** (fecha a US1) — Server Actions `updateCommitment`/`deleteCommitment` já existem, falta a UI (tocar no item → editar; excluir com 1 confirmação) |
+| **Bloqueios** | Nenhum. Código todo pushado (`origin/chore/bootstrap` = HEAD). Dev de casa: clonar → `pnpm install` → recriar `.env` (SETUP.md §3) → `pnpm prisma generate` → `pnpm dev` |
 
-**Resumo em 3 bullets:**
-- **Épico 1 fechado:** login Google (US1) + onboarding username (US2) + guard de tenant (US3). DoD 4/4 ✅.
-- **Testes:** 7 unit (Vitest) + 7 E2E (Playwright) verdes; typecheck limpo. Isolamento A≠B (SC-002) testado via **cookie de sessão forjado** (`e2e/auth.setup.ts`, `encode` do `next-auth/jwt`) — zero superfície de auth em prod. Middleware sem query ao banco (SC-004).
-- Guard: `middleware.ts` (edge) + `/app/[tenant]` (revalida no RSC) + `/app`→`/app/[username]`.
+**Resumo em 5 bullets (Épico 2 US1 — esta sessão):**
+- **Recorrência (RRULE) com TDD:** `src/lib/routine/recurrence.ts` (`occursOn`/`expandDay`/`buildRRule`) opera em **dias civis** (sem hora) → desacopla tz/DST. `src/lib/shared/date.ts` (`civilDayInTz`) resolve o "hoje" no fuso. 16 testes.
+- **Camada de dados:** `commitment-schema.ts` (Zod puro, client+server) + `commitments.ts` (`getCommitmentsForDay` p/ RSC, DTO) + `commitments.actions.ts` (create/update/delete/pause). Isolamento no domínio (`updateMany`/`deleteMany` com `userId` no where).
+- **Adoção do shadcn/ui** integrado aos tokens do BipDay (semânticos `--primary`/`--border`/… → paleta sage no `globals.css`). Fontes **Bricolage Grotesque + Inter Tight** (next/font). Componentes em `src/components/ui/`.
+- **UI da US1:** `CommitmentForm` (chips via `ToggleGroup`) + **visão do dia** (`/app/[tenant]`, lista + empty state) + rota `/compromissos/novo`.
+- **Bottom sheets mobile** (`TimeSheet`/`DayOfMonthSheet`, shadcn Drawer/vaul) — hora/minuto e dia-do-mês num sheet de **altura fixa** que rola por dentro, resolvendo os selects gigantes no celular (aprovado pelo dev no iPhone). "Me avisar" ficou inline. **Estado: 23 unit + 7 E2E verdes.**
 
 ---
 
@@ -44,6 +46,10 @@ data_inicio: "2026-07-17"
 | 2026-07-17 | 3 divergências do canon (R7): TanStack Query pontual, Three.js fora, Docker fora | Ver [[03-Planejamento]] §4.1 — confirmadas pelo dev | Stack enxuta p/ Vercel+Neon | — |
 | 2026-07-17 | iOS futuro = Capacitor (sobre RN/KMP) | Reusa o web; KMP errado p/ dev TS solo | Lógica em `src/lib/` mantida portável | — |
 | 2026-07-17 | SEM tiers free/premium no MVP | Decisão do dev; monetização no go-to-market | `isPremium` no schema mas sem gating | — |
+| 2026-07-21 | Recorrência opera em **dias civis** (Date UTC-meia-noite), tz só na borda | Elimina armadilha de DST na regra; lógica pura 100% testável sem mock de tempo | `recurrence.ts` sem tz; `shared/date.ts` faz a conversão | Épico 2 US1 |
+| 2026-07-21 | **Chips estruturados** (`{kind,weekdays}`) → server gera o RRULE (`buildRRule`) | Mais seguro que aceitar RFC 5545 cru do client; validado por Zod | UI manda estrutura, não string | Épico 2 US1 |
+| 2026-07-21 | Adotar **shadcn/ui** (já na stack) integrado aos tokens BipDay | Componentes viram código nosso, editáveis; consistência + a11y | `src/components/ui/*`; `globals.css` mapeia semânticos→paleta | Épico 2 US1 |
+| 2026-07-21 | **Bottom sheet (Drawer/vaul)** para hora/minuto/dia no mobile | Selects nativos/Radix ficam "gigantes e soltos" no celular; sheet de altura fixa rola por dentro (aprovado no iPhone) | `TimeSheet`/`DayOfMonthSheet`; sets pequenos ficam inline | Épico 2 US1 |
 
 ---
 
@@ -79,6 +85,13 @@ data_inicio: "2026-07-17"
 | husky / lint-staged | 9.1.7 / 17.1.0 | dev | pre-commit | 2026-07-17 |
 | tsx / dotenv | 4.23.1 / 17.4.2 | dev | seed + config env | 2026-07-17 |
 | tailwindcss | 4.x | dev | styling | 2026-07-17 |
+| radix-ui | 1.6.4 | prod | primitivos dos componentes shadcn (pacote unificado) | 2026-07-21 |
+| vaul | (add drawer) | prod | bottom sheet (Drawer) — pickers mobile | 2026-07-21 |
+| class-variance-authority | 0.7.1 | prod | variantes dos componentes shadcn | 2026-07-21 |
+| clsx / tailwind-merge | 2.1.1 / 3.6.0 | prod | `cn()` (merge de classes) | 2026-07-21 |
+| tw-animate-css | 1.4.0 | dev | animações dos componentes shadcn | 2026-07-21 |
+
+> **Design system:** shadcn/ui adicionado via CLI (`components.json`, `src/lib/utils.ts`, `src/components/ui/*`). Componentes: button, input, label, select, toggle, toggle-group, drawer. Tokens semânticos reconciliados com a paleta BipDay no `globals.css` (`@theme inline` → `:root`).
 
 ---
 
@@ -99,6 +112,16 @@ data_inicio: "2026-07-17"
 - [x] **US2 — Onboarding username (TDD):** `username.ts` (schema Zod puro + `isValidUsername` + `suggestUsername`) · `username.test.ts` (7 testes Vitest verdes) · `username.actions.ts` (`setUsername`/`isUsernameAvailable`) · `components/auth/UsernameForm.tsx` (RHF+Zod+`session.update`) · `/onboarding/username` · `/app` redireciona se username null. Base de teste (`vitest.config.ts`) criada.
 - [x] **US3 — Guard/tenant:** `middleware.ts` (edge, sem query ao banco) · `/app/[tenant]` (revalida no RSC) · redirect `/app`→`/app/[username]` · E2E completo: 3 sem-sessão + 3 autenticados (isolamento A≠B via cookie forjado, `e2e/auth.setup.ts`). `playwright.config.ts` com projeto `setup`. Seed (T020) adiado (guard é DB-free).
 
+### Épico 2: App Core — EM PROGRESSO (US1 ~80%)
+- [x] **Recorrência (RRULE):** `src/lib/routine/recurrence.ts` + `recurrence.test.ts` (12) + `src/lib/routine/CLAUDE.md` (R8). `src/lib/shared/date.ts` (`civilDayInTz`) + `date.test.ts` (4). Opera em dias civis.
+- [x] **Camada de dados (US1):** `commitment-schema.ts` (Zod puro) · `commitments.ts` (`getCommitmentsForDay`, DTO) · `commitments.actions.ts` (create/update/delete/pause, escopadas por `userId`).
+- [x] **Design system:** shadcn/ui (`src/components/ui/*`, `components.json`, `src/lib/utils.ts`) integrado aos tokens; fontes Bricolage+Inter Tight no `layout.tsx`.
+- [x] **US1 UI — criar + ver:** `components/routine/CommitmentForm.tsx` (chips ToggleGroup) · `TimeSheet.tsx`/`DayOfMonthSheet.tsx` (bottom sheet mobile) · `/app/[tenant]` vira a **visão do dia** (lista + empty state) · rota `/compromissos/novo`.
+- [ ] **US1 resto — editar/excluir** (Acceptance 2): tocar no item da visão do dia → editar (reusar `CommitmentForm` com valores iniciais + `updateCommitment`); excluir com 1 confirmação (`deleteCommitment`). **← próximo passo.**
+- [ ] US2 Tarefas · US3 Visões (dia/semana/mês-radar + card "agora" com countdown/GSAP) · US4 Alertas ("o bip", Web Push) · US5 Streak · US6 PWA. Ver `specs/002-app-core`.
+
+**Nota de contexto (handoff):** o código está todo no GitHub (`origin/chore/bootstrap`). A **memória do Claude Code é local da máquina** (não viaja) — este Dev-Log é o retrato canônico de onde paramos. `.env` não está no git (segredos): recriar via `SETUP.md` §3.
+
 ---
 
 ## Histórico de Sessões
@@ -106,16 +129,17 @@ data_inicio: "2026-07-17"
 | Data | Hora | Resumo | Log completo |
 |---|---|---|---|
 | 2026-07-17 | 15:00 | Kickoff→Escopo→Plano→Tarefas + Bootstrap (scaffold, deps, Prisma/Neon, DX) | `[[2026-07-17_15-02]]` |
+| 2026-07-21 | 10:00–15:30 | Fix login (`error=Configuration`) → Épico 1 fechado (US2/US3 + E2E) → Épico 2 US1 (recorrência TDD, camada de dados, shadcn/ui, form + visão do dia + bottom sheets mobile). Commits pushados. | — |
 
 ---
 
 ## Pendentes para Próxima Sessão
 
-- [ ] **Dev:** criar credenciais Google OAuth (`AUTH_GOOGLE_ID`/`SECRET`) no console.cloud.google.com (redirect `http://localhost:3000/api/auth/callback/google`) — único bloqueio do login real. `AUTH_SECRET`/VAPID/`DIRECT_URL` = comandos no `SETUP.md` §3.
-- [ ] **Dev (portabilidade):** criar repo privado no GitHub → configurar remote + push (ver `SETUP.md` §1)
-- [ ] Épico 1: implementar auth (T-1.1) com TDD — pode começar o código do Auth.js antes das creds (só o E2E do login real espera elas)
-- [ ] Contínuo: `CLAUDE.md` em novas pastas de `src/lib/` conforme os bounded contexts nascerem (R8)
-- [ ] Front (Épico 3): aplicar tokens do `DESIGN.md` no `globals.css` (`@theme`)
+- [ ] **PRÓXIMO — Épico 2 US1 (fechar):** editar/excluir compromisso na visão do dia. Reusar `CommitmentForm` com valores iniciais + `updateCommitment`; excluir com 1 confirmação + `deleteCommitment`. Depois: verificar o caminho de escrita real (dev cria compromisso logado como `jose` e confere na lista).
+- [ ] Épico 2 US2+: Tarefas (rollover `isDeadline`), Visões (card "agora" + countdown GSAP), Alertas ("o bip" Web Push), Streak, PWA — ver `specs/002-app-core`.
+- [x] ~~Credenciais Google~~ (feito) · ~~repo GitHub + push~~ (feito: `origin` nos dois repos, tudo sincronizado).
+- [ ] Contínuo: `CLAUDE.md` em novas pastas de `src/lib/` (R8) · aplicar mais tokens do `DESIGN.md` conforme a UI cresce.
+- [ ] Ao rodar do PC de casa: recriar `.env` (SETUP.md §3) e `pnpm prisma generate` (ambos gitignored).
 
 ---
 
