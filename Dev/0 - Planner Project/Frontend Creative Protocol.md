@@ -92,6 +92,12 @@ flowchart TD
 | 12  | Terminal Industries | https://terminal-industries.com/                                |
 | 13  | Oryzo               | https://oryzo.ai/                                               |
 | 14  | Luxury Ecommerce    | https://vm-premium-luxury-e-commerce-template.vusercontent.net/ |
+| 15  | Trionn              | https://trionn.com/                                             |
+| 16  | Ciao Energy         | https://www.ciaoenergy.com/                                     |
+| 17  | Shopify Winter '26  | https://www.shopify.com/editions/winter2026                     |
+| 18  | Wedding (studio)    | https://wedding20251012-ny.studio.site/                         |
+| 19  | Michelle & Tonye    | https://www.michelleandtonye.com/                               |
+| 20  | Sidewave            | https://sidewave.it/                                            |
 |     |                     |                                                                 |
 
 > Esta lista é viva: novos sites que o dev admirar entram aqui (bump de versão + entrada em `[[MEMORY]]`).
