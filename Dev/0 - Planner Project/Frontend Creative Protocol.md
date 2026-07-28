@@ -98,7 +98,9 @@ flowchart TD
 | 18  | Wedding (studio)    | https://wedding20251012-ny.studio.site/                         |
 | 19  | Michelle & Tonye    | https://www.michelleandtonye.com/                               |
 | 20  | Sidewave            | https://sidewave.it/                                            |
-|     |                     |                                                                 |
+| 21  | Kaatdm              | https://kaatdm.com/                                             |
+| 22  | Marie Guillaume     | https://marieguillaume.com/                                     |
+| 23  |                     |                                                                 |
 
 > Esta lista é viva: novos sites que o dev admirar entram aqui (bump de versão + entrada em `[[MEMORY]]`).
 
