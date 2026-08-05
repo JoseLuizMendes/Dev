@@ -1,6 +1,6 @@
 ---
 título: "Frontend Creative Protocol"
-versão: 2.1
+versão: 2.2
 status: "Ativo"
 tags:
   - protocol
@@ -203,7 +203,7 @@ Toda geração de imagem ou vídeo — por IA direta, MCP conectado (ex.: Higgsf
 
 | Tipo | Ferramenta | Observação |
 |---|---|---|
-| Imagem | Google AI Studio (Gemini) | Free tier generoso, alta qualidade |
+| Imagem | **Google AI Studio (Gemini) — modelo Nano Banana 2 / Gemini 3.1 Flash Image** | Free tier p/ teste + tier Lite muito barato (~US$0,034/1k imgs). Faz **texto legível dentro da arte**, troca de fundo e **consistência de identidade em lote** (pack shots/variações). Modelo verificado 2026-08-05 (lançado ~jun/2026 — não fev/2026 como circula em conteúdo de captação). Wrappers opcionais como skill do Claude Code existem (`kingbootoshi/nano-banana-2-skill` ~0,4k⭐, `AgriciDaniel/banana-claude` ~0,9k⭐), mas são pequenos e pouco mantidos (último push abr/2026) — avaliar antes de depender. |
 | Imagem (assets de design) | Recraft | Free tier, foco em vetor/design pra web |
 | Imagem | Leonardo.ai / Ideogram | Créditos diários grátis |
 | Imagem (local, ilimitado) | ComfyUI / Fooocus + Flux/SDXL | Exige GPU |

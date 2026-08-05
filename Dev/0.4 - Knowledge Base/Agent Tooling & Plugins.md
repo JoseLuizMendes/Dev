@@ -74,6 +74,22 @@ ler_quando: "Para saber quais ferramentas/plugins de agente estão instalados na
 
 ---
 
+## Avaliados — não instalados (2026-08-05)
+
+> Repos externos que o dev trouxe (iscas do fabiano.app) e que eu **verifiquei via GitHub API em 2026-08-05**: todos existem, ativos, com as stars reais abaixo. **Nenhum foi instalado** — ficam aqui como candidatos avaliados. Antes de instalar qualquer um: revalidar o link e ler o `README`/`SKILL.md` (R7). Instalar skill/plugin só entra em vigor na próxima sessão.
+
+| Repo | ⭐ | O que faz | Fit no vault |
+|---|---|---|---|
+| `usestrix/strix` | ~49k | Agentes de pentest (recon, SQLi, auth bypass, SSRF, PoC + fix) | **Alto** — reforça a Fase 10 (Segurança de Front-end) do [[Frontend Creative Protocol]]; rodar contra o app antes do [[Deploy Protocol]]. |
+| `petergyang/no-ai-slop` | ~4k | Skill que remove 20+ vícios de escrita de IA | **Alto** — casa com o checklist anti-AI-slop de [[ui-ux-pro-max]] e com a escrita de `5 - Publicações` (LinkedIn). |
+| `virgiliojr94/book-to-skill` | ~17k | Vira um livro técnico (PDF) em skill do Claude, consultada capítulo a capítulo | **Médio-alto** — alinhado à prática de `0.3 - Claude Skills Export` e à Knowledge Base. |
+| `diegosouzapw/OmniRoute` | ~41k | Gateway de IA (MIT): 1 endpoint, fallback automático por quota, compressão de tokens | **Médio** — relevante ao constraint de custo; é infra (proxy), avaliar peso como no pxpipe antes de adotar. |
+| `MadsLorentzen/ai-job-search` | ~30k | Assistente de vaga no Claude Code (avalia vaga, CV, cover letter, prep) | **Baixo p/ o vault** — uso pessoal, fora do fluxo de projeto. |
+
+Apps self-host (`Anil-matcha/Open-Generative-AI` ~26k, `every-app/open-seo` ~11k, `lfnovo/open-notebook` ~36k) existem e são ativos, mas são serviços à parte — não tooling de agente. ⚠️ **`Open-Generative-AI` se descreve como "unrestricted / no content filters"** — desaconselhado para trabalho de cliente/brand-safe. Ponte de Figma (`GLips/Figma-Context-MCP` ~15,6k) é real, mas o fluxo criativo do dev extrai CF de sites reais, não desenha no Figma — baixa aplicabilidade.
+
+---
+
 ## Resumo de estado
 
 | Ferramenta | Tipo | Status | Ativa quando | Cuidado |
