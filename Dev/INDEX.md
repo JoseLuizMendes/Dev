@@ -118,6 +118,11 @@ Dev/
 | [[TanStack Reference]] | TanStack Start/Query/Router na stack, ou decisão de framework |
 | [[Impeccable Reference]] | Todo projeto com UI (bootstrap + auditoria de design) |
 | [[Higgsfield Skills Reference]] | Projetos que geram mídia com IA |
+| [[Tool Palette]] | Escolher ferramenta por categoria (refs, design, mídia, skills/repos, infra) — favoritas ⭐ |
+| [[Design System Blueprint]] | Definir design system / paleta / tokens (método premium) |
+| [[Cinematic Sites Kit]] | Direção cinematográfica: prompts de site/imagem/copy + fórmula de 6 blocos |
+| [[GRIGOLETTO Templates Pack]] | Iniciar front — checar template pronto por nicho (39 templates Figma) |
+| [[Media Workflows (Human Academy)]] | Gerar mídia multi-ferramenta (personagem, character sheet, upscale…) + prompts |
 
 ---
 
@@ -175,6 +180,7 @@ Dev/
 | Escolher framework (Next vs TanStack vs Vue) | [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] + [[TanStack Reference]] |
 | Design system / eliminar AI slop | [[Impeccable Reference]] |
 | Buscar referências visuais / iniciar front | [[Frontend Creative Protocol]] (fontes de busca + sites-inspiração + refs/) |
+| **Escolher ferramenta** (ref/design/mídia/skill/infra) por categoria | [[Tool Palette]] — priorizar favoritas ⭐ |
 | Iniciar um projeto novo (input → DNA) | [[Project Kickoff Input Template]] → `00-Input.md` → `00-DNA.md` |
 | Desenhar o back (dados, API, auth) | [[Backend Onboarding Protocol]] (entrevista `backend-interview-agent` → Tech Brief) |
 | Gerar mídia com IA | Skills SEMPRE: Higgsfield skills + [[Asset Sizing Standard]] + [[GPT-Image Prompt Galleries]] — [[Frontend Creative Protocol]] §Fase 6 (inclui alternativas gratuitas) |
