@@ -72,6 +72,15 @@ ler_quando: "Para saber quais ferramentas/plugins de agente estão instalados na
   `PXPIPE_MODELS=off` desliga o imaging. **Não** aponte o `ANTHROPIC_BASE_URL` numa sessão Opus de trabalho sério.
 - **Quando usar:** sessões longas de contexto denso em Fable 5, para reduzir custo. Não para trabalho byte-exato.
 
+## 4. anthropics/skills — `frontend-design` + `webapp-testing` (global) ✅ instalado (2026-08-06)
+
+- **O que é:** duas skills **oficiais da Anthropic** (repo `anthropics/skills`, ~166k⭐) clonadas em `~/.claude/skills/`. As demais do repo (`skill-creator`, `docx`, `pdf`, `pptx`, `xlsx`, `canvas-design`, `mcp-builder`, `theme-factory`, `brand-guidelines`…) **já estavam disponíveis** no ambiente — só faltavam estas duas.
+- **`frontend-design`:** direção estética antes de codar (paleta, tipografia, layout com ponto de vista), com calibração explícita **anti-visual-genérico-de-IA**. Reforça [[ui-ux-pro-max]] + Impeccable + Fase 7 do [[Frontend Creative Protocol]]. SKILL.md **vetado** (2026-08-06): só orientação de design, sem execução de código.
+- **`webapp-testing`:** toolkit Playwright (Python) — testa UI em vários tamanhos, screenshots, logs de browser, `scripts/with_server.py`. Casa com a regra Vitest+Playwright do [[Preferencias Dev]]. SKILL.md **vetado**.
+- ⚠️ **Efeito só na PRÓXIMA sessão** — skills carregam no boot; a sessão que instalou não as enxerga.
+- **Opcional (não instalado):** `brand-guidelines` do mesmo repo pode servir ao `DESIGN.md`/identidade — dizer se quer que eu adicione.
+- **Reverter:** apagar `~/.claude/skills/frontend-design` e `~/.claude/skills/webapp-testing`.
+
 ---
 
 ## Avaliados — não instalados (2026-08-05)
@@ -88,6 +97,8 @@ ler_quando: "Para saber quais ferramentas/plugins de agente estão instalados na
 
 Apps self-host (`Anil-matcha/Open-Generative-AI` ~26k, `every-app/open-seo` ~11k, `lfnovo/open-notebook` ~36k) existem e são ativos, mas são serviços à parte — não tooling de agente. ⚠️ **`Open-Generative-AI` se descreve como "unrestricted / no content filters"** — desaconselhado para trabalho de cliente/brand-safe. Ponte de Figma (`GLips/Figma-Context-MCP` ~15,6k) é real, mas o fluxo criativo do dev extrai CF de sites reais, não desenha no Figma — baixa aplicabilidade.
 
+> **Catálogo completo de ferramentas por categoria** (não só repos — inclui refs visuais, design, mídia grátis↔paga, skills e infra), com sistema de estrelas ⭐: [[Tool Palette]]. Skills/repos adicionais verificados (anthropics/skills, claude-seo, remotion-dev/skills, humanizer, marketingskills…) estão lá na §5.
+
 ---
 
 ## Resumo de estado
@@ -97,3 +108,4 @@ Apps self-host (`Anil-matcha/Open-Generative-AI` ~26k, `every-app/open-seo` ~11k
 | **ecc** | Plugin CC | instalado, **disabled** | `claude plugin enable ecc@ecc` + reiniciar | +23.8k tok/sessão + hooks — pesado |
 | **graphify** | Skill `/graphify` + CLI/MCP | instalado | reiniciar sessão | — |
 | **pxpipe** | Proxy npm global | instalado | manual (proxy + BASE_URL) | degrada em Opus; usar só Fable 5 |
+| **frontend-design + webapp-testing** | Skills oficiais Anthropic (global `~/.claude/skills`) | instalado (2026-08-06) | **próxima sessão** | efeito só no próximo boot |

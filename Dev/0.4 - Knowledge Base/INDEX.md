@@ -25,6 +25,11 @@ tags:
 | Vídeo / mídia animada (transcode, Lottie, image-to-video) | [[Asset Sizing Standard]] §Vídeo + §Mídia animada |
 | Escrever prompt de imagem (gpt-image-2) | [[GPT-Image Prompt Galleries]] |
 | Escolher framework frontend (Next vs TanStack vs Vue) | [[TanStack Reference]] §Matriz de decisão + [[Preferencias Dev#Frameworks Frontend de Primeira Classe]] |
+| **Escolher ferramenta** (ref visual, recurso de design, mídia, skill/repo, infra) | [[Tool Palette]] — priorizar as ⭐ favoritas |
+| Definir design system / paleta / tokens (ou algo "parece barato") | [[Design System Blueprint]] |
+| Direção cinematográfica (dark/premium) — site, imagem ou copy | [[Cinematic Sites Kit]] |
+| Iniciar front / buscar referência (checar template pronto por nicho) | [[GRIGOLETTO Templates Pack]] |
+| Gerar mídia multi-ferramenta (personagem, character sheet, chroma key, upscale, texto na arte) | [[Media Workflows (Human Academy)]] |
 
 > Complemento: para qualquer biblioteca **não coberta** aqui, a regra do vault permanece — consultar **Context7 MCP** antes de decidir ([[Preferencias Dev]] §Context7).
 
@@ -39,6 +44,11 @@ tags:
 | [[Asset Sizing Standard]] | Padrão interno (Tailwind/Next + gpt-image-2/Higgsfield + ffmpeg) | Protocolo "compute before generate", matriz de assets (card/hero/OG/avatar…) com px + ratio + @2x + formato AVIF/WebP; **v2.0:** vídeo cinematográfico (slots, WebM+MP4, ffmpeg, poster), árvore de mídia animada (Lottie, GIF proibido), frames inicial/final para image-to-video, bleed e alpha |
 | [[GPT-Image Prompt Galleries]] | github.com/wuyoscar/GPT-Image2-Skill (MIT) | Bibliotecas de prompts curados; **4 galerias preferidas pelo dev** (Architecture/Interior, Beauty/Lifestyle, Fashion Editorial, Product/Food) + `craft.md` |
 | [[Agent Tooling & Plugins]] | Instalação local 2026-07-09 | ecc (plugin CC pesado), graphify (`/graphify`), pxpipe (proxy de tokens opt-in) — o que são, ativação, custo e caveats |
+| [[Tool Palette]] | Curadoria do dev + verificação 2026-08-05 | Catálogo vivo de ferramentas por categoria (refs visuais, recursos de design, mídia grátis↔paga, skills/repos Claude Code, infra open-source) com **sistema de estrelas ⭐** (favoritas = prioridade de escolha) |
+| [[Design System Blueprint]] | Material do dev, destilado 2026-08-06 | Método tokenizado de design system premium: restrição, escala 8pt, paleta pequena + 1 acento, 2 fontes, família de raios, 3 sombras, easing de assinatura, bloco `:root` |
+| [[Cinematic Sites Kit]] | Material do dev, destilado 2026-08-06 | 85+ prompts (site/imagem/copy) + fórmula de 6 blocos + DNA cinematográfico; adaptado ao stack (GSAP/Lenis) |
+| [[GRIGOLETTO Templates Pack]] | Material do dev (Notion), catalogado 2026-08-06 | Índice dos 39 templates Figma premium por **nicho** e tipo — pra lembrar o dev quando um projeto casa com um template pronto |
+| [[Media Workflows (Human Academy)]] | Deck do dev, destilado 2026-08-06 | 5 workflows de mídia (personagem animado, chroma key, character sheet, texto em arte, upscale) com Midjourney/Nano Banana/Kling + prompts prontos |
 
 ## Manutenção
 
