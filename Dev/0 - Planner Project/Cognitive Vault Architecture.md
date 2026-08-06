@@ -21,8 +21,6 @@ Este módulo define **como o vault `Dev/` é organizado** e **como os agentes de
 Dev/                              ← conteúdo cognitivo (dentro do repo, que também tem tools/ e docs/ na RAIZ)
 ├── CLAUDE.md                     ← constituição (R1–R8) + boot obrigatório
 ├── INDEX.md                      ← mapa de navegação
-├── TOON-PROMPT.md                ← prompt standalone (redundante por design)
-├── redundancias-vault.md         ← auto-auditoria histórica
 │
 ├── 0 - Planner Project/          ← Cérebro operacional (14 arquivos)
 │   ├── Master Pipeline & Enforcement.md   ← FONTE DA VERDADE do fluxo (matriz canon)

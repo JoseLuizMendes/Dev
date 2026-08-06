@@ -12,7 +12,7 @@ tags:
 
 # M2 — Session Protocol & Memory Management
 
-> ⚠️ **ESTE É O CANON DE BOOT/SHUTDOWN DO VAULT.** Qualquer outro arquivo (`cognitive-vault-manager/SKILL.md`, `INIT.md`, `TOON-PROMPT.md`) DEVE referenciar este protocolo — nunca redefinir uma sequência alternativa.
+> ⚠️ **ESTE É O CANON DE BOOT/SHUTDOWN DO VAULT.** Qualquer outro arquivo (`cognitive-vault-manager/SKILL.md`, `INIT.md`) DEVE referenciar este protocolo — nunca redefinir uma sequência alternativa.
 > ⚠️ **GATILHO BOOT:** início de qualquer sessão de trabalho no vault.
 > ⚠️ **GATILHO SHUTDOWN:** fim de qualquer sessão.
 > ⚠️ **TEMPLATE OBRIGATÓRIO (shutdown):** `[[Session Log Template]]` para o log da Camada 1.

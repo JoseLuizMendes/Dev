@@ -1,6 +1,6 @@
 ---
 título: "Frontend Creative Protocol"
-versão: 2.2
+versão: 2.4
 status: "Ativo"
 tags:
   - protocol
@@ -60,6 +60,8 @@ flowchart TD
 
 ## Fase 1 — Referências
 
+> 🗂️ **Antes de buscar referência do zero:** checar o [[GRIGOLETTO Templates Pack]] pelo **nicho do projeto** — se houver template semelhante, **avisar o dev e deixar o link** pra ele abrir/duplicar antes de começar. (Ex.: automotivo → Ferrari 296 / Amethyst / Zephyr; joalheria → Primal / Pierce the Emperor.)
+
 **1.1 Origem das referências:**
 - **Projeto de cliente:** conversar com o cliente sobre referências logo após o briefing.
 - **Projeto próprio:** o dev busca as referências sozinho.
@@ -73,6 +75,8 @@ flowchart TD
 | Pinterest | https://www.pinterest.com/ | Moodboards, direção visual, paletas |
 | Squarespace | https://www.squarespace.com/templates | Templates, estruturas de sections |
 | v0 | https://v0.app/templates/ | UI components, projects, pages and layouts |
+
+> Não achou boa referência nessas fontes? Alternativas/complementos (Muzli, Abduzeedo, Visuelle + bancos por IA STILLS/Every Pixel) no catálogo [[Tool Palette]] §1–2.
 
 **1.3 Sites-referência de inspiração (paleta + nível de qualidade que o dev admira):**
 
@@ -149,6 +153,8 @@ O agente **só implementa componentes de referência que estejam no mapa**. Refe
 
 ## Fase 4 — Paleta e Identidade Visual
 
+> 🎨 **Método por trás da paleta/tokens:** [[Design System Blueprint]] (restrição, escala 8pt, 1 acento, família de raios, 3 sombras, easing de assinatura, bloco `:root`) — agnóstico de paleta, vale pra pastel OU cinematográfico. Direção cinematográfica dark: [[Cinematic Sites Kit]].
+
 - **Default do dev: tons pastéis** — como nos sites-referência da Fase 1.3.
 - **Entrada via Kickoff:** quando existe `00-DNA.md` (linha 20), esta fase **parte dos proto-tokens já extraídos das refs** (paleta hex/OKLCH, tipografia, espaçamentos — item 2 do contrato de resposta do `[[Project Kickoff Input Template]]`) e os refina; sem Kickoff, extrair aqui a partir do CF das refs (Fase 2) — skill complementar `[[ai-web-designer-agent]]` para extração de design system a partir de código.
 - A paleta final considera: **equilíbrio visual, contraste (WCAG) e tom**.
@@ -172,6 +178,8 @@ Antes de desenvolver, garantir carregado/instalado (via `[[Protocol-Bootstrap]]`
 
 ## Fase 6 — Pipeline de Mídia
 
+> 🎨 **Seleção/sourcing de mídia (antes de codar):** consultar o catálogo [[Tool Palette]] — §2 (buscar imagem que já existe: STILLS/Every Pixel) e §4 (gerar: Nano Banana 2 / KREA / Google Flow / ArtFlow) — priorizando as ⭐ favoritas. A **geração** continua obrigatoriamente via skills instaladas + [[Asset Sizing Standard]] (regra 6.1). Workflows multi-ferramenta (personagem animado, character sheet, chroma key, upscale, texto na arte): [[Media Workflows (Human Academy)]]. Ordem: selecionar/gerar mídia → normalizar → **só então** desenvolver.
+
 **6.0 Ingestão de assets do cliente — o cliente apenas ENVIA; o dev INPUTA:**
 
 Não existe asset de cliente entrando no projeto sem passar por aqui:
@@ -194,10 +202,20 @@ Toda geração de imagem ou vídeo — por IA direta, MCP conectado (ex.: Higgsf
 
 **Prompts complexos e completos são obrigatórios** — construídos a partir das galerias + paleta/identidade + regras do repo; prompt "curto de cabeça" = violação de R7. Slots que podem virar vídeo → gerar **frame inicial + frame final**; necessidade de fundo transparente → **declarada no prompt** (saída com alpha). Detalhes: `[[Asset Sizing Standard]]` §Imagens para animação.
 
+> ⚠️ **PRIORIDADE #1 — Disciplina de prompt (decisão 2026-08-06):** o gargalo da mídia **não é crédito** (o dev tem **Google Pro** — créditos altos em AI Studio/Gemini/Nano Banana 2, Google Labs/Flow). É o **prompt**. A mídia falha quando o prompt deixa margem: a IA **alucina, desvirtua o pedido, adiciona o que não foi pedido, ou entrega coisa demais/de menos**. Regras:
+> - **Lista fechada:** descrever exatamente o que entra + restrições negativas explícitas (`no text, no extra objects, no watermark, plain background`).
+> - **Trancar na referência:** com imagem-ref, exigir `match the reference strictly; do not alter [pose/fundo/identidade]`.
+> - **Texto exato entre aspas:** `reads exactly and only: "[X]". Do not add words`.
+> - **Um eixo por rodada:** variar só paleta OU ângulo OU luz — nunca tudo junto (facilita isolar o que funcionou).
+> - **Gerar N e escolher:** 3–4 saídas → pega a melhor → itera; nunca aceitar a 1ª cega.
+> - **Base de prompt:** `[[GPT-Image Prompt Galleries]]` + `[[Cinematic Sites Kit]]` + `[[Media Workflows (Human Academy)]]`.
+
+> 🎞️ **Movimento de site premium = código, não vídeo gerado.** Marcas de alto nível (Awwwards/Apple/agências) fazem hero e seções com **GSAP/Three.js/WebGL/Lottie** — vídeo de IA fica pra social/ads. Default: movimento por código (Fase 8); gerar vídeo só quando o conceito exige um clipe real filmado/renderizado. **3D sem WebGL (recomendado):** frames pré-renderizados **scrubados no scroll** (GSAP) + fusão por **alpha** ou **fundo casado** (near-black) — parece 3D nativo e é mais leve; Three.js real só p/ interação de verdade. Detalhes: `[[Preferencias Dev#Three.js]]`.
+
 | Situação | Ferramenta |
 |---|---|
 | Higgsfield disponível (créditos/pago) | Higgsfield skills — `[[Higgsfield Skills Reference]]` |
-| **Sem orçamento (situação atual)** | Alternativas gratuitas abaixo |
+| **Padrão do dev (Google Pro)** | Google AI Studio / Gemini (**Nano Banana 2**) · Google Labs / Flow (Veo) — créditos altos · **goaxis.app** (casa com o gosto do dev). Alternativas grátis abaixo = backup |
 
 **Alternativas gratuitas aprovadas:**
 
@@ -247,6 +265,7 @@ O que dá "outro sentimento" ao site e eleva o nível:
 |---|---|---|
 | **GSAP** | Animações | Sempre. `useGSAP` obrigatório, `prefers-reduced-motion` — `[[Preferencias Dev#GSAP + Lenis]]` |
 | **Lenis** | Smooth scroll | Sempre. ScrollTrigger integrado via `requestAnimationFrame` |
+| **Anime.js** | Animação leve | **Alternativa aprovada ao GSAP** para casos simples/pontuais (~24KB, MIT). GSAP+Lenis seguem primários; `prefers-reduced-motion` — `[[Preferencias Dev#Anime.js]]` |
 | **Three.js** | 3D / WebGL | **Quando couber** (peso vs. impacto avaliado no `03-Planejamento`). Aprovado na stack — `[[Preferencias Dev#Three.js]]` |
 
 ---
@@ -278,6 +297,13 @@ Regras completas: `[[Preferencias Dev#Segurança de Front-end (Cybersecurity)]]`
 - [ ] Cookies `httpOnly` + `secure` + `sameSite`; nada de token em `localStorage`
 - [ ] `pnpm audit` limpo (sem high/critical) + lockfile commitado
 - [ ] Embeds de terceiros sandboxed; uploads validados no server (MIME real + tamanho)
+- [ ] **Auth anti-enumeração:** login/cadastro/reset com mensagem genérica + timing uniforme
+- [ ] **Rate limit de auth por IP e conta** (anti-brute-force) nos endpoints de login/reset/OTP
+- [ ] **Token no header `Authorization`** (nunca URL/query) + sessão revogada no logout
+- [ ] **Anti-IDOR** (autorização por objeto/ownership no acesso por ID) + **anti-SQLi** (query parametrizada) — *parada de linha*
+- [ ] Resposta = **DTO mínimo** (sem hash de senha, campos internos ou PII) + **CORS por allowlist** (nunca refletir `Origin`)
+- [ ] **HTTPS forçado** (redirect + HSTS) + **backup automatizado** do banco (projeto com dados)
+- [ ] Baseline completo conferido: `[[Preferencias Dev#Segurança de API e Auth (baseline anti-pentest)]]`
 
 ---
 
@@ -293,7 +319,7 @@ Regras completas: `[[Preferencias Dev#Segurança de Front-end (Cybersecurity)]]`
 - [ ] Pipeline de mídia definido (geração + Upscayl + conversão **AVIF+WebP** + vídeo WebM/MP4 via ffmpeg)
 - [ ] Checklist de princípios de web design (Fase 7) anexado ao `03-Planejamento` ou `DESIGN.md`
 - [ ] **Checklist de SEO técnico (Fase 9) completo** — sitemap, robots, JSON-LD, metadata, OG
-- [ ] **Checklist de segurança (Fase 10) completo** — headers, XSS, forms, cookies, audit
+- [ ] **Checklist de segurança (Fase 10) completo** — headers, XSS, forms, cookies, audit, auth (anti-enumeração + rate limit), IDOR/SQLi, DTO/CORS, HTTPS/backup
 - [ ] **Pós-conclusão do front + UAT:** acionar `[[Deploy Protocol]]` (linha 21); `refs/` deletada (registrar no `05-Dev-Log`)
 
 ---
@@ -309,3 +335,7 @@ Regras completas: `[[Preferencias Dev#Segurança de Front-end (Cybersecurity)]]`
 - `[[Protocol-Bootstrap]]` — instalação do tooling
 - `[[Impeccable Reference]]` — design QA
 - `[[Higgsfield Skills Reference]]` — mídia IA (quando disponível)
+- `[[Tool Palette]]` — catálogo de ferramentas por categoria (refs, design, mídia grátis↔paga, skills/repos, infra) com favoritas ⭐
+- `[[Design System Blueprint]]` — método tokenizado por trás da paleta/`DESIGN.md` (Fase 4)
+- `[[Cinematic Sites Kit]]` — prompts de site/imagem/copy + fórmula de 6 blocos p/ direção cinematográfica
+- `[[Media Workflows (Human Academy)]]` — 5 workflows de mídia (personagem, character sheet, chroma key, upscale, texto na arte) + prompts

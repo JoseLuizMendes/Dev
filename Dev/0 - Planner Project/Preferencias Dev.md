@@ -602,10 +602,18 @@ Arquitetura da informação · hierarquia visual · multi-dispositivo · acessí
 ### GSAP + Lenis
 - `useGSAP` obrigatório no React para auto-cleanup. Respeitar `prefers-reduced-motion`.
 - Animações não bloqueiam main thread. ScrollTrigger integrado ao Lenis via `requestAnimationFrame`.
+- **GSAP é 100% grátis desde abr/2025 (Webflow)** — todos os plugins antes pagos do Club (SplitText, MorphSVG, DrawSVG, ScrollTrigger, ScrollSmoother, Inertia) estão liberados, inclusive uso comercial/cliente. Usar os plugins premium à vontade; instalar via npm `gsap` (catálogo: [[Tool Palette]] §7).
+
+### Anime.js
+- **Aprovado na stack como alternativa leve ao GSAP** (decisão do dev, 2026-08-06). Engine de animação ~24KB modular (MIT): SVG morph/draw, motion path, scroll, stagger, timeline, draggable.
+- **GSAP + Lenis seguem PRIMÁRIOS/canon** (scroll complexo, timelines encadeadas, ScrollTrigger/ScrollSmoother). Usar Anime.js **só quando o GSAP for overkill**: micro-interação isolada, animação pontual, projeto simples/leve onde o peso importa.
+- Não misturar as duas engines no mesmo projeto sem justificativa registrada no `03-Planejamento`/`05-Dev-Log`. Respeitar `prefers-reduced-motion`. Catálogo: [[Tool Palette]] §7.
 
 ### Three.js
 - **Aprovado na stack** — usar **quando couber**: peso do bundle vs. impacto visual avaliado e registrado no `03-Planejamento`.
 - Cena 3D nunca bloqueia o first paint — lazy load do canvas + fallback estático (imagem WEBP) para dispositivos fracos e `prefers-reduced-motion`.
+- **⭐ Preferir "3D sem WebGL" quando der — frames pré-renderizados + scroll-scrub.** Pré-renderiza a animação (Blender / Spline / img2threejs / Google Flow), exporta **sequência de frames** (ou vídeo) e amarra o frame ao progresso do scroll com **GSAP ScrollTrigger** (técnica Apple/AirPods): parece 3D em tempo real, mas é mais leve (zero custo WebGL), roda em device fraco e tem luz art-directed. **Fusão na página:** por **alpha** (fundo transparente — robusto, qualquer bg) ou **fundo casado** (só p/ bg chapado, ex. near-black `#0a0a0b`; unificar o grão com overlay CSS `mix-blend-mode:overlay` sobre a seção pra não aparecer costura). ~30–60 frames, **preload** + WebP/AVIF ou vídeo comprimido; `prefers-reduced-motion` → 1 frame estático. Tamanho/sequência: [[Asset Sizing Standard]].
+- **Three.js/R3F "de verdade"** só quando precisa de **interação real** (girar 360° livre, configurador, física). Aí **obter a malha é o gargalo** (não o código): (a) **img2threejs** — imagem-ref → Three.js procedural ([[Tool Palette]] §7); (b) **imagem → GLB** via geração 3D (objeto único; otimizar/limpar); (c) **Spline** → export web; (d) **fallback** PNG + sombra + tilt no cursor. **Anime.js NÃO faz 3D** (é 2D/DOM/SVG); 3D é sempre Three.js/R3F — GSAP/Anime.js só *tweenam* valores (rotação/câmera).
 - Consultar Context7 antes de usar (API muda com frequência entre releases).
 
 ### Imagens e Mídia Web
@@ -629,6 +637,21 @@ Arquitetura da informação · hierarquia visual · multi-dispositivo · acessí
 - **Dependências:** `pnpm audit` no CI (falha em vulnerabilidade `high`/`critical`); lockfile sempre commitado; dependência nova só dentro da stack aprovada (R7).
 - **Embeds/terceiros:** iframes com `sandbox` + `referrerpolicy`; scripts de terceiros só com justificativa registrada no `03-Planejamento`.
 - **Uploads/mídia** (quando o front aceita arquivos): validar tipo MIME real e tamanho **no server**; nunca confiar na extensão/`Content-Type` do client.
+
+### Segurança de API e Auth (baseline anti-pentest)
+
+> Complementa a §Segurança de Front-end acima e a Fase 7 do [[Backend Onboarding Protocol]]. Itens levantados de falhas recorrentes em pentest (incorporado 2026-08-05) — inegociáveis em todo projeto com API/auth. Verificados no [[Frontend Creative Protocol]] §Fase 10 antes do deploy.
+
+- **Anti-enumeração de usuário:** login, cadastro e "esqueci a senha" devolvem **mensagem genérica** ("se o e-mail existir, enviamos as instruções"), mesmo status HTTP e **tempo de resposta uniforme** (timing). Nunca revelar se e-mail/usuário existe.
+- **Rate limiting de auth:** endpoints de login/reset/OTP com limite **por IP E por conta** (anti-brute-force), além do rate limit geral da API. Lockout progressivo ou captcha após N tentativas.
+- **Disciplina de token/sessão:** token **sempre no header `Authorization`**, nunca em URL/query string (vaza em log, histórico e `Referer`). Sessão/refresh **revogados no logout**; access token de vida curta + refresh rotacionado (complementa cookies `httpOnly` da §Front).
+- **Autorização por objeto (anti-IDOR):** todo acesso a recurso por ID valida **ownership/permissão no server** — nunca confiar que o ID veio do client "certo". **IDOR e SQL Injection são _parada de linha_** (bloqueiam o deploy).
+- **Anti-SQLi:** acesso a dados via ORM parametrizado (Prisma / EF Core); **nunca** concatenar input em query. Raw query só com parâmetros bindados. Vale especialmente na busca.
+- **Resposta mínima (anti-over-fetching / PII):** endpoint retorna **DTO explícito só com o necessário** — nunca hash de senha, tokens, campos internos ou PII desnecessária. Reforça a regra de DTOs do §Back (nunca expor entidade Prisma).
+- **CORS por allowlist:** origem validada contra **lista explícita**; **nunca refletir o header `Origin`** de volta. `Access-Control-Allow-Credentials: true` só com origem fixa (jamais com `*`).
+- **HTTPS forçado:** redirect HTTP→HTTPS + HSTS (já nos headers da §Front); sem conteúdo misto.
+- **Backup automatizado do banco:** todo projeto com dados persistidos tem backup automático — VPS: backup diário do Postgres no [[Deploy Protocol]]; managed/Vercel: PITR/backup do provedor do banco ligado **e verificado**.
+- **Segredos fora do código:** credenciais de banco/API **nunca** no código ou no repo (histórico incluso) — só em env validada com zod (reforça §Front e §Back).
 
 ### Vitest + Playwright
 - Testes escritos antes ou junto com a implementação.
