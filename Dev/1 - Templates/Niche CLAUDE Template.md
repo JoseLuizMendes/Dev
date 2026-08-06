@@ -12,7 +12,7 @@ escopo: "[descrição curta do que este diretório contém]"
 
 # {{NOME_DO_DIRETORIO}}
 
-> **Nota de Uso:** Template canon para `CLAUDE.md` de subpasta/nicho dentro de um projeto. Substitui o template inline anteriormente em `[[TOON-PROMPT]]`.
+> **Nota de Uso:** Template canon para `CLAUDE.md` de subpasta/nicho dentro de um projeto.
 >
 > ⚠️ **Função:** diretrizes específicas do nicho local. Complementa (não substitui) o `CLAUDE.md` global do projeto.
 
