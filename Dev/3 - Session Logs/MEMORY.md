@@ -100,7 +100,7 @@
 - [2026-05-30] Todos os protocolos (`[[Client Onboarding Protocol]]`, `[[Protocol-Contract]]`, `[[Protocol-Bootstrap]]`, `[[Protocol-SpecKit]]`, `[[Session Protocol]]`, `[[Immunological Error Memory]]`, `[[0.2 - Audit/Diretrizes]]`) blindados com banner ⚠️ + sub-fluxograma Mermaid + checkbox de template no Quality Gate
 - [2026-05-30] Frontmatter do `[[Requirements & Scope Project Template]]` sincronizado com campos lidos por `setup.js` (projeto, package_manager, frontend_stack, backend_stack, cloud_stack, dependencies, email_service, storage_service, payment_gateway)
 - [2026-05-30] `[[Session Protocol]]` marcado como canon único de boot/shutdown
-- [2026-05-30] `[[TOON-PROMPT]]` limpo: removidos comandos CLI aspiracionais (`npx dev init/bootstrap/mcp`), template inline de claude.md substituído por link ao `[[Niche CLAUDE Template]]`, lista hardcoded de skills delegada à pasta `0.3`
+- [2026-05-30] `TOON-PROMPT (removido 2026-08-06)` limpo: removidos comandos CLI aspiracionais (`npx dev init/bootstrap/mcp`), template inline de claude.md substituído por link ao `[[Niche CLAUDE Template]]`, lista hardcoded de skills delegada à pasta `0.3`
 - [2026-05-30] Criado `[[Pre-Sale Protocol]]` cobrindo a fase antes do onboarding: dev faz call → entrega notas para IA → IA produz Master Project Planning preenchido + pendências
 - [2026-05-30] Criado `[[Spec-Kit Reference]]` com documentação de `/speckit.specify`, `.plan`, `.tasks`, `.implement`, `.analyze` + fallback manual para cada um
 - [2026-05-30] `cognitive-vault-manager/SKILL.md` alinhado: boot section agora REFERENCIA `[[Session Protocol]]` ao invés de redefinir 4 passos divergentes
@@ -109,7 +109,7 @@
   - `[[Preferencias Dev]]` ganhou seção "Filosofia de Construção": SOLID (5 princípios com exemplos por stack) + Clean Code (7 regras) + Arquitetura Hexagonal (Ports & Adapters) com matriz de decisão de 6 sinais
   - `[[Preferencias Dev]]` ganhou seção "Estrutura de Pastas por Stack": TS+Next+NestJS (default + hexagonal), C# Clean Architecture, Java Spring (hexagonal + layered), Vue, Angular
   - R7 adicionado ao `[[CLAUDE]]` raiz: conformidade com `[[Preferencias Dev]]` é mandatória — IA deve avisar antes de qualquer sugestão que viole regras
-  - `[[TOON-PROMPT]]` mantido standalone (não foi gutted) — SOLID inline ampliado + Clean Code + Hexagonal resumo + link a `[[Preferencias Dev]]` para detalhes
+  - `TOON-PROMPT (removido 2026-08-06)` mantido standalone (não foi gutted) — SOLID inline ampliado + Clean Code + Hexagonal resumo + link a `[[Preferencias Dev]]` para detalhes
   - `tools/validate-project.js` ganhou flag `--code-path` para validar estrutura de pastas do repo de código contra stack do frontmatter (`back/`+`front/` p/ TS, `src/<Name>.Web/` p/ C#, etc)
   - `[[Mock Pipeline Test]]` atualizado: critério de aceitação inclui decisão Hexagonal vs Layered + estrutura de pastas conforme stack + R7 respeitado
   - `[[Master Pipeline & Enforcement]]` — Regras de Enforcement passaram a 10 itens (incluindo R7 e referência à Filosofia)
