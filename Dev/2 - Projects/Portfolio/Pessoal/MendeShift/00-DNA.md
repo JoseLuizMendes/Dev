@@ -96,22 +96,26 @@ direção CPG colorida, outro nicho.
 2. **A frase** em display grande, ancorada no espaço negativo do frame final.
 3. **Links** (Páginas / Seguir) em mono pequeno, coluna à direita, sem borda e sem pill.
 
-**Narrativa (5,5s / ~95 frames) — "Da sinapse ao produto"** *(revisão 2026-09-14: plano 03
-"Materialização" CORTADO — ver §4.1)*:
+**Narrativa (7s / ~120 frames) — "Da sinapse à constelação"** *(revisão 2 de 2026-09-14: o final
+mudou de "produto na tela" para transformação da própria rede; **clarão proibido** — ver §4.2)*:
 
-| Plano | Frames | Cena | Origem do asset |
-|---|---|---|---|
-| 01 Origem | 0–30 | Retrato do fundador, ombros pra cima, olhando pra fora do quadro. Câmera inicia orbit tipo drone. | **Foto real do dev** (P&B, estúdio) |
-| 02 Dentro | 30–70 | O orbit atravessa a têmpora sem corte. Estrutura neural escura; pulso vermelho percorre o filamento até a sinapse. Clarão branco no fim. | K2 gerado — **aprovado** |
-| 03 Entrega | 70–95 | Corta no branco do clarão. A interface roda numa tela escura, quadro estático, terço esquerdo vazio para a frase. | K4 — a gerar |
+| Trecho | O que acontece | Origem do asset |
+|---|---|---|
+| **A** Origem | Dev em 3/4, orbit lento até o perfil. | **Fotos reais do dev** (P&B estúdio) |
+| **B** Entrada | A câmera continua entrando; a pele perde opacidade gradualmente e os filamentos aparecem por baixo. Não existe ponto de virada. | morph K1→K2 |
+| **C** Pulso | O pulso vermelho percorre o filamento até a junção, que ganha brilho **contido**. | K2 — **aprovado** |
+| **D** Desmanche | Os filamentos se afinam e se rompem em pontos, seguindo os mesmos caminhos. | K3 — editar a partir do K2 |
+| **E** Constelação | Os pontos assentam numa malha estável. Um único ponto segue vermelho. Quadro para. | K4 — editar a partir do K3 |
 
-**Por que funciona:** a luz é o fio condutor — luz de estúdio → pulso na sinapse → clarão → luz de tela.
-Sem ator, sem "cliente sorrindo" (clichê rejeitado), sem corte visível: o clarão cobre a única emenda.
+**Regra de transição — INEGOCIÁVEL:** nenhum corte, **nenhum clarão**, nenhum dissolve para branco.
+Toda passagem é **transformação do mesmo material** em estados diferentes. É o princípio do
+Species in Pieces (ref #3 do mapa). Saída de gerador com flash ou corte é descartada: sem o clarão
+não existe remendo na pós para um scrub.
 
-**Regra de cor (derivada dos assets aprovados):** a sequência inteira é **monocromática**. O
-`--accent` `#ff4d4f` só aparece no pulso da sinapse e na linha da interface — é o único ponto de cor
-da seção. As fotos do dev são P&B de estúdio e o K2 aprovado é cinza/branco com um único pulso
-vermelho; o K4 obedece ao mesmo registro.
+**Leitura:** rosto → pensamento → ideia → rede de trabalho. Cada ponto da constelação lê como um
+projeto, mas **sem rótulo, número ou texto dentro da imagem** — o significado fica na copy da seção.
+
+**Regra de cor:** sequência monocromática; `#ff4d4f` só no pulso e no ponto final.
 
 **Sizing (calculado conforme [[Asset Sizing Standard]] — compute before generate):**
 
@@ -120,7 +124,7 @@ vermelho; o K4 obedece ao mesmo registro.
 | Slot | Showcase / foco, 16:9 | É o momento principal da seção, não um inline decorativo. |
 | Largura de exibição (lg) | ~1152 px (container) | Container do site. |
 | DPR aplicado | **1.4×** | Regra "1.5× aceitável para heros/decorativos grandes" — 2× num scrub de 120 frames estoura o budget. |
-| Frames de entrega | **1600×900 AVIF** (+ WebP fallback), ~95 frames | ~25–35 KB/frame → **2,5–3,5 MB** total, dentro do budget de showcase (≤15 MB). |
+| Frames de entrega | **1600×900 AVIF** (+ WebP fallback), ~120 frames | ~25–35 KB/frame → **3–4 MB** total, dentro do budget de showcase (≤15 MB). |
 | Máster de geração (stills) | **2048×1152** | ≥ alvo, sem upscale. |
 | Máster de vídeo | ≥1080p (Veo/Flow) | Gate do Asset Sizing; abaixo disso é rejeitado. |
 | Fallback | `poster` = frame final, AVIF/WebP | `prefers-reduced-motion` e mobile (<768px) recebem só o poster; sem scrub. |
@@ -141,8 +145,24 @@ Decisões:
 2. **K2 aprovado** na terceira versão (neurônio contido, fundo preto limpo, pulso vermelho único).
 3. **K3 CORTADO.** O clarão do K2 já esconde a transição; um plano intermediário de "interface se
    montando" só adiciona ponto de falha. Vai do clarão direto para a entrega.
-4. **K4 é a única imagem que falta gerar** — e como cena concreta (monitor escuro fotografado), não
-   como geometria abstrata.
+4. **K4 "monitor/produto" DESCARTADO** — ver §4.2.
+
+### 4.2 Revisão 2 de 2026-09-14 — o final abandonou "mostrar o produto"
+
+Tentativas de fechar a sequência com o produto na tela falharam em sequência: monitor gerado (datado,
+interface falsa, "não transmite autoridade nem a minha entrega"), e depois setup fotografado +
+captura real do projeto do casamento composta na tela — abandonado pelo dev antes da produção.
+
+**Direção final escolhida (conceito "a rede vira constelação"):** o desfecho é a própria estrutura
+neural se transformando — filamentos se rompem em pontos que assentam numa constelação. Vantagens:
+deriva do K2 já aprovado (continuidade garantida), não exige cenário, hardware, captura de projeto
+nem composição, e o morph é intrínseco ao material.
+
+**Descartado junto:** o clarão branco. Ele existia para esconder emendas; o dev exige transições
+imperceptíveis, então toda passagem passa a ser morph do mesmo material.
+
+**K3 e K4 são gerados por EDIÇÃO do K2** (image-edit, não text-to-image): foi a geração do zero que
+falhou três vezes.
 
 **Keyframes (3 stills → 3 segmentos image-to-video):** ver [[02-Prompt-Pack-Secao-Marca]].
 Regra do Asset Sizing: cada segmento tem **frame inicial + frame final** no mesmo ratio/estilo/seed —
