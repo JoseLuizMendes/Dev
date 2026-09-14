@@ -96,17 +96,22 @@ direção CPG colorida, outro nicho.
 2. **A frase** em display grande, ancorada no espaço negativo do frame final.
 3. **Links** (Páginas / Seguir) em mono pequeno, coluna à direita, sem borda e sem pill.
 
-**Narrativa (7s / ~120 frames) — "Da sinapse ao produto":**
+**Narrativa (5,5s / ~95 frames) — "Da sinapse ao produto"** *(revisão 2026-09-14: plano 03
+"Materialização" CORTADO — ver §4.1)*:
 
-| Plano | Frames | Cena |
-|---|---|---|
-| 01 Origem | 0–30 | Retrato do fundador, ombros pra cima, frontal. Câmera inicia orbit tipo drone. |
-| 02 Dentro | 30–65 | O orbit atravessa a têmpora sem corte. Rede neural escura; pulso vermelho percorre o filamento até a sinapse. Clarão no fim. |
-| 03 Materialização | 65–95 | O clarão vira a luz de um monitor; geometria de interface se montando. |
-| 04 Entrega | 95–120 | Câmera afasta, a interface roda, quadro estabiliza com espaço negativo à esquerda para a frase. |
+| Plano | Frames | Cena | Origem do asset |
+|---|---|---|---|
+| 01 Origem | 0–30 | Retrato do fundador, ombros pra cima, olhando pra fora do quadro. Câmera inicia orbit tipo drone. | **Foto real do dev** (P&B, estúdio) |
+| 02 Dentro | 30–70 | O orbit atravessa a têmpora sem corte. Estrutura neural escura; pulso vermelho percorre o filamento até a sinapse. Clarão branco no fim. | K2 gerado — **aprovado** |
+| 03 Entrega | 70–95 | Corta no branco do clarão. A interface roda numa tela escura, quadro estático, terço esquerdo vazio para a frase. | K4 — a gerar |
 
-**Por que funciona:** a luz é o fio condutor — rim light → pulso na sinapse → clarão → luz de tela.
-Tudo é uma coisa só se transformando, sem corte, sem ator, sem "cliente sorrindo" (clichê rejeitado).
+**Por que funciona:** a luz é o fio condutor — luz de estúdio → pulso na sinapse → clarão → luz de tela.
+Sem ator, sem "cliente sorrindo" (clichê rejeitado), sem corte visível: o clarão cobre a única emenda.
+
+**Regra de cor (derivada dos assets aprovados):** a sequência inteira é **monocromática**. O
+`--accent` `#ff4d4f` só aparece no pulso da sinapse e na linha da interface — é o único ponto de cor
+da seção. As fotos do dev são P&B de estúdio e o K2 aprovado é cinza/branco com um único pulso
+vermelho; o K4 obedece ao mesmo registro.
 
 **Sizing (calculado conforme [[Asset Sizing Standard]] — compute before generate):**
 
@@ -115,12 +120,31 @@ Tudo é uma coisa só se transformando, sem corte, sem ator, sem "cliente sorrin
 | Slot | Showcase / foco, 16:9 | É o momento principal da seção, não um inline decorativo. |
 | Largura de exibição (lg) | ~1152 px (container) | Container do site. |
 | DPR aplicado | **1.4×** | Regra "1.5× aceitável para heros/decorativos grandes" — 2× num scrub de 120 frames estoura o budget. |
-| Frames de entrega | **1600×900 AVIF** (+ WebP fallback), ~120 frames | ~25–35 KB/frame → **3–4 MB** total, dentro do budget de showcase (≤15 MB). |
+| Frames de entrega | **1600×900 AVIF** (+ WebP fallback), ~95 frames | ~25–35 KB/frame → **2,5–3,5 MB** total, dentro do budget de showcase (≤15 MB). |
 | Máster de geração (stills) | **2048×1152** | ≥ alvo, sem upscale. |
 | Máster de vídeo | ≥1080p (Veo/Flow) | Gate do Asset Sizing; abaixo disso é rejeitado. |
 | Fallback | `poster` = frame final, AVIF/WebP | `prefers-reduced-motion` e mobile (<768px) recebem só o poster; sem scrub. |
 
-**Keyframes a gerar (5 stills → 4 segmentos image-to-video):** ver [[02-Prompt-Pack-Secao-Marca]].
+### 4.1 Revisão de 2026-09-14 — o que sobrou de geração
+
+Três rodadas de geração falharam nos keyframes **abstratos** (K2 v1 "neurônio 3D de banco de imagem",
+K2 v2 "linhas gráficas", K3 "geometria de interface"). Diagnóstico: prompt abstrato sem assunto
+concreto = o gerador preenche o vazio com bloom, núcleo branco estourado e sci-fi genérico. O que
+destravou o K2 foram as negativas **`no bloom`**, **`no blown-out white core`** e
+**`no volumetric light`** — agora obrigatórias em toda geração deste projeto.
+
+Decisões:
+
+1. **K0 e K1 não são mais gerados** — o dev já tem duas fotos de estúdio P&B próprias (3/4 sentado e
+   perfil), mesmo figurino e mesma luz, que servem como frame inicial e final do plano 01. Asset real
+   vence asset gerado. *Pendência: arquivos originais para validar resolução (gate ≥1080p).*
+2. **K2 aprovado** na terceira versão (neurônio contido, fundo preto limpo, pulso vermelho único).
+3. **K3 CORTADO.** O clarão do K2 já esconde a transição; um plano intermediário de "interface se
+   montando" só adiciona ponto de falha. Vai do clarão direto para a entrega.
+4. **K4 é a única imagem que falta gerar** — e como cena concreta (monitor escuro fotografado), não
+   como geometria abstrata.
+
+**Keyframes (3 stills → 3 segmentos image-to-video):** ver [[02-Prompt-Pack-Secao-Marca]].
 Regra do Asset Sizing: cada segmento tem **frame inicial + frame final** no mesmo ratio/estilo/seed —
 aqui o frame final de um segmento **é** o inicial do seguinte, o que garante continuidade sem corte.
 
@@ -133,6 +157,8 @@ bleed de 10–15% não se aplica.
 
 - [ ] Zero `backdrop-blur` no componente novo (§2)
 - [ ] Frames gerados no máster 2048×1152, entregues 1600×900 AVIF+WebP, sem upscale
+- [ ] Negativas anti-bloom (`no bloom`, `no blown-out white core`, `no volumetric light`) em todo prompt
+- [ ] Fotos do dev validadas no gate de resolução (≥1080p) antes de entrarem no pipeline
 - [ ] Poster estático servido em `prefers-reduced-motion` e em <768px
 - [ ] Máximo de 3 elementos visuais na seção (§4)
 - [ ] Prompts obedecendo §6.1 (lista fechada, negativas explícitas, um eixo por rodada, 3–4 saídas)
