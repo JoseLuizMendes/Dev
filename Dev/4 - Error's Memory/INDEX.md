@@ -189,4 +189,23 @@
     - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
     - "[[deployment|Deployment]]"
     - "[[postgresql|PostgreSQL]]"
+- id: ERR-2026-0009
+  título: "Variável de funcionalidade parcial exigida no boot derruba a aplicação inteira"
+  categoria: Deployment
+  stack:
+    - Next.js
+    - Vercel
+    - Zod
+  severidade: alta
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-09-21
+  sintoma: "Deploy marcado READY pela Vercel, mas TODA rota responde 500 — site público incluído. Log: 'Failed to prepare server: An error occurred while loading instrumentation hook: Configuração inválida: APP_URL (ausente)'"
+  causa_raiz: "APP_URL entrou no schema validado no boot (instrumentation.ts) junto com uma funcionalidade ainda não implementada (recuperação de senha). Como EMAIL_TRANSPORT tem default `resend`, o boot passou a exigir também RESEND_API_KEY e EMAIL_FROM. O build NÃO executa o instrumentation, então o deploy sobe verde e só quebra na primeira requisição."
+  solução: "Escopo parcial: requireEmailConfig() valida no primeiro envio, não no boot — o mesmo padrão de requireDatabaseUrl() e requireSessionSecret(). No boot ficam só as variáveis sem as quais NENHUMA rota funciona (DATABASE_URL, JWT_SECRET)."
+  prevenção: "Variável só entra na validação de boot se a ausência dela impedir TODA a aplicação de servir. Variável de uma funcionalidade específica — e principalmente de uma ainda não entregue — vira escopo parcial, validado no primeiro uso. Critério prático: 'se faltar, a home ainda precisa abrir?' Se sim, não é de boot. Corolário: deploy verde na Vercel não prova que o servidor sobe, porque o build não roda o instrumentation hook."
+  recorrências: 0
+  links:
+    - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
+    - "[[deployment|Deployment]]"
+    - "[[ERR-2026-0008]] — mesma família: rigidez em tempo de carga/boot quebrando o deploy"
 ```
