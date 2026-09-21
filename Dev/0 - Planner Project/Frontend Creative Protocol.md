@@ -68,13 +68,13 @@ flowchart TD
 
 **1.2 Fontes de busca canônicas** (buscar sites inteiros, sections, componentes, efeitos e insights):
 
-| Fonte | URL | O que buscar |
-|---|---|---|
-| Awwwards | https://www.awwwards.com/ | Sites premiados, efeitos de alto nível, insights |
-| Dribbble | https://dribbble.com/ | Componentes, UI shots, direção de arte |
-| Pinterest | https://www.pinterest.com/ | Moodboards, direção visual, paletas |
-| Squarespace | https://www.squarespace.com/templates | Templates, estruturas de sections |
-| v0 | https://v0.app/templates/ | UI components, projects, pages and layouts |
+| Fonte       | URL                                   | O que buscar                                     |
+| ----------- | ------------------------------------- | ------------------------------------------------ |
+| Awwwards    | https://www.awwwards.com/             | Sites premiados, efeitos de alto nível, insights |
+| Dribbble    | https://dribbble.com/                 | Componentes, UI shots, direção de arte           |
+| Pinterest   | https://www.pinterest.com/            | Moodboards, direção visual, paletas              |
+| Squarespace | https://www.squarespace.com/templates | Templates, estruturas de sections                |
+| v0          | https://v0.app/templates/             | UI components, projects, pages and layouts       |
 
 > Não achou boa referência nessas fontes? Alternativas/complementos (Muzli, Abduzeedo, Visuelle + bancos por IA STILLS/Every Pixel) no catálogo [[Tool Palette]] §1–2.
 
