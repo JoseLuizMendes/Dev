@@ -23,10 +23,10 @@ data_inicio: "2026-09-16"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-09-18 16:00 |
-| **Fase atual** | Setup (bootstrap concluído) → Desenvolvimento |
-| **Tarefa em progresso** | Nenhuma — próxima: T-0.1 (ref a `[[04-Tarefas]]`) |
-| **Bloqueios** | T-1.13/T-1.14 (provedor de e-mail PENDENTE) · T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 |
+| **Timestamp** | 2026-09-21 13:00 |
+| **Fase atual** | Desenvolvimento — Épico 0 concluído, Épico 1 em especificação |
+| **Tarefa em progresso** | Nenhuma — Épico 0 (T-0.1…T-0.6) concluído; próxima: T-1.1 |
+| **Bloqueios** | T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 — *provedor de e-mail resolvido em 21/09 (Resend), T-1.13/T-1.14 desbloqueadas* |
 
 **Resumo em 3 bullets:**
 - F0 (limpeza e correções críticas) mergeável no PR #1: cadastro público removido, hub em `/hub`, `JWT_SECRET` obrigatório.
@@ -43,6 +43,12 @@ data_inicio: "2026-09-16"
 | 2026-09-17 | Papéis `OWNER`/`STAFF`, sem cadastro público; 1º acesso via `scripts/seed-owner.mjs` | Sistema mono-tenant com dados de saúde | `POST /api/users` só OWNER | US-1.4 |
 | 2026-09-17 | Grafia oficial **Cavalcanti** | Confirmado pelo dev (domínio e site atual) | Código/documentos atualizados; pasta do vault e repo mantêm o nome antigo | — |
 | 2026-09-17 | `.env` local aponta para o branch Neon `dev` | Branch `production` era usado localmente | App e migrações no mesmo branch; backup `.env.bak-20260917-152003` | US-10.3 |
+| 2026-09-18 | Validação de env em dois tempos: preguiçosa em `src/lib/env.ts` + `getServerEnv()` no boot via `instrumentation.ts` | Validação só no import quebrava o `next build` da Vercel; validação só preguiçosa deixava o servidor subir com segredo inválido (fere o princípio III) | Build sem env conclui; boot sem env recusa nomeando a variável | T-0.3/T-0.4 |
+| 2026-09-18 | Banco de testes protegido por tabela marcadora `_e2e_test_marker`, não por nome de host | Uma `DATABASE_URL` copiada errado passaria por qualquer checagem de nome; a marcadora é o próprio banco dizendo o que é | Reset e seed recusam qualquer banco sem a marcadora; 0 escrita em `dev`/`production` | T-0.5/T-0.6 |
+| 2026-09-18 | `output: standalone` vira opt-in (`BUILD_STANDALONE=1`) no `next.config.ts` | Era o padrão fora da Vercel e impedia `next start`, de que a suíte E2E depende para servir na porta 3101 | Caminho de contêiner segue disponível sob demanda; alvo aprovado continua a Vercel | T-0.1 |
+| 2026-09-18 | Exceção R8 estendida a `e2e/`, `scripts/` e `src/test/` | Não são conteúdo gerado por ferramenta, então a exceção de `skills/*` não se aplica — cada uma ganhou `CLAUDE.md` próprio | Três `CLAUDE.md` novos | R8 |
+| 2026-09-21 | Provedor de e-mail: **Resend** | Primeira opção do dev para a recuperação de senha (US-1.7); integração atrás da porta `EmailSender`, então trocar depois não muda requisito | Desbloqueia T-1.13/T-1.14; justificativa de dependência nova exigida pelo princípio VI | US-1.7 |
+| 2026-09-21 | Rotação da senha do Neon e separação do `JWT_SECRET` entre dev e produção adiadas para antes do go-live | Credenciais atuais trafegaram por chat durante o setup das duas máquinas; valem só enquanto o projeto não está no ar | Dívida registrada; obrigatória antes do deploy público | US-10.3 |
 | 2026-09-18 | **Exceção R7:** Drizzle ORM no lugar de Prisma | Back já em Drizzle; driver nativo Neon | Constituição §Restrições | Constituição v1.0.0 |
 | 2026-09-18 | **Exceção R7:** sessão própria no banco no lugar de Auth.js v5 | Credentials do Auth.js v5 exige JWT não revogável (ERR-2026-0003); baseline exige revogação | Épico 1 (T-1.1–T-1.4) | US-1.1, US-1.2 |
 | 2026-09-18 | **Exceção R7:** ECharts mantido no gráfico financeiro (exceção C6) | Zoom por pinça/roda nativo | Reavaliar em T-8.4 | US-6.2 |

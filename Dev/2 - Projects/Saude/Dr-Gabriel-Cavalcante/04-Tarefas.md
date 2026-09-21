@@ -36,12 +36,12 @@ data_criacao: "2026-09-18"
 
 | ID | Tipo | Descrição | US Origem | Arquivos Afetados | Critério BDD | Status | Owner | Est (h) |
 |---|---|---|---|---|---|---|---|---|
-| T-0.1 | `[TEST]` | Smoke: `pnpm test` roda Vitest e `pnpm test:e2e` abre a home e vê o `h1` | Constituição §Quality Gates | `e2e/smoke.spec.ts`, `src/test/smoke.test.ts` | GIVEN o projeto instalado WHEN rodo `pnpm test` e `pnpm test:e2e` THEN ambos executam e passam | pending | Dev | 1 |
-| T-0.2 | impl | DX obrigatória (prettier + plugin tailwind, husky, lint-staged, `.editorconfig`) + Playwright config + scripts | Constituição §Quality Gates | `package.json`, `.prettierrc`, `.editorconfig`, `.husky/pre-commit`, `playwright.config.ts` | T-0.1 verde | pending | Dev | 2 |
-| T-0.3 | `[TEST]` | Env: boot falha se `DATABASE_URL`/segredo de sessão ausente ou inválido | Constituição III | `src/lib/env.test.ts` | GIVEN uma env sem segredo de sessão WHEN o módulo de env é carregado THEN lança erro com a variável faltante | pending | Dev | 1 |
-| T-0.4 | impl | `src/lib/env.ts` com zod; substituir leituras diretas de `process.env` | Constituição III | `src/lib/env.ts`, `src/lib/session.ts`, `src/db/index.ts` | T-0.3 verde | pending | Dev | 1 |
-| T-0.5 | `[TEST]` | Infra E2E: fixture faz login com usuário semeado e acessa `/hub/agenda` | Constituição II | `e2e/fixtures/auth.ts`, `e2e/hub-smoke.spec.ts` | GIVEN o banco `test` semeado WHEN a fixture autentica THEN `/hub/agenda` carrega sem erro de console | pending | Dev | 2 |
-| T-0.6 | impl | Branch Neon `test` + script de reset/seed + `webServer` do Playwright | Constituição II | `scripts/test-db-reset.mjs`, `playwright.config.ts` | T-0.5 verde | pending | Dev | 2 |
+| T-0.1 | `[TEST]` | Smoke: `pnpm test` roda Vitest e `pnpm test:e2e` abre a home e vê o `h1` | Constituição §Quality Gates | `e2e/smoke.spec.ts`, `src/test/smoke.test.ts` | GIVEN o projeto instalado WHEN rodo `pnpm test` e `pnpm test:e2e` THEN ambos executam e passam | done | Dev | 1 |
+| T-0.2 | impl | DX obrigatória (prettier + plugin tailwind, husky, lint-staged, `.editorconfig`) + Playwright config + scripts | Constituição §Quality Gates | `package.json`, `.prettierrc`, `.editorconfig`, `.husky/pre-commit`, `playwright.config.ts` | T-0.1 verde | done | Dev | 2 |
+| T-0.3 | `[TEST]` | Env: boot falha se `DATABASE_URL`/segredo de sessão ausente ou inválido | Constituição III | `src/lib/env.test.ts` | GIVEN uma env sem segredo de sessão WHEN o módulo de env é carregado THEN lança erro com a variável faltante | done | Dev | 1 |
+| T-0.4 | impl | `src/lib/env.ts` com zod; substituir leituras diretas de `process.env` | Constituição III | `src/lib/env.ts`, `src/lib/session.ts`, `src/db/index.ts` | T-0.3 verde | done | Dev | 1 |
+| T-0.5 | `[TEST]` | Infra E2E: fixture faz login com usuário semeado e acessa `/hub/agenda` | Constituição II | `e2e/fixtures/auth.ts`, `e2e/hub-smoke.spec.ts` | GIVEN o banco `test` semeado WHEN a fixture autentica THEN `/hub/agenda` carrega sem erro de console | done | Dev | 2 |
+| T-0.6 | impl | Branch Neon `test` + script de reset/seed + `webServer` do Playwright | Constituição II | `scripts/test-db-reset.mjs`, `playwright.config.ts` | T-0.5 verde | done | Dev | 2 |
 
 ## Épico 1: Acesso, Sessão e Equipe
 

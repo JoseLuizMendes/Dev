@@ -170,4 +170,23 @@
   recorrências: 0
   links:
     - "[[deployment|Deployment]]"
+- id: ERR-2026-0008
+  título: "Conexão Neon criada no import do módulo quebra o build sem DATABASE_URL"
+  categoria: Deployment
+  stack:
+    - Next.js
+    - Neon
+    - Drizzle
+  severidade: média
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-09-18
+  sintoma: "next build falha em ambiente sem DATABASE_URL; neon('') lança 'No database connection string was provided'"
+  causa_raiz: "src/db/index.ts chamava neon(process.env.DATABASE_URL || '') no topo do módulo, então qualquer import — inclusive o que o build faz para tracing de rotas — exigia a variável"
+  solução: "Criar o cliente sob demanda em getDb() e exportar `db` como proxy fino que delega, preservando os ~20 imports existentes"
+  prevenção: "Nenhum módulo de servidor deve abrir conexão, ler env ou criar cliente no corpo do módulo. Conexão nasce na primeira chamada. Coberto por teste: importar o módulo sem env não pode lançar."
+  recorrências: 0
+  links:
+    - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
+    - "[[deployment|Deployment]]"
+    - "[[postgresql|PostgreSQL]]"
 ```
