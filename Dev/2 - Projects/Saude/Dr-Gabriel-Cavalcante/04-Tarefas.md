@@ -173,6 +173,42 @@ data_criacao: "2026-09-18"
 | T-10.6 | impl | Configurar retenção de histórico do Neon + proteger branch `production` + limpar usuários de teste | US-10.3 | Neon (console/MCP) | T-10.5 verificado | pending | Dev | 1 |
 | T-10.7 | impl | Checklists SEO/segurança ([[Frontend Creative Protocol]] Fases 9–10), auditoria dos 3 agentes, UAT e [[Deploy Protocol]] (domínio, HTTPS, smoke) | Todas | Vercel, DNS | DoD do [[03-Planejamento]] | pending | Dev | 6 |
 
+
+## Épico 11: Correções da auditoria do hub (2026-10-12)
+
+> Origem: `dr-gabriel-cavalcante-web/docs/auditoria-hub.md` (levantamento medido) e
+> `docs/plano-hub.md` (plano de execução). Erros registrados em [[06-Erros]] como
+> ERR-2026-0010 a ERR-2026-0017.
+>
+> Decisões do dev em 2026-10-12: unidades com **separação completa**; conflito de horário
+> **avisa e deixa confirmar**; **vai ter outros profissionais**; telas de conteúdo do site
+> **depois**; tipografia e paleta **pendentes** até esta rodada fechar.
+>
+> Interseção com o que já estava planejado: o filtro de unidade em `reports/summary` e a rota
+> `/hub/relatorios` são **T-8.2**, e as tabelas de conteúdo do site são o **Épico 6** — este
+> épico não os duplica.
+
+| ID | Tipo | Descrição | US Origem | Arquivos Afetados | Critério BDD | Status | Owner | Est (h) |
+|---|---|---|---|---|---|---|---|---|
+| T-11.1 | `[TEST]` | Grade da agenda tem altura > 0 e desenha os eventos | ERR-2026-0010 | `e2e/hub-agenda.spec.ts` | **GIVEN** a agenda com consultas na semana **WHEN** a tela carrega em 1440×900 e em 390×844 **THEN** o contêiner do calendário mede mais de 400px de altura e os eventos estão visíveis | pending | Dev | 1 |
+| T-11.2 | impl | Trocar `min-h-` por `h-` na cadeia shell → página → calendário | ERR-2026-0010 | `src/components/tenant/app-shell.tsx`, `src/app/hub/(workspace)/agenda/page.tsx` | T-11.1 verde | pending | Dev | 1 |
+| T-11.3 | `[TEST]` | Texto do bloco da agenda passa em contraste nas 8 cores de serviço | ERR-2026-0011 | `src/lib/a11y/contraste.test.ts` | **GIVEN** os 8 tokens `--color-service-*` **WHEN** calculo a razão contra `--color-on-event` **THEN** todas medem ao menos 4,5:1 | pending | Dev | 1 |
+| T-11.4 | impl | `--color-on-event` passa de branco para a tinta do sistema | ERR-2026-0011 | `src/app/globals.css` | T-11.3 verde | pending | Dev | 1 |
+| T-11.5 | impl | `prefetch={false}` + prefetch no hover na NAV; `next/dynamic` nos gráficos e no calendário | ERR-2026-0012 | `src/components/tenant/app-shell.tsx`, `src/components/tenant/dashboard/**` | JS da primeira tela do hub abaixo de 550 KB comprimidos, medido com CDP | pending | Dev | 2 |
+| T-11.6 | impl | `config.matcher` em `proxy.ts` limitado a `/hub/:path*` | ERR-2026-0014 | `src/proxy.ts` | `functions-config-manifest.json` da build deixa de trazer `^.*$` | pending | Dev | 1 |
+| T-11.7 | impl | `from` obrigatório na consulta da triagem | ERR-2026-0012 | `src/components/tenant/agenda/triage-panel.tsx` | A triagem para de pedir o histórico inteiro a cada 60s | pending | Dev | 1 |
+| T-11.8 | impl | Índices em `appointments`, `patients` e `teeth_procedures` | ERR-2026-0015 | `src/db/schema.ts`, `drizzle/` | Migração aplicada; nenhuma tabela de operação sem índice além da PK | pending | Dev | 2 |
+| T-11.9 | `[TEST]` | Agenda e horários separados por unidade | ERR-2026-0017 | `src/lib/clinica/unidades.test.ts`, `e2e/hub-unidades.spec.ts` | **GIVEN** duas unidades com expedientes diferentes **WHEN** troco a unidade no hub **THEN** a agenda mostra só as consultas dela e os horários são os dela | pending | Dev | 3 |
+| T-11.10 | impl | Tabelas `units` e `professionals`; `unit_id` em `appointments`, `business_hours` e `business_date_overrides`; `professional_id` em `appointments`; UNIQUE `(unit_id, day_of_week)` | ERR-2026-0017 | `src/db/schema.ts`, `drizzle/`, `src/lib/clinica/**` | T-11.9 verde | pending | Dev | 8 |
+| T-11.11 | impl | Seletor de unidade no shell + filtro de profissional na agenda (sem view de recurso: `resource-timegrid` é FullCalendar Premium) | ERR-2026-0017 | `src/components/tenant/app-shell.tsx`, `src/components/tenant/agenda/**` | T-11.10 aplicado | pending | Dev | 5 |
+| T-11.12 | `[TEST]` | Sobreposição de horário no mesmo profissional devolve 409 com os conflitantes | US-2.x | `src/lib/agenda/conflito.test.ts`, `e2e/hub-agenda-conflito.spec.ts` | **GIVEN** uma consulta marcada **WHEN** marco outra que cruza o mesmo horário do mesmo profissional **THEN** recebo 409 com a lista de conflitos; **AND WHEN** reenvio com `permitirSobreposicao` **THEN** grava | pending | Dev | 2 |
+| T-11.13 | impl | `lib/agenda/` (conflito por `INSERT … WHERE NOT EXISTS`, um statement) + zod nas rotas de operação | US-2.x | `src/lib/agenda/**`, `src/app/api/appointments/**` | T-11.12 verde | pending | Dev | 6 |
+| T-11.14 | `[TEST]` | Hub abre sem tela de carregamento e sem cascata | ERR-2026-0013 | `e2e/hub-abertura.spec.ts` | **GIVEN** sessão válida **WHEN** abro `/hub/agenda` **THEN** a frase "Carregando clínica…" não aparece em nenhum quadro e os dados já vêm no HTML | pending | Dev | 2 |
+| T-11.15 | impl | Layout do workspace vira Server Component com `prefetchQuery` + `dehydrate` + `HydrationBoundary` | ERR-2026-0013 | `src/app/hub/(workspace)/layout.tsx`, `src/components/tenant/tenant-context.tsx` | T-11.14 verde | pending | Dev | 5 |
+| T-11.16 | `[TEST]` | Agregados do relatório no fuso da clínica, e ocupação medindo ocupação | ERR-2026-0016 | `src/lib/relatorios/metrics.test.ts` | **GIVEN** `TZ=UTC` no processo e uma consulta às 21h de terça em São Paulo **WHEN** gero o relatório **THEN** ela conta em terça; **AND** a ocupação é tempo agendado ÷ tempo disponível, não comparecimento | pending | Dev | 2 |
+| T-11.17 | impl | Agregação em SQL com `AT TIME ZONE`; corrigir ocupação e novos clientes; paginar pacientes e clientes | ERR-2026-0016 | `src/app/api/reports/summary/route.ts`, `src/lib/relatorios/**`, `src/app/api/patients/route.ts` | T-11.16 verde (ver T-8.2 para a rota `/hub/relatorios`) | pending | Dev | 5 |
+
+
 ---
 
 ## Quality Gate (antes de iniciar implementação)
@@ -183,6 +219,8 @@ data_criacao: "2026-09-18"
 - [x] IDs sequenciais por épico (`T-X.Y`)
 - [x] Critérios BDD copiados literalmente do `[[01-Escopo]]`
 - [x] Stack de cada arquivo afetado alinhada com `[[Preferencias Dev]]` (com as exceções aprovadas na constituição)
+- [x] Épico 11 acrescentado em 2026-10-12 a partir da auditoria medida; cada tarefa aponta o erro de origem em `[[06-Erros]]`
+- [ ] **Tipografia e paleta: PENDENTE por decisão do dev** — rodada própria, só depois do Épico 11
 
 ---
 

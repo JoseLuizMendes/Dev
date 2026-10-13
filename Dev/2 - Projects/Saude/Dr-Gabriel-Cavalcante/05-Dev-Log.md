@@ -23,9 +23,9 @@ data_inicio: "2026-09-16"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-09-21 13:00 |
-| **Fase atual** | Desenvolvimento — Épico 0 concluído, Épico 1 em especificação |
-| **Tarefa em progresso** | Nenhuma — Épico 0 (T-0.1…T-0.6) concluído; próxima: T-1.1 |
+| **Timestamp** | 2026-10-12 23:50 |
+| **Fase atual** | Site público entregue; **Épico 11 (correções da auditoria do hub) especificado**, não iniciado |
+| **Tarefa em progresso** | Nenhuma — próxima: T-11.1 (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
 | **Bloqueios** | T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 — *provedor de e-mail resolvido em 21/09 (Resend), T-1.13/T-1.14 desbloqueadas* |
 
 **Resumo em 3 bullets:**
@@ -62,6 +62,13 @@ data_inicio: "2026-09-16"
 | 2026-09-18 | Prettier **não** aplicado em massa | Diff gigante sem valor; lint-staged formata o que for tocado | Formatação progressiva | — |
 
 ---
+| 2026-10-12 | Unidades Vila Velha e Serra com **separação completa** (agenda, horários e relatórios por unidade) | Sem isso o hub não responde "em que unidade é essa consulta?"; e cada dia de operação acrescenta linha para o backfill adivinhar | Tabela `units`, `unit_id` em `appointments`/`business_hours`/`business_date_overrides`, UNIQUE `(unit_id, day_of_week)` no lugar do simples | T-11.9/T-11.10 · ERR-2026-0017 |
+| 2026-10-12 | Conflito de horário **avisa e deixa confirmar** (409 + reenvio com `permitirSobreposicao`) | Encaixe de urgência é rotina de clínica; bloquear de vez impediria o uso legítimo, e não bloquear nada deixa acidente passar em silêncio | Constraint de exclusão no banco foi descartada: ela seria à prova de corrida e também do encaixe | T-11.12/T-11.13 |
+| 2026-10-12 | **Profissional entra no modelo agora**, em tabela própria com `user_id` opcional | Vai ter outros dentistas; dentista pode atender sem fazer login e recepcionista faz login sem atender — não é a mesma lista | Conflito passa a ser por profissional, não pela clínica | T-11.10 |
+| 2026-10-12 | **Sem view de recurso no FullCalendar.** Separação por filtro + cor, no `timeGrid` gratuito | `@fullcalendar/resource-timegrid` é Premium e exige `schedulerLicenseKey` pago; a chave AGPLv3 só vale com frontend e backend abertos (confirmado na doc v6 via Context7) | Colunas lado a lado por profissional ficam fora; a regra de negócio vive no banco e não depende da view | T-11.11 |
+| 2026-10-12 | Conflito resolvido em **um statement** (`INSERT … SELECT … WHERE NOT EXISTS`) | `neon-http` não faz transação interativa — só `db.batch`, de statements já decididos (doc Drizzle + Neon via Context7). "SELECT depois INSERT" teria janela de corrida | Driver fica em `neon-http` (≈3 ida-e-volta contra ≈8 do TCP); o que diminui é o número de consultas, não o transporte | T-11.13 |
+| 2026-10-12 | Carga inicial do hub migra para o Server Component do layout | O gate `enabled: isAuthed` custava um ida-e-volta inteiro para descobrir o que o cookie já dizia, com 1,4s de "Carregando clínica…" medidos | `prefetchQuery` + `dehydrate` + `HydrationBoundary` (padrão oficial do App Router); exige a regra extraída para `lib/` antes | T-11.14/T-11.15 · ERR-2026-0013 |
+| 2026-10-12 | **Tipografia e paleta: pendentes** até o Épico 11 fechar | Decisão do dev: regra de negócio primeiro, design depois | Candidatas de tipografia já levantadas e verificadas no `next/font/google`; nada será mexido antes | `auditoria-hub.md` §7 |
 
 ## Dependências Instaladas (com versão)
 

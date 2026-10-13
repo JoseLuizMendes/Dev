@@ -11,6 +11,10 @@
 |---|---|---|---|
 | ERR-2026-0008 | Conexão Neon criada no import do módulo quebra o build sem DATABASE_URL | média | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0009 | Variável de funcionalidade parcial exigida no boot derruba a aplicação inteira | alta | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0012 | Prefetch dos Link de navegação baixa o aplicativo inteiro na primeira tela | alta | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0013 | Gate de autenticação no cliente serializa toda a carga atrás de um /me | alta | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0014 | Middleware (proxy.ts) sem config.matcher roda em toda requisição | média | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0016 | Relatório agrega no fuso do processo, não no fuso do negócio | alta | Saude/Dr-Gabriel-Cavalcante |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]
 
