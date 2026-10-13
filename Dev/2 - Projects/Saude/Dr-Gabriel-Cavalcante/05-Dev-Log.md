@@ -23,9 +23,9 @@ data_inicio: "2026-09-16"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-10-12 23:50 |
+| **Timestamp** | 2026-10-13 00:20 |
 | **Fase atual** | Site público entregue; **Épico 11 (correções da auditoria do hub) especificado**, não iniciado |
-| **Tarefa em progresso** | Nenhuma — próxima: T-11.1 (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
+| **Tarefa em progresso** | **F1 do Épico 11 concluída** (T-11.1 a T-11.8); próxima: T-11.9 (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
 | **Bloqueios** | T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 — *provedor de e-mail resolvido em 21/09 (Resend), T-1.13/T-1.14 desbloqueadas* |
 
 **Resumo em 3 bullets:**
@@ -69,6 +69,8 @@ data_inicio: "2026-09-16"
 | 2026-10-12 | Conflito resolvido em **um statement** (`INSERT … SELECT … WHERE NOT EXISTS`) | `neon-http` não faz transação interativa — só `db.batch`, de statements já decididos (doc Drizzle + Neon via Context7). "SELECT depois INSERT" teria janela de corrida | Driver fica em `neon-http` (≈3 ida-e-volta contra ≈8 do TCP); o que diminui é o número de consultas, não o transporte | T-11.13 |
 | 2026-10-12 | Carga inicial do hub migra para o Server Component do layout | O gate `enabled: isAuthed` custava um ida-e-volta inteiro para descobrir o que o cookie já dizia, com 1,4s de "Carregando clínica…" medidos | `prefetchQuery` + `dehydrate` + `HydrationBoundary` (padrão oficial do App Router); exige a regra extraída para `lib/` antes | T-11.14/T-11.15 · ERR-2026-0013 |
 | 2026-10-12 | **Tipografia e paleta: pendentes** até o Épico 11 fechar | Decisão do dev: regra de negócio primeiro, design depois | Candidatas de tipografia já levantadas e verificadas no `next/font/google`; nada será mexido antes | `auditoria-hub.md` §7 |
+| 2026-10-13 | Backfill de unidade usa uma unidade **"não informada"**, não Vila Velha nem Serra | Adivinhar gravaria dado errado indistinguível de dado certo; a recepção corrige o que souber | `unit_id` fica `not null`; a unidade nasce `active: false` para não aparecer em agendamento novo, e os relatórios mostram a fatia dela separada | T-11.10 |
+| 2026-10-13 | `--color-status-completed` e `--color-status-canceled` clareados para L 0,70 | Com o texto escuro novo mediam 3,72:1 e 4,34:1, abaixo da AA; as outras seis já passavam | Mudança visual forçada por acessibilidade, não por estética — as bordas `-bd` ficam escuras | T-11.4 · ERR-2026-0011 |
 
 ## Dependências Instaladas (com versão)
 
