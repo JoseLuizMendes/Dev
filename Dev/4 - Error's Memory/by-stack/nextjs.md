@@ -15,6 +15,7 @@
 | ERR-2026-0013 | Gate de autenticação no cliente serializa toda a carga atrás de um /me | alta | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0014 | Middleware (proxy.ts) sem config.matcher roda em toda requisição | média | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0016 | Relatório agrega no fuso do processo, não no fuso do negócio | alta | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0018 | Id de outra tabela aceito sem verificação: FK sobe como 500 | média | Saude/Dr-Gabriel-Cavalcante |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]
 

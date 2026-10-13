@@ -12,6 +12,7 @@
 |---|---|---|---|
 | ERR-2026-0015 | Toda a autenticação indexada e nenhuma tabela da operação | alta | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0017 | Entidade central do mundo real ausente do schema | crítica | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0018 | Id de outra tabela aceito sem verificação: FK sobe como 500 | média | Saude/Dr-Gabriel-Cavalcante |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]
 

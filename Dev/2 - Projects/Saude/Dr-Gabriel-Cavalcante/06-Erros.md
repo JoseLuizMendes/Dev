@@ -184,6 +184,36 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
   recorrências: 0
   links: ["[[data-modeling|Data Modeling]]", "[[drizzle|Drizzle]]", "[[docs/auditoria-hub|Auditoria do hub §4.1]]"]
 
+- id: ERR-2026-0018
+  título: "professionalId inexistente no POST de agendamento devolvia 500"
+  categoria: API Integration
+  stack: [PostgreSQL, Drizzle, Next.js]
+  severidade: média
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-10-13
+  localização: "src/app/api/appointments/route.ts (POST) e [id]/route.ts (PATCH)"
+  sintoma: "POST com `professionalId: 999` respondia 500 e 'Erro ao criar agendamento'. A chave estrangeira estourava no banco e caía no catch genérico."
+  causa_raiz: "O id vinha como `Number(body.professionalId)` direto para o INSERT. A integridade existia no banco, mas lá ela é exceção, não validação."
+  solução: "Verificar com `profissionalPorId` antes de gravar: 400 se não existe **ou está inativo** — quem saiu da clínica continua no histórico, não na escala. Mesmo tratamento no PATCH."
+  prevenção: "Toda FK vinda do corpo é validada na aplicação antes do INSERT, perguntando 'existe?' e 'pode ser usado?'. Só aparece contra banco de verdade — com API simulada a FK nunca é avaliada."
+  recorrências: 0
+  links: ["[[api-integration|API Integration]]"]
+
+- id: ERR-2026-0019
+  título: "A série de dias da ocupação incluía o dia final e diluía a métrica"
+  categoria: Data Modeling
+  stack: [PostgreSQL]
+  severidade: média
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-10-13
+  localização: "src/lib/relatorios/resumo.ts (minutosDisponiveis)"
+  sintoma: "Ocupação 0,0784 onde a conta à mão dava 0,0941. O numerador estava certo; o denominador contava 6 dias úteis onde havia 5."
+  causa_raiz: "`generate_series(date_trunc('day', inicio), date_trunc('day', fim), '1 day')` é inclusivo nos dois extremos. Um período que vai da meia-noite do dia 2 à do dia 9 cobre 2 a 8, mas a série devolvia o dia 9 também."
+  solução: "Recuar um microssegundo antes de truncar o fim. O período continua `>= inicio AND < fim` nas consultas de dados, e a série passa a concordar com ele."
+  prevenção: "Intervalo de relatório é semiaberto `[inicio, fim)`, e tudo que o percorre precisa concordar — inclusive a geração de dias. É invisível em 90 dias e gritante em 7, então o teste usa período curto com resultado calculado à mão."
+  recorrências: 0
+  links: ["[[data-modeling|Data Modeling]]"]
+
 # Candidatos observados no onboarding, a registrar se reincidirem:
 # - Sessões assinadas com segredo de fallback no código quando JWT_SECRET faltava (corrigido na F0, PR #1)
 # - App local apontando para o branch Neon `production` (corrigido em 2026-09-17)
@@ -206,6 +236,7 @@ sincronizacao: "espelhado em [[4 - Error's Memory/INDEX]]"
 - [x] Categorias novas criadas: `by-category/layout-css` e `by-category/data-modeling`
 - [x] Stacks novas criadas: `by-stack/drizzle`, `by-stack/tanstack-query`, `by-stack/fullcalendar`
 - [x] Levantamento completo, com método de medição: `dr-gabriel-cavalcante-web/docs/auditoria-hub.md`
+- [x] ERR-2026-0018 e 0019 achados **durante** a implementação, rodando contra Postgres real — os dois são invisíveis com API simulada
 
 ---
 

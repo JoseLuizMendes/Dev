@@ -23,9 +23,9 @@ data_inicio: "2026-09-16"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-10-13 00:20 |
-| **Fase atual** | Site público entregue; **Épico 11 (correções da auditoria do hub) especificado**, não iniciado |
-| **Tarefa em progresso** | **F1 do Épico 11 concluída** (T-11.1 a T-11.8); próxima: T-11.9 (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
+| **Timestamp** | 2026-10-13 02:20 |
+| **Fase atual** | **Épico 11 concluído** (F1 a F5). Pendentes: validação com zod nas rotas de operação, rota `/hub/relatorios` (T-8.2) e tipografia/paleta |
+| **Tarefa em progresso** | Nenhuma — Épico 11 inteiro concluído e empurrado (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
 | **Bloqueios** | T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 — *provedor de e-mail resolvido em 21/09 (Resend), T-1.13/T-1.14 desbloqueadas* |
 
 **Resumo em 3 bullets:**
@@ -71,6 +71,9 @@ data_inicio: "2026-09-16"
 | 2026-10-12 | **Tipografia e paleta: pendentes** até o Épico 11 fechar | Decisão do dev: regra de negócio primeiro, design depois | Candidatas de tipografia já levantadas e verificadas no `next/font/google`; nada será mexido antes | `auditoria-hub.md` §7 |
 | 2026-10-13 | Backfill de unidade usa uma unidade **"não informada"**, não Vila Velha nem Serra | Adivinhar gravaria dado errado indistinguível de dado certo; a recepção corrige o que souber | `unit_id` fica `not null`; a unidade nasce `active: false` para não aparecer em agendamento novo, e os relatórios mostram a fatia dela separada | T-11.10 |
 | 2026-10-13 | `--color-status-completed` e `--color-status-canceled` clareados para L 0,70 | Com o texto escuro novo mediam 3,72:1 e 4,34:1, abaixo da AA; as outras seis já passavam | Mudança visual forçada por acessibilidade, não por estética — as bordas `-bd` ficam escuras | T-11.4 · ERR-2026-0011 |
+| 2026-10-13 | Suíte E2E do hub rodando nesta sessão contra **Postgres local**, por um shim HTTP que fala o protocolo do `@neondatabase/serverless` | O contêiner não alcança o Neon, e sem banco a F2 (migração), a F4 (carga no servidor) e a F5 (SQL de relatório) seriam entregues sem nenhuma verificação real | 46 testes do hub verdes pela primeira vez na sessão; três defeitos só apareceram aí (FK como 500, dia a mais na ocupação, guard de altura errado no celular). O shim é de sessão, não entra no repositório | — |
+| 2026-10-13 | Ocupação passa a ser tempo agendado ÷ tempo disponível; "novos clientes" medido contra o histórico inteiro | `concluídas/total` é comparecimento, não ocupação, e `newClients` era cópia de `clients` — número que não dá para provar é proibido pelo PRODUCT.md | Denominador sai do expediente real (exceção de data → grade → zero, descontando intervalos); pode passar de 1 em dia de encaixe, e isso é informação | T-11.17 · ERR-2026-0016 |
+| 2026-10-13 | `/api/patients` paginado (50 por página, teto de 100) | Devolvia a tabela inteira e a busca é `ilike '%termo%'` sem índice | Resposta virou `{ total, limit, offset, items }`; o odontograma foi adaptado | T-11.17 |
 
 ## Dependências Instaladas (com versão)
 

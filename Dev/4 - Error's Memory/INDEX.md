@@ -10,10 +10,10 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 17 |
+| **Total de erros registrados** | 19 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
-| **Última atualização** | 2026-10-12 |
+| **Última atualização** | 2026-10-13 |
 
 ---
 
@@ -22,13 +22,13 @@
 | Categoria | Arquivo | Qtd. Erros |
 |---|---|---|
 | Conflitos de dependências | [[dependency-breaks\|Dependency Breaks]] | 0 |
-| Integração de APIs | [[api-integration\|API Integration]] | 0 |
+| Integração de APIs | [[api-integration\|API Integration]] | 1 |
 | Autenticação e segurança | [[auth-security\|Auth & Security]] | 3 |
 | Performance | [[performance\|Performance]] | 3 |
 | Gerenciamento de estado | [[state-management\|State Management]] | 0 |
 | Deploy e infraestrutura | [[deployment\|Deployment]] | 5 |
 | Layout e CSS | [[layout-css\|Layout & CSS]] | 2 |
-| Modelagem de dados | [[data-modeling\|Data Modeling]] | 2 |
+| Modelagem de dados | [[data-modeling\|Data Modeling]] | 3 |
 
 ---
 
@@ -42,10 +42,10 @@
 | GSAP + Lenis | [[gsap-lenis\|GSAP & Lenis]] | 0 |
 | Next-Auth (Auth.js v5) | [[next-auth\|Next-Auth]] | 2 |
 | Prisma | [[prisma\|Prisma]] | 2 |
-| PostgreSQL | [[postgresql\|PostgreSQL]] | 4 |
+| PostgreSQL | [[postgresql\|PostgreSQL]] | 6 |
 | Zustand | [[zustand\|Zustand]] | 1 |
-| Next.js | [[nextjs\|Next.js]] | 6 |
-| Drizzle | [[drizzle\|Drizzle]] | 2 |
+| Next.js | [[nextjs\|Next.js]] | 7 |
+| Drizzle | [[drizzle\|Drizzle]] | 3 |
 | TanStack Query | [[tanstack-query\|TanStack Query]] | 1 |
 | FullCalendar | [[fullcalendar\|FullCalendar]] | 1 |
 
@@ -361,6 +361,42 @@
   causa_raiz: "O schema foi desenhado a partir das telas do MVP (agenda, pacientes, serviços), não a partir do mundo que o cliente descreveu. A unidade aparecia só como conteúdo do site — texto e endereço —, então nunca virou entidade. O UNIQUE em `day_of_week` cristalizou a suposição de clínica única em CONSTRAINT, que é a forma mais cara de errar: não é só um campo faltando, é uma regra que PROÍBE o modelo certo."
   solução: "Migração: tabela `units`, `unit_id` em `appointments` e em `business_hours`, e troca do UNIQUE em `day_of_week` por UNIQUE composto `(unit_id, day_of_week)`. Quanto mais consultas gravadas sem unidade, mais caro o backfill."
   prevenção: "Antes de escrever o schema, listar os SUBSTANTIVOS que o cliente usa ao descrever a operação — e conferir um por um se viraram tabela. 'Duas unidades' é substantivo. Um substantivo do cliente que só existe como texto do site é um modelo faltando, não uma decisão de conteúdo. E nunca declarar UNIQUE numa coluna sem perguntar 'único DENTRO de quê?': UNIQUE sem escopo é a suposição de instância única escrita em pedra."
+  recorrências: 0
+  links:
+    - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
+    - "[[data-modeling|Data Modeling]]"
+
+- id: ERR-2026-0018
+  título: "Id de outra tabela aceito sem verificação: a violação de chave estrangeira sobe como 500"
+  categoria: API Integration
+  stack:
+    - PostgreSQL
+    - Drizzle
+    - Next.js
+  severidade: média
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-10-13
+  sintoma: "POST /api/appointments com `professionalId` inexistente devolvia 500 e 'Erro ao criar agendamento'. A chave estrangeira estourava no banco e o erro subia pelo catch genérico, sem dizer qual campo estava errado."
+  causa_raiz: "A rota lia o id de um recurso relacionado como `Number(body.professionalId)` e mandava direto para o INSERT. A integridade existia — no banco —, mas chegava tarde demais para virar uma resposta útil: no nível do SQL ela é uma exceção, não uma validação."
+  solução: "Verificar o recurso relacionado antes de gravar e devolver **400** (o que não foi encontrado é um campo do corpo, não a rota). Verificar também se ele está **ativo**: existir não é o mesmo que poder ser usado."
+  prevenção: "Toda chave estrangeira que vem do corpo da requisição é validada na aplicação antes do INSERT. A constraint do banco é a última linha de defesa contra corrida, não a primeira contra entrada errada. Teste que pega: exercitar a rota com um id que não existe — e isso **só aparece contra um banco de verdade**, porque com a API simulada a chave estrangeira nunca é avaliada."
+  recorrências: 0
+  links:
+    - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
+    - "[[api-integration|API Integration]]"
+
+- id: ERR-2026-0019
+  título: "generate_series com o fim inclusivo conta um período a mais e dilui a métrica"
+  categoria: Data Modeling
+  stack:
+    - PostgreSQL
+  severidade: média
+  projeto_origem: "Saude/Dr-Gabriel-Cavalcante"
+  data_descoberta: 2026-10-13
+  sintoma: "A taxa de ocupação saía 0,0784 onde o cálculo à mão dava 0,0941. O numerador estava certo; o denominador contava 6 dias úteis onde havia 5."
+  causa_raiz: "`generate_series(date_trunc('day', inicio), date_trunc('day', fim), '1 day')` é inclusivo nos dois extremos. Um período que vai da meia-noite do dia 2 à meia-noite do dia 9 cobre os dias 2 a 8 — mas a série devolvia também o dia 9, e o expediente dele entrou no denominador."
+  solução: "Recuar um microssegundo antes de truncar o fim: `date_trunc('day', (fim - interval '1 microsecond'))`. O período continua `>= inicio AND < fim` nas consultas de dados, e a série de dias passa a concordar com ele."
+  prevenção: "Intervalo de tempo em relatório é **semiaberto** — `[inicio, fim)` — e tudo que o percorre precisa concordar com isso, inclusive a geração de dias. O erro é invisível em períodos longos (1 dia a mais em 90 muda pouco) e gritante em períodos curtos, então o teste tem que usar um período de poucos dias com o resultado calculado à mão. Verificar métrica derivada contra conta de papel, nunca contra 'parece razoável'."
   recorrências: 0
   links:
     - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
