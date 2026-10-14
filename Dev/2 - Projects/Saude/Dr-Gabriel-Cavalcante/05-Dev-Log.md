@@ -23,17 +23,21 @@ data_inicio: "2026-09-16"
 
 | Campo | Valor |
 |---|---|
-| **Timestamp** | 2026-10-13 02:20 |
-| **Fase atual** | **Épico 11 concluído** (F1 a F5). Pendentes: validação com zod nas rotas de operação, rota `/hub/relatorios` (T-8.2) e tipografia/paleta |
-| **Tarefa em progresso** | Nenhuma — Épico 11 inteiro concluído e empurrado (guarda da altura da agenda). Tech Brief completo em `dr-gabriel-cavalcante-web/docs/plano-hub.md`; levantamento medido em `docs/auditoria-hub.md` |
-| **Bloqueios** | T-7.9/T-7.10 (mídia do hero) · `DESIGN.md` nasce na T-2.2 — *provedor de e-mail resolvido em 21/09 (Resend), T-1.13/T-1.14 desbloqueadas* |
+| **Timestamp** | 2026-10-14 00:30 |
+| **Fase atual** | Identidade visual unificada (PR #36) e auditoria de UI/UX do hub (PR #37) entregues. Em curso: a rodada de dívidas — zod nas rotas, Clientes sobre `patients`, Relatórios, sobras da auditoria |
+| **Tarefa em progresso** | Nenhuma. O quadro de `[[04-Tarefas]]` foi reconciliado contra o código em 2026-10-14 (103 linhas conferidas uma a uma) |
+| **Bloqueios** | Conteúdo real do doutor: política de privacidade revisada, 3 depoimentos autorizados, termos de garantia, formas de pagamento e confirmação dos tratamentos (`pnpm check:provisorio` reprova até lá). Logo oficial e fotos reais continuam pendentes |
 
 **Resumo em 3 bullets:**
-- F0 (limpeza e correções críticas) mergeável no PR #1: cadastro público removido, hub em `/hub`, `JWT_SECRET` obrigatório.
-- Pipeline canon aplicado: 01-Escopo, 02-Contrato, 03-Planejamento, 04-Tarefas, constituição SpecKit v1.0.0.
-- Tooling instalado no repo (SpecKit, Impeccable, Higgsfield, skills Next.js, DX, Playwright) no branch `chore/sdd-bootstrap`.
-
----
+- **Um sistema visual só** (PR #36): três paletas viraram uma, quatro famílias tipográficas viraram
+  duas, vinte decisões de movimento viraram uma curva e duas durações. O login deixou de ser
+  preto-e-branco de SaaS.
+- **Hub auditado e corrigido** (PR #37): barra lateral que recolhe e lembra, rodapé que parava de
+  estourar, 450 alvos de toque abaixo de 44px reduzidos a ≤6, gráfico que mentia consertado e um
+  degrau de movimento próprio para a operação.
+- **Rodada de dívidas (2026-10-14):** zod em toda rota que aceita entrada, Clientes lendo a tabela
+  de pacientes em vez de baixar a clínica inteira, Dashboard renomeado para Relatórios, e as duas
+  sobras da auditoria fechadas.
 
 ## Decisões Tomadas
 
@@ -62,6 +66,14 @@ data_inicio: "2026-09-16"
 | 2026-09-18 | Prettier **não** aplicado em massa | Diff gigante sem valor; lint-staged formata o que for tocado | Formatação progressiva | — |
 
 ---
+| 2026-10-13 | **Um substrato de marca no `:root`**, com `.site` e `.workspace` só reescrevendo o contrato do shadcn | Site e hub pareciam dois produtos: paleta, tipografia e movimento divergentes, e o login em preto-e-branco genérico | 3 paletas → 1, 4 famílias → 2, 20 decisões de movimento → 1 curva + 2 durações; paleta categórica re-derivada em OKLCH fora da faixa proibida | PR #36 |
+| 2026-10-13 | **Acento é um momento, nunca uma superfície**: `--primary` é tinta e o âmbar vive em `--destaque` | Com âmbar em `--primary`, Horários nascia com três botões âmbar empilhados e o acento virou "a cor de Salvar" | O âmbar aparece em um lugar por tela: a ação que cria, o anel de foco e a marca da navegação ativa | PR #36 |
+| 2026-10-13 | **Área de clique por pseudo-elemento**, não tamanho de controle | 450 alvos abaixo de 44px, 113 só em Equipe; crescer os controles destruiria a densidade de uma tabela de operação | `max(100%, 44px)` centrado no `Button`: todo botão aceita o polegar sem que uma linha densa cresça um pixel | PR #37 |
+| 2026-10-13 | **Lenis e GSAP não entram no hub** | Rolagem por interpolação serve a página de conversão; num sistema operado 8h/dia é regressão. A transição da barra é uma propriedade com uma curva — CSS faz por zero byte | Entrou `--dur-ui-hub: 0.2s` (micro-interação de aplicação vive em 150–300ms), com a mesma curva de assinatura do site | PR #37 |
+| 2026-10-13 | **Nada de eixo Y duplo** no gráfico financeiro | Receita e contagem não dividem escala: o ponto em que a linha cruzava as barras saía dos dois domínios, não do dado | Dois painéis empilhados na mesma linha do tempo, um `dataZoom` governando os dois eixos X | PR #37 |
+| 2026-10-14 | **Validação de entrada com zod em toda rota que aceita dado**, com helper único em `lib/http/validacao.ts` | 26 rotas conferiam na mão; `PATCH /settings` espalhava `...body` dentro do `INSERT` (qualquer chave virava coluna, `id` incluído) e `serviceId: "abc"` virava `NaN` na chave estrangeira | Status continua **400** (contrato que o front e os E2E já leem); o corpo ganhou `campos` para a tela marcar o campo errado | — |
+| 2026-10-14 | **Clientes passa a ler `patients`**, agregado no Postgres | A tela baixava `/appointments` inteiro e agregava no navegador — e escondia quem está cadastrado e ainda não foi atendido, porque a fonte era a consulta e não a pessoa | `lib/pacientes/lista.ts` com busca, ordenação e paginação em SQL; o `LEFT JOIN` casa por `patient_id` **ou** telefone para consulta órfã não sumir do histórico | T-5.1/T-5.2 |
+| 2026-10-14 | **Dashboard → Relatórios** (`/hub/relatorios`), com 308 do caminho antigo | O `PRODUCT.md` fixa a terminologia desde o início e a dívida estava anotada em `permissions.ts` | A pasta de componentes segue `dashboard/`: é o nome do conjunto, não da rota | T-8.2 |
 | 2026-10-12 | Unidades Vila Velha e Serra com **separação completa** (agenda, horários e relatórios por unidade) | Sem isso o hub não responde "em que unidade é essa consulta?"; e cada dia de operação acrescenta linha para o backfill adivinhar | Tabela `units`, `unit_id` em `appointments`/`business_hours`/`business_date_overrides`, UNIQUE `(unit_id, day_of_week)` no lugar do simples | T-11.9/T-11.10 · ERR-2026-0017 |
 | 2026-10-12 | Conflito de horário **avisa e deixa confirmar** (409 + reenvio com `permitirSobreposicao`) | Encaixe de urgência é rotina de clínica; bloquear de vez impediria o uso legítimo, e não bloquear nada deixa acidente passar em silêncio | Constraint de exclusão no banco foi descartada: ela seria à prova de corrida e também do encaixe | T-11.12/T-11.13 |
 | 2026-10-12 | **Profissional entra no modelo agora**, em tabela própria com `user_id` opcional | Vai ter outros dentistas; dentista pode atender sem fazer login e recepcionista faz login sem atender — não é a mesma lista | Conflito passa a ser por profissional, não pela clínica | T-11.10 |
@@ -124,18 +136,31 @@ data_inicio: "2026-09-16"
 | 2026-09-16 | — | Diagnóstico inicial, plano em fases, character do doutor, conceito do hero "A Porta" | [[00-Diagnostico-Inicial]] |
 | 2026-09-17 | — | F0 executada e testada; hub em `/hub`; grafia Cavalcanti; branch Neon `dev` | PR #1 |
 | 2026-09-18 | — | F1 (IA), constituição, 01–06, setup.js, INIT.md, tooling | Este log |
+| 2026-10-12 | — | Épico 11: auditoria do hub e as cinco fases de correção | PR #34 |
+| 2026-10-13 | — | Identidade visual unificada entre site, login e hub (F1–F6) | PR #36 |
+| 2026-10-13 | — | Auditoria de UI/UX do hub: barra colapsável, alvos de toque, gráficos | PR #37 |
+| 2026-10-14 | — | Rodada de dívidas: zod nas rotas, Clientes sobre `patients`, Relatórios, sobras da auditoria | Em revisão |
 
 ---
 
 ## Pendentes para Próxima Sessão
 
-- [x] `impeccable init` → `PRODUCT.md` (marca: Dr. Gabriel Cavalcanti; build path: code-first; logo, fotos reais e depoimentos autorizados existem e aguardam envio)
-- [ ] Merge do PR #1 (F0) e do PR #2 (bootstrap SDD)
-- [ ] Dev: `JWT_SECRET` de produção na Vercel
-- [ ] Dev: responder pendências de contrato/escopo (valor, datas, PO, provedor de e-mail, acesso ao registro.br)
-- [ ] Iniciar T-0.1 via `/speckit-specify` (feature `001-fundacao-testes`)
-
----
+- [ ] **Conteúdo do doutor** (trava o go-live): privacidade revisada, 3 depoimentos autorizados,
+      garantia, formas de pagamento, confirmação dos tratamentos. `pnpm check:provisorio` nomeia
+      cada um.
+- [ ] Logo oficial e fotos reais (o código já espera por `existsSync`; o dia que o arquivo chega,
+      a troca é só o arquivo).
+- [ ] T-2.3/T-2.4 — regra de lint contra controle HTML cru fora de `components/ui`.
+- [ ] T-2.5/T-2.6 — E2E de teclado e skip-link.
+- [ ] T-5.2 — renomear a rota `/hub/clientes` para `/hub/pacientes` (o `PRODUCT.md` diz Paciente).
+- [ ] T-5.3…T-5.6 — cadastro/edição de paciente e a ficha com histórico e odontograma.
+- [ ] Épico 6 — CMS do site (`site_content`, `testimonials`, `faqs`).
+- [ ] T-7.13/T-7.14 — `sitemap.ts`, OG image e JSON-LD `Dentist`.
+- [ ] T-8.4 — `ChartCard` único e a consolidação ECharts × Recharts.
+- [ ] Rotação da senha do Neon e separação do segredo de sessão entre dev e produção, antes do
+      deploy público.
+- [ ] Decidir sobre `src/components/GlareHover.tsx` — órfão, com hex cravado e efeito de hover
+      sobre mídia que o `motion/CLAUDE.md` proíbe. Aguardando o dev para apagar.
 
 ## Quality Gate
 
