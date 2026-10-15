@@ -13,6 +13,7 @@
 | ERR-2026-0012 | Prefetch dos Link de navegação baixa o aplicativo inteiro na primeira tela | alta | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0013 | Gate de autenticação no cliente serializa toda a carga atrás de um /me | alta | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0015 | Toda a autenticação indexada e nenhuma tabela da operação | alta | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0020 | O otimizador de imagem pendura o evento load e o teste morre sem dizer por quê | alta | Ecommerce/Belessence |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]
 
@@ -20,14 +21,16 @@
 
 ## Padrão observado
 
-Os três são **lentidão que nenhum ambiente de desenvolvimento mostra**.
+Os quatro são **lentidão que nenhum ambiente de desenvolvimento mostra**.
 
 - O 0012 não aparece porque na máquina do dev 938 KB descem instantaneamente.
 - O 0013 não aparece porque o banco local responde em 2ms, e a cascata de dois níveis custa 4ms.
 - O 0015 não aparece porque a tabela tem 200 linhas e varrê-la é mais rápido que ler o índice.
+- O 0020 não aparece porque a máquina do dev re-encoda o PNG de 1,5 MB em 0,13s; o runner de
+  dois núcleos não termina em 25s, e o evento `load` nunca dispara.
 
 **Regra de leitura para o próximo:** performance se mede com as duas variáveis que o
-desenvolvimento zera — **latência de rede** e **volume de dados**. Medição mínima antes de dar
+desenvolvimento zera — **latência de rede**, **volume de dados** e **CPU disponível**. Medição mínima antes de dar
 qualquer tela por pronta: CPU estrangulada em 4×, latência injetada na API (150ms é realista para
 função serverless falando com banco gerenciado), e payload do tamanho de um ano de operação.
 

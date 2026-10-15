@@ -10,10 +10,10 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de erros registrados** | 19 |
+| **Total de erros registrados** | 24 |
 | **Erros com recorrências >= 2** | 0 |
 | **Regras promovidas para M5** | 0 |
-| **Última atualização** | 2026-10-13 |
+| **Última atualização** | 2026-10-15 |
 
 ---
 
@@ -23,10 +23,10 @@
 |---|---|---|
 | Conflitos de dependências | [[dependency-breaks\|Dependency Breaks]] | 0 |
 | Integração de APIs | [[api-integration\|API Integration]] | 1 |
-| Autenticação e segurança | [[auth-security\|Auth & Security]] | 3 |
-| Performance | [[performance\|Performance]] | 3 |
-| Gerenciamento de estado | [[state-management\|State Management]] | 0 |
-| Deploy e infraestrutura | [[deployment\|Deployment]] | 5 |
+| Autenticação e segurança | [[auth-security\|Auth & Security]] | 5 |
+| Performance | [[performance\|Performance]] | 4 |
+| Gerenciamento de estado | [[state-management\|State Management]] | 1 |
+| Deploy e infraestrutura | [[deployment\|Deployment]] | 6 |
 | Layout e CSS | [[layout-css\|Layout & CSS]] | 2 |
 | Modelagem de dados | [[data-modeling\|Data Modeling]] | 3 |
 
@@ -42,11 +42,12 @@
 | GSAP + Lenis | [[gsap-lenis\|GSAP & Lenis]] | 0 |
 | Next-Auth (Auth.js v5) | [[next-auth\|Next-Auth]] | 2 |
 | Prisma | [[prisma\|Prisma]] | 2 |
-| PostgreSQL | [[postgresql\|PostgreSQL]] | 6 |
+| PostgreSQL | [[postgresql\|PostgreSQL]] | 8 |
 | Zustand | [[zustand\|Zustand]] | 1 |
-| Next.js | [[nextjs\|Next.js]] | 7 |
+| Next.js | [[nextjs\|Next.js]] | 10 |
 | Drizzle | [[drizzle\|Drizzle]] | 3 |
 | TanStack Query | [[tanstack-query\|TanStack Query]] | 1 |
+| Sentry | [[sentry\|Sentry]] | 1 |
 | FullCalendar | [[fullcalendar\|FullCalendar]] | 1 |
 
 ---
@@ -401,4 +402,90 @@
   links:
     - "[[Dev/2 - Projects/Saude/Dr-Gabriel-Cavalcante/06-Erros|Dr-Gabriel-Cavalcante/06-Erros]]"
     - "[[data-modeling|Data Modeling]]"
+
+- id: ERR-2026-0020
+  título: "O otimizador de imagem pendura o evento load e o teste morre sem dizer por quê"
+  categoria: Performance
+  stack:
+    - Next.js
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-10-15
+  sintoma: "Dois specs de Playwright falhavam só no CI, nas três tentativas, sempre na primeira navegação: `page.goto: Test timeout of 60000ms exceeded. - navigating to \"...\", waiting until \"load\"`. A mesma suíte passava na máquina de desenvolvimento duas execuções seguidas, com build de produção e banco sujo de propósito."
+  causa_raiz: "`waitUntil: \"load\"` espera **todos** os subrecursos. As imagens da página passam pelo otimizador same-origin `/_next/image`, que lê o arquivo e re-encoda — aqui, um PNG de 1,5 MB. Num runner de dois núcleos com cache de imagem frio o trabalho não cabe no teste. O mesmo pedido, com o cache igualmente frio, responde em 0,13s na máquina de desenvolvimento: a diferença é CPU do runner, não cache."
+  solução: "Abortar requisição de imagem por `resourceType` nos specs que navegam com `load`. O repositório já fazia isso num spec e tinha a explicação escrita lá; a convenção simplesmente não tinha sido aplicada aos dois specs religados."
+  prevenção: "A mensagem nativa do Playwright nomeia a navegação e nada mais — ela diz onde o teste parou e nada sobre o que o prendeu. Envolver `page.goto` num helper que acompanhe as requisições em voo e, no timeout, falhe listando o que ficou pendente e há quanto tempo; foi isso que achou a linha, em uma rodada de CI. Em CI cujo artefato de teste está fora de alcance, esse erro ainda chega pelas anotações do Actions. Regra de leitura: `waitUntil: \"load\"` acopla o teste a cada imagem da página — ou bloqueie imagem, ou não espere `load`."
+  recorrências: 0
+  links:
+    - "[[nextjs|Next.js]]"
+    - "[[performance|Performance]]"
+
+- id: ERR-2026-0021
+  título: "Rota pré-renderizada assa a variável de ambiente do build e serve localhost em produção"
+  categoria: Deployment
+  stack:
+    - Next.js
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-10-15
+  sintoma: "`sitemap.xml` e `robots.txt` anunciavam `http://localhost:3000` em produção. Build verde, nenhum erro, nenhum aviso."
+  causa_raiz: "`sitemap.ts` e `robots.ts` são pré-renderizados por padrão. A origem canônica é resolvida a partir de variável de ambiente, e o valor lido no momento do build ficou congelado no artefato — o ambiente de execução nunca chega a ser consultado."
+  solução: "`export const dynamic = \"force-dynamic\"` nas duas rotas."
+  prevenção: "Rota cujo conteúdo depende de env de runtime precisa ser dinâmica, e isso inclui as rotas de metadado, que não parecem ter dados e por isso passam despercebidas. Memoizar o resolvedor de origem piora o caso, porque congela também em runtime. Verificar pelo artefato servido e não pelo código: subir um build de produção local, pedir a rota e conferir o host da resposta."
+  recorrências: 0
+  links:
+    - "[[nextjs|Next.js]]"
+    - "[[deployment|Deployment]]"
+
+- id: ERR-2026-0022
+  título: "Apagar a opção de privacidade que sumiu do SDK deixa mais permissivo, não menos"
+  categoria: Auth & Security
+  stack:
+    - Sentry
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-10-15
+  sintoma: "Ao configurar a versão nova do SDK de observabilidade, a opção `sendDefaultPii` não existia mais. A leitura natural — apagar a linha e deixar o padrão valer — passaria no type-check e no build."
+  causa_raiz: "A opção não foi removida: foi **substituída** por um objeto `dataCollection` com vários campos independentes, cada um com padrão próprio. Apagar a linha antiga não desliga nada; entrega o controle aos padrões do fornecedor, que incluem variáveis de frame de stack, corpos de requisição e cabeçalhos."
+  solução: "Abrir o tipo do pacote instalado, enumerar os campos e declarar cada um explicitamente como falso."
+  prevenção: "Opção de privacidade que some numa atualização é mudança de contrato, não limpeza — e a direção do erro é perigosa, porque o código fica mais permissivo em silêncio. Nunca deduzir o novo padrão pelo nome da opção antiga nem pelo changelog: ler a definição de tipo do pacote que está instalado. Vale para qualquer SDK de observabilidade; o padrão do fornecedor otimiza diagnóstico, não sigilo."
+  recorrências: 0
+  links:
+    - "[[sentry|Sentry]]"
+    - "[[auth-security|Auth & Security]]"
+
+- id: ERR-2026-0023
+  título: "Mudar o contador de rate limit de lugar não resolve a corrida; só a operação atômica resolve"
+  categoria: Auth & Security
+  stack:
+    - PostgreSQL
+    - Next.js
+  severidade: alta
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-10-15
+  sintoma: "Rate limit das rotas públicas contava num `Map` do processo. Em serverless cada instância tem o seu, então bastava atacar com concorrência para cair em instâncias diferentes e passar por baixo do limite — numa rota onde isso permite enumerar códigos de cupom por força bruta."
+  causa_raiz: "A correção óbvia — mover o contador para o banco — **não basta por si**. Ler a linha, decidir em TypeScript e gravar de volta reintroduz exatamente a mesma corrida num nível diferente: duas instâncias leem 9, as duas gravam 10, e passaram 11. O erro aqui é tratar 'store compartilhado' e 'contador correto' como a mesma coisa."
+  solução: "Um único `INSERT ... ON CONFLICT DO UPDATE` que lê, decide e grava num statement — o banco trava a linha no conflito e serializa os concorrentes. Junto, a decisão de queda: banco indisponível **degrada** para o contador em memória, em vez de abrir a rota (reabre o ataque que motivou a mudança) ou fechá-la (derruba cliente legítimo por causa de um blip)."
+  prevenção: "Teste sequencial não distingue contador atômico de contador com corrida — os dois passam. A prova tem que ser concorrente e **exata**: disparar `limite + N` pedidos simultâneos contra banco real e exigir que exatamente `limite` passem. Segundo efeito a antecipar: contador em banco sobrevive ao fim da suíte de testes, então execuções seguidas passam a interferir entre si — dar a cada execução uma identidade de cliente própria."
+  recorrências: 0
+  links:
+    - "[[postgresql|PostgreSQL]]"
+    - "[[auth-security|Auth & Security]]"
+
+- id: ERR-2026-0024
+  título: "Estado compartilhado no banco vaza entre testes e o sintoma acusa o inocente"
+  categoria: State Management
+  stack:
+    - PostgreSQL
+  severidade: média
+  projeto_origem: "Ecommerce/Belessence"
+  data_descoberta: 2026-10-15
+  sintoma: "`expect(estoque).toBe(estoqueAntes - 1)` falhava com `Expected: 47 / Received: 43`. O número aponta para o checkout baixando estoque errado — que era exatamente o que o teste afirmava cobrir, e não tinha defeito nenhum."
+  causa_raiz: "O carrinho é privado por usuário e mora no banco, e todos os specs logam como o mesmo usuário de teste. Um spec que morre depois de adicionar ao carrinho e antes de finalizar deixa o item lá; o checkout seguinte leva o órfão junto. Com `retries: 2` o efeito se acumula dentro da própria execução — cada tentativa que falha no meio soma um item para a próxima."
+  solução: "Limpar o carrinho em `beforeEach`, não em `afterAll`: `afterAll` não roda entre as tentativas de retry, que é justamente onde o resíduo nasce."
+  prevenção: "Uma execução em banco recém-semeado passa mesmo com o vazamento — foi assim que ele ficou escondido, e é por isso que rodar a suíte uma vez não prova isolamento. A verificação é **em par**: duas execuções seguidas sem limpar o banco entre elas. E, diante de um número errado numa asserção de banco, perguntar primeiro de quem é o estado antes de perguntar o que o código fez com ele."
+  recorrências: 0
+  links:
+    - "[[postgresql|PostgreSQL]]"
+    - "[[state-management|State Management]]"
 ```

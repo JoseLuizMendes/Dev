@@ -16,5 +16,7 @@
 | ERR-2026-0017 | Entidade central do mundo real ausente do schema | crítica | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0018 | Id de outra tabela aceito sem verificação: FK sobe como 500 | média | Saude/Dr-Gabriel-Cavalcante |
 | ERR-2026-0019 | generate_series com o fim inclusivo conta um período a mais | média | Saude/Dr-Gabriel-Cavalcante |
+| ERR-2026-0023 | Mudar o contador de rate limit de lugar não resolve a corrida; só a operação atômica resolve | alta | Ecommerce/Belessence |
+| ERR-2026-0024 | Estado compartilhado no banco vaza entre testes e o sintoma acusa o inocente | média | Ecommerce/Belessence |
 
 > Registro completo (YAML canônico) de cada erro: [[INDEX#Registro de Erros]]
