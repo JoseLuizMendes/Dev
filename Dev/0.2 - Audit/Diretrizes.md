@@ -15,6 +15,12 @@ A IA **DEVE** obrigatoriamente ler e processar o conteúdo dos 3 documentos meto
 2. **Padrões de UI/UX, Componentes e Animação:** [[ai-web-designer-agent]]
 3. **Arquitetura de Copy e Comunicação:** [[ai-portfolio-copy-architect]]
 
+> ⚠️ **Os três são escritos para site de portfólio de desenvolvedor.** Quando o
+> artefato auditado for outra coisa — loja, painel interno, SaaS, app —, ler
+> também `[[Aplicação dos Agentes por Tipo de Artefato]]`: traz o critério de
+> transferência e as linhas específicas por tipo. Nasceu da auditoria Belessence
+> 2026-10-15, que teve de inventar o critério na hora por ele não existir.
+
 ## 2. Checklist de Auditoria Estrita (Instruções para a IA)
 
 Ao receber um código-fonte para continuação ou refatoração, a IA deve utilizar comandos de análise (como o `/speckit.analyze`) para realizar a verificação de consistência cross-artifact e aplicar os seguintes critérios baseados nas metodologias anexadas.

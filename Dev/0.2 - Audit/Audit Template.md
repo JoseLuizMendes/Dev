@@ -1,6 +1,6 @@
 ---
 template: "Code Audit Report"
-version: 1.0
+version: 1.1
 status: "Template"
 tags:
   - template
@@ -80,6 +80,15 @@ auditor: "{{AUDITOR_NAME}}"
 
 ## 3. Auditoria dos 3 Agentes Norteadores
 
+> ⚠️ **O artefato não é um site de portfólio de desenvolvedor?** Leia
+> `[[Aplicação dos Agentes por Tipo de Artefato]]` **antes** de preencher as
+> tabelas abaixo. Os três agentes são escritos para portfólio; aquele documento
+> traz o critério de transferência (o que avaliar, o que é `N/A` e por quê) e as
+> linhas específicas por tipo de artefato — e-commerce já mapeado em §4.
+>
+> Sem ele, o auditor cai numa das duas saídas ruins: marcar tudo `N/A`, que é
+> fuga, ou fingir que casa, que é pior.
+
 ### 3.1 Product Strategist [[ai-portfolio-product-strategist]]
 | Critério | Status | Observações |
 |---|---|---|
@@ -105,6 +114,20 @@ auditor: "{{AUDITOR_NAME}}"
 | Autoridade | [ ] OK / [ ] N/A | |
 | Escaneabilidade | [ ] OK / [ ] N/A | |
 | CTAs eficazes | [ ] OK / [ ] N/A | |
+
+### 3.4 Específicos do tipo de artefato
+
+> Preencher com a tabela do tipo correspondente em
+> `[[Aplicação dos Agentes por Tipo de Artefato]]` §4 (e-commerce) ou §5 (demais
+> tipos). Se o artefato for portfólio de desenvolvedor, marcar
+> `N/A — caso base dos três agentes, já coberto em 3.1–3.3`.
+>
+> Se o tipo ainda não estiver mapeado naquele documento, **mapeie lá** em vez de
+> improvisar aqui: improvisar foi o que custou o documento.
+
+| Critério | Status | Observações |
+|---|---|---|
+| | [ ] OK / [ ] N/A | |
 
 ---
 
