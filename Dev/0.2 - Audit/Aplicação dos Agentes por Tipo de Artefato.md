@@ -1,6 +1,6 @@
 ---
 template: "—  (artefato de metodologia; sem template canon correspondente)"
-version: 1.0
+version: 1.1
 status: "Ativo"
 tags:
   - auditoria
@@ -82,18 +82,22 @@ preguiça, e seis meses depois ninguém sabe qual dos dois foi.
 normalização de componentes e dark mode não têm nada de portfólio. É o único dos
 três que se aplica sem tradução a qualquer artefato com interface.
 
-> ⚠️ **Conflito aberto, para o dev decidir.** O `[[CLAUDE]]` raiz, em Diretrizes
-> Globais, diz que em trabalho de UI/UX as skills **primárias** são
-> `[[motion-design-engineering]]` e `[[ui-ux-pro-max]]`, e que em divergência
-> **vencem as primárias**, ficando o `[[ai-web-designer-agent]]` como
-> complementar (extração de design system a partir de código).
-> O `[[Audit Template]]` §3.2 e o `[[Diretrizes]]` §1 **não sabem disso** — auditam contra o
-> documento que o próprio cofre rebaixou, e não mencionam as duas primárias.
+> ✅ **Precedência resolvida em 2026-10-16 (decisão do dev: saída "a").** O
+> `[[CLAUDE]]` raiz define `[[ui-ux-pro-max]]` e `[[motion-design-engineering]]`
+> como **primárias** em UI/UX, vencendo o `[[ai-web-designer-agent]]`. O
+> `[[Audit Template]]` §3.2 e o `[[Diretrizes]]` §1 auditavam contra o
+> documento rebaixado e não mencionavam as primárias — ficaram para trás
+> quando o `CLAUDE` mudou.
 >
-> Não concilio isso sozinho (R4). As opções são: (a) §3.2 passa a auditar contra
-> as duas primárias e o `ai-web-designer-agent` vira a fonte só da parte de
-> extração; (b) o `[[CLAUDE]]` volta atrás na precedência; (c) os três continuam
-> como estão e a precedência vale só fora de auditoria. **Decisão do dev.**
+> Agora o §3.2 tem três partes: **3.2.a** UI/UX pelas 10 prioridades do
+> `ui-ux-pro-max` + checklist anti-AI-slop, **3.2.b** motion pelos
+> não-negociáveis verificáveis em código, **3.2.c** o `ai-web-designer-agent`
+> no escopo em que segue sendo a melhor fonte — extrair design system a
+> partir de código (as quatro famílias de token + normalização).
+>
+> **O que isto significa para a tabela acima:** "Web Designer transfere
+> inteiro" continua valendo, e com mais força — acessibilidade, toque,
+> performance e motion não têm nada de portfólio.
 
 ### 3.3 Copy Architect
 
@@ -174,7 +178,7 @@ de improvisar de novo — foi improvisar que custou este documento.
 - [x] Critério de transferência escrito e aplicável a qualquer tipo de artefato
 - [x] Os três agentes mapeados linha a linha, com `❌` justificado
 - [x] Primeiro tipo não-portfólio (e-commerce) com tabela pronta para colar no relatório
-- [x] Conflito de precedência das skills de design **reportado**, não conciliado (R4)
+- [x] Conflito de precedência das skills de design reportado e, depois da decisão do dev, **resolvido** pela saída (a)
 - [x] Nenhum critério inventado sem fonte: tudo sai dos três agentes, da auditoria Belessence 2026-10-15 ou do código auditado (R3)
 
 ---
