@@ -99,6 +99,7 @@ Dev/
 | Fim de sessão → log | `[[Session Log Template]]` |
 | Registrando erro local | `[[Errors Template]]` |
 | Auditoria de código | `[[Audit Template]]` (em `Dev/0.2 - Audit/`) |
+| Auditoria cujo artefato **não** é portfólio (loja, painel, SaaS, app) | `[[Aplicação dos Agentes por Tipo de Artefato]]` — ler antes do §3 do Audit Template |
 | Bootstrap concluído → instalar tooling obrigatório | `[[Preferencias Dev#Ferramentas Obrigatórias de Bootstrap]]` (via `[[Protocol-Bootstrap]]` Passo 7) |
 | Projeto com UI → começar o front | `[[Frontend Creative Protocol]]` (matriz canon linha 19) |
 | "Vou iniciar um projeto" / `00-Input.md` entregue | `[[Project Kickoff Input Template]]` (matriz canon linha 20) → Kickoff Output (`00-DNA.md`) |

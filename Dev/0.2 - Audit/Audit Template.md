@@ -1,6 +1,6 @@
 ---
 template: "Code Audit Report"
-version: 1.0
+version: 1.2
 status: "Template"
 tags:
   - template
@@ -80,6 +80,15 @@ auditor: "{{AUDITOR_NAME}}"
 
 ## 3. Auditoria dos 3 Agentes Norteadores
 
+> ⚠️ **O artefato não é um site de portfólio de desenvolvedor?** Leia
+> `[[Aplicação dos Agentes por Tipo de Artefato]]` **antes** de preencher as
+> tabelas abaixo. Os três agentes são escritos para portfólio; aquele documento
+> traz o critério de transferência (o que avaliar, o que é `N/A` e por quê) e as
+> linhas específicas por tipo de artefato — e-commerce já mapeado em §4.
+>
+> Sem ele, o auditor cai numa das duas saídas ruins: marcar tudo `N/A`, que é
+> fuga, ou fingir que casa, que é pior.
+
 ### 3.1 Product Strategist [[ai-portfolio-product-strategist]]
 | Critério | Status | Observações |
 |---|---|---|
@@ -88,10 +97,64 @@ auditor: "{{AUDITOR_NAME}}"
 | Conversão otimizada | [ ] OK / [ ] N/A | |
 | Authority signals | [ ] OK / [ ] N/A | |
 
-### 3.2 Web Designer [[ai-web-designer-agent]]
+### 3.2 UI/UX e Motion — skills **primárias**
+
+> **Precedência (resolvida em 2026-10-16).** O `[[CLAUDE]]` raiz define
+> `[[ui-ux-pro-max]]` e `[[motion-design-engineering]]` como **primárias** em
+> trabalho de UI/UX, vencendo o `[[ai-web-designer-agent]]` em divergência.
+> Até aqui este §3.2 auditava só contra o agente rebaixado — auditava contra
+> um padrão que o resto do cofre já considerava superado. Agora audita contra
+> as primárias, e o `ai-web-designer-agent` fica no §3.2.c, no escopo em que
+> continua sendo a melhor fonte: **extrair design system a partir de código**.
+
+#### 3.2.a UI/UX — [[ui-ux-pro-max]]
+
+Ordem de prioridade é a da própria skill: 1 é o mais crítico.
+
+| # | Critério | Status | Observações |
+|---|---|---|---|
+| 1 | Acessibilidade — contraste 4.5:1, foco visível, `alt`, aria, teclado | [ ] OK / [ ] N/A | |
+| 2 | Touch e interação — alvo ≥44×44, feedback, nada só-hover | [ ] OK / [ ] N/A | |
+| 3 | Performance — WebP/AVIF, lazy, espaço reservado, CLS < 0,1 | [ ] OK / [ ] N/A | |
+| 4 | Seleção de estilo — casa com o produto; SVG, não emoji | [ ] OK / [ ] N/A | |
+| 5 | Layout e responsivo — mobile-first, sem scroll horizontal | [ ] OK / [ ] N/A | |
+| 6 | Tipografia e cor — base 16px, line-height 1.5, tokens semânticos | [ ] OK / [ ] N/A | |
+| 8 | Forms e feedback — label visível, erro perto do campo | [ ] OK / [ ] N/A | |
+| 9 | Navegação — voltar previsível, bottom-nav ≤5, deep link | [ ] OK / [ ] N/A | |
+| 10 | Charts e dados — legenda, tooltip, cor acessível | [ ] OK / [ ] N/A | |
+
+> O item 7 da skill (animação) não se repete aqui — é o §3.2.b inteiro.
+
+**Checklist anti-AI-slop** (a skill trata como pré-entrega; na auditoria é
+verificação): sem emoji como ícone · `cursor: pointer` no clicável, com
+hover/pressed/disabled distintos · contraste testado em claro **e** escuro
+separadamente · alvos ≥44×44 com ≥8px entre eles · imagens com
+`width/height` ou `aspect-ratio` · **tokens semânticos, sem hex cru em
+componente** · testado em 375px e em landscape · body ≥16px no mobile.
+
+#### 3.2.b Motion — [[motion-design-engineering]]
+
+Os não-negociáveis da skill que se verificam lendo código:
+
 | Critério | Status | Observações |
 |---|---|---|
-| Design System consistente | [ ] OK / [ ] N/A | |
+| Movimento justificado (responde "por que isso anima?") | [ ] OK / [ ] N/A | |
+| Frequência manda — ação 100+×/dia não anima | [ ] OK / [ ] N/A | |
+| Easing: `ease-out` ou curva custom forte; **`ease-in` em UI é bloqueio** | [ ] OK / [ ] N/A | |
+| Sub-300ms salvo justificativa | [ ] OK / [ ] N/A | |
+| Origem no gatilho (`transform-origin`); nunca `scale(0)` | [ ] OK / [ ] N/A | |
+| Interruptível (transition/spring, não keyframe que reinicia) | [ ] OK / [ ] N/A | |
+| **Só `transform` e `opacity`** — `width/height/top/left` é achado | [ ] OK / [ ] N/A | |
+| `prefers-reduced-motion` honrado; hover atrás de `(hover: hover)` | [ ] OK / [ ] N/A | |
+
+#### 3.2.c Design system extraído do código — [[ai-web-designer-agent]]
+
+Escopo em que ele continua sendo a fonte: as quatro famílias de token e a
+normalização de componente.
+
+| Critério | Status | Observações |
+|---|---|---|
+| Design System consistente (fonte única) | [ ] OK / [ ] N/A | |
 | Tokens de tipografia | [ ] OK / [ ] N/A | |
 | Tokens de spacing | [ ] OK / [ ] N/A | |
 | Tokens de motion | [ ] OK / [ ] N/A | |
@@ -105,6 +168,20 @@ auditor: "{{AUDITOR_NAME}}"
 | Autoridade | [ ] OK / [ ] N/A | |
 | Escaneabilidade | [ ] OK / [ ] N/A | |
 | CTAs eficazes | [ ] OK / [ ] N/A | |
+
+### 3.4 Específicos do tipo de artefato
+
+> Preencher com a tabela do tipo correspondente em
+> `[[Aplicação dos Agentes por Tipo de Artefato]]` §4 (e-commerce) ou §5 (demais
+> tipos). Se o artefato for portfólio de desenvolvedor, marcar
+> `N/A — caso base dos três agentes, já coberto em 3.1–3.3`.
+>
+> Se o tipo ainda não estiver mapeado naquele documento, **mapeie lá** em vez de
+> improvisar aqui: improvisar foi o que custou o documento.
+
+| Critério | Status | Observações |
+|---|---|---|
+| | [ ] OK / [ ] N/A | |
 
 ---
 

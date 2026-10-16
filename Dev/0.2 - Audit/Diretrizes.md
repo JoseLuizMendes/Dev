@@ -12,8 +12,20 @@ Este documento estabelece as regras inegociáveis para orquestração, auditoria
 A IA **DEVE** obrigatoriamente ler e processar o conteúdo dos 3 documentos metodológicos abaixo através de links bidirecionais para compreender os padrões aprovados de engenharia antes de qualquer planejamento ou alteração de código:
 
 1. **Estratégia de Produto e Negócios:** [[ai-portfolio-product-strategist]]
-2. **Padrões de UI/UX, Componentes e Animação:** [[ai-web-designer-agent]]
-3. **Arquitetura de Copy e Comunicação:** [[ai-portfolio-copy-architect]]
+2. **Padrões de UI/UX e Animação:** [[ui-ux-pro-max]] + [[motion-design-engineering]] — **primárias**, conforme `[[CLAUDE]]` raiz. Em divergência, vencem elas.
+3. **Extração de design system a partir de código:** [[ai-web-designer-agent]] — complementar, neste escopo.
+4. **Arquitetura de Copy e Comunicação:** [[ai-portfolio-copy-architect]]
+
+> **Mudou em 2026-10-16.** Esta lista dizia que o padrão de UI/UX era o
+> `[[ai-web-designer-agent]]`, sozinho. O `[[CLAUDE]]` raiz já o havia
+> rebaixado a complementar e promovido as duas primárias — e esta lista, que
+> é a que o auditor lê, não sabia. Ver `[[Audit Template]]` §3.2.
+
+> ⚠️ **Os três são escritos para site de portfólio de desenvolvedor.** Quando o
+> artefato auditado for outra coisa — loja, painel interno, SaaS, app —, ler
+> também `[[Aplicação dos Agentes por Tipo de Artefato]]`: traz o critério de
+> transferência e as linhas específicas por tipo. Nasceu da auditoria Belessence
+> 2026-10-15, que teve de inventar o critério na hora por ele não existir.
 
 ## 2. Checklist de Auditoria Estrita (Instruções para a IA)
 
@@ -22,7 +34,7 @@ Ao receber um código-fonte para continuação ou refatoração, a IA deve utili
 - [ ] **Segurança de Tipos:** O código utiliza estritamente TypeScript? A tipagem `any` está presente sem justificativa? (Em caso positivo, o código deve ser rejeitado e refatorado).
 - [ ] **Gerenciamento de Pacotes:** Todas as dependências e comandos de shell propostos utilizam o gerenciador de pacotes definido (pnpm)?
 - [ ] **Arquitetura Backend (se aplicável):** A lógica de negócios está isolada e obedece à Injeção de Dependências? Controladores estão livres de regras de negócio complexas?
-- [ ] **Arquitetura Frontend e UI:** O design respeita as diretrizes de [[ai-web-designer-agent]]. As animações estão encapsuladas para evitar memory leaks? A estilização utiliza classes utilitárias estritas (Tailwind/Shadcn)?
+- [ ] **Arquitetura Frontend e UI:** O design respeita [[ui-ux-pro-max]] (acessibilidade, toque, performance, layout, tipografia/cor) e [[motion-design-engineering]] (movimento justificado, sub-300ms, só `transform`/`opacity`, `prefers-reduced-motion`). As animações estão encapsuladas para evitar memory leaks? A estilização utiliza classes utilitárias estritas (Tailwind/Shadcn)?
 - [ ] **Dívida Técnica:** O código analisado apresenta forte acoplamento ou falta de modularidade que dificultará a evolução arquitetônica?
 - [ ] **Copy e Tom de Voz:** O conteúdo estático e a microcópia da interface estão alinhados às regras definidas em [[ai-portfolio-copy-architect]]?
 
